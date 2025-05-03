@@ -1,5 +1,8 @@
-entrypoint = "src/components/index.ts"
+entrypoints = ["src/index.ts","src/Button.tsx","src/Input.tsx"]
 outdir = "dist"
-external = ["react", "react-dom"]
 target = "browser"
+
+external = ["react", "react-dom"]
 minify = true
+splitting = false
+sourcemap = "external"

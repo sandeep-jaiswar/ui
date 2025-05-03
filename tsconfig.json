@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext"],
+    "lib": ["ESNext", "DOM"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
@@ -8,21 +8,20 @@
     "allowJs": true,
 
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true,
+    "noEmit": false,
     "outDir": "dist",
 
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["vitest/globals", "node"],
+    "types": ["vitest/globals", "node", "react"],
 
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["vitest.config.ts", "src/**/*.ts", "tests/*.ts"],
+  "include": ["vitest.config.ts", "src", "tests"],
   "exclude": ["node_modules", "dist"]
 }

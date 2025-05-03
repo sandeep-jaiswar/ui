@@ -3,7 +3,6 @@
     "@eslint/css": "^0.7.0",
     "@eslint/js": "^9.26.0",
     "@eslint/json": "^0.12.0",
-    "@eslint/markdown": "^6.4.0",
     "@testing-library/react": "^16.3.0",
     "@types/bun": "latest",
     "@types/react": "^19.1.2",
@@ -23,8 +22,10 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "name": "@sandeep-jaiswar/ui",
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "typescript": "^5.8.3"
   },
@@ -32,11 +33,15 @@
   "scripts": {
     "preinstall": "echo 'Installing....'",
     "postinstall": "echo 'Done !'",
+    "build:types": "tsc -p tsconfig.build.json",
     "build": "bun run scripts/build.ts",
     "lint": "eslint",
     "format": "prettier . --write",
     "test": "bun x vitest"
   },
   "type": "module",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "toml": "^3.0.0"
+  }
 }
