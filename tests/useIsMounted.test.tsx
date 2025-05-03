@@ -1,23 +1,22 @@
-import { renderHook, waitFor } from '@testing-library/react';
-import useIsMounted from '../src/hooks/useIsMounted';
+import { renderHook, waitFor } from "@testing-library/react";
+import useIsMounted from "../src/useIsMounted";
 
-describe('useIsMounted hook', () => {
-
-  it('should return true when mounted', async () => {
+describe("useIsMounted hook", () => {
+  it("should return true when mounted", async () => {
     const { result } = renderHook(() => useIsMounted());
     await waitFor(() => {
       expect(result.current.current).toBe(true);
-    })
+    });
   });
 
-  it('should return false after unmount', async () => {
+  it("should return false after unmount", async () => {
     const { result, unmount } = renderHook(() => useIsMounted());
     await waitFor(() => {
       expect(result.current.current).toBe(true);
-    })
-    unmount()
+    });
+    unmount();
     await waitFor(() => {
       expect(result.current.current).toBe(false);
-    })
+    });
   });
 });

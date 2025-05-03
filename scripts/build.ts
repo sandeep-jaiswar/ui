@@ -35,27 +35,29 @@ await Promise.all(
       entrypoints: [file],
       outdir: distDir,
       target: "bun",
-      external: ["react", "react-dom"]
+      external: ["react", "react-dom"],
     });
 
     if (result.success) {
       const output = result.outputs[0];
       const sizeKB = (await output.arrayBuffer()).byteLength / 1024;
       console.log(
-        `✅ Built ${basename(file)} → ${basename(outFile)} (${sizeKB.toFixed(2)} KB)`
+        `✅ Built ${basename(file)} → ${basename(outFile)} (${sizeKB.toFixed(2)} KB)`,
       );
     } else {
       console.error(`❌ Failed to build ${file}`);
     }
-  })
+  }),
 );
 
-console.log(`🏁 JS build completed in ${(performance.now() - start).toFixed(1)} ms`);
+console.log(
+  `🏁 JS build completed in ${(performance.now() - start).toFixed(1)} ms`,
+);
 
 console.log("🧾 Generating type declarations...");
 
 const tsc = spawnSync("tsc", ["-p", "tsconfig.build.json"], {
-  stdio: "inherit"
+  stdio: "inherit",
 });
 
 if (tsc.status !== 0) {
