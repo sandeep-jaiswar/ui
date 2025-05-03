@@ -1,0 +1,5 @@
+entrypoint = "src/components/index.ts"
+outdir = "dist"
+external = ["react", "react-dom"]
+target = "browser"
+minify = true
