@@ -16,10 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Bun
-        uses: jarred-sumner/setup-bun@v1
-        with:
-          bun-version: "latest" # Use latest version or specify a version
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash  # Install Bun via curl
 
       - name: Install dependencies
         run: |
@@ -41,10 +40,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Bun
-        uses: jarred-sumner/setup-bun@v1
-        with:
-          bun-version: "latest"
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash  # Install Bun via curl
 
       - name: Install dependencies
         run: |
@@ -62,10 +60,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Bun
-        uses: jarred-sumner/setup-bun@v1
-        with:
-          bun-version: "latest"
+      - name: Install Bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash  # Install Bun via curl
 
       - name: Install dependencies
         run: |
