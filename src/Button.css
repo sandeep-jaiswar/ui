@@ -1,3 +1,5 @@
+@include "./common.css";
+
 .button {
   display: flex;
   background-color: red;
