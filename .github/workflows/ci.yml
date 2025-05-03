@@ -19,7 +19,9 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          export PATH=$HOME/.bun/bin:$PATH  # Ensure Bun is in the PATH
+          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $HOME/.bashrc
+          source $HOME/.bashrc
+          bun --version  # Verify Bun installation
 
       - name: Install dependencies
         run: |
@@ -44,7 +46,9 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          export PATH=$HOME/.bun/bin:$PATH  # Ensure Bun is in the PATH
+          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $HOME/.bashrc
+          source $HOME/.bashrc
+          bun --version  # Verify Bun installation
 
       - name: Install dependencies
         run: |
@@ -65,7 +69,9 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          export PATH=$HOME/.bun/bin:$PATH  # Ensure Bun is in the PATH
+          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $HOME/.bashrc
+          source $HOME/.bashrc
+          bun --version  # Verify Bun installation
 
       - name: Install dependencies
         run: |
