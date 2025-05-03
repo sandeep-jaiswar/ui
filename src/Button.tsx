@@ -1,3 +1,5 @@
+import "./Button.css"
+
 const Button = () => {
     return(
         <div className="button">button</div>
