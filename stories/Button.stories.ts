@@ -18,7 +18,7 @@ export const LargeBlack: Story = {
   args: {
     size: "large",
     background: "black",
-    children: "Large Black"
+    children: "Large Black",
   },
 };
 
@@ -26,7 +26,7 @@ export const LargeWhite: Story = {
   args: {
     size: "large",
     background: "white",
-    children: "Large White"
+    children: "Large White",
   },
 };
 
@@ -34,7 +34,7 @@ export const LargeRed: Story = {
   args: {
     size: "large",
     background: "red",
-    children: "Large Red"
+    children: "Large Red",
   },
 };
 
@@ -42,6 +42,6 @@ export const LargeGrey: Story = {
   args: {
     size: "large",
     background: "grey",
-    children: "Large Grey"
+    children: "Large Grey",
   },
 };
