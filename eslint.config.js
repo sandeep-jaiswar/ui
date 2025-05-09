@@ -56,9 +56,5 @@ export default defineConfig([
         version: "detect",
       },
     },
-    rules: {
-      "react/react-in-jsx-scope": "off",
-      "css/no-invalid-at-rules": "off",
-    },
   },
 ]);
