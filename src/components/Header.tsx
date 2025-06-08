@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Button } from './Button';
-import './header.css';
 
 type User = {
   name: string;
@@ -16,9 +15,9 @@ export interface HeaderProps {
 
 export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps) => (
   <header>
-    <div className="storybook-header">
-      <div>
-        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <div className="flex justify-between items-center border-b border-gray-200 py-[15px] px-5 font-sans">
+      <div className="flex items-center">
+        <svg className="inline-block align-top" width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
           <g fill="none" fillRule="evenodd">
             <path
               d="M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z"
@@ -34,12 +33,12 @@ export const Header = ({ user, onLogin, onLogout, onCreateAccount }: HeaderProps
             />
           </g>
         </svg>
-        <h1>Acme</h1>
+        <h1 className="inline-block align-top mt-[6px] mb-[6px] ml-2.5 font-bold text-xl leading-none">Acme</h1>
       </div>
-      <div>
+      <div className="flex items-center space-x-2.5">
         {user ? (
           <>
-            <span className="welcome">
+            <span className="mr-2.5 text-[#333] text-sm">
               Welcome, <b>{user.name}</b>!
             </span>
             <Button size="small" onClick={onLogout} label="Log out" />
