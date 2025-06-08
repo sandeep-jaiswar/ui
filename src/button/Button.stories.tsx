@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { fn } from 'storybook/test';
 
-import { Button } from '../components/Button'; // Corrected path
+import { Button } from './Button'; // Corrected path
 
 // A simple SVG icon for demonstration
 const SendIcon = () => (

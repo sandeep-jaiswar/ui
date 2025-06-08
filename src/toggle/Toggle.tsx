@@ -5,7 +5,7 @@ export interface ToggleProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
   onChange: (checked: boolean) => void;
   label?: string;
 }
-\export const Toggle = forwardRef<HTMLInputElement, ToggleProps>((
+export const Toggle = forwardRef<HTMLInputElement, ToggleProps>((
   { checked, onChange, label, className, disabled, ...props },
   ref
 ) => {

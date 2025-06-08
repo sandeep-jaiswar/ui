@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AlertModal } from '../components/AlertModal';
+import { AlertModal } from './AlertModal';
 import React from 'react';
 
 const meta = {
@@ -28,7 +28,7 @@ const meta = {
   args: {
     isOpen: true, // Ensure modal is open in Storybook
     title: 'Alert title',
-    message: 'Here's some alert text. It can span multiple lines if needed!',
+    message: "Here's some alert text. It can span multiple lines if needed!",
   },
 } satisfies Meta<typeof AlertModal>;
 

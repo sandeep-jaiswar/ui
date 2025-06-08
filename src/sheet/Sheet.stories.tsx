@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { fn } from 'storybook/test';
 
-import { Sheet } from '../components/Sheet';
+import { Sheet } from './Sheet';
 
 const meta = {
   title: 'Component/Sheet',
