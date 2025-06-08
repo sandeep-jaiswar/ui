@@ -1,1 +1,1 @@
-export { default as Button } from './Button';
+console.log("hello");
