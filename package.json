@@ -9,14 +9,19 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "version": "1.0.0",
+  "files": [
+    "dist"
+  ],
+  "version": "0.0.0",
   "scripts": {
     "build": "tsup",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.md --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "exports": {
     ".": {
@@ -42,6 +47,7 @@
   "homepage": "https://github.com/sandeep-jaiswar/ui#readme",
   "description": "",
   "devDependencies": {
+    "@changesets/cli": "^2.29.3",
     "@chromatic-com/storybook": "^4.0.0",
     "@eslint/css": "^0.8.1",
     "@eslint/js": "^9.30.0",

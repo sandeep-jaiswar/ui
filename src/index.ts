@@ -1,4 +1,3 @@
-// Export all components
 export { Alert } from "./Alert"
 export type { AlertProps, AlertAction } from "./Alert"
 
@@ -93,11 +92,9 @@ export type { NavigationBarProps } from "./NavigationBar"
 export { TabBar } from "./TabBar"
 export type { TabBarProps, TabBarItem } from "./TabBar"
 
-// Layout Components
 export { List, ListItem } from "./List"
 export type { ListProps, ListItemProps } from "./List"
 
-// Data Display Components
 export { Accordion, AccordionItem } from "./Accordion"
 export type { AccordionProps, AccordionItemProps } from "./Accordion"
 
@@ -107,6 +104,5 @@ export type { TabsProps, TabItem } from "./Tabs"
 export { Image } from "./Image"
 export type { ImageProps } from "./Image"
 
-// Advanced Components
 export { Menu } from "./Menu"
 export type { MenuProps, MenuItem } from "./Menu"
