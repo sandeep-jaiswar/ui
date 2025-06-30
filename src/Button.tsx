@@ -34,7 +34,7 @@ export interface ButtonProps {
 
 /**
  * iOS-inspired button component following Apple's Human Interface Guidelines.
- * 
+ *
  * Features:
  * - Multiple variants (primary, secondary, destructive, ghost, plain)
  * - Three size options with proper touch targets
@@ -43,7 +43,7 @@ export interface ButtonProps {
  * - Full accessibility support including ARIA attributes
  * - Smooth animations and hover effects
  * - Proper disabled state handling
- * 
+ *
  * @example
  * ```tsx
  * <Button

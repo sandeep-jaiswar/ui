@@ -15,7 +15,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.md",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.md --fix",
     "format": "prettier --write ."
   },
   "exports": {

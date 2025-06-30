@@ -28,7 +28,7 @@ export interface ModalProps {
 
 /**
  * iOS-inspired modal component with backdrop, animations, and comprehensive accessibility features.
- * 
+ *
  * Features:
  * - Focus management with focus trap
  * - Keyboard navigation (Escape to close, Tab cycling)
@@ -37,7 +37,7 @@ export interface ModalProps {
  * - Smooth animations for enter/exit
  * - Multiple size variants including fullscreen
  * - Configurable close behaviors
- * 
+ *
  * @example
  * ```tsx
  * <Modal
@@ -103,7 +103,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       return () => {
         // Restore body scroll
         document.body.style.overflow = ""
-        
+
         // Restore focus to the previously focused element
         if (previousActiveElement.current) {
           previousActiveElement.current.focus()
@@ -202,7 +202,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-ios p-1 text-label-tertiary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 hover:bg-fill-quaternary hover:text-label-primary dark:text-label-tertiary-dark dark:hover:bg-fill-quaternary-dark dark:hover:text-label-primary-dark"
+                  className="rounded-ios p-1 text-label-tertiary transition-colors hover:bg-fill-quaternary hover:text-label-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 dark:text-label-tertiary-dark dark:hover:bg-fill-quaternary-dark dark:hover:text-label-primary-dark"
                   aria-label="Close modal"
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -214,9 +214,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
           )}
 
           {/* Content */}
-          <div className={`${size === "fullscreen" ? "flex-1 overflow-auto" : ""} p-6`}>
-            {children}
-          </div>
+          <div className={`${size === "fullscreen" ? "flex-1 overflow-auto" : ""} p-6`}>{children}</div>
         </div>
       </div>
     )

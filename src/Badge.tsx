@@ -30,20 +30,20 @@ export interface BadgeProps {
 
 /**
  * iOS-inspired badge component for notifications, status indicators, and labels.
- * 
+ *
  * Features:
  * - Multiple variants with semantic colors
  * - Animated count changes with accessibility announcements
  * - Dot variant with proper accessibility labels
  * - Number formatting with customizable max values
  * - Smooth animations with reduced motion support
- * 
+ *
  * @example
  * ```tsx
  * <Badge variant="primary" animated max={99}>
  *   {notificationCount}
  * </Badge>
- * 
+ *
  * <Badge dot variant="success" aria-label="Online status" />
  * ```
  */
@@ -67,12 +67,10 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
 
     // Announce count changes to screen readers
     React.useEffect(() => {
-      if (animated && typeof children === 'number' && typeof previousValue === 'number') {
+      if (animated && typeof children === "number" && typeof previousValue === "number") {
         if (children !== previousValue) {
-          const message = children > previousValue 
-            ? `Count increased to ${children}`
-            : `Count decreased to ${children}`
-          announceToScreenReader(message, 'polite')
+          const message = children > previousValue ? `Count increased to ${children}` : `Count decreased to ${children}`
+          announceToScreenReader(message, "polite")
         }
       }
       setPreviousValue(children)
@@ -120,7 +118,9 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       shapeStyles[shape],
       animationStyles,
       className,
-    ].filter(Boolean).join(" ")
+    ]
+      .filter(Boolean)
+      .join(" ")
 
     if (dot) {
       return (
@@ -141,12 +141,10 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         className={badgeClasses}
         data-testid={testId}
         role="status"
-        aria-label={typeof children === 'number' ? `${children} notifications` : undefined}
+        aria-label={typeof children === "number" ? `${children} notifications` : undefined}
         {...props}
       >
-        <span className={animated ? "transition-all duration-200 ease-ios" : ""}>
-          {formatContent(children)}
-        </span>
+        <span className={animated ? "transition-all duration-200 ease-ios" : ""}>{formatContent(children)}</span>
       </span>
     )
   }

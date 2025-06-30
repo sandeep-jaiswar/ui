@@ -42,7 +42,7 @@ export interface AccordionProps {
 /**
  * iOS-inspired accordion item component with smooth expand/collapse animations.
  * Supports both controlled and uncontrolled usage patterns.
- * 
+ *
  * @example
  * ```tsx
  * <AccordionItem title="Settings" onToggle={(expanded) => console.log(expanded)}>
@@ -145,7 +145,7 @@ AccordionItem.displayName = "AccordionItem"
 /**
  * iOS-inspired accordion container component that groups multiple accordion items.
  * Provides consistent styling and layout for accordion interfaces.
- * 
+ *
  * @example
  * ```tsx
  * <Accordion variant="grouped">
@@ -162,10 +162,10 @@ export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     }
 
     return (
-      <div 
-        ref={ref} 
-        className={`${variantStyles[variant]} ${className}`.trim()} 
-        data-testid={testId} 
+      <div
+        ref={ref}
+        className={`${variantStyles[variant]} ${className}`.trim()}
+        data-testid={testId}
         role="group"
         aria-label="Accordion"
         {...props}

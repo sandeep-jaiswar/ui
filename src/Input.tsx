@@ -38,7 +38,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 
 /**
  * iOS-inspired input component with comprehensive features and accessibility.
- * 
+ *
  * Features:
  * - Multiple variants (filled, outlined, plain)
  * - Validation states with proper error handling
@@ -47,7 +47,7 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
  * - Icon support with proper spacing
  * - Comprehensive accessibility features
  * - Debounced validation feedback
- * 
+ *
  * @example
  * ```tsx
  * <Input
@@ -90,9 +90,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [internalValue, setInternalValue] = React.useState(value || "")
     const [isFocused, setIsFocused] = React.useState(false)
     const inputId = React.useId()
-    const errorId = generateId('input-error')
-    const helperId = generateId('input-helper')
-    const counterId = generateId('input-counter')
+    const errorId = generateId("input-error")
+    const helperId = generateId("input-helper")
+    const counterId = generateId("input-counter")
 
     React.useEffect(() => {
       if (value !== undefined) {
@@ -129,7 +129,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const currentValue = value !== undefined ? value : internalValue
     const showClear = clearable && currentValue && !props.disabled && !props.readOnly
     const displayText = state === "error" && errorText ? errorText : helperText
-    const characterCount = typeof currentValue === 'string' ? currentValue.length : 0
+    const characterCount = typeof currentValue === "string" ? currentValue.length : 0
     const isOverLimit = maxLength && characterCount > maxLength
 
     const baseStyles = "transition-all duration-200 ease-ios focus:outline-none"
@@ -185,7 +185,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className="block font-medium text-label-primary text-ios-subhead dark:text-label-primary-dark"
           >
             {label}
-            {required && <span className="text-systemRed-500 ml-1" aria-label="required">*</span>}
+            {required && (
+              <span className="ml-1 text-systemRed-500" aria-label="required">
+                *
+              </span>
+            )}
           </label>
         )}
 
@@ -213,11 +217,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             data-testid={testId}
             required={required}
             maxLength={maxLength}
-            aria-describedby={[
-              state === "error" && errorText ? errorId : null,
-              helperText && state !== "error" ? helperId : null,
-              showCounter ? counterId : null,
-            ].filter(Boolean).join(' ') || undefined}
+            aria-describedby={
+              [
+                state === "error" && errorText ? errorId : null,
+                helperText && state !== "error" ? helperId : null,
+                showCounter ? counterId : null,
+              ]
+                .filter(Boolean)
+                .join(" ") || undefined
+            }
             aria-invalid={state === "error"}
             aria-required={required}
             {...props}
@@ -229,7 +237,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <button
                   type="button"
                   onClick={handleClear}
-                  className={`text-label-tertiary transition-all duration-200 ease-ios hover:text-label-secondary dark:text-label-tertiary-dark dark:hover:text-label-secondary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 rounded ${transitions.default}`}
+                  className={`rounded text-label-tertiary transition-all duration-200 ease-ios hover:text-label-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 dark:text-label-tertiary-dark dark:hover:text-label-secondary-dark ${transitions.default}`}
                   aria-label="Clear input"
                   tabIndex={-1}
                 >

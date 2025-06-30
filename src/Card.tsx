@@ -27,7 +27,7 @@ export interface CardProps {
 
 /**
  * iOS-inspired card component following Apple's design guidelines.
- * 
+ *
  * Features:
  * - Multiple visual variants (elevated, grouped, inset, plain)
  * - Interactive support with proper keyboard navigation
@@ -35,7 +35,7 @@ export interface CardProps {
  * - Accessibility support with proper ARIA attributes
  * - Smooth hover and focus transitions
  * - Touch-friendly interaction areas
- * 
+ *
  * @example
  * ```tsx
  * <Card
@@ -100,7 +100,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
      */
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (loading) return
-      
+
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault()
         const clickEvent = new MouseEvent("click", {
@@ -119,7 +119,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       loadingStyles,
       transitions.default,
       className,
-    ].filter(Boolean).join(" ")
+    ]
+      .filter(Boolean)
+      .join(" ")
 
     return (
       <div
@@ -136,9 +138,9 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       >
         {loading ? (
           <div className="space-y-3">
-            <div className="h-4 bg-fill-tertiary rounded animate-pulse dark:bg-fill-tertiary-dark" />
-            <div className="h-4 bg-fill-tertiary rounded animate-pulse dark:bg-fill-tertiary-dark w-3/4" />
-            <div className="h-4 bg-fill-tertiary rounded animate-pulse dark:bg-fill-tertiary-dark w-1/2" />
+            <div className="h-4 animate-pulse rounded bg-fill-tertiary dark:bg-fill-tertiary-dark" />
+            <div className="h-4 w-3/4 animate-pulse rounded bg-fill-tertiary dark:bg-fill-tertiary-dark" />
+            <div className="h-4 w-1/2 animate-pulse rounded bg-fill-tertiary dark:bg-fill-tertiary-dark" />
           </div>
         ) : (
           children

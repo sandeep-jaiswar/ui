@@ -1,5 +1,5 @@
 import React from "react"
-import { generateId, announceToScreenReader } from "./utils/accessibility"
+import { announceToScreenReader, generateId } from "./utils/accessibility"
 import { transitions } from "./utils/animations"
 
 /**
@@ -40,7 +40,7 @@ export interface CheckboxProps {
 
 /**
  * iOS-inspired checkbox component following Apple's design patterns.
- * 
+ *
  * Features:
  * - Controlled and uncontrolled modes
  * - Indeterminate state with proper screen reader support
@@ -48,7 +48,7 @@ export interface CheckboxProps {
  * - Smooth animations with reduced motion support
  * - Large touch targets for mobile accessibility
  * - Comprehensive keyboard navigation
- * 
+ *
  * @example
  * ```tsx
  * <Checkbox
@@ -85,8 +85,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const [isChecked, setIsChecked] = React.useState(checked ?? defaultChecked)
     const inputRef = React.useRef<HTMLInputElement>(null)
     const checkboxId = React.useId()
-    const errorId = generateId('checkbox-error')
-    const helperId = generateId('checkbox-helper')
+    const errorId = generateId("checkbox-error")
+    const helperId = generateId("checkbox-helper")
 
     React.useEffect(() => {
       if (checked !== undefined) {
@@ -116,10 +116,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       if (indeterminate) {
         announceToScreenReader("Checkbox state changed from indeterminate", "polite")
       } else {
-        announceToScreenReader(
-          newChecked ? "Checkbox checked" : "Checkbox unchecked",
-          "polite"
-        )
+        announceToScreenReader(newChecked ? "Checkbox checked" : "Checkbox unchecked", "polite")
       }
     }
 
@@ -170,10 +167,10 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           onChange={handleChange}
           className={`${baseStyles} ${sizeStyles[size]} ${colorStyles[color]} ${errorStyles} ${disabledStyles} ${className}`.trim()}
           data-testid={testId}
-          aria-describedby={[
-            error && errorMessage ? errorId : null,
-            helperText ? helperId : null,
-          ].filter(Boolean).join(' ') || undefined}
+          aria-describedby={
+            [error && errorMessage ? errorId : null, helperText ? helperId : null].filter(Boolean).join(" ") ||
+            undefined
+          }
           aria-invalid={error}
           aria-required={required}
           {...props}
@@ -216,25 +213,29 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <div className="space-y-1">
         <label
           htmlFor={checkboxId}
-          className={`flex cursor-pointer items-start gap-3 min-h-[44px] ${labelPosition === "left" ? "flex-row-reverse" : ""} ${
-            disabled ? "cursor-not-allowed" : ""
-          }`}
+          className={`flex min-h-[44px] cursor-pointer items-start gap-3 ${
+            labelPosition === "left" ? "flex-row-reverse" : ""
+          } ${disabled ? "cursor-not-allowed" : ""}`}
         >
           {checkboxElement}
           <div className="flex-1 pt-0.5">
             <span className="select-none text-label-primary text-ios-body dark:text-label-primary-dark">
               {label}
-              {required && <span className="text-systemRed-500 ml-1" aria-label="required">*</span>}
+              {required && (
+                <span className="ml-1 text-systemRed-500" aria-label="required">
+                  *
+                </span>
+              )}
             </span>
           </div>
         </label>
-        
+
         {error && errorMessage && (
           <p id={errorId} className="text-systemRed-500 text-ios-footnote dark:text-systemRed-400" role="alert">
             {errorMessage}
           </p>
         )}
-        
+
         {helperText && !error && (
           <p id={helperId} className="text-label-tertiary text-ios-footnote dark:text-label-tertiary-dark">
             {helperText}

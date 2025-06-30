@@ -3,9 +3,6 @@ import React from "react"
 import { Avatar } from "../src/Avatar"
 import { Typography } from "../src/Typography"
 
-// Mock function for onClick handlers
-const fn = () => {}
-
 const meta = {
   title: "Components/Avatar",
   component: Avatar,

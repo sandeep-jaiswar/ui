@@ -28,14 +28,14 @@ export interface AvatarProps {
 
 /**
  * iOS-inspired avatar component for displaying user profile pictures with fallback options.
- * 
+ *
  * Features:
  * - Multiple size variants following iOS design guidelines
  * - Graceful fallback from image → initials → default icon
  * - Online status indicator with proper positioning
  * - Accessible image handling with proper alt text
  * - Support for different shapes (circle, rounded, square)
- * 
+ *
  * @example
  * ```tsx
  * <Avatar
@@ -104,9 +104,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     const renderContent = () => {
       // Show loading state
       if (imageLoading && !imageError) {
-        return (
-          <div className="h-full w-full animate-pulse bg-fill-tertiary dark:bg-fill-tertiary-dark" />
-        )
+        return <div className="h-full w-full animate-pulse bg-fill-tertiary dark:bg-fill-tertiary-dark" />
       }
 
       // Show image if available and not errored

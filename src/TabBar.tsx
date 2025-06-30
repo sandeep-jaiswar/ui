@@ -42,7 +42,7 @@ export interface TabBarProps {
 
 /**
  * iOS-inspired tab bar component for bottom navigation with comprehensive accessibility.
- * 
+ *
  * Features:
  * - Horizontal scrolling for overflow tabs
  * - Badge support with proper accessibility
@@ -50,7 +50,7 @@ export interface TabBarProps {
  * - Touch-friendly 44px minimum touch targets
  * - Smooth animations with reduced motion support
  * - Screen reader announcements for tab changes
- * 
+ *
  * @example
  * ```tsx
  * <TabBar
@@ -65,16 +65,10 @@ export interface TabBarProps {
  * ```
  */
 export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
-  ({ 
-    items, 
-    activeTab, 
-    defaultActiveTab, 
-    onChange, 
-    showSwipeIndicators = true,
-    className = "", 
-    testId, 
-    ...props 
-  }, ref) => {
+  (
+    { items, activeTab, defaultActiveTab, onChange, showSwipeIndicators = true, className = "", testId, ...props },
+    ref
+  ) => {
     const [selectedTab, setSelectedTab] = React.useState(activeTab ?? defaultActiveTab ?? items[0]?.id ?? "")
     const tabBarRef = React.useRef<HTMLDivElement>(null)
     const tabRefs = React.useRef<Map<string, HTMLButtonElement>>(new Map())
@@ -89,7 +83,7 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
      * Handles tab selection with accessibility announcements
      */
     const handleTabChange = (tabId: string) => {
-      const tab = items.find(item => item.id === tabId)
+      const tab = items.find((item) => item.id === tabId)
       if (!tab || tab.disabled) return
 
       if (activeTab === undefined) {
@@ -98,11 +92,11 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
       onChange?.(tabId)
 
       // Announce tab change to screen readers
-      const announcement = `${tab.label} tab selected${tab.badge ? `, ${tab.badge} notifications` : ''}`
-      const announcer = document.createElement('div')
-      announcer.setAttribute('aria-live', 'polite')
-      announcer.setAttribute('aria-atomic', 'true')
-      announcer.className = 'sr-only'
+      const announcement = `${tab.label} tab selected${tab.badge ? `, ${tab.badge} notifications` : ""}`
+      const announcer = document.createElement("div")
+      announcer.setAttribute("aria-live", "polite")
+      announcer.setAttribute("aria-atomic", "true")
+      announcer.className = "sr-only"
       announcer.textContent = announcement
       document.body.appendChild(announcer)
       setTimeout(() => document.body.removeChild(announcer), 1000)
@@ -112,23 +106,23 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
      * Handles keyboard navigation
      */
     const handleKeyDown = (event: React.KeyboardEvent, currentTabId: string) => {
-      const currentIndex = items.findIndex(item => item.id === currentTabId)
+      const currentIndex = items.findIndex((item) => item.id === currentTabId)
       let targetIndex = currentIndex
 
       switch (event.key) {
-        case 'ArrowLeft':
+        case "ArrowLeft":
           event.preventDefault()
           targetIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1
           break
-        case 'ArrowRight':
+        case "ArrowRight":
           event.preventDefault()
           targetIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0
           break
-        case 'Home':
+        case "Home":
           event.preventDefault()
           targetIndex = 0
           break
-        case 'End':
+        case "End":
           event.preventDefault()
           targetIndex = items.length - 1
           break
@@ -139,9 +133,14 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
       // Find next non-disabled tab
       let attempts = 0
       while (items[targetIndex]?.disabled && attempts < items.length) {
-        targetIndex = event.key === 'ArrowLeft' || event.key === 'End' 
-          ? (targetIndex > 0 ? targetIndex - 1 : items.length - 1)
-          : (targetIndex < items.length - 1 ? targetIndex + 1 : 0)
+        targetIndex =
+          event.key === "ArrowLeft" || event.key === "End"
+            ? targetIndex > 0
+              ? targetIndex - 1
+              : items.length - 1
+            : targetIndex < items.length - 1
+            ? targetIndex + 1
+            : 0
         attempts++
       }
 
@@ -171,7 +170,7 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
           }
         }}
         className={`flex items-center border-t border-separator-nonOpaque bg-background-primary bg-opacity-95 backdrop-blur-sm safe-bottom dark:border-separator-nonOpaque-dark dark:bg-background-primary-dark dark:bg-opacity-95 ${
-          hasOverflow ? 'overflow-x-auto scrollbar-hide' : 'justify-around'
+          hasOverflow ? "scrollbar-hide overflow-x-auto" : "justify-around"
         } px-2 py-1 ${className}`.trim()}
         role="tablist"
         aria-label="Main navigation"
@@ -196,32 +195,34 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
               role="tab"
               aria-selected={isActive}
               aria-disabled={isDisabled}
-              aria-label={item["aria-label"] || `${item.label}${item.badge ? `, ${item.badge} notifications` : ''}`}
+              aria-label={item["aria-label"] || `${item.label}${item.badge ? `, ${item.badge} notifications` : ""}`}
               disabled={isDisabled}
               onClick={() => handleTabChange(item.id)}
               onKeyDown={(e) => handleKeyDown(e, item.id)}
-              className={`flex min-w-0 ${hasOverflow ? 'min-w-[80px]' : 'flex-1'} flex-col items-center justify-center px-2 py-2 min-h-[44px] ${transitions.default} ${
+              className={`flex min-w-0 ${
+                hasOverflow ? "min-w-[80px]" : "flex-1"
+              } min-h-[44px] flex-col items-center justify-center px-2 py-2 ${transitions.default} ${
                 isActive
                   ? "text-systemBlue-500 dark:text-systemBlue-400"
                   : "text-label-tertiary dark:text-label-tertiary-dark"
               } ${
                 isDisabled
                   ? "cursor-not-allowed opacity-50"
-                  : "hover:text-systemBlue-600 dark:hover:text-systemBlue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2"
+                  : "hover:text-systemBlue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 dark:hover:text-systemBlue-300"
               }`.trim()}
               tabIndex={isActive ? 0 : -1}
             >
               <div className="relative mb-1">
                 {item.icon && (
-                  <Icon 
-                    name={item.icon} 
-                    size="medium" 
-                    className={`${transitions.default} ${isActive ? 'scale-110' : ''}`}
+                  <Icon
+                    name={item.icon}
+                    size="medium"
+                    className={`${transitions.default} ${isActive ? "scale-110" : ""}`}
                   />
                 )}
 
                 {item.badge && item.badge > 0 && (
-                  <div 
+                  <div
                     className="absolute -right-1 -top-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-systemRed-500 px-1 font-medium text-white text-ios-caption-2"
                     aria-hidden="true"
                   >
@@ -230,9 +231,7 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
                 )}
               </div>
 
-              <span className="max-w-full truncate font-medium text-ios-caption-2">
-                {item.label}
-              </span>
+              <span className="max-w-full truncate font-medium text-ios-caption-2">{item.label}</span>
             </button>
           )
         })}
@@ -240,8 +239,8 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
         {/* Swipe indicators for overflow */}
         {hasOverflow && showSwipeIndicators && (
           <>
-            <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-background-primary to-transparent pointer-events-none dark:from-background-primary-dark" />
-            <div className="absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-l from-background-primary to-transparent pointer-events-none dark:from-background-primary-dark" />
+            <div className="pointer-events-none absolute bottom-0 left-0 top-0 w-4 bg-gradient-to-r from-background-primary to-transparent dark:from-background-primary-dark" />
+            <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-4 bg-gradient-to-l from-background-primary to-transparent dark:from-background-primary-dark" />
           </>
         )}
       </div>

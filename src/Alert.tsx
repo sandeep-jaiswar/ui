@@ -38,13 +38,13 @@ export interface AlertProps {
 /**
  * iOS-inspired alert component following Apple's alert design patterns.
  * Supports both modal alerts and action sheets with proper accessibility features.
- * 
+ *
  * Features:
  * - Focus management and keyboard navigation
  * - Screen reader support with proper ARIA attributes
  * - Backdrop click and escape key handling
  * - Smooth animations and transitions
- * 
+ *
  * @example
  * ```tsx
  * <Alert
@@ -83,7 +83,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       if (visible) {
         // Prevent body scroll
         document.body.style.overflow = "hidden"
-        
+
         // Focus management - focus first action button or alert itself
         const focusTarget = firstActionRef.current || alertRef.current
         if (focusTarget) {
@@ -215,7 +215,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
                     key={index}
                     ref={isFirst ? firstActionRef : undefined}
                     onClick={() => handleActionPress(action)}
-                    className={`flex-1 px-4 py-3 font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 text-ios-body ${
+                    className={`flex-1 px-4 py-3 font-medium transition-colors text-ios-body focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 ${
                       isDestructive
                         ? "text-systemRed-500 dark:text-systemRed-400"
                         : isCancel

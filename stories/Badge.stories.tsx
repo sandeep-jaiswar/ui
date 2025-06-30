@@ -5,9 +5,6 @@ import { Badge } from "../src/Badge"
 import { Button } from "../src/Button"
 import { Typography } from "../src/Typography"
 
-// Mock function for onClick handlers
-const fn = () => {}
-
 const meta = {
   title: "Components/Badge",
   component: Badge,

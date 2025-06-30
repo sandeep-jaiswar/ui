@@ -7,14 +7,14 @@
  */
 export function getFocusableElements(container: HTMLElement): HTMLElement[] {
   const focusableSelectors = [
-    'button:not([disabled])',
-    '[href]',
-    'input:not([disabled])',
-    'select:not([disabled])',
-    'textarea:not([disabled])',
+    "button:not([disabled])",
+    "[href]",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
     '[tabindex]:not([tabindex="-1"]):not([disabled])',
-    '[contenteditable="true"]'
-  ].join(', ')
+    '[contenteditable="true"]',
+  ].join(", ")
 
   return Array.from(container.querySelectorAll(focusableSelectors))
 }
@@ -42,7 +42,7 @@ export function createFocusTrap(container: HTMLElement) {
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!isActive || event.key !== 'Tab') return
+      if (!isActive || event.key !== "Tab") return
 
       const currentFocusableElements = getFocusableElements(container)
       const firstFocusable = currentFocusableElements[0]
@@ -63,10 +63,10 @@ export function createFocusTrap(container: HTMLElement) {
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown)
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }
 
@@ -74,7 +74,7 @@ export function createFocusTrap(container: HTMLElement) {
     if (!isActive) return
 
     isActive = false
-    
+
     // Restore focus to the previously focused element
     if (previousActiveElement) {
       previousActiveElement.focus()
@@ -83,6 +83,6 @@ export function createFocusTrap(container: HTMLElement) {
 
   return {
     activate,
-    deactivate
+    deactivate,
   }
 }
