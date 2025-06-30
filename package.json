@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsup",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "storybook build -o ./docs",
     "test": "vitest run",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.md --fix",
     "format": "prettier --write .",

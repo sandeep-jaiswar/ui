@@ -1,0 +1,1 @@
+function e(){return window.matchMedia("(prefers-reduced-motion: reduce)").matches}e(),e(),e(),e();const a={default:e()?"":"transition-all duration-200 ease-ios",fast:e()?"":"transition-all duration-150 ease-ios",slow:e()?"":"transition-all duration-300 ease-ios"};export{a as t};

@@ -1,0 +1,1 @@
+function a(t,n="polite"){const e=document.createElement("div");e.setAttribute("aria-live",n),e.setAttribute("aria-atomic","true"),e.className="sr-only",e.textContent=t,document.body.appendChild(e),setTimeout(()=>{document.body.removeChild(e)},1e3)}let o=0;function i(t="id"){return`${t}-${++o}`}export{a,i as g};

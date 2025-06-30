@@ -1,0 +1,19 @@
+import{R as e}from"./iframe-DPTEoTx4.js";const s=e.forwardRef(({size:l="medium",src:a,alt:i="Avatar",initials:t,shape:o="circle",backgroundColor:d="#007AFF",textColor:u="#FFFFFF",online:c=!1,className:m="",testId:f,...p},g)=>{const[r,v]=e.useState(!1),[h,n]=e.useState(!!a),y={small:"w-8 h-8 text-ios-caption-1",medium:"w-10 h-10 text-ios-footnote",large:"w-12 h-12 text-ios-subhead",xlarge:"w-16 h-16 text-ios-body"},b={circle:"rounded-full",rounded:"rounded-ios",square:"rounded-none"},w="relative inline-flex items-center justify-center font-semibold overflow-hidden bg-fill-secondary dark:bg-fill-secondary-dark",x=()=>{v(!0),n(!1)},F=()=>{n(!1)},k=()=>h&&!r?e.createElement("div",{className:"h-full w-full animate-pulse bg-fill-tertiary dark:bg-fill-tertiary-dark"}):a&&!r?e.createElement("img",{src:a,alt:i,loading:"lazy",className:"h-full w-full object-cover",onError:x,onLoad:F}):t?e.createElement("span",{className:"select-none",style:{color:u}},t.slice(0,2).toUpperCase()):e.createElement("svg",{className:"h-1/2 w-1/2 text-label-tertiary dark:text-label-tertiary-dark",fill:"currentColor",viewBox:"0 0 24 24","aria-hidden":"true"},e.createElement("path",{d:"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"})),q={small:"w-2 h-2",medium:"w-2.5 h-2.5",large:"w-3 h-3",xlarge:"w-4 h-4"};return e.createElement("div",{ref:g,className:`${w} ${y[l]} ${b[o]} ${m}`.trim(),style:!a&&t&&!r?{backgroundColor:d}:void 0,"data-testid":f,role:"img","aria-label":i,...p},k(),c&&e.createElement("div",{className:`absolute bottom-0 right-0 ${q[l]} rounded-full border-2 border-background-primary bg-systemGreen-500 dark:border-background-primary-dark`,"aria-label":"Online",role:"status"}))});s.displayName="Avatar";s.__docgenInfo={description:`iOS-inspired avatar component for displaying user profile pictures with fallback options.
+
+Features:
+- Multiple size variants following iOS design guidelines
+- Graceful fallback from image → initials → default icon
+- Online status indicator with proper positioning
+- Accessible image handling with proper alt text
+- Support for different shapes (circle, rounded, square)
+
+@example
+\`\`\`tsx
+<Avatar
+  src="https://example.com/avatar.jpg"
+  alt="John Doe's profile picture"
+  initials="JD"
+  online={true}
+  size="large"
+/>
+\`\`\``,methods:[],displayName:"Avatar",props:{size:{required:!1,tsType:{name:"union",raw:'"small" | "medium" | "large" | "xlarge"',elements:[{name:"literal",value:'"small"'},{name:"literal",value:'"medium"'},{name:"literal",value:'"large"'},{name:"literal",value:'"xlarge"'}]},description:"Size variant of the avatar",defaultValue:{value:'"medium"',computed:!1}},src:{required:!1,tsType:{name:"string"},description:"Image source URL"},alt:{required:!1,tsType:{name:"string"},description:"Alt text for the image (important for accessibility)",defaultValue:{value:'"Avatar"',computed:!1}},initials:{required:!1,tsType:{name:"string"},description:"Fallback initials when no image is available"},shape:{required:!1,tsType:{name:"union",raw:'"circle" | "rounded" | "square"',elements:[{name:"literal",value:'"circle"'},{name:"literal",value:'"rounded"'},{name:"literal",value:'"square"'}]},description:"Shape variant of the avatar",defaultValue:{value:'"circle"',computed:!1}},backgroundColor:{required:!1,tsType:{name:"string"},description:"Background color for initials display",defaultValue:{value:'"#007AFF"',computed:!1}},textColor:{required:!1,tsType:{name:"string"},description:"Text color for initials",defaultValue:{value:'"#FFFFFF"',computed:!1}},online:{required:!1,tsType:{name:"boolean"},description:"Whether to show online status indicator",defaultValue:{value:"false",computed:!1}},className:{required:!1,tsType:{name:"string"},description:"Additional CSS classes to apply",defaultValue:{value:'""',computed:!1}},testId:{required:!1,tsType:{name:"string"},description:"Test identifier for automated testing"}}};export{s as A};
