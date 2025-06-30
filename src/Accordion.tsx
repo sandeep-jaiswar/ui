@@ -1,39 +1,55 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for an individual accordion item
+ */
 export interface AccordionItemProps {
-  /** Item title */
+  /** Item title displayed in the header */
   title: string
-  /** Item content */
+  /** Item content that expands/collapses */
   children: React.ReactNode
-  /** Is the item expanded? */
+  /** Controlled expanded state */
   expanded?: boolean
-  /** Default expanded state */
+  /** Default expanded state for uncontrolled usage */
   defaultExpanded?: boolean
-  /** Is the item disabled? */
+  /** Whether the item is disabled and cannot be toggled */
   disabled?: boolean
-  /** Expand/collapse handler */
+  /** Callback fired when the item is toggled */
   onToggle?: (expanded: boolean) => void
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   className?: string
-  /** Test ID for testing */
+  /** Test identifier for automated testing */
   testId?: string
 }
 
+/**
+ * Props for the accordion container
+ */
 export interface AccordionProps {
-  /** Accordion items */
+  /** Accordion items to render */
   children: React.ReactNode
-  /** Allow multiple items to be expanded */
+  /** Whether multiple items can be expanded simultaneously */
   allowMultiple?: boolean
-  /** Accordion variant */
+  /** Visual style variant */
   variant?: "grouped" | "separated"
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   className?: string
-  /** Test ID for testing */
+  /** Test identifier for automated testing */
   testId?: string
 }
 
-/** iOS-inspired accordion item component */
+/**
+ * iOS-inspired accordion item component with smooth expand/collapse animations.
+ * Supports both controlled and uncontrolled usage patterns.
+ * 
+ * @example
+ * ```tsx
+ * <AccordionItem title="Settings" onToggle={(expanded) => console.log(expanded)}>
+ *   <p>Configuration options here</p>
+ * </AccordionItem>
+ * ```
+ */
 export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
   (
     {
@@ -57,6 +73,9 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
       }
     }, [expanded])
 
+    /**
+     * Handles the toggle action for the accordion item
+     */
     const handleToggle = () => {
       if (disabled) return
 
@@ -65,6 +84,16 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
         setIsExpanded(newExpanded)
       }
       onToggle?.(newExpanded)
+    }
+
+    /**
+     * Handles keyboard navigation for accessibility
+     */
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault()
+        handleToggle()
+      }
     }
 
     return (
@@ -77,11 +106,14 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
         <button
           type="button"
           onClick={handleToggle}
+          onKeyDown={handleKeyDown}
           disabled={disabled}
-          className={`flex w-full items-center justify-between bg-background-primary px-4 py-3 text-left transition-colors duration-200 ease-ios dark:bg-background-secondary-dark ${
+          className={`flex w-full items-center justify-between bg-background-primary px-4 py-3 text-left transition-colors duration-200 ease-ios focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 dark:bg-background-secondary-dark ${
             disabled ? "cursor-not-allowed opacity-50" : "hover:bg-fill-quaternary dark:hover:bg-fill-quaternary-dark"
           } `.trim()}
           aria-expanded={isExpanded}
+          aria-controls={`accordion-content-${testId}`}
+          aria-disabled={disabled}
         >
           <span className="font-medium text-label-primary text-ios-body dark:text-label-primary-dark">{title}</span>
 
@@ -89,14 +121,17 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
             name="chevron"
             size="medium"
             color="tertiary"
-            className={`transition-transform duration-200 ease-ios ${isExpanded ? "rotate-90" : ""}`}
+            className={`transition-transform duration-300 ease-ios ${isExpanded ? "rotate-90" : ""}`}
           />
         </button>
 
         <div
+          id={`accordion-content-${testId}`}
           className={`overflow-hidden transition-all duration-300 ease-ios ${
             isExpanded ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           } `}
+          role="region"
+          aria-labelledby={`accordion-header-${testId}`}
         >
           <div className="bg-background-secondary px-4 py-3 dark:bg-background-tertiary-dark">{children}</div>
         </div>
@@ -107,7 +142,18 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
 
 AccordionItem.displayName = "AccordionItem"
 
-/** iOS-inspired accordion container component */
+/**
+ * iOS-inspired accordion container component that groups multiple accordion items.
+ * Provides consistent styling and layout for accordion interfaces.
+ * 
+ * @example
+ * ```tsx
+ * <Accordion variant="grouped">
+ *   <AccordionItem title="Section 1">Content 1</AccordionItem>
+ *   <AccordionItem title="Section 2">Content 2</AccordionItem>
+ * </Accordion>
+ * ```
+ */
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
   ({ children, variant = "grouped", className = "", testId, ...props }, ref) => {
     const variantStyles = {
@@ -116,7 +162,14 @@ export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     }
 
     return (
-      <div ref={ref} className={`${variantStyles[variant]} ${className}`.trim()} data-testid={testId} {...props}>
+      <div 
+        ref={ref} 
+        className={`${variantStyles[variant]} ${className}`.trim()} 
+        data-testid={testId} 
+        role="group"
+        aria-label="Accordion"
+        {...props}
+      >
         {children}
       </div>
     )

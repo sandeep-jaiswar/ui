@@ -1,33 +1,62 @@
 import React from "react"
 
+/**
+ * Props for the Button component
+ */
 export interface ButtonProps {
-  /** Button variant following iOS design patterns */
+  /** Visual style variant following iOS design patterns */
   variant?: "primary" | "secondary" | "destructive" | "ghost" | "plain"
-  /** Button size */
+  /** Size variant affecting padding and font size */
   size?: "small" | "medium" | "large"
-  /** Button contents */
+  /** Button content */
   children: React.ReactNode
-  /** Is the button disabled? */
+  /** Whether the button is disabled */
   disabled?: boolean
-  /** Is the button in loading state? */
+  /** Whether the button is in loading state */
   loading?: boolean
-  /** Full width button */
+  /** Whether the button should take full width of container */
   fullWidth?: boolean
-  /** Icon to display before text */
+  /** Icon to display before the text content */
   startIcon?: React.ReactNode
-  /** Icon to display after text */
+  /** Icon to display after the text content */
   endIcon?: React.ReactNode
-  /** Optional click handler */
+  /** Click event handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-  /** Button type */
+  /** HTML button type */
   type?: "button" | "submit" | "reset"
-  /** Additional CSS classes */
+  /** Additional CSS classes to apply */
   className?: string
-  /** Test ID for testing */
+  /** Test identifier for automated testing */
   testId?: string
+  /** Accessible label for screen readers (especially important for icon-only buttons) */
+  "aria-label"?: string
 }
 
-/** iOS-inspired button component following Apple's Human Interface Guidelines */
+/**
+ * iOS-inspired button component following Apple's Human Interface Guidelines.
+ * 
+ * Features:
+ * - Multiple variants (primary, secondary, destructive, ghost, plain)
+ * - Three size options with proper touch targets
+ * - Loading state with spinner and width preservation
+ * - Icon support with proper spacing
+ * - Full accessibility support including ARIA attributes
+ * - Smooth animations and hover effects
+ * - Proper disabled state handling
+ * 
+ * @example
+ * ```tsx
+ * <Button
+ *   variant="primary"
+ *   size="medium"
+ *   startIcon={<PlusIcon />}
+ *   onClick={handleClick}
+ *   loading={isSubmitting}
+ * >
+ *   Add Item
+ * </Button>
+ * ```
+ */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -67,6 +96,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const widthStyles = fullWidth ? "w-full" : ""
 
+    /**
+     * Handles click events with proper disabled/loading state checks
+     */
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       if (disabled || loading) {
         event.preventDefault()
@@ -75,6 +107,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       onClick?.(event)
     }
 
+    /**
+     * Renders button content with loading state handling
+     */
     const renderContent = () => {
       if (loading) {
         return (
@@ -88,7 +123,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <>
           {startIcon && <span className="flex-shrink-0">{startIcon}</span>}
-          <span>{children}</span>
+          <span className={loading ? "invisible" : ""}>{children}</span>
           {endIcon && <span className="flex-shrink-0">{endIcon}</span>}
         </>
       )
@@ -102,6 +137,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || loading}
         onClick={handleClick}
         data-testid={testId}
+        aria-busy={loading}
+        aria-disabled={disabled || loading}
         {...props}
       >
         {renderContent()}
