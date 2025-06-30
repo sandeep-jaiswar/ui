@@ -88,11 +88,11 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
       large: 'w-8 h-8'
     };
 
-    const colorStyles = {
-      yellow: 'text-systemYellow-500',
-      red: 'text-systemRed-500',
-      blue: 'text-systemBlue-500',
-      green: 'text-systemGreen-500'
+    const colorHexMap = {
+      yellow: '#FFCC02',
+      red: '#FF3B30',
+      blue: '#007AFF',
+      green: '#34C759'
     };
 
     const textSizeStyles = {
@@ -117,6 +117,7 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
           {/* Background star */}
           <Icon
             name="star"
+            size={size}
             className={`${sizeStyles[size]} text-fill-tertiary dark:text-fill-tertiary-dark`}
           />
 
@@ -124,7 +125,10 @@ export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
           {(isActive || isHalfActive) && (
             <Icon
               name="star"
-              className={`${sizeStyles[size]} ${colorStyles[color]} absolute inset-0`}
+              size={size}
+              color="custom"
+              customColor={colorHexMap[color]}
+              className={`${sizeStyles[size]} absolute inset-0`}
               style={isHalfActive ? { clipPath: 'inset(0 50% 0 0)' } : undefined}
             />
           )}
