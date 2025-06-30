@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the ListItem component
+ */
 export interface ListItemProps {
   /** Item content */
   children: React.ReactNode
@@ -17,6 +20,9 @@ export interface ListItemProps {
   testId?: string
 }
 
+/**
+ * Props for the List component
+ */
 export interface ListProps {
   /** List items */
   children: React.ReactNode
@@ -28,7 +34,27 @@ export interface ListProps {
   testId?: string
 }
 
-/** iOS-inspired list item component */
+/**
+ * iOS-inspired list item component for structured content display.
+ * 
+ * Features:
+ * - Support for left and right content (icons, badges, etc.)
+ * - Interactive state with hover effects
+ * - Disabled state
+ * - Proper keyboard accessibility
+ * - Consistent iOS-style borders
+ * 
+ * @example
+ * ```tsx
+ * <ListItem
+ *   leftContent={<Icon name="settings" />}
+ *   rightContent={<Badge>3</Badge>}
+ *   onClick={handleItemClick}
+ * >
+ *   Settings
+ * </ListItem>
+ * ```
+ */
 export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
   ({ children, leftContent, rightContent, disabled = false, onClick, className = "", testId, ...props }, ref) => {
     const isInteractive = !!onClick && !disabled
@@ -59,7 +85,23 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
 
 ListItem.displayName = "ListItem"
 
-/** iOS-inspired list container component */
+/**
+ * iOS-inspired list container component for grouping list items.
+ * 
+ * Features:
+ * - Multiple variants (grouped, inset, plain)
+ * - Consistent iOS styling
+ * - Proper accessibility semantics
+ * 
+ * @example
+ * ```tsx
+ * <List variant="grouped">
+ *   <ListItem>First item</ListItem>
+ *   <ListItem>Second item</ListItem>
+ *   <ListItem>Third item</ListItem>
+ * </List>
+ * ```
+ */
 export const List = React.forwardRef<HTMLDivElement, ListProps>(
   ({ children, variant = "grouped", className = "", testId, ...props }, ref) => {
     const variantStyles = {

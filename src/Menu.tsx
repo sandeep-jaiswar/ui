@@ -1,16 +1,29 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Configuration for a menu item
+ */
 export interface MenuItem {
+  /** Unique identifier for the item */
   id: string
+  /** Display text for the item */
   label: string
+  /** Optional icon name */
   icon?: string
+  /** Whether the item is disabled */
   disabled?: boolean
+  /** Whether the item is destructive (red) */
   destructive?: boolean
+  /** Whether the item is a separator */
   separator?: boolean
+  /** Callback fired when the item is clicked */
   onClick?: () => void
 }
 
+/**
+ * Props for the Menu component
+ */
 export interface MenuProps {
   /** Menu items */
   items: MenuItem[]
@@ -28,11 +41,40 @@ export interface MenuProps {
   testId?: string
 }
 
-/** iOS-inspired context menu component */
+/**
+ * iOS-inspired context menu component for dropdown actions.
+ * 
+ * Features:
+ * - Multiple positioning options
+ * - Support for icons and separators
+ * - Destructive action styling
+ * - Disabled state handling
+ * - Keyboard navigation and accessibility
+ * - Click outside and escape key handling
+ * 
+ * @example
+ * ```tsx
+ * <Menu
+ *   open={isOpen}
+ *   onClose={() => setIsOpen(false)}
+ *   position="bottom-right"
+ *   trigger={<Button>Options</Button>}
+ *   items={[
+ *     { id: "edit", label: "Edit", icon: "settings" },
+ *     { id: "copy", label: "Copy", icon: "plus" },
+ *     { id: "separator", separator: true },
+ *     { id: "delete", label: "Delete", icon: "close", destructive: true }
+ *   ]}
+ * />
+ * ```
+ */
 export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(
   ({ items, open, onClose, trigger, position = "bottom-left", className = "", testId, ...props }, ref) => {
     const menuRef = React.useRef<HTMLDivElement>(null)
 
+    /**
+     * Handle click outside and escape key to close menu
+     */
     React.useEffect(() => {
       if (!open) return
 
@@ -57,6 +99,9 @@ export const Menu = React.forwardRef<HTMLDivElement, MenuProps>(
       }
     }, [open, onClose])
 
+    /**
+     * Handles menu item click
+     */
     const handleItemClick = (item: MenuItem) => {
       if (item.disabled) return
       item.onClick?.()

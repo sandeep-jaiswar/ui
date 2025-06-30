@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the Switch component
+ */
 export interface SwitchProps {
   /** Is the switch checked? */
   checked?: boolean
@@ -23,7 +26,35 @@ export interface SwitchProps {
   testId?: string
 }
 
-/** iOS-inspired switch component following Apple's toggle design */
+/**
+ * iOS-inspired switch component for toggling boolean values.
+ * 
+ * Features:
+ * - Multiple size variants
+ * - Various color options when active
+ * - Label with customizable position
+ * - Smooth sliding animation
+ * - Proper accessibility attributes
+ * - Controlled and uncontrolled modes
+ * 
+ * @example
+ * ```tsx
+ * // Basic switch
+ * <Switch 
+ *   label="Dark Mode"
+ *   checked={isDarkMode}
+ *   onChange={setIsDarkMode}
+ * />
+ * 
+ * // Custom color and size
+ * <Switch
+ *   label="Notifications"
+ *   color="blue"
+ *   size="large"
+ *   defaultChecked
+ * />
+ * ```
+ */
 export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
@@ -49,6 +80,9 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       }
     }, [checked])
 
+    /**
+     * Handles switch toggle
+     */
     const handleToggle = () => {
       if (disabled) return
 

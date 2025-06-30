@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the Slider component
+ */
 export interface SliderProps {
   /** Slider value */
   value?: number
@@ -29,7 +32,39 @@ export interface SliderProps {
   testId?: string
 }
 
-/** iOS-inspired slider component for selecting numeric values */
+/**
+ * iOS-inspired slider component for selecting numeric values.
+ * 
+ * Features:
+ * - Min/max range with step control
+ * - Multiple color options
+ * - Value display with custom formatting
+ * - Smooth thumb movement
+ * - Proper accessibility attributes
+ * - Controlled and uncontrolled modes
+ * 
+ * @example
+ * ```tsx
+ * // Basic slider
+ * <Slider
+ *   label="Volume"
+ *   value={volume}
+ *   onChange={setVolume}
+ *   showValue
+ * />
+ * 
+ * // Custom range and formatting
+ * <Slider
+ *   label="Temperature"
+ *   min={-10}
+ *   max={40}
+ *   value={temperature}
+ *   onChange={setTemperature}
+ *   formatValue={(value) => `${value}°C`}
+ *   color="orange"
+ * />
+ * ```
+ */
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
   (
     {
@@ -58,6 +93,9 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
       }
     }, [value])
 
+    /**
+     * Handles slider value changes
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (disabled) return
 

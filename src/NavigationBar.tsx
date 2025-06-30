@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the NavigationBar component
+ */
 export interface NavigationBarProps {
   /** Navigation title */
   title?: string
@@ -20,7 +23,30 @@ export interface NavigationBarProps {
   testId?: string
 }
 
-/** iOS-inspired navigation bar component */
+/**
+ * iOS-inspired navigation bar component for app headers.
+ * 
+ * Features:
+ * - Multiple variants (default, large title, transparent)
+ * - Back button with handler
+ * - Customizable left and right content areas
+ * - Proper semantic HTML structure
+ * - Consistent iOS styling with blur effects
+ * 
+ * @example
+ * ```tsx
+ * <NavigationBar
+ *   title="Messages"
+ *   showBack
+ *   onBack={() => navigate(-1)}
+ *   rightContent={
+ *     <Button variant="ghost" size="small">
+ *       <Icon name="plus" />
+ *     </Button>
+ *   }
+ * />
+ * ```
+ */
 export const NavigationBar = React.forwardRef<HTMLElement, NavigationBarProps>(
   (
     {

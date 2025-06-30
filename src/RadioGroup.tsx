@@ -1,6 +1,9 @@
 import React from "react"
 import { Radio, RadioProps } from "./Radio"
 
+/**
+ * Props for the RadioGroup component
+ */
 export interface RadioGroupProps {
   /** Selected value */
   value?: string
@@ -30,7 +33,30 @@ export interface RadioGroupProps {
   testId?: string
 }
 
-/** iOS-inspired radio group component for managing multiple radio buttons */
+/**
+ * iOS-inspired radio group component for managing multiple radio buttons.
+ * 
+ * Features:
+ * - Controlled and uncontrolled modes
+ * - Horizontal or vertical layout
+ * - Consistent styling across radio buttons
+ * - Group-level disabled state
+ * - Proper accessibility with role="radiogroup"
+ * 
+ * @example
+ * ```tsx
+ * <RadioGroup
+ *   name="fruits"
+ *   value={selectedFruit}
+ *   onChange={setSelectedFruit}
+ *   options={[
+ *     { value: "apple", label: "Apple" },
+ *     { value: "banana", label: "Banana" },
+ *     { value: "orange", label: "Orange" }
+ *   ]}
+ * />
+ * ```
+ */
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   (
     {
@@ -57,6 +83,9 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       }
     }, [value])
 
+    /**
+     * Handles radio selection change
+     */
     const handleChange = (newValue: string) => {
       if (disabled) return
 

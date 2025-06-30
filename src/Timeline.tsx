@@ -1,16 +1,29 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Configuration for a timeline item
+ */
 export interface TimelineItem {
+  /** Unique identifier for the item */
   id: string
+  /** Item title */
   title: string
+  /** Optional description */
   description?: string
+  /** Timestamp or date text */
   timestamp: string
+  /** Optional icon name */
   icon?: string
+  /** Color theme for the item */
   color?: "blue" | "green" | "orange" | "red" | "purple"
+  /** Whether the item is completed */
   completed?: boolean
 }
 
+/**
+ * Props for the Timeline component
+ */
 export interface TimelineProps {
   /** Timeline items */
   items: TimelineItem[]
@@ -24,7 +37,47 @@ export interface TimelineProps {
   testId?: string
 }
 
-/** iOS-inspired timeline component for chronological data */
+/**
+ * iOS-inspired timeline component for chronological data display.
+ * 
+ * Features:
+ * - Vertical or horizontal orientation
+ * - Default and compact variants
+ * - Customizable item colors
+ * - Icon support
+ * - Completed/incomplete state visualization
+ * 
+ * @example
+ * ```tsx
+ * <Timeline
+ *   items={[
+ *     {
+ *       id: "1",
+ *       title: "Order Placed",
+ *       description: "Your order has been placed successfully",
+ *       timestamp: "2:30 PM",
+ *       completed: true,
+ *       color: "green"
+ *     },
+ *     {
+ *       id: "2",
+ *       title: "Processing",
+ *       description: "Your order is being processed",
+ *       timestamp: "3:15 PM",
+ *       completed: true,
+ *       color: "blue"
+ *     },
+ *     {
+ *       id: "3",
+ *       title: "Shipped",
+ *       timestamp: "Expected 4:00 PM",
+ *       completed: false,
+ *       color: "orange"
+ *     }
+ *   ]}
+ * />
+ * ```
+ */
 export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
   ({ items, variant = "default", orientation = "vertical", className = "", testId, ...props }, ref) => {
     const colorStyles = {

@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the Toast component
+ */
 export interface ToastProps {
   /** Is the toast visible? */
   visible: boolean
@@ -24,7 +27,28 @@ export interface ToastProps {
   testId?: string
 }
 
-/** iOS-inspired toast notification component */
+/**
+ * iOS-inspired toast notification component for temporary feedback.
+ * 
+ * Features:
+ * - Multiple types (info, success, warning, error)
+ * - Auto-dismiss with configurable duration
+ * - Top or bottom positioning
+ * - Optional close button
+ * - Smooth animations
+ * - Proper ARIA attributes for accessibility
+ * 
+ * @example
+ * ```tsx
+ * <Toast
+ *   visible={showToast}
+ *   type="success"
+ *   title="Success"
+ *   message="Your changes have been saved"
+ *   onClose={() => setShowToast(false)}
+ * />
+ * ```
+ */
 export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
   (
     {
@@ -42,6 +66,9 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     },
     ref
   ) => {
+    /**
+     * Auto-dismiss the toast after duration
+     */
     React.useEffect(() => {
       if (visible && duration > 0) {
         const timer = setTimeout(() => {

@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the ProgressBar component
+ */
 export interface ProgressBarProps {
   /** Progress value (0-100) */
   value: number
@@ -21,7 +24,35 @@ export interface ProgressBarProps {
   testId?: string
 }
 
-/** iOS-inspired progress bar component */
+/**
+ * iOS-inspired progress bar component for displaying completion status.
+ * 
+ * Features:
+ * - Multiple size variants
+ * - Various color options
+ * - Percentage or custom label display
+ * - Indeterminate state for unknown progress
+ * - Proper ARIA attributes for accessibility
+ * - Smooth animations
+ * 
+ * @example
+ * ```tsx
+ * // Basic progress bar
+ * <ProgressBar value={75} />
+ * 
+ * // With label and custom color
+ * <ProgressBar 
+ *   value={downloadProgress} 
+ *   max={100}
+ *   color="green"
+ *   showLabel
+ *   label="Downloading..."
+ * />
+ * 
+ * // Indeterminate progress
+ * <ProgressBar indeterminate label="Loading..." />
+ * ```
+ */
 export const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
   (
     {

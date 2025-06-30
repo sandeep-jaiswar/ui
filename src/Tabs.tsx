@@ -1,12 +1,22 @@
 import React from "react"
 
+/**
+ * Configuration for a tab item
+ */
 export interface TabItem {
+  /** Unique identifier for the tab */
   id: string
+  /** Display label for the tab */
   label: string
+  /** Content to display when tab is active */
   content: React.ReactNode
+  /** Whether the tab is disabled */
   disabled?: boolean
 }
 
+/**
+ * Props for the Tabs component
+ */
 export interface TabsProps {
   /** Tab items */
   items: TabItem[]
@@ -24,7 +34,30 @@ export interface TabsProps {
   testId?: string
 }
 
-/** iOS-inspired tabs component for content organization */
+/**
+ * iOS-inspired tabs component for content organization.
+ * 
+ * Features:
+ * - Default and segmented variants
+ * - Controlled and uncontrolled modes
+ * - Disabled tab support
+ * - Proper ARIA roles for accessibility
+ * - Smooth transitions between tabs
+ * 
+ * @example
+ * ```tsx
+ * <Tabs
+ *   items={[
+ *     { id: 'overview', label: 'Overview', content: <OverviewContent /> },
+ *     { id: 'details', label: 'Details', content: <DetailsContent /> },
+ *     { id: 'settings', label: 'Settings', content: <SettingsContent /> }
+ *   ]}
+ *   activeTab={activeTab}
+ *   onChange={setActiveTab}
+ *   variant="segmented"
+ * />
+ * ```
+ */
 export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
   ({ items, activeTab, defaultActiveTab, onChange, variant = "default", className = "", testId, ...props }, ref) => {
     const [selectedTab, setSelectedTab] = React.useState(activeTab ?? defaultActiveTab ?? items[0]?.id ?? "")
@@ -35,6 +68,9 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
       }
     }, [activeTab])
 
+    /**
+     * Handles tab selection change
+     */
     const handleTabChange = (tabId: string) => {
       if (activeTab === undefined) {
         setSelectedTab(tabId)

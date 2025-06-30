@@ -65,10 +65,7 @@ export interface TabBarProps {
  * ```
  */
 export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
-  (
-    { items, activeTab, defaultActiveTab, onChange, showSwipeIndicators = true, className = "", testId, ...props },
-    ref
-  ) => {
+  ({ items, activeTab, defaultActiveTab, onChange, showSwipeIndicators = true, className = "", testId, ...props }, ref) => {
     const [selectedTab, setSelectedTab] = React.useState(activeTab ?? defaultActiveTab ?? items[0]?.id ?? "")
     const tabBarRef = React.useRef<HTMLDivElement>(null)
     const tabRefs = React.useRef<Map<string, HTMLButtonElement>>(new Map())
@@ -130,7 +127,7 @@ export const TabBar = React.forwardRef<HTMLDivElement, TabBarProps>(
           return
       }
 
-      // Find next non-disabled tab
+      // Skip disabled tabs
       let attempts = 0
       while (items[targetIndex]?.disabled && attempts < items.length) {
         targetIndex =

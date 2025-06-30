@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the TextArea component
+ */
 export interface TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
   /** TextArea variant */
   variant?: "filled" | "outlined" | "plain"
@@ -27,7 +30,29 @@ export interface TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
   testId?: string
 }
 
-/** iOS-inspired textarea component with auto-resize and character count */
+/**
+ * iOS-inspired textarea component with auto-resize and character count.
+ * 
+ * Features:
+ * - Multiple variants (filled, outlined, plain)
+ * - Various size options
+ * - Validation states
+ * - Character counter with maxLength support
+ * - Auto-resizing capability
+ * - Label and helper text
+ * 
+ * @example
+ * ```tsx
+ * <TextArea
+ *   label="Description"
+ *   placeholder="Enter product description..."
+ *   helperText="Maximum 500 characters"
+ *   maxLength={500}
+ *   showCount
+ *   autoResize
+ * />
+ * ```
+ */
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
@@ -58,6 +83,9 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [value])
 
+    /**
+     * Auto-resize the textarea when content changes
+     */
     React.useEffect(() => {
       if (autoResize && textareaRef.current) {
         const textarea = textareaRef.current
@@ -66,6 +94,9 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }, [internalValue, autoResize])
 
+    /**
+     * Handles textarea value changes
+     */
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const newValue = e.target.value
       if (value === undefined) {

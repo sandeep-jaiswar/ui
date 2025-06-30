@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the Radio component
+ */
 export interface RadioProps {
   /** Radio value */
   value: string
@@ -25,7 +28,28 @@ export interface RadioProps {
   testId?: string
 }
 
-/** iOS-inspired radio component following Apple's design patterns */
+/**
+ * iOS-inspired radio component for single selection options.
+ * 
+ * Features:
+ * - Multiple size variants
+ * - Various color options
+ * - Label with customizable position
+ * - Disabled state
+ * - Proper accessibility attributes
+ * - Smooth animations
+ * 
+ * @example
+ * ```tsx
+ * <Radio
+ *   value="option1"
+ *   name="options"
+ *   checked={selectedOption === "option1"}
+ *   onChange={(value) => setSelectedOption(value)}
+ *   label="Option 1"
+ * />
+ * ```
+ */
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   (
     {
@@ -44,6 +68,9 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
     },
     ref
   ) => {
+    /**
+     * Handles change events
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (disabled) return
       onChange?.(e.target.value)

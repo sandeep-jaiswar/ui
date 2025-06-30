@@ -1,12 +1,21 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Option configuration for Select component
+ */
 export interface SelectOption {
+  /** Option value */
   value: string
+  /** Display label */
   label: string
+  /** Whether the option is disabled */
   disabled?: boolean
 }
 
+/**
+ * Props for the Select component
+ */
 export interface SelectProps {
   /** Select options */
   options: SelectOption[]
@@ -42,7 +51,31 @@ export interface SelectProps {
   id?: string
 }
 
-/** iOS-inspired select component with dropdown functionality */
+/**
+ * iOS-inspired select component for dropdown selection.
+ * 
+ * Features:
+ * - Multiple variants (filled, outlined, plain)
+ * - Various size options
+ * - Validation states
+ * - Custom chevron icon
+ * - Placeholder support
+ * - Disabled state and options
+ * 
+ * @example
+ * ```tsx
+ * <Select
+ *   label="Country"
+ *   options={[
+ *     { value: "us", label: "United States" },
+ *     { value: "ca", label: "Canada" },
+ *     { value: "mx", label: "Mexico" }
+ *   ]}
+ *   value={country}
+ *   onChange={setCountry}
+ * />
+ * ```
+ */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
@@ -73,6 +106,9 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     }, [value])
 
+    /**
+     * Handles select change events
+     */
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       const newValue = e.target.value
       if (value === undefined) {

@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the ColorPicker component
+ */
 export interface ColorPickerProps {
   /** Selected color */
   value?: string
@@ -25,7 +28,26 @@ export interface ColorPickerProps {
   testId?: string
 }
 
-/** iOS-inspired color picker component */
+/**
+ * iOS-inspired color picker component for selecting colors from a predefined palette or custom input.
+ * 
+ * Features:
+ * - Predefined color palette with customizable options
+ * - Custom color input with hex value support
+ * - Multiple size variants
+ * - Controlled and uncontrolled modes
+ * - Accessibility support with proper ARIA attributes
+ * 
+ * @example
+ * ```tsx
+ * <ColorPicker
+ *   label="Theme Color"
+ *   value={themeColor}
+ *   onChange={setThemeColor}
+ *   colors={["#007AFF", "#34C759", "#FF9500", "#FF3B30"]}
+ * />
+ * ```
+ */
 export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
   (
     {
@@ -65,6 +87,9 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
       }
     }, [value])
 
+    /**
+     * Handles color selection from palette or custom input
+     */
     const handleColorSelect = (color: string) => {
       if (value === undefined) {
         setSelectedColor(color)
@@ -74,6 +99,9 @@ export const ColorPicker = React.forwardRef<HTMLDivElement, ColorPickerProps>(
       setIsOpen(false)
     }
 
+    /**
+     * Handles custom color input change
+     */
     const handleCustomColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newColor = e.target.value
       setCustomColor(newColor)

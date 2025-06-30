@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the FloatingActionButton component
+ */
 export interface FloatingActionButtonProps {
   /** Button icon */
   icon?: string
@@ -22,7 +25,27 @@ export interface FloatingActionButtonProps {
   testId?: string
 }
 
-/** iOS-inspired floating action button component */
+/**
+ * iOS-inspired floating action button component for primary actions.
+ * 
+ * Features:
+ * - Fixed positioning in any corner
+ * - Multiple size options
+ * - Various color options
+ * - Icon or custom content
+ * - Hover and active animations
+ * - Accessibility support
+ * 
+ * @example
+ * ```tsx
+ * <FloatingActionButton
+ *   icon="plus"
+ *   color="blue"
+ *   position="bottom-right"
+ *   onClick={handleAddItem}
+ * />
+ * ```
+ */
 export const FloatingActionButton = React.forwardRef<HTMLButtonElement, FloatingActionButtonProps>(
   (
     {

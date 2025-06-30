@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the SearchField component
+ */
 export interface SearchFieldProps {
   /** Search value */
   value?: string
@@ -28,7 +31,28 @@ export interface SearchFieldProps {
   testId?: string
 }
 
-/** iOS-inspired search field component with search icon and cancel functionality */
+/**
+ * iOS-inspired search field component with search icon and cancel functionality.
+ * 
+ * Features:
+ * - Search icon with proper positioning
+ * - Clear button for quick text clearing
+ * - Optional cancel button (iOS style)
+ * - Multiple size variants
+ * - Search event on Enter key
+ * - Controlled and uncontrolled modes
+ * 
+ * @example
+ * ```tsx
+ * <SearchField
+ *   placeholder="Search products..."
+ *   value={searchQuery}
+ *   onChange={setSearchQuery}
+ *   onSearch={handleSearch}
+ *   showCancel
+ * />
+ * ```
+ */
 export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
   (
     {
@@ -57,6 +81,9 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       }
     }, [value])
 
+    /**
+     * Handles input change
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
       if (value === undefined) {
@@ -65,12 +92,18 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       onChange?.(newValue)
     }
 
+    /**
+     * Handles Enter key press for search
+     */
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
         onSearch?.(searchValue)
       }
     }
 
+    /**
+     * Clears the search input
+     */
     const handleClear = () => {
       const newValue = ""
       if (value === undefined) {
@@ -79,6 +112,9 @@ export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
       onChange?.(newValue)
     }
 
+    /**
+     * Handles cancel button click
+     */
     const handleCancel = () => {
       handleClear()
       onCancel?.()

@@ -1,27 +1,65 @@
 import React, { InputHTMLAttributes, useState } from "react"
 
+/**
+ * Props for the TextField component
+ */
 export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
+  /** Label text */
   label?: string
+  /** Whether the field has an error */
   error?: boolean
+  /** Helper or error text */
   helperText?: string
+  /** Change handler */
   onChange?: (value: string) => void
+  /** Visual style variant */
   variant?: "light" | "dark"
 }
 
+/**
+ * Basic text field component with clear button functionality.
+ * 
+ * Features:
+ * - Light and dark variants
+ * - Error state
+ * - Helper text
+ * - Clear button
+ * - Focus and blur handling
+ * 
+ * @example
+ * ```tsx
+ * <TextField
+ *   label="Username"
+ *   placeholder="Enter your username"
+ *   value={username}
+ *   onChange={setUsername}
+ *   helperText="Username must be at least 3 characters"
+ * />
+ * ```
+ */
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   ({ label, error, helperText, className, onChange, value, variant = "light", ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false)
 
+    /**
+     * Clears the input value
+     */
     const handleClear = () => {
       if (onChange) {
         onChange("")
       }
     }
 
+    /**
+     * Handles input focus
+     */
     const handleFocus = () => {
       setIsFocused(true)
     }
 
+    /**
+     * Handles input blur
+     */
     const handleBlur = () => {
       setIsFocused(false)
     }

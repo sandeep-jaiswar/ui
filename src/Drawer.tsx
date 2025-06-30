@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the Drawer component
+ */
 export interface DrawerProps {
   /** Is the drawer open? */
   open: boolean
@@ -26,7 +29,34 @@ export interface DrawerProps {
   testId?: string
 }
 
-/** iOS-inspired drawer/sidebar component */
+/**
+ * iOS-inspired drawer/sidebar component for displaying content or navigation.
+ * 
+ * Features:
+ * - Multiple positions (left, right, top, bottom)
+ * - Various size options
+ * - Smooth animations
+ * - Backdrop with blur effect
+ * - Close button and escape key support
+ * - Focus management
+ * - Body scroll locking
+ * 
+ * @example
+ * ```tsx
+ * <Drawer
+ *   open={isOpen}
+ *   onClose={() => setIsOpen(false)}
+ *   position="right"
+ *   title="Settings"
+ * >
+ *   <List variant="plain">
+ *     <ListItem>Profile</ListItem>
+ *     <ListItem>Notifications</ListItem>
+ *     <ListItem>Privacy</ListItem>
+ *   </List>
+ * </Drawer>
+ * ```
+ */
 export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
   (
     {
@@ -45,6 +75,9 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
     },
     ref
   ) => {
+    /**
+     * Handle escape key press to close drawer
+     */
     React.useEffect(() => {
       if (!open || !closeOnEscape) return
 
@@ -58,6 +91,9 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       return () => document.removeEventListener("keydown", handleEscape)
     }, [open, closeOnEscape, onClose])
 
+    /**
+     * Manage body scroll lock when drawer is open
+     */
     React.useEffect(() => {
       if (open) {
         document.body.style.overflow = "hidden"
@@ -70,6 +106,9 @@ export const Drawer = React.forwardRef<HTMLDivElement, DrawerProps>(
       }
     }, [open])
 
+    /**
+     * Handles backdrop click to close drawer if enabled
+     */
     const handleBackdropClick = (e: React.MouseEvent) => {
       if (closeOnBackdrop && e.target === e.currentTarget) {
         onClose()

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the Rating component
+ */
 export interface RatingProps {
   /**
    * The current rating value
@@ -40,6 +43,31 @@ export interface RatingProps {
   "data-testid"?: string
 }
 
+/**
+ * iOS-inspired rating component for displaying and collecting star ratings.
+ * 
+ * Features:
+ * - Configurable maximum rating (default: 5)
+ * - Half-star rating support
+ * - Multiple color themes
+ * - Read-only mode for display only
+ * - Different size options
+ * - Hover effects for interactive feedback
+ * 
+ * @example
+ * ```tsx
+ * // Basic rating display
+ * <Rating value={4.5} readonly />
+ * 
+ * // Interactive rating with half-stars
+ * <Rating 
+ *   value={rating}
+ *   onChange={setRating}
+ *   allowHalf
+ *   color="blue"
+ * />
+ * ```
+ */
 export const Rating: React.FC<RatingProps> = ({
   value = 0,
   max = 5,
@@ -58,14 +86,21 @@ export const Rating: React.FC<RatingProps> = ({
     setInternalValue(value)
   }, [value])
 
+  /**
+   * Handles star click for rating selection
+   */
   const handleStarClick = (starIndex: number, isHalf: boolean = false) => {
     if (readonly) return
 
     const newValue = starIndex + (isHalf && allowHalf ? 0.5 : 1)
     setInternalValue(newValue)
     onChange?.(newValue)
+    setHoverValue(null)
   }
 
+  /**
+   * Handles star hover for visual feedback
+   */
   const handleStarHover = (starIndex: number, isHalf: boolean = false) => {
     if (readonly) return
 
@@ -73,11 +108,17 @@ export const Rating: React.FC<RatingProps> = ({
     setHoverValue(newValue)
   }
 
+  /**
+   * Handles mouse leave to reset hover state
+   */
   const handleMouseLeave = () => {
     if (readonly) return
     setHoverValue(null)
   }
 
+  /**
+   * Determines the state of a star (empty, half, or full)
+   */
   const getStarState = (starIndex: number) => {
     const currentValue = hoverValue !== null ? hoverValue : internalValue
     const starValue = starIndex + 1

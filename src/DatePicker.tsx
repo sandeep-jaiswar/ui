@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the DatePicker component
+ */
 export interface DatePickerProps {
   /** Selected date */
   value?: Date
@@ -32,7 +35,28 @@ export interface DatePickerProps {
   testId?: string
 }
 
-/** iOS-inspired date picker component */
+/**
+ * iOS-inspired date picker component for selecting dates with a calendar interface.
+ * 
+ * Features:
+ * - Calendar popup for date selection
+ * - Min/max date constraints
+ * - Validation states
+ * - Formatted date display
+ * - Today button for quick selection
+ * - Responsive design
+ * 
+ * @example
+ * ```tsx
+ * <DatePicker
+ *   label="Event Date"
+ *   value={eventDate}
+ *   onChange={setEventDate}
+ *   min={new Date()}
+ *   max={new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)}
+ * />
+ * ```
+ */
 export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
   (
     {
@@ -63,6 +87,9 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       }
     }, [value])
 
+    /**
+     * Handles date selection and closes the picker
+     */
     const handleDateChange = (date: Date | null) => {
       if (value === undefined) {
         setSelectedDate(date)
@@ -71,6 +98,9 @@ export const DatePicker = React.forwardRef<HTMLInputElement, DatePickerProps>(
       setIsOpen(false)
     }
 
+    /**
+     * Formats date for display in the input field
+     */
     const formatDate = (date: Date | null) => {
       if (!date) return ""
       return date.toLocaleDateString("en-US", {

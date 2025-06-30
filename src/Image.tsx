@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the Image component
+ */
 export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /** Image source URL */
   src: string
@@ -21,7 +24,36 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   testId?: string
 }
 
-/** iOS-inspired image component with aspect ratio and fallback support */
+/**
+ * iOS-inspired image component with aspect ratio and fallback support.
+ * 
+ * Features:
+ * - Configurable aspect ratios
+ * - Object fit options
+ * - Loading state with skeleton animation
+ * - Error handling with fallback content
+ * - Lazy loading support
+ * - Various border radius options
+ * 
+ * @example
+ * ```tsx
+ * // Basic image
+ * <Image
+ *   src="https://example.com/image.jpg"
+ *   alt="Product image"
+ *   aspectRatio="4:3"
+ * />
+ * 
+ * // With fallback
+ * <Image
+ *   src="https://example.com/image.jpg"
+ *   alt="Profile picture"
+ *   aspectRatio="square"
+ *   rounded="full"
+ *   fallback={<div>Image not available</div>}
+ * />
+ * ```
+ */
 export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   (
     {
@@ -42,12 +74,18 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
     const [hasError, setHasError] = React.useState(false)
     const [isLoading, setIsLoading] = React.useState(true)
 
+    /**
+     * Handles image load errors
+     */
     const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
       setHasError(true)
       setIsLoading(false)
       onError?.(e)
     }
 
+    /**
+     * Handles successful image load
+     */
     const handleLoad = () => {
       setIsLoading(false)
     }

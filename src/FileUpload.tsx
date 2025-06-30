@@ -1,6 +1,9 @@
 import React from "react"
 import { Icon } from "./Icon"
 
+/**
+ * Props for the FileUpload component
+ */
 export interface FileUploadProps {
   /** Accepted file types */
   accept?: string
@@ -30,7 +33,29 @@ export interface FileUploadProps {
   testId?: string
 }
 
-/** iOS-inspired file upload component with drag & drop */
+/**
+ * iOS-inspired file upload component with drag & drop functionality.
+ * 
+ * Features:
+ * - Drag and drop file upload
+ * - File type restrictions
+ * - File size validation
+ * - Multiple file support
+ * - Progress indicator
+ * - File list with remove option
+ * - Button and dropzone variants
+ * 
+ * @example
+ * ```tsx
+ * <FileUpload
+ *   label="Upload Documents"
+ *   accept=".pdf,.docx,.jpg,.png"
+ *   maxSize={5 * 1024 * 1024} // 5MB
+ *   multiple
+ *   onChange={handleFileChange}
+ * />
+ * ```
+ */
 export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
   (
     {
@@ -55,6 +80,9 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
     const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([])
     const fileInputRef = React.useRef<HTMLInputElement>(null)
 
+    /**
+     * Handles file selection and validation
+     */
     const handleFileChange = (files: FileList | null) => {
       if (!files) return
 
@@ -73,6 +101,9 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       onChange?.(files)
     }
 
+    /**
+     * Handles drag over event
+     */
     const handleDragOver = (e: React.DragEvent) => {
       e.preventDefault()
       if (!disabled) {
@@ -80,11 +111,17 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       }
     }
 
+    /**
+     * Handles drag leave event
+     */
     const handleDragLeave = (e: React.DragEvent) => {
       e.preventDefault()
       setIsDragOver(false)
     }
 
+    /**
+     * Handles drop event
+     */
     const handleDrop = (e: React.DragEvent) => {
       e.preventDefault()
       setIsDragOver(false)
@@ -95,17 +132,26 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       handleFileChange(files)
     }
 
+    /**
+     * Handles click to open file browser
+     */
     const handleClick = () => {
       if (!disabled && fileInputRef.current) {
         fileInputRef.current.click()
       }
     }
 
+    /**
+     * Removes a file from the uploaded files list
+     */
     const removeFile = (index: number) => {
       const newFiles = uploadedFiles.filter((_, i) => i !== index)
       setUploadedFiles(newFiles)
     }
 
+    /**
+     * Formats file size for display
+     */
     const formatFileSize = (bytes: number) => {
       if (bytes === 0) return "0 Bytes"
       const k = 1024

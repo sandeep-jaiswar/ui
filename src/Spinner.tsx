@@ -1,5 +1,8 @@
 import React from "react"
 
+/**
+ * Props for the Spinner component
+ */
 export interface SpinnerProps {
   /** Spinner size */
   size?: "small" | "medium" | "large"
@@ -15,7 +18,30 @@ export interface SpinnerProps {
   testId?: string
 }
 
-/** iOS-inspired spinner component for loading states */
+/**
+ * iOS-inspired spinner component for loading states.
+ * 
+ * Features:
+ * - Multiple size variants
+ * - Various color options
+ * - Optional loading text
+ * - Smooth animation
+ * - Proper accessibility attributes
+ * 
+ * @example
+ * ```tsx
+ * // Basic spinner
+ * <Spinner />
+ * 
+ * // Spinner with label and custom color
+ * <Spinner 
+ *   size="large"
+ *   color="green"
+ *   label="Loading data..."
+ *   showLabel
+ * />
+ * ```
+ */
 export const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
   (
     { size = "medium", color = "blue", label = "Loading...", showLabel = false, className = "", testId, ...props },
