@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { NavigationBar } from '../src/components/NavigationBar';
-import { Button } from '../src/components/Button';
-import { Icon } from '../src/components/Icon';
+import { NavigationBar } from '../src/NavigationBar';
+import { Button } from '../src/Button';
+import { Icon } from '../src/Icon';
 
 const meta = {
   title: 'Navigation/NavigationBar',

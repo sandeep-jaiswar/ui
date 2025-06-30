@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TextField } from '../src/components/TextField';
+import { TextField } from '../src/TextField';
 
 // Mock function for onChange handlers
 const fn = () => {};

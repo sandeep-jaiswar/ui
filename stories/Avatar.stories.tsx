@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Avatar } from '../src/components/Avatar';
-import { Typography } from '../src/components/Typography';
+import { Avatar } from '../src/Avatar';
+import { Typography } from '../src/Typography';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Avatar',
@@ -215,22 +215,22 @@ export const AllShapes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <div className="text-center">
-        <Avatar 
-          shape="circle" 
+        <Avatar
+          shape="circle"
           src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
         />
         <Typography variant="caption2" className="mt-1">Circle</Typography>
       </div>
       <div className="text-center">
-        <Avatar 
-          shape="rounded" 
+        <Avatar
+          shape="rounded"
           src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
         />
         <Typography variant="caption2" className="mt-1">Rounded</Typography>
       </div>
       <div className="text-center">
-        <Avatar 
-          shape="square" 
+        <Avatar
+          shape="square"
           src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
         />
         <Typography variant="caption2" className="mt-1">Square</Typography>
@@ -257,8 +257,8 @@ export const UserList: Story = {
         { name: 'Alice Brown', initials: 'AB', online: false },
       ].map((user, index) => (
         <div key={index} className="flex items-center gap-3 p-2 rounded-ios hover:bg-fill-quaternary dark:hover:bg-fill-quaternary-dark">
-          <Avatar 
-            initials={user.initials} 
+          <Avatar
+            initials={user.initials}
             online={user.online}
             backgroundColor={`hsl(${index * 90}, 60%, 50%)`}
           />
@@ -285,21 +285,21 @@ export const UserList: Story = {
 export const AvatarGroup: Story = {
   render: () => (
     <div className="flex -space-x-2">
-      <Avatar 
+      <Avatar
         src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
         className="border-2 border-background-primary dark:border-background-primary-dark"
       />
-      <Avatar 
+      <Avatar
         initials="JS"
         backgroundColor="#34C759"
         className="border-2 border-background-primary dark:border-background-primary-dark"
       />
-      <Avatar 
+      <Avatar
         initials="BW"
         backgroundColor="#FF9500"
         className="border-2 border-background-primary dark:border-background-primary-dark"
       />
-      <Avatar 
+      <Avatar
         initials="AB"
         backgroundColor="#AF52DE"
         className="border-2 border-background-primary dark:border-background-primary-dark"
@@ -322,28 +322,27 @@ export const AvatarGroup: Story = {
 export const InteractiveExample: Story = {
   render: () => {
     const [selectedUser, setSelectedUser] = React.useState<number | null>(null);
-    
+
     const users = [
       { name: 'John Doe', initials: 'JD', color: '#007AFF' },
       { name: 'Jane Smith', initials: 'JS', color: '#34C759' },
       { name: 'Bob Wilson', initials: 'BW', color: '#FF9500' },
     ];
-    
+
     return (
       <div className="space-y-4">
         <Typography variant="headline">Select a user:</Typography>
         <div className="flex gap-4">
           {users.map((user, index) => (
-            <div 
+            <div
               key={index}
-              className={`text-center cursor-pointer p-2 rounded-ios transition-colors ${
-                selectedUser === index 
-                  ? 'bg-systemBlue-50 dark:bg-systemBlue-900/20' 
+              className={`text-center cursor-pointer p-2 rounded-ios transition-colors ${selectedUser === index
+                  ? 'bg-systemBlue-50 dark:bg-systemBlue-900/20'
                   : 'hover:bg-fill-quaternary dark:hover:bg-fill-quaternary-dark'
-              }`}
+                }`}
               onClick={() => setSelectedUser(index)}
             >
-              <Avatar 
+              <Avatar
                 initials={user.initials}
                 backgroundColor={user.color}
                 online={selectedUser === index}

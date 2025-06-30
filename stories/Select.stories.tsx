@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Select } from '../src/components/Select';
+import { Select } from '../src/Select';
 
 const mockOptions = [
   { value: 'apple', label: 'Apple' },

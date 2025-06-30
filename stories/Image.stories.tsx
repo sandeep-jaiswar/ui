@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Image } from '../src/components/Image';
+import { Image } from '../src/Image';
 
 const meta = {
   title: 'Data Display/Image',
@@ -30,7 +30,7 @@ export const AspectRatios: Story = {
     <div className="grid grid-cols-2 gap-4 w-96">
       <div>
         <h4 className="mb-2 font-semibold">Square</h4>
-        <Image 
+        <Image
           src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400"
           alt="Square"
           aspectRatio="square"
@@ -38,7 +38,7 @@ export const AspectRatios: Story = {
       </div>
       <div>
         <h4 className="mb-2 font-semibold">16:9</h4>
-        <Image 
+        <Image
           src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400"
           alt="16:9"
           aspectRatio="16:9"
@@ -53,7 +53,7 @@ export const ObjectFit: Story = {
     <div className="grid grid-cols-2 gap-4 w-96">
       <div>
         <h4 className="mb-2 font-semibold">Cover</h4>
-        <Image 
+        <Image
           src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400"
           alt="Cover"
           aspectRatio="square"
@@ -62,7 +62,7 @@ export const ObjectFit: Story = {
       </div>
       <div>
         <h4 className="mb-2 font-semibold">Contain</h4>
-        <Image 
+        <Image
           src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400"
           alt="Contain"
           aspectRatio="square"
@@ -88,21 +88,21 @@ export const WithFallback: Story = {
 export const Rounded: Story = {
   render: () => (
     <div className="grid grid-cols-3 gap-4">
-      <Image 
+      <Image
         src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=200"
         alt="Rounded"
         aspectRatio="square"
         rounded="lg"
         className="w-24"
       />
-      <Image 
+      <Image
         src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=200"
         alt="More rounded"
         aspectRatio="square"
         rounded="xl"
         className="w-24"
       />
-      <Image 
+      <Image
         src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=200"
         alt="Circular"
         aspectRatio="square"

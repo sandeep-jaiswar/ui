@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { FileUpload } from '../src/components/FileUpload';
+import { FileUpload } from '../src/FileUpload';
 
 const meta = {
   title: 'Advanced/FileUpload',
@@ -55,12 +55,12 @@ export const Interactive: Story = {
   render: () => {
     const [files, setFiles] = React.useState<File[]>([]);
     const [progress, setProgress] = React.useState<number | undefined>();
-    
+
     const handleFileChange = (fileList: FileList | null) => {
       if (fileList) {
         const newFiles = Array.from(fileList);
         setFiles(prev => [...prev, ...newFiles]);
-        
+
         // Simulate upload progress
         setProgress(0);
         const interval = setInterval(() => {
@@ -74,7 +74,7 @@ export const Interactive: Story = {
         }, 200);
       }
     };
-    
+
     return (
       <div className="space-y-4 w-96">
         <FileUpload
@@ -86,7 +86,7 @@ export const Interactive: Story = {
           progress={progress}
           onChange={handleFileChange}
         />
-        
+
         {files.length > 0 && (
           <div className="p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
             <h4 className="font-semibold mb-2">Uploaded Files:</h4>

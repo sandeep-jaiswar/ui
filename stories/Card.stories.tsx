@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Card } from '../src/components/Card';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
+import { Card } from '../src/Card';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Card',
@@ -179,8 +179,8 @@ export const Clickable: Story = {
 export const WithImage: Story = {
   render: () => (
     <Card padding="none" className="max-w-sm">
-      <img 
-        src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400" 
+      <img
+        src="https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400"
         alt="Beautiful landscape"
         className="w-full h-48 object-cover"
       />
@@ -230,8 +230,8 @@ export const WithActions: Story = {
 export const ProductCard: Story = {
   render: () => (
     <Card padding="none" className="max-w-sm" interactive>
-      <img 
-        src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=400" 
+      <img
+        src="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=400"
         alt="Product"
         className="w-full h-48 object-cover"
       />
@@ -336,13 +336,13 @@ export const AllVariants: Story = {
 export const InteractiveExample: Story = {
   render: () => {
     const [selectedCard, setSelectedCard] = React.useState<number | null>(null);
-    
+
     return (
       <div className="space-y-4">
         <Typography variant="headline">Select a card:</Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[1, 2, 3].map((item) => (
-            <Card 
+            <Card
               key={item}
               interactive
               onClick={() => setSelectedCard(item)}

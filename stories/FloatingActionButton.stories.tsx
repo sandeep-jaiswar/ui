@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { FloatingActionButton } from '../src/components/FloatingActionButton';
+import { FloatingActionButton } from '../src/FloatingActionButton';
 
 const meta = {
   title: 'Advanced/FloatingActionButton',
@@ -57,14 +57,14 @@ export const Colors: Story = {
 export const Interactive: Story = {
   render: () => {
     const [count, setCount] = React.useState(0);
-    
+
     return (
       <div className="relative h-96 bg-fill-quaternary dark:bg-fill-quaternary-dark p-6">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Counter: {count}</h2>
           <p className="text-label-secondary">Click the floating button to increment</p>
         </div>
-        
+
         <FloatingActionButton
           icon="plus"
           onClick={() => setCount(count + 1)}

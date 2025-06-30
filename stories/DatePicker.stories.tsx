@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { DatePicker } from '../src/components/DatePicker';
+import { DatePicker } from '../src/DatePicker';
 
 const meta = {
   title: 'Advanced/DatePicker',
@@ -47,7 +47,7 @@ export const WithMinMax: Story = {
 export const Interactive: Story = {
   render: () => {
     const [selectedDate, setSelectedDate] = React.useState<Date | null>(null);
-    
+
     return (
       <div className="space-y-4 w-80">
         <DatePicker
@@ -56,7 +56,7 @@ export const Interactive: Story = {
           onChange={setSelectedDate}
           helperText="Select the date for your event"
         />
-        
+
         {selectedDate && (
           <div className="p-3 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
             <p className="text-sm">

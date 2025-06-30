@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Alert } from '../src/components/Alert';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
+import { Alert } from '../src/Alert';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
 
 // Mock function for action handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Feedback/Alert',
@@ -181,7 +181,7 @@ export const InteractiveAlert: Story = {
     return (
       <div className="space-y-4">
         <Typography variant="headline">Alert Examples</Typography>
-        
+
         <div className="flex gap-3">
           <Button size="small" onClick={() => showAlert('simple')}>
             Simple Alert
@@ -227,7 +227,7 @@ export const FormValidationAlert: Story = {
     return (
       <div className="space-y-6 max-w-sm">
         <Typography variant="headline">Login Form</Typography>
-        
+
         <div className="space-y-4">
           <input
             type="email"

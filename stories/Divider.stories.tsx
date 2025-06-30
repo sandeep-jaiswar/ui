@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Divider } from '../src/components/Divider';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
+import { Divider } from '../src/Divider';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
 
 const meta = {
   title: 'Components/Divider',
@@ -160,18 +160,18 @@ export const InForm: Story = {
         <Button fullWidth>Sign in with Apple</Button>
         <Button fullWidth variant="secondary">Sign in with Google</Button>
       </div>
-      
+
       <Divider>OR</Divider>
-      
+
       <div className="space-y-4">
-        <input 
-          type="email" 
-          placeholder="Email" 
+        <input
+          type="email"
+          placeholder="Email"
           className="w-full p-3 border rounded-ios"
         />
-        <input 
-          type="password" 
-          placeholder="Password" 
+        <input
+          type="password"
+          placeholder="Password"
           className="w-full p-3 border rounded-ios"
         />
         <Button fullWidth>Sign In</Button>
@@ -197,18 +197,18 @@ export const InContent: Story = {
           and sets up the main content.
         </Typography>
       </div>
-      
+
       <Divider />
-      
+
       <div>
         <Typography variant="body">
           This is the main content section that contains the detailed information
           and primary message of the article.
         </Typography>
       </div>
-      
+
       <Divider thickness="medium" />
-      
+
       <div>
         <Typography variant="subhead">Related Articles</Typography>
         <Typography variant="footnote" color="tertiary">
@@ -247,7 +247,7 @@ export const AllVariants: Story = {
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-4">
         <Typography variant="subhead">With Content</Typography>
         <div className="space-y-4">

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { SearchField } from '../src/components/SearchField';
+import { SearchField } from '../src/SearchField';
 
 const meta = {
   title: 'Form Controls/SearchField',

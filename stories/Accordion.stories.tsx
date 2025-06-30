@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Accordion, AccordionItem } from '../src/components/Accordion';
+import { Accordion, AccordionItem } from '../src/Accordion';
 
 const meta = {
   title: 'Data Display/Accordion',
@@ -80,30 +80,30 @@ export const Separated: Story = {
 export const Interactive: Story = {
   render: () => {
     const [expandedItems, setExpandedItems] = React.useState<string[]>(['item1']);
-    
+
     const handleToggle = (itemId: string, expanded: boolean) => {
-      setExpandedItems(prev => 
-        expanded 
+      setExpandedItems(prev =>
+        expanded
           ? [...prev, itemId]
           : prev.filter(id => id !== itemId)
       );
     };
-    
+
     return (
       <div className="space-y-4">
         <div className="text-sm text-label-secondary">
           Expanded items: {expandedItems.join(', ') || 'None'}
         </div>
-        
+
         <Accordion>
-          <AccordionItem 
+          <AccordionItem
             title="Controlled item 1"
             expanded={expandedItems.includes('item1')}
             onToggle={(expanded) => handleToggle('item1', expanded)}
           >
             This is controlled accordion content 1.
           </AccordionItem>
-          <AccordionItem 
+          <AccordionItem
             title="Controlled item 2"
             expanded={expandedItems.includes('item2')}
             onToggle={(expanded) => handleToggle('item2', expanded)}

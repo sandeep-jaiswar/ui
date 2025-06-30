@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Typography } from '../src/components/Typography';
+import { Typography } from '../src/Typography';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Typography',
@@ -374,28 +374,28 @@ export const SemanticUsage: Story = {
           Published on March 15, 2024
         </Typography>
       </header>
-      
+
       <section>
         <Typography variant="title2" as="h2">
           Section Heading
         </Typography>
         <Typography variant="body">
-          This is the main body content of the article. It uses the body variant which provides 
-          optimal readability for longer form content. The text flows naturally and maintains 
+          This is the main body content of the article. It uses the body variant which provides
+          optimal readability for longer form content. The text flows naturally and maintains
           good contrast and spacing.
         </Typography>
       </section>
-      
+
       <section>
         <Typography variant="headline" as="h3">
           Subsection
         </Typography>
         <Typography variant="callout">
-          This callout text provides additional context or highlights important information 
+          This callout text provides additional context or highlights important information
           that supports the main content.
         </Typography>
       </section>
-      
+
       <footer>
         <Typography variant="footnote" color="tertiary">
           This footnote provides additional details or disclaimers related to the content above.
@@ -417,14 +417,14 @@ export const InteractiveExample: Story = {
   render: () => {
     const [selectedVariant, setSelectedVariant] = React.useState<'body' | 'headline' | 'title2'>('body');
     const [selectedColor, setSelectedColor] = React.useState<'primary' | 'secondary' | 'system'>('primary');
-    
+
     return (
       <div className="space-y-6">
         <div className="flex gap-4">
           <div>
             <Typography variant="subhead" as="label">Variant:</Typography>
-            <select 
-              value={selectedVariant} 
+            <select
+              value={selectedVariant}
               onChange={(e) => setSelectedVariant(e.target.value as any)}
               className="ml-2 px-2 py-1 border rounded"
             >
@@ -435,8 +435,8 @@ export const InteractiveExample: Story = {
           </div>
           <div>
             <Typography variant="subhead" as="label">Color:</Typography>
-            <select 
-              value={selectedColor} 
+            <select
+              value={selectedColor}
               onChange={(e) => setSelectedColor(e.target.value as any)}
               className="ml-2 px-2 py-1 border rounded"
             >
@@ -446,10 +446,10 @@ export const InteractiveExample: Story = {
             </select>
           </div>
         </div>
-        
+
         <div className="p-4 border rounded-lg">
           <Typography variant={selectedVariant} color={selectedColor}>
-            This text changes based on your selections above. Try different combinations 
+            This text changes based on your selections above. Try different combinations
             to see how the typography variants and colors work together.
           </Typography>
         </div>

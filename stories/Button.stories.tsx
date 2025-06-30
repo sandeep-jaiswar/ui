@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '../src/components/Button';
+import { Button } from '../src/Button';
 import React from 'react';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 // Icons for demonstration
 const ChevronRightIcon = () => (
@@ -288,8 +288,8 @@ export const InteractiveExample: Story = {
     return (
       <div className="flex flex-col items-center gap-4">
         <div className="text-ios-title-2 font-semibold">Count: {count}</div>
-        <Button 
-          onClick={handleIncrement} 
+        <Button
+          onClick={handleIncrement}
           loading={loading}
           startIcon={<PlusIcon />}
         >

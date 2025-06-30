@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Toast } from '../src/components/Toast';
-import { Button } from '../src/components/Button';
+import { Toast } from '../src/Toast';
+import { Button } from '../src/Button';
 
 const meta = {
   title: 'Feedback/Toast',
@@ -18,7 +18,7 @@ const meta = {
   args: {
     visible: true,
     message: 'This is a toast notification',
-    onClose: () => {},
+    onClose: () => { },
   },
 } satisfies Meta<typeof Toast>;
 
@@ -59,7 +59,7 @@ export const Error: Story = {
 
 export const Interactive: Story = {
   render: () => {
-    const [toasts, setToasts] = React.useState<Array<{id: number, type: 'info' | 'success' | 'warning' | 'error', message: string}>>([]);
+    const [toasts, setToasts] = React.useState<Array<{ id: number, type: 'info' | 'success' | 'warning' | 'error', message: string }>>([]);
 
     const showToast = (type: 'info' | 'success' | 'warning' | 'error') => {
       const id = Date.now();
@@ -69,9 +69,9 @@ export const Interactive: Story = {
         warning: 'Warning message',
         error: 'Error message',
       };
-      
+
       setToasts(prev => [...prev, { id, type, message: messages[type] }]);
-      
+
       setTimeout(() => {
         setToasts(prev => prev.filter(toast => toast.id !== id));
       }, 4000);
@@ -85,7 +85,7 @@ export const Interactive: Story = {
           <Button size="small" onClick={() => showToast('warning')}>Warning</Button>
           <Button size="small" onClick={() => showToast('error')}>Error</Button>
         </div>
-        
+
         {toasts.map(toast => (
           <Toast
             key={toast.id}

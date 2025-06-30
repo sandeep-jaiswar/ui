@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { TabBar } from '../src/components/TabBar';
+import { TabBar } from '../src/TabBar';
 
 const mockItems = [
   { id: 'home', label: 'Home', icon: 'home' },
@@ -54,7 +54,7 @@ export const WithDisabled: Story = {
 export const Interactive: Story = {
   render: () => {
     const [activeTab, setActiveTab] = React.useState('home');
-    
+
     return (
       <div className="h-screen flex flex-col">
         <div className="flex-1 p-4 bg-background-secondary dark:bg-background-secondary-dark">
@@ -63,7 +63,7 @@ export const Interactive: Story = {
           </h1>
           <p>Content for the {activeTab} tab goes here.</p>
         </div>
-        
+
         <TabBar
           items={mockItems}
           activeTab={activeTab}
