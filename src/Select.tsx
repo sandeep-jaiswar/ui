@@ -38,6 +38,8 @@ export interface SelectProps {
   className?: string;
   /** Test ID for testing */
   testId?: string;
+  /** Additional props */
+  id?: string;
 }
 
 /** iOS-inspired select component with dropdown functionality */
