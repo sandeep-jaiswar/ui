@@ -1,9 +1,11 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import { Card } from '../src/components/Card';
 import { Typography } from '../src/components/Typography';
 import { Button } from '../src/components/Button';
+
+// Mock function for onClick handlers
+const fn = () => {};
 
 const meta = {
   title: 'Components/Card',
@@ -38,7 +40,7 @@ const meta = {
     },
   },
   args: {
-    onClick: fn(),
+    onClick: fn,
     children: 'Card content',
   },
 } satisfies Meta<typeof Card>;
@@ -161,7 +163,7 @@ export const Interactive: Story = {
 
 export const Clickable: Story = {
   args: {
-    onClick: fn(),
+    onClick: fn,
     children: (
       <div>
         <Typography variant="headline">Clickable Card</Typography>
