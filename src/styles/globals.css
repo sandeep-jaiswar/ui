@@ -1,3 +1,357 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Apple System Font Stack */
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply font-sf-pro text-ios-body text-label-primary bg-background-primary;
+    @apply dark:text-label-primary-dark dark:bg-background-primary-dark;
+    line-height: 1.47059;
+    letter-spacing: -0.003em;
+  }
+
+  /* iOS-style focus states */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    @apply ring-2 ring-systemBlue-500 ring-offset-2;
+    @apply dark:ring-systemBlue-400 dark:ring-offset-background-primary-dark;
+  }
+
+  /* iOS-style selection */
+  ::selection {
+    @apply bg-systemBlue-500/20 text-label-primary;
+  }
+
+  ::-moz-selection {
+    @apply bg-systemBlue-500/20 text-label-primary;
+  }
+
+  /* iOS-style scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-systemGray-400 rounded-full;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-systemGray-500;
+  }
+
+  /* Dark mode scrollbars */
+  @media (prefers-color-scheme: dark) {
+    ::-webkit-scrollbar-thumb {
+      @apply bg-systemGray-600;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      @apply bg-systemGray-500;
+    }
+  }
+}
+
+/* iOS Component Styles */
+@layer components {
+  /* iOS Button Variants */
+  .btn-primary {
+    @apply btn-ios bg-systemBlue-500 text-white;
+    @apply hover:bg-systemBlue-600 active:bg-systemBlue-700;
+    @apply dark:bg-systemBlue-600 dark:hover:bg-systemBlue-700 dark:active:bg-systemBlue-800;
+  }
+
+  .btn-secondary {
+    @apply btn-ios bg-fill-secondary text-systemBlue-500 border border-separator-opaque;
+    @apply hover:bg-fill-primary active:bg-fill-tertiary;
+    @apply dark:bg-fill-secondary-dark dark:text-systemBlue-400 dark:border-separator-opaque-dark;
+    @apply dark:hover:bg-fill-primary-dark dark:active:bg-fill-tertiary-dark;
+  }
+
+  .btn-destructive {
+    @apply btn-ios bg-systemRed-500 text-white;
+    @apply hover:bg-systemRed-600 active:bg-systemRed-700;
+    @apply dark:bg-systemRed-600 dark:hover:bg-systemRed-700 dark:active:bg-systemRed-800;
+  }
+
+  .btn-ghost {
+    @apply btn-ios bg-transparent text-systemBlue-500;
+    @apply hover:bg-fill-quaternary active:bg-fill-tertiary;
+    @apply dark:text-systemBlue-400 dark:hover:bg-fill-quaternary-dark dark:active:bg-fill-tertiary-dark;
+  }
+
+  /* iOS Card Variants */
+  .card-elevated {
+    @apply card-ios shadow-ios-2;
+    @apply dark:bg-background-secondary-dark dark:shadow-none dark:border dark:border-separator-opaque-dark;
+  }
+
+  .card-grouped {
+    @apply bg-background-primary rounded-ios-lg overflow-hidden;
+    @apply dark:bg-background-secondary-dark;
+  }
+
+  /* iOS Input Variants */
+  .input-primary {
+    @apply input-ios;
+    @apply dark:bg-fill-tertiary-dark dark:text-label-primary-dark;
+  }
+
+  .input-search {
+    @apply input-ios bg-fill-secondary rounded-ios-lg pl-10;
+    @apply dark:bg-fill-secondary-dark dark:text-label-primary-dark;
+  }
+
+  /* iOS Navigation */
+  .navbar {
+    @apply nav-ios px-4 py-2 flex items-center justify-between;
+    @apply dark:bg-background-secondary-dark/94 dark:border-separator-opaque-dark;
+  }
+
+  .navbar-title {
+    @apply text-ios-headline font-semibold text-label-primary;
+    @apply dark:text-label-primary-dark;
+  }
+
+  /* iOS Lists */
+  .list-grouped {
+    @apply list-ios mx-4 my-6;
+    @apply dark:bg-background-secondary-dark;
+  }
+
+  .list-inset-grouped {
+    @apply list-ios mx-4 my-6 shadow-ios-1;
+    @apply dark:bg-background-secondary-dark dark:shadow-none dark:border dark:border-separator-opaque-dark;
+  }
+
+  /* iOS Alerts and Modals */
+  .modal-ios {
+    @apply bg-background-primary rounded-ios-xl shadow-modal p-6 max-w-sm mx-auto;
+    @apply dark:bg-background-secondary-dark dark:border dark:border-separator-opaque-dark;
+  }
+
+  .alert-ios {
+    @apply modal-ios text-center;
+  }
+
+  .alert-title {
+    @apply text-ios-headline font-semibold text-label-primary mb-2;
+    @apply dark:text-label-primary-dark;
+  }
+
+  .alert-message {
+    @apply text-ios-subhead text-label-secondary mb-6;
+    @apply dark:text-label-secondary-dark;
+  }
+
+  /* iOS Form Elements */
+  .form-group {
+    @apply space-y-2;
+  }
+
+  .form-label {
+    @apply text-ios-subhead font-medium text-label-primary;
+    @apply dark:text-label-primary-dark;
+  }
+
+  .form-helper {
+    @apply text-ios-footnote text-label-tertiary;
+    @apply dark:text-label-tertiary-dark;
+  }
+
+  .form-error {
+    @apply text-ios-footnote text-systemRed-500;
+    @apply dark:text-systemRed-400;
+  }
+
+  /* iOS Segmented Control */
+  .segmented-control {
+    @apply bg-fill-secondary rounded-ios p-1 flex;
+    @apply dark:bg-fill-secondary-dark;
+  }
+
+  .segmented-item {
+    @apply flex-1 text-center py-2 px-4 rounded-ios-sm text-ios-subhead font-medium;
+    @apply text-label-primary transition-all duration-200 ease-ios;
+    @apply dark:text-label-primary-dark;
+  }
+
+  .segmented-item.active {
+    @apply bg-background-primary text-label-primary shadow-ios-1;
+    @apply dark:bg-background-tertiary-dark dark:text-label-primary-dark;
+  }
+
+  /* iOS Toggle Switch */
+  .toggle-ios {
+    @apply relative inline-block w-12 h-7 bg-fill-tertiary rounded-full;
+    @apply transition-colors duration-200 ease-ios cursor-pointer;
+    @apply dark:bg-fill-tertiary-dark;
+  }
+
+  .toggle-ios.checked {
+    @apply bg-systemGreen-500;
+    @apply dark:bg-systemGreen-600;
+  }
+
+  .toggle-thumb {
+    @apply absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-ios-1;
+    @apply transition-transform duration-200 ease-ios;
+  }
+
+  .toggle-ios.checked .toggle-thumb {
+    @apply transform translate-x-5;
+  }
+
+  /* iOS Progress Indicators */
+  .progress-ios {
+    @apply w-full h-1 bg-fill-tertiary rounded-full overflow-hidden;
+    @apply dark:bg-fill-tertiary-dark;
+  }
+
+  .progress-bar {
+    @apply h-full bg-systemBlue-500 rounded-full transition-all duration-300 ease-ios;
+    @apply dark:bg-systemBlue-600;
+  }
+
+  /* iOS Activity Indicator */
+  .spinner-ios {
+    @apply animate-spin rounded-full border-2 border-fill-tertiary border-t-systemBlue-500;
+    @apply dark:border-fill-tertiary-dark dark:border-t-systemBlue-600;
+  }
+
+  /* iOS Badges */
+  .badge-ios {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-ios-caption-1 font-medium;
+    @apply bg-systemRed-500 text-white;
+    @apply dark:bg-systemRed-600;
+  }
+
+  .badge-secondary {
+    @apply bg-fill-secondary text-label-primary;
+    @apply dark:bg-fill-secondary-dark dark:text-label-primary-dark;
+  }
+
+  /* iOS Dividers */
+  .divider-ios {
+    @apply border-t border-separator-nonOpaque;
+    @apply dark:border-separator-nonOpaque-dark;
+  }
+
+  .divider-full {
+    @apply border-t border-separator-opaque;
+    @apply dark:border-separator-opaque-dark;
+  }
+}
+
+/* iOS Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* iOS Haptic Feedback Simulation */
+@media (hover: hover) {
+  .btn-ios:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* iOS Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* iOS Print Styles */
+@media print {
+  .btn-ios,
+  .card-ios,
+  .modal-ios {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+}
