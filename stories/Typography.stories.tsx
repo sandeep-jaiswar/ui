@@ -2,6 +2,9 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Typography } from '../src/components/Typography';
 
+// Mock function for onClick handlers
+const fn = () => {};
+
 const meta = {
   title: 'Components/Typography',
   component: Typography,

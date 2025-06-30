@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Avatar } from '../src/components/Avatar';
 import { Typography } from '../src/components/Typography';
 
+// Mock function for onClick handlers
+const fn = () => {};
+
 const meta = {
   title: 'Components/Avatar',
   component: Avatar,

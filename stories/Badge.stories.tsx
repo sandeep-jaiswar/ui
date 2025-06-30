@@ -5,6 +5,9 @@ import { Typography } from '../src/components/Typography';
 import { Button } from '../src/components/Button';
 import { Avatar } from '../src/components/Avatar';
 
+// Mock function for onClick handlers
+const fn = () => {};
+
 const meta = {
   title: 'Components/Badge',
   component: Badge,
