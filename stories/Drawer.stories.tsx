@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Drawer } from '../src/components/Drawer';
-import { Button } from '../src/components/Button';
-import { List, ListItem } from '../src/components/List';
-import { Icon } from '../src/components/Icon';
+import { Drawer } from '../src/Drawer';
+import { Button } from '../src/Button';
+import { List, ListItem } from '../src/List';
+import { Icon } from '../src/Icon';
 
 const meta = {
   title: 'Advanced/Drawer',
@@ -19,7 +19,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     open: true,
-    onClose: () => {},
+    onClose: () => { },
     children: 'Drawer content goes here',
   },
 } satisfies Meta<typeof Drawer>;
@@ -60,21 +60,21 @@ export const WithNavigation: Story = {
     title: 'Navigation',
     children: (
       <List variant="plain">
-        <ListItem 
+        <ListItem
           leftContent={<Icon name="home" color="system" />}
           rightContent={<Icon name="chevron" color="tertiary" />}
           onClick={() => console.log('Home')}
         >
           Home
         </ListItem>
-        <ListItem 
+        <ListItem
           leftContent={<Icon name="search" color="system" />}
           rightContent={<Icon name="chevron" color="tertiary" />}
           onClick={() => console.log('Search')}
         >
           Search
         </ListItem>
-        <ListItem 
+        <ListItem
           leftContent={<Icon name="settings" color="system" />}
           rightContent={<Icon name="chevron" color="tertiary" />}
           onClick={() => console.log('Settings')}
@@ -90,7 +90,7 @@ export const Interactive: Story = {
   render: () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [position, setPosition] = React.useState<'left' | 'right' | 'top' | 'bottom'>('right');
-    
+
     return (
       <div className="p-6 space-y-4">
         <div className="flex gap-2 flex-wrap">
@@ -107,7 +107,7 @@ export const Interactive: Story = {
             Open Bottom
           </Button>
         </div>
-        
+
         <Drawer
           open={isOpen}
           onClose={() => setIsOpen(false)}

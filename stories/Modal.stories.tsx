@@ -1,12 +1,12 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Modal } from '../src/components/Modal';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
-import { Input } from '../src/components/Input';
+import { Modal } from '../src/Modal';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
+import { Input } from '../src/Input';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Modal',
@@ -264,23 +264,23 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-4">
         <Typography variant="headline">Modal Examples</Typography>
-        
+
         <div className="flex gap-2">
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             onClick={() => { setModalType('info'); setIsOpen(true); }}
           >
             Info Modal
           </Button>
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             variant="secondary"
             onClick={() => { setModalType('form'); setIsOpen(true); }}
           >
             Form Modal
           </Button>
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             variant="destructive"
             onClick={() => { setModalType('confirm'); setIsOpen(true); }}
           >

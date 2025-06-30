@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Timeline } from '../src/components/Timeline';
+import { Timeline } from '../src/Timeline';
 
 const mockItems = [
   {
@@ -107,21 +107,21 @@ export const WithIcons: Story = {
 export const Interactive: Story = {
   render: () => {
     const [completedSteps, setCompletedSteps] = React.useState(2);
-    
+
     const steps = [
       { id: '1', title: 'Account Setup', description: 'Create your account' },
       { id: '2', title: 'Profile Information', description: 'Add your personal details' },
       { id: '3', title: 'Verification', description: 'Verify your email address' },
       { id: '4', title: 'Complete', description: 'You\'re all set!' }
     ];
-    
+
     const timelineItems = steps.map((step, index) => ({
       ...step,
       timestamp: `Step ${index + 1}`,
       completed: index < completedSteps,
       color: 'blue' as const
     }));
-    
+
     return (
       <div className="space-y-6 max-w-md">
         <div className="flex gap-2">
@@ -140,7 +140,7 @@ export const Interactive: Story = {
             Next
           </button>
         </div>
-        
+
         <Timeline items={timelineItems} />
       </div>
     );

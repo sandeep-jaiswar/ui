@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '../src/components/Checkbox';
-import { Typography } from '../src/components/Typography';
+import { Checkbox } from '../src/Checkbox';
+import { Typography } from '../src/Typography';
 
 // Mock function for onChange handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Form Controls/Checkbox',
@@ -195,7 +195,7 @@ export const FormExample: Story = {
   render: () => (
     <div className="space-y-6 max-w-sm">
       <Typography variant="headline">Preferences</Typography>
-      
+
       <div className="space-y-4">
         <Checkbox defaultChecked label="Email notifications" />
         <Checkbox label="SMS notifications" />
@@ -203,7 +203,7 @@ export const FormExample: Story = {
         <Checkbox label="Marketing emails" />
         <Checkbox defaultChecked label="Security alerts" />
       </div>
-      
+
       <div className="pt-4 border-t border-separator-nonOpaque dark:border-separator-nonOpaque-dark">
         <Checkbox label="I agree to the terms and conditions" color="green" />
       </div>
@@ -223,14 +223,14 @@ export const InteractiveExample: Story = {
   render: () => {
     const [selectedItems, setSelectedItems] = React.useState<string[]>(['item1']);
     const [selectAll, setSelectAll] = React.useState(false);
-    
+
     const items = [
       { id: 'item1', label: 'Item 1' },
       { id: 'item2', label: 'Item 2' },
       { id: 'item3', label: 'Item 3' },
       { id: 'item4', label: 'Item 4' },
     ];
-    
+
     const handleItemChange = (itemId: string, checked: boolean) => {
       if (checked) {
         setSelectedItems(prev => [...prev, itemId]);
@@ -238,7 +238,7 @@ export const InteractiveExample: Story = {
         setSelectedItems(prev => prev.filter(id => id !== itemId));
       }
     };
-    
+
     const handleSelectAllChange = (checked: boolean) => {
       setSelectAll(checked);
       if (checked) {
@@ -247,19 +247,19 @@ export const InteractiveExample: Story = {
         setSelectedItems([]);
       }
     };
-    
+
     React.useEffect(() => {
       const allSelected = items.every(item => selectedItems.includes(item.id));
       const someSelected = selectedItems.length > 0;
       setSelectAll(allSelected);
     }, [selectedItems]);
-    
+
     const isIndeterminate = selectedItems.length > 0 && selectedItems.length < items.length;
 
     return (
       <div className="space-y-6 max-w-sm">
         <Typography variant="headline">Select Items</Typography>
-        
+
         <Checkbox
           checked={selectAll}
           indeterminate={isIndeterminate}
@@ -267,7 +267,7 @@ export const InteractiveExample: Story = {
           label="Select All"
           color="blue"
         />
-        
+
         <div className="pl-6 space-y-3 border-l-2 border-separator-nonOpaque dark:border-separator-nonOpaque-dark">
           {items.map(item => (
             <Checkbox
@@ -278,7 +278,7 @@ export const InteractiveExample: Story = {
             />
           ))}
         </div>
-        
+
         <div className="mt-6 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Typography variant="subhead">Selected Items:</Typography>
           <Typography variant="footnote" color="secondary">

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ColorPicker } from '../src/components/ColorPicker';
+import { ColorPicker } from '../src/ColorPicker';
 
 const meta = {
   title: 'Advanced/ColorPicker',
@@ -38,7 +38,7 @@ export const CustomColors: Story = {
 export const Interactive: Story = {
   render: () => {
     const [selectedColor, setSelectedColor] = React.useState('#007AFF');
-    
+
     return (
       <div className="space-y-4">
         <ColorPicker
@@ -47,12 +47,12 @@ export const Interactive: Story = {
           onChange={setSelectedColor}
           helperText="Choose a background color"
         />
-        
-        <div 
+
+        <div
           className="w-full h-20 rounded-ios border border-separator-opaque dark:border-separator-opaque-dark"
           style={{ backgroundColor: selectedColor }}
         />
-        
+
         <p className="text-sm text-label-secondary">
           Selected color: {selectedColor}
         </p>

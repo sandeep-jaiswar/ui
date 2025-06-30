@@ -1,12 +1,12 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Spinner } from '../src/components/Spinner';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
-import { Card } from '../src/components/Card';
+import { Spinner } from '../src/Spinner';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
+import { Card } from '../src/Card';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Spinner',
@@ -239,18 +239,18 @@ export const LoadingStates: Story = {
   render: () => (
     <div className="space-y-6 w-80">
       <Typography variant="headline">Loading States</Typography>
-      
+
       <div className="space-y-4">
         <div className="flex items-center gap-3 p-3 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Spinner size="small" />
           <Typography variant="body">Fetching data...</Typography>
         </div>
-        
+
         <div className="flex items-center gap-3 p-3 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Spinner size="small" color="green" />
           <Typography variant="body">Uploading file...</Typography>
         </div>
-        
+
         <div className="flex items-center gap-3 p-3 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Spinner size="small" color="orange" />
           <Typography variant="body">Processing...</Typography>
@@ -276,7 +276,7 @@ export const InteractiveExample: Story = {
     const handleAction = (type: 'save' | 'delete' | 'upload') => {
       setLoadingType(type);
       setIsLoading(true);
-      
+
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -303,33 +303,33 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-6 w-80">
         <Typography variant="headline">Interactive Loading</Typography>
-        
+
         {isLoading ? (
           <Card className="text-center py-8">
-            <Spinner 
-              size="large" 
-              color={getSpinnerColor()} 
-              showLabel 
-              label={getLoadingText()} 
+            <Spinner
+              size="large"
+              color={getSpinnerColor()}
+              showLabel
+              label={getLoadingText()}
             />
           </Card>
         ) : (
           <div className="space-y-3">
-            <Button 
-              fullWidth 
+            <Button
+              fullWidth
               onClick={() => handleAction('save')}
             >
               Save Document
             </Button>
-            <Button 
-              fullWidth 
+            <Button
+              fullWidth
               variant="destructive"
               onClick={() => handleAction('delete')}
             >
               Delete Item
             </Button>
-            <Button 
-              fullWidth 
+            <Button
+              fullWidth
               variant="secondary"
               onClick={() => handleAction('upload')}
             >

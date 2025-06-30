@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Rating } from '../src/components/Rating';
+import { Rating } from '../src/Rating';
 
 const meta = {
   title: 'Advanced/Rating',
@@ -61,11 +61,11 @@ export const Sizes: Story = {
 export const Interactive: Story = {
   render: () => {
     const [rating, setRating] = React.useState(0);
-    
+
     return (
       <div className="space-y-4 text-center">
         <h3 className="text-lg font-semibold">Rate this product</h3>
-        
+
         <Rating
           value={rating}
           onChange={setRating}
@@ -73,7 +73,7 @@ export const Interactive: Story = {
           showValue
           size="large"
         />
-        
+
         <p className="text-sm text-label-secondary">
           {rating === 0 && 'Click to rate'}
           {rating > 0 && rating <= 2 && 'Poor'}

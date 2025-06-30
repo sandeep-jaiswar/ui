@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Radio } from '../src/components/Radio';
-import { RadioGroup } from '../src/components/RadioGroup';
-import { Typography } from '../src/components/Typography';
+import { Radio } from '../src/Radio';
+import { RadioGroup } from '../src/RadioGroup';
+import { Typography } from '../src/Typography';
 
 // Mock function for onChange handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Form Controls/Radio',
@@ -197,7 +197,7 @@ export const FormExample: Story = {
   render: () => (
     <div className="space-y-8 max-w-sm">
       <Typography variant="headline">Survey Form</Typography>
-      
+
       <div className="space-y-4">
         <Typography variant="subhead">How satisfied are you with our service?</Typography>
         <RadioGroup
@@ -212,7 +212,7 @@ export const FormExample: Story = {
           color="green"
         />
       </div>
-      
+
       <div className="space-y-4">
         <Typography variant="subhead">How did you hear about us?</Typography>
         <RadioGroup
@@ -227,7 +227,7 @@ export const FormExample: Story = {
           color="blue"
         />
       </div>
-      
+
       <div className="space-y-4">
         <Typography variant="subhead">Preferred contact method</Typography>
         <RadioGroup
@@ -264,7 +264,7 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-8 max-w-md">
         <Typography variant="headline">Choose Your Plan</Typography>
-        
+
         <div className="space-y-4">
           <Typography variant="subhead">Select Plan</Typography>
           <RadioGroup
@@ -279,7 +279,7 @@ export const InteractiveExample: Story = {
             color="blue"
           />
         </div>
-        
+
         <div className="space-y-4">
           <Typography variant="subhead">Billing Cycle</Typography>
           <RadioGroup
@@ -294,7 +294,7 @@ export const InteractiveExample: Story = {
             color="green"
           />
         </div>
-        
+
         <div className="space-y-4">
           <Typography variant="subhead">Support Level</Typography>
           <RadioGroup
@@ -309,7 +309,7 @@ export const InteractiveExample: Story = {
             color="purple"
           />
         </div>
-        
+
         <div className="mt-8 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Typography variant="subhead">Selected Options:</Typography>
           <Typography variant="footnote" color="secondary">

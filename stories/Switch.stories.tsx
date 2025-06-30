@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Switch } from '../src/components/Switch';
-import { Typography } from '../src/components/Typography';
+import { Switch } from '../src/Switch';
+import { Typography } from '../src/Typography';
 
 // Mock function for onChange handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Switch',
@@ -200,7 +200,7 @@ export const SettingsPanel: Story = {
   render: () => (
     <div className="space-y-6 max-w-sm p-6 bg-background-secondary dark:bg-background-secondary-dark rounded-ios-lg">
       <Typography variant="headline">Settings</Typography>
-      
+
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -211,7 +211,7 @@ export const SettingsPanel: Story = {
           </div>
           <Switch defaultChecked />
         </div>
-        
+
         <div className="flex items-center justify-between">
           <div>
             <Typography variant="body">Dark Mode</Typography>
@@ -221,7 +221,7 @@ export const SettingsPanel: Story = {
           </div>
           <Switch color="blue" />
         </div>
-        
+
         <div className="flex items-center justify-between">
           <div>
             <Typography variant="body">Location Services</Typography>
@@ -231,7 +231,7 @@ export const SettingsPanel: Story = {
           </div>
           <Switch color="orange" defaultChecked />
         </div>
-        
+
         <div className="flex items-center justify-between">
           <div>
             <Typography variant="body">Analytics</Typography>
@@ -266,7 +266,7 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-6 max-w-md">
         <Typography variant="headline">Interactive Settings</Typography>
-        
+
         <div className="space-y-4">
           <Switch
             checked={settings.notifications}
@@ -274,21 +274,21 @@ export const InteractiveExample: Story = {
             label="Push Notifications"
             color="green"
           />
-          
+
           <Switch
             checked={settings.darkMode}
             onChange={(checked) => setSettings(prev => ({ ...prev, darkMode: checked }))}
             label="Dark Mode"
             color="blue"
           />
-          
+
           <Switch
             checked={settings.location}
             onChange={(checked) => setSettings(prev => ({ ...prev, location: checked }))}
             label="Location Services"
             color="orange"
           />
-          
+
           <Switch
             checked={settings.analytics}
             onChange={(checked) => setSettings(prev => ({ ...prev, analytics: checked }))}
@@ -296,7 +296,7 @@ export const InteractiveExample: Story = {
             color="purple"
           />
         </div>
-        
+
         <div className="mt-6 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Typography variant="subhead">Current Settings:</Typography>
           <Typography variant="footnote" color="secondary">

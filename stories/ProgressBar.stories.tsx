@@ -1,11 +1,11 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { ProgressBar } from '../src/components/ProgressBar';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
+import { ProgressBar } from '../src/ProgressBar';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/ProgressBar',
@@ -231,30 +231,30 @@ export const DownloadProgress: Story = {
   render: () => (
     <div className="space-y-4 w-80">
       <Typography variant="headline">File Downloads</Typography>
-      
+
       <div className="space-y-3">
-        <ProgressBar 
-          value={100} 
-          color="green" 
-          label="document.pdf" 
-          showLabel 
+        <ProgressBar
+          value={100}
+          color="green"
+          label="document.pdf"
+          showLabel
         />
-        <ProgressBar 
-          value={75} 
-          color="blue" 
-          label="image.jpg" 
-          showLabel 
+        <ProgressBar
+          value={75}
+          color="blue"
+          label="image.jpg"
+          showLabel
         />
-        <ProgressBar 
-          value={45} 
-          color="orange" 
-          label="video.mp4" 
-          showLabel 
+        <ProgressBar
+          value={45}
+          color="orange"
+          label="video.mp4"
+          showLabel
         />
-        <ProgressBar 
-          indeterminate 
-          color="blue" 
-          label="archive.zip" 
+        <ProgressBar
+          indeterminate
+          color="blue"
+          label="archive.zip"
         />
       </div>
     </div>
@@ -272,23 +272,23 @@ export const TaskProgress: Story = {
   render: () => (
     <div className="space-y-6 w-80">
       <Typography variant="headline">Project Tasks</Typography>
-      
+
       <div className="space-y-4">
         <div>
           <Typography variant="body">Design Phase</Typography>
           <ProgressBar value={100} color="green" showLabel size="small" />
         </div>
-        
+
         <div>
           <Typography variant="body">Development</Typography>
           <ProgressBar value={68} color="blue" showLabel size="small" />
         </div>
-        
+
         <div>
           <Typography variant="body">Testing</Typography>
           <ProgressBar value={25} color="orange" showLabel size="small" />
         </div>
-        
+
         <div>
           <Typography variant="body">Deployment</Typography>
           <ProgressBar value={0} color="red" showLabel size="small" />
@@ -343,38 +343,38 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-6 w-80">
         <Typography variant="headline">Interactive Progress</Typography>
-        
-        <ProgressBar 
-          value={progress} 
+
+        <ProgressBar
+          value={progress}
           color={progress === 100 ? 'green' : 'blue'}
-          showLabel 
+          showLabel
         />
-        
+
         <div className="flex gap-2">
-          <Button 
-            size="small" 
-            onClick={handleStart} 
+          <Button
+            size="small"
+            onClick={handleStart}
             disabled={isRunning || progress === 100}
           >
             Start
           </Button>
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             variant="secondary"
-            onClick={handlePause} 
+            onClick={handlePause}
             disabled={!isRunning}
           >
             Pause
           </Button>
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             variant="ghost"
             onClick={handleReset}
           >
             Reset
           </Button>
         </div>
-        
+
         <Typography variant="footnote" color="secondary">
           Status: {progress === 100 ? 'Complete' : isRunning ? 'Running' : 'Paused'}
         </Typography>

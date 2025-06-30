@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Icon } from '../src/components/Icon';
-import { Typography } from '../src/components/Typography';
+import { Icon } from '../src/Icon';
+import { Typography } from '../src/Typography';
 
 const meta = {
   title: 'Foundation/Icon',

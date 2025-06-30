@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Slider } from '../src/components/Slider';
-import { Typography } from '../src/components/Typography';
+import { Slider } from '../src/Slider';
+import { Typography } from '../src/Typography';
 
 // Mock function for onChange handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Form Controls/Slider',
@@ -224,7 +224,7 @@ export const SettingsPanel: Story = {
   render: () => (
     <div className="space-y-8 max-w-sm">
       <Typography variant="headline">Audio Settings</Typography>
-      
+
       <div className="space-y-6">
         <Slider
           label="Master Volume"
@@ -233,7 +233,7 @@ export const SettingsPanel: Story = {
           formatValue={(value) => `${value}%`}
           color="blue"
         />
-        
+
         <Slider
           label="Music Volume"
           value={60}
@@ -241,7 +241,7 @@ export const SettingsPanel: Story = {
           formatValue={(value) => `${value}%`}
           color="green"
         />
-        
+
         <Slider
           label="Effects Volume"
           value={80}
@@ -249,7 +249,7 @@ export const SettingsPanel: Story = {
           formatValue={(value) => `${value}%`}
           color="orange"
         />
-        
+
         <Slider
           label="Voice Volume"
           value={90}
@@ -257,7 +257,7 @@ export const SettingsPanel: Story = {
           formatValue={(value) => `${value}%`}
           color="purple"
         />
-        
+
         <Slider
           label="Bass"
           min={-10}
@@ -267,7 +267,7 @@ export const SettingsPanel: Story = {
           formatValue={(value) => value > 0 ? `+${value}` : `${value}`}
           color="red"
         />
-        
+
         <Slider
           label="Treble"
           min={-10}
@@ -302,7 +302,7 @@ export const InteractiveExample: Story = {
     return (
       <div className="space-y-8 max-w-md">
         <Typography variant="headline">Display Settings</Typography>
-        
+
         <div className="space-y-6">
           <Slider
             label="Brightness"
@@ -312,7 +312,7 @@ export const InteractiveExample: Story = {
             formatValue={(value) => `${value}%`}
             color="blue"
           />
-          
+
           <Slider
             label="Contrast"
             value={settings.contrast}
@@ -321,7 +321,7 @@ export const InteractiveExample: Story = {
             formatValue={(value) => `${value}%`}
             color="green"
           />
-          
+
           <Slider
             label="Saturation"
             value={settings.saturation}
@@ -330,7 +330,7 @@ export const InteractiveExample: Story = {
             formatValue={(value) => `${value}%`}
             color="orange"
           />
-          
+
           <Slider
             label="Color Temperature"
             min={2700}
@@ -343,7 +343,7 @@ export const InteractiveExample: Story = {
             color="red"
           />
         </div>
-        
+
         <div className="mt-8 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
           <Typography variant="subhead">Current Settings:</Typography>
           <div className="mt-2 space-y-1">

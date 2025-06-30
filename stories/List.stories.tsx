@@ -1,9 +1,9 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { List, ListItem } from '../src/components/List';
-import { Avatar } from '../src/components/Avatar';
-import { Icon } from '../src/components/Icon';
-import { Badge } from '../src/components/Badge';
+import { List, ListItem } from '../src/List';
+import { Avatar } from '../src/Avatar';
+import { Icon } from '../src/Icon';
+import { Badge } from '../src/Badge';
 
 const meta = {
   title: 'Layout/List',
@@ -51,7 +51,7 @@ export const WithIcons: Story = {
 export const WithAvatars: Story = {
   render: () => (
     <List>
-      <ListItem 
+      <ListItem
         leftContent={<Avatar initials="JD" size="medium" />}
         rightContent={<Badge variant="primary">3</Badge>}
       >
@@ -60,7 +60,7 @@ export const WithAvatars: Story = {
           <div className="text-sm text-label-secondary">Hey, how are you?</div>
         </div>
       </ListItem>
-      <ListItem 
+      <ListItem
         leftContent={<Avatar initials="JS" size="medium" backgroundColor="#34C759" />}
         rightContent={<Badge variant="success" dot />}
       >
@@ -76,21 +76,21 @@ export const WithAvatars: Story = {
 export const Interactive: Story = {
   render: () => (
     <List>
-      <ListItem 
+      <ListItem
         onClick={() => console.log('Notifications clicked')}
         leftContent={<Icon name="settings" color="system" />}
         rightContent={<Icon name="chevron" color="tertiary" />}
       >
         Notifications
       </ListItem>
-      <ListItem 
+      <ListItem
         onClick={() => console.log('Privacy clicked')}
         leftContent={<Icon name="settings" color="system" />}
         rightContent={<Icon name="chevron" color="tertiary" />}
       >
         Privacy & Security
       </ListItem>
-      <ListItem 
+      <ListItem
         disabled
         leftContent={<Icon name="settings" color="tertiary" />}
         rightContent={<Icon name="chevron" color="tertiary" />}
@@ -111,7 +111,7 @@ export const Variants: Story = {
           <ListItem>Grouped item 2</ListItem>
         </List>
       </div>
-      
+
       <div>
         <h3 className="mb-2 font-semibold">Inset</h3>
         <List variant="inset">
@@ -119,7 +119,7 @@ export const Variants: Story = {
           <ListItem>Inset item 2</ListItem>
         </List>
       </div>
-      
+
       <div>
         <h3 className="mb-2 font-semibold">Plain</h3>
         <List variant="plain">

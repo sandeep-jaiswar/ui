@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Menu } from '../src/components/Menu';
-import { Button } from '../src/components/Button';
+import { Menu } from '../src/Menu';
+import { Button } from '../src/Button';
 
 const mockItems = [
   { id: 'edit', label: 'Edit', icon: 'settings', onClick: () => console.log('Edit') },
@@ -27,7 +27,7 @@ const meta = {
   args: {
     items: mockItems,
     open: true,
-    onClose: () => {},
+    onClose: () => { },
   },
 } satisfies Meta<typeof Menu>;
 
@@ -46,7 +46,7 @@ export const WithTrigger: Story = {
 export const Positions: Story = {
   render: () => {
     const [openMenu, setOpenMenu] = React.useState<string | null>(null);
-    
+
     return (
       <div className="grid grid-cols-2 gap-8 p-8">
         <Menu
@@ -60,7 +60,7 @@ export const Positions: Story = {
             </Button>
           }
         />
-        
+
         <Menu
           items={mockItems.slice(0, 3)}
           open={openMenu === 'bottom-right'}
@@ -72,7 +72,7 @@ export const Positions: Story = {
             </Button>
           }
         />
-        
+
         <Menu
           items={mockItems.slice(0, 3)}
           open={openMenu === 'top-left'}
@@ -84,7 +84,7 @@ export const Positions: Story = {
             </Button>
           }
         />
-        
+
         <Menu
           items={mockItems.slice(0, 3)}
           open={openMenu === 'top-right'}
@@ -105,14 +105,14 @@ export const Interactive: Story = {
   render: () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [lastAction, setLastAction] = React.useState<string>('');
-    
+
     const items = [
       { id: 'edit', label: 'Edit', icon: 'settings', onClick: () => setLastAction('Edit clicked') },
       { id: 'copy', label: 'Copy', icon: 'plus', onClick: () => setLastAction('Copy clicked') },
       { id: 'separator', separator: true },
       { id: 'delete', label: 'Delete', icon: 'close', destructive: true, onClick: () => setLastAction('Delete clicked') },
     ];
-    
+
     return (
       <div className="space-y-4">
         <Menu
@@ -125,7 +125,7 @@ export const Interactive: Story = {
             </Button>
           }
         />
-        
+
         {lastAction && (
           <div className="p-3 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
             Last action: {lastAction}

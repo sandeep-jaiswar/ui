@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { TextArea } from '../src/components/TextArea';
+import { TextArea } from '../src/TextArea';
 
 const meta = {
   title: 'Form Controls/TextArea',

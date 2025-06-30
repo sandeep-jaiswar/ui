@@ -1,12 +1,12 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Badge } from '../src/components/Badge';
-import { Typography } from '../src/components/Typography';
-import { Button } from '../src/components/Button';
-import { Avatar } from '../src/components/Avatar';
+import { Badge } from '../src/Badge';
+import { Typography } from '../src/Typography';
+import { Button } from '../src/Button';
+import { Avatar } from '../src/Avatar';
 
 // Mock function for onClick handlers
-const fn = () => {};
+const fn = () => { };
 
 const meta = {
   title: 'Components/Badge',
@@ -252,8 +252,8 @@ export const WithButton: Story = {
   render: () => (
     <div className="relative inline-block">
       <Button>Messages</Button>
-      <Badge 
-        variant="primary" 
+      <Badge
+        variant="primary"
         size="small"
         className="absolute -top-2 -right-2"
       >
@@ -273,12 +273,12 @@ export const WithButton: Story = {
 export const WithAvatar: Story = {
   render: () => (
     <div className="relative inline-block">
-      <Avatar 
+      <Avatar
         src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
         size="large"
       />
-      <Badge 
-        variant="success" 
+      <Badge
+        variant="success"
         dot
         size="medium"
         className="absolute top-0 right-0"
@@ -375,7 +375,7 @@ export const InteractiveExample: Story = {
   render: () => {
     const [count, setCount] = React.useState(5);
     const [showDot, setShowDot] = React.useState(true);
-    
+
     return (
       <div className="space-y-6">
         <div className="space-y-4">
@@ -383,8 +383,8 @@ export const InteractiveExample: Story = {
           <div className="relative inline-block">
             <Button>Notifications</Button>
             {count > 0 && (
-              <Badge 
-                variant="primary" 
+              <Badge
+                variant="primary"
                 size="small"
                 className="absolute -top-2 -right-2"
               >
@@ -393,22 +393,22 @@ export const InteractiveExample: Story = {
             )}
           </div>
           <div className="flex gap-2">
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               variant="secondary"
               onClick={() => setCount(Math.max(0, count - 1))}
             >
               -1
             </Button>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               variant="secondary"
               onClick={() => setCount(count + 1)}
             >
               +1
             </Button>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               variant="ghost"
               onClick={() => setCount(0)}
             >
@@ -416,22 +416,22 @@ export const InteractiveExample: Story = {
             </Button>
           </div>
         </div>
-        
+
         <div className="space-y-4">
           <Typography variant="headline">Status Indicator</Typography>
           <div className="relative inline-block">
             <Avatar initials="JD" />
             {showDot && (
-              <Badge 
-                variant="success" 
+              <Badge
+                variant="success"
                 dot
                 size="medium"
                 className="absolute top-0 right-0"
               />
             )}
           </div>
-          <Button 
-            size="small" 
+          <Button
+            size="small"
             variant="secondary"
             onClick={() => setShowDot(!showDot)}
           >
