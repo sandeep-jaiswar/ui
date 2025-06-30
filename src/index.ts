@@ -17,8 +17,23 @@ export type { CardProps } from './components/Card';
 export { Checkbox } from './components/Checkbox';
 export type { CheckboxProps } from './components/Checkbox';
 
+export { ColorPicker } from './components/ColorPicker';
+export type { ColorPickerProps } from './components/ColorPicker';
+
+export { DatePicker } from './components/DatePicker';
+export type { DatePickerProps } from './components/DatePicker';
+
 export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';
+
+export { Drawer } from './components/Drawer';
+export type { DrawerProps } from './components/Drawer';
+
+export { FileUpload } from './components/FileUpload';
+export type { FileUploadProps } from './components/FileUpload';
+
+export { FloatingActionButton } from './components/FloatingActionButton';
+export type { FloatingActionButtonProps } from './components/FloatingActionButton';
 
 export { Icon } from './components/Icon';
 export type { IconProps } from './components/Icon';
@@ -37,6 +52,9 @@ export type { RadioProps } from './components/Radio';
 
 export { RadioGroup } from './components/RadioGroup';
 export type { RadioGroupProps } from './components/RadioGroup';
+
+export { Rating } from './components/Rating';
+export type { RatingProps } from './components/Rating';
 
 export { Select } from './components/Select';
 export type { SelectProps, SelectOption } from './components/Select';
@@ -58,6 +76,9 @@ export type { TextAreaProps } from './components/TextArea';
 
 export { TextField } from './components/TextField';
 export type { TextFieldProps } from './components/TextField';
+
+export { Timeline } from './components/Timeline';
+export type { TimelineProps, TimelineItem } from './components/Timeline';
 
 export { Toast } from './components/Toast';
 export type { ToastProps } from './components/Toast';
@@ -90,4 +111,4 @@ export type { ImageProps } from './components/Image';
 export { Menu } from './components/Menu';
 export type { MenuProps, MenuItem } from './components/Menu';
 
-console.log("iOS-inspired UI Component Library loaded - v1.0.0");
+console.log("iOS-inspired UI Component Library loaded - v2.0.0");
