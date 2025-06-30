@@ -1,43 +1,43 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { NavigationBar } from '../src/NavigationBar';
-import { Button } from '../src/Button';
-import { Icon } from '../src/Icon';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Button } from "../src/Button"
+import { Icon } from "../src/Icon"
+import { NavigationBar } from "../src/NavigationBar"
 
 const meta = {
-  title: 'Navigation/NavigationBar',
+  title: "Navigation/NavigationBar",
   component: NavigationBar,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
-        component: 'iOS-inspired navigation bar component.',
+        component: "iOS-inspired navigation bar component.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof NavigationBar>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof NavigationBar>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    title: 'Home',
+    title: "Home",
   },
-};
+}
 
 export const WithBackButton: Story = {
   args: {
-    title: 'Details',
+    title: "Details",
     showBack: true,
-    onBack: () => console.log('Back pressed'),
+    onBack: () => console.log("Back pressed"),
   },
-};
+}
 
 export const WithActions: Story = {
   args: {
-    title: 'Messages',
+    title: "Messages",
     rightContent: (
       <div className="flex gap-2">
         <Button variant="ghost" size="small">
@@ -49,18 +49,18 @@ export const WithActions: Story = {
       </div>
     ),
   },
-};
+}
 
 export const LargeTitle: Story = {
   args: {
-    title: 'Large Title',
-    variant: 'large',
+    title: "Large Title",
+    variant: "large",
   },
-};
+}
 
 export const Transparent: Story = {
   args: {
-    title: 'Transparent',
-    variant: 'transparent',
+    title: "Transparent",
+    variant: "transparent",
   },
-};
+}

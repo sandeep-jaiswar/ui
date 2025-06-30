@@ -5,15 +5,16 @@
 /* Apple System Font Stack */
 @layer base {
   html {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply font-sf-pro text-ios-body text-label-primary bg-background-primary;
-    @apply dark:text-label-primary-dark dark:bg-background-primary-dark;
+    @apply bg-background-primary font-sf-pro text-label-primary text-ios-body;
+    @apply dark:bg-background-primary-dark dark:text-label-primary-dark;
     line-height: 1.47059;
     letter-spacing: -0.003em;
   }
@@ -48,7 +49,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-systemGray-400 rounded-full;
+    @apply rounded-full bg-systemGray-400;
     border: 2px solid transparent;
     background-clip: content-box;
   }
@@ -73,38 +74,38 @@
 @layer components {
   /* iOS Button Variants */
   .btn-primary {
-    @apply btn-ios bg-systemBlue-500 text-white;
+    @apply bg-systemBlue-500 text-white btn-ios;
     @apply hover:bg-systemBlue-600 active:bg-systemBlue-700;
     @apply dark:bg-systemBlue-600 dark:hover:bg-systemBlue-700 dark:active:bg-systemBlue-800;
   }
 
   .btn-secondary {
-    @apply btn-ios bg-fill-secondary text-systemBlue-500 border border-separator-opaque;
+    @apply border border-separator-opaque bg-fill-secondary text-systemBlue-500 btn-ios;
     @apply hover:bg-fill-primary active:bg-fill-tertiary;
-    @apply dark:bg-fill-secondary-dark dark:text-systemBlue-400 dark:border-separator-opaque-dark;
+    @apply dark:border-separator-opaque-dark dark:bg-fill-secondary-dark dark:text-systemBlue-400;
     @apply dark:hover:bg-fill-primary-dark dark:active:bg-fill-tertiary-dark;
   }
 
   .btn-destructive {
-    @apply btn-ios bg-systemRed-500 text-white;
+    @apply bg-systemRed-500 text-white btn-ios;
     @apply hover:bg-systemRed-600 active:bg-systemRed-700;
     @apply dark:bg-systemRed-600 dark:hover:bg-systemRed-700 dark:active:bg-systemRed-800;
   }
 
   .btn-ghost {
-    @apply btn-ios bg-transparent text-systemBlue-500;
+    @apply bg-transparent text-systemBlue-500 btn-ios;
     @apply hover:bg-fill-quaternary active:bg-fill-tertiary;
     @apply dark:text-systemBlue-400 dark:hover:bg-fill-quaternary-dark dark:active:bg-fill-tertiary-dark;
   }
 
   /* iOS Card Variants */
   .card-elevated {
-    @apply card-ios shadow-ios-2;
-    @apply dark:bg-background-secondary-dark dark:shadow-none dark:border dark:border-separator-opaque-dark;
+    @apply shadow-ios-2 card-ios;
+    @apply dark:border dark:border-separator-opaque-dark dark:bg-background-secondary-dark dark:shadow-none;
   }
 
   .card-grouped {
-    @apply bg-background-primary rounded-ios-lg overflow-hidden;
+    @apply overflow-hidden rounded-ios-lg bg-background-primary;
     @apply dark:bg-background-secondary-dark;
   }
 
@@ -115,36 +116,36 @@
   }
 
   .input-search {
-    @apply input-ios bg-fill-secondary rounded-ios-lg pl-10;
+    @apply rounded-ios-lg bg-fill-secondary pl-10 input-ios;
     @apply dark:bg-fill-secondary-dark dark:text-label-primary-dark;
   }
 
   /* iOS Navigation */
   .navbar {
-    @apply nav-ios px-4 py-2 flex items-center justify-between;
-    @apply dark:bg-background-secondary-dark dark:border-separator-opaque-dark;
+    @apply flex items-center justify-between px-4 py-2 nav-ios;
+    @apply dark:border-separator-opaque-dark dark:bg-background-secondary-dark;
   }
 
   .navbar-title {
-    @apply text-ios-headline font-semibold text-label-primary;
+    @apply font-semibold text-label-primary text-ios-headline;
     @apply dark:text-label-primary-dark;
   }
 
   /* iOS Lists */
   .list-grouped {
-    @apply list-ios mx-4 my-6;
+    @apply mx-4 my-6 list-ios;
     @apply dark:bg-background-secondary-dark;
   }
 
   .list-inset-grouped {
-    @apply list-ios mx-4 my-6 shadow-ios-1;
-    @apply dark:bg-background-secondary-dark dark:shadow-none dark:border dark:border-separator-opaque-dark;
+    @apply mx-4 my-6 shadow-ios-1 list-ios;
+    @apply dark:border dark:border-separator-opaque-dark dark:bg-background-secondary-dark dark:shadow-none;
   }
 
   /* iOS Alerts and Modals */
   .modal-ios {
-    @apply bg-background-primary rounded-ios-xl shadow-modal p-6 max-w-sm mx-auto;
-    @apply dark:bg-background-secondary-dark dark:border dark:border-separator-opaque-dark;
+    @apply mx-auto max-w-sm rounded-ios-xl bg-background-primary p-6 shadow-modal;
+    @apply dark:border dark:border-separator-opaque-dark dark:bg-background-secondary-dark;
   }
 
   .alert-ios {
@@ -152,12 +153,12 @@
   }
 
   .alert-title {
-    @apply text-ios-headline font-semibold text-label-primary mb-2;
+    @apply mb-2 font-semibold text-label-primary text-ios-headline;
     @apply dark:text-label-primary-dark;
   }
 
   .alert-message {
-    @apply text-ios-subhead text-label-secondary mb-6;
+    @apply mb-6 text-label-secondary text-ios-subhead;
     @apply dark:text-label-secondary-dark;
   }
 
@@ -167,28 +168,28 @@
   }
 
   .form-label {
-    @apply text-ios-subhead font-medium text-label-primary;
+    @apply font-medium text-label-primary text-ios-subhead;
     @apply dark:text-label-primary-dark;
   }
 
   .form-helper {
-    @apply text-ios-footnote text-label-tertiary;
+    @apply text-label-tertiary text-ios-footnote;
     @apply dark:text-label-tertiary-dark;
   }
 
   .form-error {
-    @apply text-ios-footnote text-systemRed-500;
+    @apply text-systemRed-500 text-ios-footnote;
     @apply dark:text-systemRed-400;
   }
 
   /* iOS Segmented Control */
   .segmented-control {
-    @apply bg-fill-secondary rounded-ios p-1 flex;
+    @apply flex rounded-ios bg-fill-secondary p-1;
     @apply dark:bg-fill-secondary-dark;
   }
 
   .segmented-item {
-    @apply flex-1 text-center py-2 px-4 rounded-ios-sm text-ios-subhead font-medium;
+    @apply flex-1 rounded-ios-sm px-4 py-2 text-center font-medium text-ios-subhead;
     @apply text-label-primary transition-all duration-200 ease-ios;
     @apply dark:text-label-primary-dark;
   }
@@ -200,8 +201,8 @@
 
   /* iOS Toggle Switch */
   .toggle-ios {
-    @apply relative inline-block w-12 h-7 bg-fill-tertiary rounded-full;
-    @apply transition-colors duration-200 ease-ios cursor-pointer;
+    @apply relative inline-block h-7 w-12 rounded-full bg-fill-tertiary;
+    @apply cursor-pointer transition-colors duration-200 ease-ios;
     @apply dark:bg-fill-tertiary-dark;
   }
 
@@ -211,22 +212,22 @@
   }
 
   .toggle-thumb {
-    @apply absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-ios-1;
+    @apply absolute left-0.5 top-0.5 h-6 w-6 rounded-full bg-white shadow-ios-1;
     @apply transition-transform duration-200 ease-ios;
   }
 
   .toggle-ios.checked .toggle-thumb {
-    @apply transform translate-x-5;
+    @apply translate-x-5 transform;
   }
 
   /* iOS Progress Indicators */
   .progress-ios {
-    @apply w-full h-1 bg-fill-tertiary rounded-full overflow-hidden;
+    @apply h-1 w-full overflow-hidden rounded-full bg-fill-tertiary;
     @apply dark:bg-fill-tertiary-dark;
   }
 
   .progress-bar {
-    @apply h-full bg-systemBlue-500 rounded-full transition-all duration-300 ease-ios;
+    @apply h-full rounded-full bg-systemBlue-500 transition-all duration-300 ease-ios;
     @apply dark:bg-systemBlue-600;
   }
 
@@ -238,7 +239,7 @@
 
   /* iOS Badges */
   .badge-ios {
-    @apply inline-flex items-center px-2 py-0.5 rounded-full text-ios-caption-1 font-medium;
+    @apply inline-flex items-center rounded-full px-2 py-0.5 font-medium text-ios-caption-1;
     @apply bg-systemRed-500 text-white;
     @apply dark:bg-systemRed-600;
   }

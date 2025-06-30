@@ -1,72 +1,75 @@
-import React from 'react';
-import { Radio, RadioProps } from './Radio';
+import React from "react"
+import { Radio, RadioProps } from "./Radio"
 
 export interface RadioGroupProps {
   /** Selected value */
-  value?: string;
+  value?: string
   /** Default selected value for uncontrolled component */
-  defaultValue?: string;
+  defaultValue?: string
   /** Radio group name */
-  name: string;
+  name: string
   /** Change handler */
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => void
   /** Radio options */
   options: Array<{
-    value: string;
-    label: string;
-    disabled?: boolean;
-  }>;
+    value: string
+    label: string
+    disabled?: boolean
+  }>
   /** Radio size */
-  size?: RadioProps['size'];
+  size?: RadioProps["size"]
   /** Radio color */
-  color?: RadioProps['color'];
+  color?: RadioProps["color"]
   /** Layout direction */
-  direction?: 'horizontal' | 'vertical';
+  direction?: "horizontal" | "vertical"
   /** Is the entire group disabled? */
-  disabled?: boolean;
+  disabled?: boolean
   /** Additional CSS classes */
-  className?: string;
+  className?: string
   /** Test ID for testing */
-  testId?: string;
+  testId?: string
 }
 
 /** iOS-inspired radio group component for managing multiple radio buttons */
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
-  ({
-    value,
-    defaultValue,
-    name,
-    onChange,
-    options,
-    size = 'medium',
-    color = 'blue',
-    direction = 'vertical',
-    disabled = false,
-    className = '',
-    testId,
-    ...props
-  }, ref) => {
-    const [selectedValue, setSelectedValue] = React.useState(value ?? defaultValue ?? '');
+  (
+    {
+      value,
+      defaultValue,
+      name,
+      onChange,
+      options,
+      size = "medium",
+      color = "blue",
+      direction = "vertical",
+      disabled = false,
+      className = "",
+      testId,
+      ...props
+    },
+    ref
+  ) => {
+    const [selectedValue, setSelectedValue] = React.useState(value ?? defaultValue ?? "")
 
     React.useEffect(() => {
       if (value !== undefined) {
-        setSelectedValue(value);
+        setSelectedValue(value)
       }
-    }, [value]);
+    }, [value])
 
     const handleChange = (newValue: string) => {
-      if (disabled) return;
-      
+      if (disabled) return
+
       if (value === undefined) {
-        setSelectedValue(newValue);
+        setSelectedValue(newValue)
       }
-      onChange?.(newValue);
-    };
+      onChange?.(newValue)
+    }
 
     const directionStyles = {
-      horizontal: 'flex flex-row gap-6',
-      vertical: 'flex flex-col gap-3'
-    };
+      horizontal: "flex flex-row gap-6",
+      vertical: "flex flex-col gap-3",
+    }
 
     return (
       <div
@@ -90,8 +93,8 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           />
         ))}
       </div>
-    );
+    )
   }
-);
+)
 
-RadioGroup.displayName = 'RadioGroup';
+RadioGroup.displayName = "RadioGroup"

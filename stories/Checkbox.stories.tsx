@@ -1,156 +1,157 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Checkbox } from '../src/Checkbox';
-import { Typography } from '../src/Typography';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Checkbox } from "../src/Checkbox"
+import { Typography } from "../src/Typography"
 
 // Mock function for onChange handlers
-const fn = () => { };
+const fn = () => {}
 
 const meta = {
-  title: 'Form Controls/Checkbox',
+  title: "Form Controls/Checkbox",
   component: Checkbox,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'iOS-inspired checkbox component following Apple\'s design patterns. Perfect for forms, settings, and multi-selection interfaces.',
+        component:
+          "iOS-inspired checkbox component following Apple's design patterns. Perfect for forms, settings, and multi-selection interfaces.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     checked: {
-      control: 'boolean',
-      description: 'Is the checkbox checked?',
+      control: "boolean",
+      description: "Is the checkbox checked?",
     },
     indeterminate: {
-      control: 'boolean',
-      description: 'Is the checkbox indeterminate?',
+      control: "boolean",
+      description: "Is the checkbox indeterminate?",
     },
     size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Checkbox size',
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Checkbox size",
     },
     color: {
-      control: 'select',
-      options: ['blue', 'green', 'orange', 'red', 'purple'],
-      description: 'Checkbox color when checked',
+      control: "select",
+      options: ["blue", "green", "orange", "red", "purple"],
+      description: "Checkbox color when checked",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disable the checkbox',
+      control: "boolean",
+      description: "Disable the checkbox",
     },
     label: {
-      control: 'text',
-      description: 'Checkbox label',
+      control: "text",
+      description: "Checkbox label",
     },
     labelPosition: {
-      control: 'select',
-      options: ['left', 'right'],
-      description: 'Label position',
+      control: "select",
+      options: ["left", "right"],
+      description: "Label position",
     },
   },
   args: {
     onChange: fn,
   },
-} satisfies Meta<typeof Checkbox>;
+} satisfies Meta<typeof Checkbox>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // Basic variants
 export const Default: Story = {
   args: {},
-};
+}
 
 export const Checked: Story = {
   args: {
     checked: true,
   },
-};
+}
 
 export const Indeterminate: Story = {
   args: {
     indeterminate: true,
   },
-};
+}
 
 export const WithLabel: Story = {
   args: {
-    label: 'Accept terms and conditions',
+    label: "Accept terms and conditions",
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    label: 'Disabled checkbox',
+    label: "Disabled checkbox",
   },
-};
+}
 
 // Sizes
 export const Small: Story = {
   args: {
-    size: 'small',
-    label: 'Small checkbox',
+    size: "small",
+    label: "Small checkbox",
   },
-};
+}
 
 export const Medium: Story = {
   args: {
-    size: 'medium',
-    label: 'Medium checkbox',
+    size: "medium",
+    label: "Medium checkbox",
   },
-};
+}
 
 export const Large: Story = {
   args: {
-    size: 'large',
-    label: 'Large checkbox',
+    size: "large",
+    label: "Large checkbox",
   },
-};
+}
 
 // Colors
 export const Blue: Story = {
   args: {
     checked: true,
-    color: 'blue',
-    label: 'Blue checkbox',
+    color: "blue",
+    label: "Blue checkbox",
   },
-};
+}
 
 export const Green: Story = {
   args: {
     checked: true,
-    color: 'green',
-    label: 'Green checkbox',
+    color: "green",
+    label: "Green checkbox",
   },
-};
+}
 
 export const Orange: Story = {
   args: {
     checked: true,
-    color: 'orange',
-    label: 'Orange checkbox',
+    color: "orange",
+    label: "Orange checkbox",
   },
-};
+}
 
 export const Red: Story = {
   args: {
     checked: true,
-    color: 'red',
-    label: 'Red checkbox',
+    color: "red",
+    label: "Red checkbox",
   },
-};
+}
 
 export const Purple: Story = {
   args: {
     checked: true,
-    color: 'purple',
-    label: 'Purple checkbox',
+    color: "purple",
+    label: "Purple checkbox",
   },
-};
+}
 
 // All sizes showcase
 export const AllSizes: Story = {
@@ -164,11 +165,11 @@ export const AllSizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All checkbox sizes displayed together.',
+        story: "All checkbox sizes displayed together.",
       },
     },
   },
-};
+}
 
 // All colors showcase
 export const AllColors: Story = {
@@ -184,16 +185,16 @@ export const AllColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All checkbox colors displayed together.',
+        story: "All checkbox colors displayed together.",
       },
     },
   },
-};
+}
 
 // Form example
 export const FormExample: Story = {
   render: () => (
-    <div className="space-y-6 max-w-sm">
+    <div className="max-w-sm space-y-6">
       <Typography variant="headline">Preferences</Typography>
 
       <div className="space-y-4">
@@ -204,7 +205,7 @@ export const FormExample: Story = {
         <Checkbox defaultChecked label="Security alerts" />
       </div>
 
-      <div className="pt-4 border-t border-separator-nonOpaque dark:border-separator-nonOpaque-dark">
+      <div className="border-t border-separator-nonOpaque pt-4 dark:border-separator-nonOpaque-dark">
         <Checkbox label="I agree to the terms and conditions" color="green" />
       </div>
     </div>
@@ -212,52 +213,52 @@ export const FormExample: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example preferences form with various checkbox options.',
+        story: "Example preferences form with various checkbox options.",
       },
     },
   },
-};
+}
 
 // Interactive example
 export const InteractiveExample: Story = {
   render: () => {
-    const [selectedItems, setSelectedItems] = React.useState<string[]>(['item1']);
-    const [selectAll, setSelectAll] = React.useState(false);
+    const [selectedItems, setSelectedItems] = React.useState<string[]>(["item1"])
+    const [selectAll, setSelectAll] = React.useState(false)
 
     const items = [
-      { id: 'item1', label: 'Item 1' },
-      { id: 'item2', label: 'Item 2' },
-      { id: 'item3', label: 'Item 3' },
-      { id: 'item4', label: 'Item 4' },
-    ];
+      { id: "item1", label: "Item 1" },
+      { id: "item2", label: "Item 2" },
+      { id: "item3", label: "Item 3" },
+      { id: "item4", label: "Item 4" },
+    ]
 
     const handleItemChange = (itemId: string, checked: boolean) => {
       if (checked) {
-        setSelectedItems(prev => [...prev, itemId]);
+        setSelectedItems((prev) => [...prev, itemId])
       } else {
-        setSelectedItems(prev => prev.filter(id => id !== itemId));
+        setSelectedItems((prev) => prev.filter((id) => id !== itemId))
       }
-    };
+    }
 
     const handleSelectAllChange = (checked: boolean) => {
-      setSelectAll(checked);
+      setSelectAll(checked)
       if (checked) {
-        setSelectedItems(items.map(item => item.id));
+        setSelectedItems(items.map((item) => item.id))
       } else {
-        setSelectedItems([]);
+        setSelectedItems([])
       }
-    };
+    }
 
     React.useEffect(() => {
-      const allSelected = items.every(item => selectedItems.includes(item.id));
-      const someSelected = selectedItems.length > 0;
-      setSelectAll(allSelected);
-    }, [selectedItems]);
+      const allSelected = items.every((item) => selectedItems.includes(item.id))
+      const someSelected = selectedItems.length > 0
+      setSelectAll(allSelected)
+    }, [selectedItems])
 
-    const isIndeterminate = selectedItems.length > 0 && selectedItems.length < items.length;
+    const isIndeterminate = selectedItems.length > 0 && selectedItems.length < items.length
 
     return (
-      <div className="space-y-6 max-w-sm">
+      <div className="max-w-sm space-y-6">
         <Typography variant="headline">Select Items</Typography>
 
         <Checkbox
@@ -268,8 +269,8 @@ export const InteractiveExample: Story = {
           color="blue"
         />
 
-        <div className="pl-6 space-y-3 border-l-2 border-separator-nonOpaque dark:border-separator-nonOpaque-dark">
-          {items.map(item => (
+        <div className="space-y-3 border-l-2 border-separator-nonOpaque pl-6 dark:border-separator-nonOpaque-dark">
+          {items.map((item) => (
             <Checkbox
               key={item.id}
               checked={selectedItems.includes(item.id)}
@@ -279,20 +280,20 @@ export const InteractiveExample: Story = {
           ))}
         </div>
 
-        <div className="mt-6 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
+        <div className="mt-6 rounded-ios bg-fill-quaternary p-4 dark:bg-fill-quaternary-dark">
           <Typography variant="subhead">Selected Items:</Typography>
           <Typography variant="footnote" color="secondary">
-            {selectedItems.length > 0 ? selectedItems.join(', ') : 'None'}
+            {selectedItems.length > 0 ? selectedItems.join(", ") : "None"}
           </Typography>
         </div>
       </div>
-    );
+    )
   },
   parameters: {
     docs: {
       description: {
-        story: 'Interactive example with select all functionality and indeterminate state.',
+        story: "Interactive example with select all functionality and indeterminate state.",
       },
     },
   },
-};
+}

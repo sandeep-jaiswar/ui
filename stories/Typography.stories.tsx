@@ -1,212 +1,211 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Typography } from '../src/Typography';
-
-// Mock function for onClick handlers
-const fn = () => { };
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Typography } from "../src/Typography"
 
 const meta = {
-  title: 'Components/Typography',
+  title: "Components/Typography",
   component: Typography,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
-        component: 'iOS-inspired typography component following Apple\'s text style guidelines. Provides consistent text styling across the application with proper semantic HTML elements.',
+        component:
+          "iOS-inspired typography component following Apple's text style guidelines. Provides consistent text styling across the application with proper semantic HTML elements.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
+      control: "select",
       options: [
-        'largeTitle',
-        'title1',
-        'title2',
-        'title3',
-        'headline',
-        'body',
-        'callout',
-        'subhead',
-        'footnote',
-        'caption1',
-        'caption2'
+        "largeTitle",
+        "title1",
+        "title2",
+        "title3",
+        "headline",
+        "body",
+        "callout",
+        "subhead",
+        "footnote",
+        "caption1",
+        "caption2",
       ],
-      description: 'Typography variant following iOS text styles',
+      description: "Typography variant following iOS text styles",
     },
     color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'quaternary', 'system', 'custom'],
-      description: 'Text color variant',
+      control: "select",
+      options: ["primary", "secondary", "tertiary", "quaternary", "system", "custom"],
+      description: "Text color variant",
     },
     customColor: {
-      control: 'color',
+      control: "color",
       description: 'Custom color value when color is "custom"',
-      if: { arg: 'color', eq: 'custom' },
+      if: { arg: "color", eq: "custom" },
     },
     weight: {
-      control: 'select',
-      options: ['regular', 'medium', 'semibold', 'bold'],
-      description: 'Font weight override',
+      control: "select",
+      options: ["regular", "medium", "semibold", "bold"],
+      description: "Font weight override",
     },
     align: {
-      control: 'select',
-      options: ['left', 'center', 'right', 'justify'],
-      description: 'Text alignment',
+      control: "select",
+      options: ["left", "center", "right", "justify"],
+      description: "Text alignment",
     },
     transform: {
-      control: 'select',
-      options: ['none', 'uppercase', 'lowercase', 'capitalize'],
-      description: 'Text transform',
+      control: "select",
+      options: ["none", "uppercase", "lowercase", "capitalize"],
+      description: "Text transform",
     },
     decoration: {
-      control: 'select',
-      options: ['none', 'underline', 'line-through'],
-      description: 'Text decoration',
+      control: "select",
+      options: ["none", "underline", "line-through"],
+      description: "Text decoration",
     },
     truncate: {
-      control: 'boolean',
-      description: 'Truncate text with ellipsis',
+      control: "boolean",
+      description: "Truncate text with ellipsis",
     },
     lineClamp: {
-      control: 'number',
-      description: 'Number of lines to clamp (requires truncate)',
+      control: "number",
+      description: "Number of lines to clamp (requires truncate)",
       min: 1,
       max: 10,
     },
     as: {
-      control: 'select',
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'div', 'label'],
-      description: 'HTML element to render',
+      control: "select",
+      options: ["h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "label"],
+      description: "HTML element to render",
     },
     children: {
-      control: 'text',
-      description: 'Typography content',
+      control: "text",
+      description: "Typography content",
     },
   },
   args: {
-    children: 'The quick brown fox jumps over the lazy dog',
+    children: "The quick brown fox jumps over the lazy dog",
   },
-} satisfies Meta<typeof Typography>;
+} satisfies Meta<typeof Typography>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // Basic variants
 export const LargeTitle: Story = {
   args: {
-    variant: 'largeTitle',
-    children: 'Large Title',
+    variant: "largeTitle",
+    children: "Large Title",
   },
-};
+}
 
 export const Title1: Story = {
   args: {
-    variant: 'title1',
-    children: 'Title 1',
+    variant: "title1",
+    children: "Title 1",
   },
-};
+}
 
 export const Title2: Story = {
   args: {
-    variant: 'title2',
-    children: 'Title 2',
+    variant: "title2",
+    children: "Title 2",
   },
-};
+}
 
 export const Title3: Story = {
   args: {
-    variant: 'title3',
-    children: 'Title 3',
+    variant: "title3",
+    children: "Title 3",
   },
-};
+}
 
 export const Headline: Story = {
   args: {
-    variant: 'headline',
-    children: 'Headline',
+    variant: "headline",
+    children: "Headline",
   },
-};
+}
 
 export const Body: Story = {
   args: {
-    variant: 'body',
-    children: 'Body text is used for the main content of your interface. It should be easy to read and provide good contrast.',
+    variant: "body",
+    children:
+      "Body text is used for the main content of your interface. It should be easy to read and provide good contrast.",
   },
-};
+}
 
 export const Callout: Story = {
   args: {
-    variant: 'callout',
-    children: 'Callout text is slightly smaller than body text and is used for secondary content.',
+    variant: "callout",
+    children: "Callout text is slightly smaller than body text and is used for secondary content.",
   },
-};
+}
 
 export const Subhead: Story = {
   args: {
-    variant: 'subhead',
-    children: 'Subhead text is used for section headers and important secondary information.',
+    variant: "subhead",
+    children: "Subhead text is used for section headers and important secondary information.",
   },
-};
+}
 
 export const Footnote: Story = {
   args: {
-    variant: 'footnote',
-    children: 'Footnote text is used for less important information and fine print.',
+    variant: "footnote",
+    children: "Footnote text is used for less important information and fine print.",
   },
-};
+}
 
 export const Caption1: Story = {
   args: {
-    variant: 'caption1',
-    children: 'Caption 1 is used for image captions and small labels.',
+    variant: "caption1",
+    children: "Caption 1 is used for image captions and small labels.",
   },
-};
+}
 
 export const Caption2: Story = {
   args: {
-    variant: 'caption2',
-    children: 'Caption 2 is the smallest text size, used for timestamps and metadata.',
+    variant: "caption2",
+    children: "Caption 2 is the smallest text size, used for timestamps and metadata.",
   },
-};
+}
 
 // Color variants
 export const PrimaryColor: Story = {
   args: {
-    color: 'primary',
-    children: 'Primary color text',
+    color: "primary",
+    children: "Primary color text",
   },
-};
+}
 
 export const SecondaryColor: Story = {
   args: {
-    color: 'secondary',
-    children: 'Secondary color text',
+    color: "secondary",
+    children: "Secondary color text",
   },
-};
+}
 
 export const TertiaryColor: Story = {
   args: {
-    color: 'tertiary',
-    children: 'Tertiary color text',
+    color: "tertiary",
+    children: "Tertiary color text",
   },
-};
+}
 
 export const SystemColor: Story = {
   args: {
-    color: 'system',
-    children: 'System blue color text',
+    color: "system",
+    children: "System blue color text",
   },
-};
+}
 
 export const CustomColor: Story = {
   args: {
-    color: 'custom',
-    customColor: '#FF6B35',
-    children: 'Custom color text',
+    color: "custom",
+    customColor: "#FF6B35",
+    children: "Custom color text",
   },
-};
+}
 
 // Font weights
 export const FontWeights: Story = {
@@ -221,16 +220,16 @@ export const FontWeights: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different font weights available for typography.',
+        story: "Different font weights available for typography.",
       },
     },
   },
-};
+}
 
 // Text alignment
 export const TextAlignment: Story = {
   render: () => (
-    <div className="space-y-4 w-full max-w-md">
+    <div className="w-full max-w-md space-y-4">
       <Typography align="left">Left aligned text</Typography>
       <Typography align="center">Center aligned text</Typography>
       <Typography align="right">Right aligned text</Typography>
@@ -242,11 +241,11 @@ export const TextAlignment: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different text alignment options.',
+        story: "Different text alignment options.",
       },
     },
   },
-};
+}
 
 // Text transforms
 export const TextTransforms: Story = {
@@ -261,11 +260,11 @@ export const TextTransforms: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different text transform options.',
+        story: "Different text transform options.",
       },
     },
   },
-};
+}
 
 // Text decorations
 export const TextDecorations: Story = {
@@ -279,42 +278,43 @@ export const TextDecorations: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Different text decoration options.',
+        story: "Different text decoration options.",
       },
     },
   },
-};
+}
 
 // Truncation
 export const TruncatedText: Story = {
   args: {
     truncate: true,
-    children: 'This is a very long text that will be truncated with an ellipsis when it exceeds the container width',
+    children: "This is a very long text that will be truncated with an ellipsis when it exceeds the container width",
   },
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
-        story: 'Text can be truncated with an ellipsis when it exceeds the container width.',
+        story: "Text can be truncated with an ellipsis when it exceeds the container width.",
       },
     },
   },
-};
+}
 
 export const LineClampedText: Story = {
   args: {
     lineClamp: 3,
-    children: 'This is a very long text that will be clamped to exactly three lines. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+    children:
+      "This is a very long text that will be clamped to exactly three lines. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
-        story: 'Text can be clamped to a specific number of lines.',
+        story: "Text can be clamped to a specific number of lines.",
       },
     },
   },
-};
+}
 
 // Typography scale showcase
 export const TypographyScale: Story = {
@@ -336,11 +336,11 @@ export const TypographyScale: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Complete iOS typography scale with all variants and their sizes.',
+        story: "Complete iOS typography scale with all variants and their sizes.",
       },
     },
   },
-};
+}
 
 // Color scale showcase
 export const ColorScale: Story = {
@@ -356,16 +356,16 @@ export const ColorScale: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'iOS label color hierarchy from primary to quaternary, plus system colors.',
+        story: "iOS label color hierarchy from primary to quaternary, plus system colors.",
       },
     },
   },
-};
+}
 
 // Semantic usage examples
 export const SemanticUsage: Story = {
   render: () => (
-    <article className="space-y-6 max-w-2xl">
+    <article className="max-w-2xl space-y-6">
       <header>
         <Typography variant="largeTitle" as="h1">
           Article Title
@@ -380,9 +380,8 @@ export const SemanticUsage: Story = {
           Section Heading
         </Typography>
         <Typography variant="body">
-          This is the main body content of the article. It uses the body variant which provides
-          optimal readability for longer form content. The text flows naturally and maintains
-          good contrast and spacing.
+          This is the main body content of the article. It uses the body variant which provides optimal readability for
+          longer form content. The text flows naturally and maintains good contrast and spacing.
         </Typography>
       </section>
 
@@ -391,8 +390,8 @@ export const SemanticUsage: Story = {
           Subsection
         </Typography>
         <Typography variant="callout">
-          This callout text provides additional context or highlights important information
-          that supports the main content.
+          This callout text provides additional context or highlights important information that supports the main
+          content.
         </Typography>
       </section>
 
@@ -406,27 +405,29 @@ export const SemanticUsage: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example of semantic usage of typography variants in a typical article layout.',
+        story: "Example of semantic usage of typography variants in a typical article layout.",
       },
     },
   },
-};
+}
 
 // Interactive example
 export const InteractiveExample: Story = {
   render: () => {
-    const [selectedVariant, setSelectedVariant] = React.useState<'body' | 'headline' | 'title2'>('body');
-    const [selectedColor, setSelectedColor] = React.useState<'primary' | 'secondary' | 'system'>('primary');
+    const [selectedVariant, setSelectedVariant] = React.useState<"body" | "headline" | "title2">("body")
+    const [selectedColor, setSelectedColor] = React.useState<"primary" | "secondary" | "system">("primary")
 
     return (
       <div className="space-y-6">
         <div className="flex gap-4">
           <div>
-            <Typography variant="subhead" as="label">Variant:</Typography>
+            <Typography variant="subhead" as="label">
+              Variant:
+            </Typography>
             <select
               value={selectedVariant}
               onChange={(e) => setSelectedVariant(e.target.value as any)}
-              className="ml-2 px-2 py-1 border rounded"
+              className="ml-2 rounded border px-2 py-1"
             >
               <option value="body">Body</option>
               <option value="headline">Headline</option>
@@ -434,11 +435,13 @@ export const InteractiveExample: Story = {
             </select>
           </div>
           <div>
-            <Typography variant="subhead" as="label">Color:</Typography>
+            <Typography variant="subhead" as="label">
+              Color:
+            </Typography>
             <select
               value={selectedColor}
               onChange={(e) => setSelectedColor(e.target.value as any)}
-              className="ml-2 px-2 py-1 border rounded"
+              className="ml-2 rounded border px-2 py-1"
             >
               <option value="primary">Primary</option>
               <option value="secondary">Secondary</option>
@@ -447,20 +450,20 @@ export const InteractiveExample: Story = {
           </div>
         </div>
 
-        <div className="p-4 border rounded-lg">
+        <div className="rounded-lg border p-4">
           <Typography variant={selectedVariant} color={selectedColor}>
-            This text changes based on your selections above. Try different combinations
-            to see how the typography variants and colors work together.
+            This text changes based on your selections above. Try different combinations to see how the typography
+            variants and colors work together.
           </Typography>
         </div>
       </div>
-    );
+    )
   },
   parameters: {
     docs: {
       description: {
-        story: 'Interactive example showing how different variants and colors can be combined.',
+        story: "Interactive example showing how different variants and colors can be combined.",
       },
     },
   },
-};
+}

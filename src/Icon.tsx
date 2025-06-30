@@ -1,53 +1,44 @@
-import React from 'react';
+import React from "react"
 
 export interface IconProps {
   /** Icon name or custom SVG element */
-  name?: string;
+  name?: string
   /** Custom SVG element */
-  children?: React.ReactNode;
+  children?: React.ReactNode
   /** Icon size */
-  size?: 'small' | 'medium' | 'large' | 'xlarge' | number;
+  size?: "small" | "medium" | "large" | "xlarge" | number
   /** Icon color */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'system' | 'success' | 'warning' | 'error' | 'custom';
+  color?: "primary" | "secondary" | "tertiary" | "system" | "success" | "warning" | "error" | "custom"
   /** Custom color value */
-  customColor?: string;
+  customColor?: string
   /** Additional CSS classes */
-  className?: string;
+  className?: string
   /** Test ID for testing */
-  testId?: string;
+  testId?: string
 }
 
 /** iOS-inspired icon component with system icons and custom SVG support */
 export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
-  ({
-    name,
-    children,
-    size = 'medium',
-    color = 'primary',
-    customColor,
-    className = '',
-    testId,
-    ...props
-  }, ref) => {
+  ({ name, children, size = "medium", color = "primary", customColor, className = "", testId, ...props }, ref) => {
     const sizeMap = {
       small: 16,
       medium: 20,
       large: 24,
       xlarge: 32,
-    };
+    }
 
-    const iconSize = typeof size === 'number' ? size : sizeMap[size];
+    const iconSize = typeof size === "number" ? size : sizeMap[size]
 
     const colorStyles = {
-      primary: 'text-label-primary dark:text-label-primary-dark',
-      secondary: 'text-label-secondary dark:text-label-secondary-dark',
-      tertiary: 'text-label-tertiary dark:text-label-tertiary-dark',
-      system: 'text-systemBlue-500 dark:text-systemBlue-400',
-      success: 'text-systemGreen-500 dark:text-systemGreen-400',
-      warning: 'text-systemOrange-500 dark:text-systemOrange-400',
-      error: 'text-systemRed-500 dark:text-systemRed-400',
-      custom: '',
-    };
+      primary: "text-label-primary dark:text-label-primary-dark",
+      secondary: "text-label-secondary dark:text-label-secondary-dark",
+      tertiary: "text-label-tertiary dark:text-label-tertiary-dark",
+      system: "text-systemBlue-500 dark:text-systemBlue-400",
+      success: "text-systemGreen-500 dark:text-systemGreen-400",
+      warning: "text-systemOrange-500 dark:text-systemOrange-400",
+      error: "text-systemRed-500 dark:text-systemRed-400",
+      custom: "",
+    }
 
     const systemIcons = {
       chevron: (
@@ -56,9 +47,7 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
       plus: (
         <path d="M8 2a.75.75 0 01.75.75v4.5h4.5a.75.75 0 010 1.5h-4.5v4.5a.75.75 0 01-1.5 0v-4.5h-4.5a.75.75 0 010-1.5h4.5v-4.5A.75.75 0 018 2z" />
       ),
-      minus: (
-        <path d="M4 8a.75.75 0 01.75-.75h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 014 8z" />
-      ),
+      minus: <path d="M4 8a.75.75 0 01.75-.75h6.5a.75.75 0 010 1.5h-6.5A.75.75 0 014 8z" />,
       close: (
         <path d="M4.293 4.293a1 1 0 011.414 0L8 6.586l2.293-2.293a1 1 0 111.414 1.414L9.414 8l2.293 2.293a1 1 0 01-1.414 1.414L8 9.414l-2.293 2.293a1 1 0 01-1.414-1.414L6.586 8 4.293 5.707a1 1 0 010-1.414z" />
       ),
@@ -80,20 +69,20 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
       settings: (
         <path d="M8 4.754a3.246 3.246 0 100 6.492 3.246 3.246 0 000-6.492zM5.754 8a2.246 2.246 0 114.492 0 2.246 2.246 0 01-4.492 0z" />
       ),
-    };
+    }
 
     const renderIcon = () => {
       if (children) {
-        return children;
+        return children
       }
 
       if (name && systemIcons[name as keyof typeof systemIcons]) {
-        return systemIcons[name as keyof typeof systemIcons];
+        return systemIcons[name as keyof typeof systemIcons]
       }
 
       // Default icon if name not found
-      return systemIcons.settings;
-    };
+      return systemIcons.settings
+    }
 
     return (
       <svg
@@ -103,14 +92,14 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
         viewBox="0 0 16 16"
         fill="currentColor"
         className={`${colorStyles[color]} ${className}`.trim()}
-        style={color === 'custom' && customColor ? { color: customColor } : undefined}
+        style={color === "custom" && customColor ? { color: customColor } : undefined}
         data-testid={testId}
         {...props}
       >
         {renderIcon()}
       </svg>
-    );
+    )
   }
-);
+)
 
-Icon.displayName = 'Icon';
+Icon.displayName = "Icon"

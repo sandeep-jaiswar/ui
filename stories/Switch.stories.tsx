@@ -1,161 +1,161 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Switch } from '../src/Switch';
-import { Typography } from '../src/Typography';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Switch } from "../src/Switch"
+import { Typography } from "../src/Typography"
 
-// Mock function for onChange handlers
-const fn = () => { };
+const fn = () => {}
 
 const meta = {
-  title: 'Components/Switch',
+  title: "Components/Switch",
   component: Switch,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'iOS-inspired switch component following Apple\'s toggle design. Perfect for boolean settings and preferences.',
+        component:
+          "iOS-inspired switch component following Apple's toggle design. Perfect for boolean settings and preferences.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     checked: {
-      control: 'boolean',
-      description: 'Is the switch checked?',
+      control: "boolean",
+      description: "Is the switch checked?",
     },
     size: {
-      control: 'select',
-      options: ['small', 'medium', 'large'],
-      description: 'Switch size',
+      control: "select",
+      options: ["small", "medium", "large"],
+      description: "Switch size",
     },
     color: {
-      control: 'select',
-      options: ['green', 'blue', 'orange', 'red', 'purple'],
-      description: 'Switch color when checked',
+      control: "select",
+      options: ["green", "blue", "orange", "red", "purple"],
+      description: "Switch color when checked",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disable the switch',
+      control: "boolean",
+      description: "Disable the switch",
     },
     label: {
-      control: 'text',
-      description: 'Switch label',
+      control: "text",
+      description: "Switch label",
     },
     labelPosition: {
-      control: 'select',
-      options: ['left', 'right'],
-      description: 'Label position',
+      control: "select",
+      options: ["left", "right"],
+      description: "Label position",
     },
   },
   args: {
     onChange: fn,
   },
-} satisfies Meta<typeof Switch>;
+} satisfies Meta<typeof Switch>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // Basic variants
 export const Default: Story = {
   args: {},
-};
+}
 
 export const Checked: Story = {
   args: {
     checked: true,
   },
-};
+}
 
 export const WithLabel: Story = {
   args: {
-    label: 'Enable notifications',
+    label: "Enable notifications",
   },
-};
+}
 
 export const Disabled: Story = {
   args: {
     disabled: true,
-    label: 'Disabled switch',
+    label: "Disabled switch",
   },
-};
+}
 
 // Sizes
 export const Small: Story = {
   args: {
-    size: 'small',
-    label: 'Small switch',
+    size: "small",
+    label: "Small switch",
   },
-};
+}
 
 export const Medium: Story = {
   args: {
-    size: 'medium',
-    label: 'Medium switch',
+    size: "medium",
+    label: "Medium switch",
   },
-};
+}
 
 export const Large: Story = {
   args: {
-    size: 'large',
-    label: 'Large switch',
+    size: "large",
+    label: "Large switch",
   },
-};
+}
 
 // Colors
 export const Green: Story = {
   args: {
     checked: true,
-    color: 'green',
-    label: 'Green switch',
+    color: "green",
+    label: "Green switch",
   },
-};
+}
 
 export const Blue: Story = {
   args: {
     checked: true,
-    color: 'blue',
-    label: 'Blue switch',
+    color: "blue",
+    label: "Blue switch",
   },
-};
+}
 
 export const Orange: Story = {
   args: {
     checked: true,
-    color: 'orange',
-    label: 'Orange switch',
+    color: "orange",
+    label: "Orange switch",
   },
-};
+}
 
 export const Red: Story = {
   args: {
     checked: true,
-    color: 'red',
-    label: 'Red switch',
+    color: "red",
+    label: "Red switch",
   },
-};
+}
 
 export const Purple: Story = {
   args: {
     checked: true,
-    color: 'purple',
-    label: 'Purple switch',
+    color: "purple",
+    label: "Purple switch",
   },
-};
+}
 
 // Label positions
 export const LabelLeft: Story = {
   args: {
-    label: 'Label on left',
-    labelPosition: 'left',
+    label: "Label on left",
+    labelPosition: "left",
   },
-};
+}
 
 export const LabelRight: Story = {
   args: {
-    label: 'Label on right',
-    labelPosition: 'right',
+    label: "Label on right",
+    labelPosition: "right",
   },
-};
+}
 
 // All sizes showcase
 export const AllSizes: Story = {
@@ -169,11 +169,11 @@ export const AllSizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All switch sizes displayed together.',
+        story: "All switch sizes displayed together.",
       },
     },
   },
-};
+}
 
 // All colors showcase
 export const AllColors: Story = {
@@ -189,16 +189,16 @@ export const AllColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'All switch colors displayed together.',
+        story: "All switch colors displayed together.",
       },
     },
   },
-};
+}
 
 // Settings panel example
 export const SettingsPanel: Story = {
   render: () => (
-    <div className="space-y-6 max-w-sm p-6 bg-background-secondary dark:bg-background-secondary-dark rounded-ios-lg">
+    <div className="max-w-sm space-y-6 rounded-ios-lg bg-background-secondary p-6 dark:bg-background-secondary-dark">
       <Typography variant="headline">Settings</Typography>
 
       <div className="space-y-4">
@@ -247,11 +247,11 @@ export const SettingsPanel: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Example settings panel with various switch configurations.',
+        story: "Example settings panel with various switch configurations.",
       },
     },
   },
-};
+}
 
 // Interactive example
 export const InteractiveExample: Story = {
@@ -261,56 +261,56 @@ export const InteractiveExample: Story = {
       darkMode: false,
       location: true,
       analytics: false,
-    });
+    })
 
     return (
-      <div className="space-y-6 max-w-md">
+      <div className="max-w-md space-y-6">
         <Typography variant="headline">Interactive Settings</Typography>
 
         <div className="space-y-4">
           <Switch
             checked={settings.notifications}
-            onChange={(checked) => setSettings(prev => ({ ...prev, notifications: checked }))}
+            onChange={(checked) => setSettings((prev) => ({ ...prev, notifications: checked }))}
             label="Push Notifications"
             color="green"
           />
 
           <Switch
             checked={settings.darkMode}
-            onChange={(checked) => setSettings(prev => ({ ...prev, darkMode: checked }))}
+            onChange={(checked) => setSettings((prev) => ({ ...prev, darkMode: checked }))}
             label="Dark Mode"
             color="blue"
           />
 
           <Switch
             checked={settings.location}
-            onChange={(checked) => setSettings(prev => ({ ...prev, location: checked }))}
+            onChange={(checked) => setSettings((prev) => ({ ...prev, location: checked }))}
             label="Location Services"
             color="orange"
           />
 
           <Switch
             checked={settings.analytics}
-            onChange={(checked) => setSettings(prev => ({ ...prev, analytics: checked }))}
+            onChange={(checked) => setSettings((prev) => ({ ...prev, analytics: checked }))}
             label="Analytics"
             color="purple"
           />
         </div>
 
-        <div className="mt-6 p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
+        <div className="mt-6 rounded-ios bg-fill-quaternary p-4 dark:bg-fill-quaternary-dark">
           <Typography variant="subhead">Current Settings:</Typography>
           <Typography variant="footnote" color="secondary">
             {JSON.stringify(settings, null, 2)}
           </Typography>
         </div>
       </div>
-    );
+    )
   },
   parameters: {
     docs: {
       description: {
-        story: 'Interactive example showing switch state management.',
+        story: "Interactive example showing switch state management.",
       },
     },
   },
-};
+}

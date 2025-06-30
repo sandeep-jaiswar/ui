@@ -1,55 +1,107 @@
-// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
-import storybook from "eslint-plugin-storybook";
+// https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
+// import eslintPluginTailwindcss from "eslint-plugin-tailwindcss"
+import eslintPluginNext from "@next/eslint-plugin-next"
+import eslintPluginImport from "eslint-plugin-import"
+import eslintPluginStorybook from "eslint-plugin-storybook"
+import typescriptEslint from "typescript-eslint"
+import * as fs from "fs"
 
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import json from "@eslint/json";
-import markdown from "@eslint/markdown";
-import css from "@eslint/css";
-import { defineConfig } from "eslint/config";
+const eslintIgnore = [
+  ".git/",
+  ".next/",
+  "node_modules/",
+  "dist/",
+  "build/",
+  "coverage/",
+  "*.min.js",
+  "*.config.js",
+  "*.d.ts",
+]
 
-export default defineConfig([
+const config = typescriptEslint.config(
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
+    ignores: eslintIgnore,
+  },
+  ...eslintPluginStorybook.configs["flat/recommended"],
+  //  https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
+  // ...eslintPluginTailwindcss.configs["flat/recommended"],
+  typescriptEslint.configs.recommended,
+  eslintPluginImport.flatConfigs.recommended,
+  {
+    plugins: {
+      "@next/next": eslintPluginNext,
+    },
+    rules: {
+      ...eslintPluginNext.configs.recommended.rules,
+      ...eslintPluginNext.configs["core-web-vitals"].rules,
+    },
   },
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    languageOptions: { globals: globals.browser },
-  },
-  tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  {
-    files: ["**/*.json"],
-    plugins: { json },
-    language: "json/json",
-    extends: ["json/recommended"],
-  },
-  {
-    files: ["**/*.jsonc"],
-    plugins: { json },
-    language: "json/jsonc",
-    extends: ["json/recommended"],
-  },
-  {
-    files: ["**/*.json5"],
-    plugins: { json },
-    language: "json/json5",
-    extends: ["json/recommended"],
-  },
-  {
-    files: ["**/*.md"],
-    plugins: { markdown },
-    language: "markdown/gfm",
-    extends: ["markdown/recommended"],
-  },
-  {
-    files: ["**/*.css"],
-    plugins: { css },
-    language: "css/css",
-    extends: ["css/recommended"],
-  },
-]);
+    settings: {
+      tailwindcss: {
+        callees: ["classnames", "clsx", "ctl", "cn", "cva"],
+      },
+
+      "import/resolver": {
+        typescript: true,
+        node: true,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+      "sort-imports": [
+        "error",
+        {
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+        },
+      ],
+      "import/order": [
+        "warn",
+        {
+          groups: ["external", "builtin", "internal", "sibling", "parent", "index"],
+          pathGroups: [
+            ...getDirectoriesToSort().map((singleDir) => ({
+              pattern: `${singleDir}/**`,
+              group: "internal",
+            })),
+            {
+              pattern: "env",
+              group: "internal",
+            },
+            {
+              pattern: "theme",
+              group: "internal",
+            },
+            {
+              pattern: "public/**",
+              group: "internal",
+              position: "after",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["internal"],
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
+    },
+  }
+)
+
+function getDirectoriesToSort() {
+  const ignoredSortingDirectories = [".git", ".next", ".vscode", "node_modules"]
+  return fs
+    .readdirSync(process.cwd())
+    .filter((file) => fs.statSync(process.cwd() + "/" + file).isDirectory())
+    .filter((f) => !ignoredSortingDirectories.includes(f))
+}
+
+export default config

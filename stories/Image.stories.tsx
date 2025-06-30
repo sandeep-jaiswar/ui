@@ -1,33 +1,33 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Image } from '../src/Image';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Image } from "../src/Image"
 
 const meta = {
-  title: 'Data Display/Image',
+  title: "Data Display/Image",
   component: Image,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'iOS-inspired image component with aspect ratio and fallback support.',
+        component: "iOS-inspired image component with aspect ratio and fallback support.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   args: {
-    src: 'https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400',
-    alt: 'Beautiful landscape',
+    src: "https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=400",
+    alt: "Beautiful landscape",
   },
-} satisfies Meta<typeof Image>;
+} satisfies Meta<typeof Image>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const AspectRatios: Story = {
   render: () => (
-    <div className="grid grid-cols-2 gap-4 w-96">
+    <div className="grid w-96 grid-cols-2 gap-4">
       <div>
         <h4 className="mb-2 font-semibold">Square</h4>
         <Image
@@ -46,11 +46,11 @@ export const AspectRatios: Story = {
       </div>
     </div>
   ),
-};
+}
 
 export const ObjectFit: Story = {
   render: () => (
-    <div className="grid grid-cols-2 gap-4 w-96">
+    <div className="grid w-96 grid-cols-2 gap-4">
       <div>
         <h4 className="mb-2 font-semibold">Cover</h4>
         <Image
@@ -71,19 +71,19 @@ export const ObjectFit: Story = {
       </div>
     </div>
   ),
-};
+}
 
 export const WithFallback: Story = {
   args: {
-    src: 'https://invalid-url.com/image.jpg',
-    alt: 'Broken image',
+    src: "https://invalid-url.com/image.jpg",
+    alt: "Broken image",
     fallback: (
-      <div className="w-full h-full bg-fill-tertiary dark:bg-fill-tertiary-dark flex items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center bg-fill-tertiary dark:bg-fill-tertiary-dark">
         <span className="text-label-tertiary">Image not found</span>
       </div>
     ),
   },
-};
+}
 
 export const Rounded: Story = {
   render: () => (
@@ -111,4 +111,4 @@ export const Rounded: Story = {
       />
     </div>
   ),
-};
+}

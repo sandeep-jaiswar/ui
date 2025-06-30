@@ -1,26 +1,26 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { List, ListItem } from '../src/List';
-import { Avatar } from '../src/Avatar';
-import { Icon } from '../src/Icon';
-import { Badge } from '../src/Badge';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { Avatar } from "../src/Avatar"
+import { Badge } from "../src/Badge"
+import { Icon } from "../src/Icon"
+import { List, ListItem } from "../src/List"
 
 const meta = {
-  title: 'Layout/List',
+  title: "Layout/List",
   component: List,
   parameters: {
-    layout: 'padded',
+    layout: "padded",
     docs: {
       description: {
-        component: 'iOS-inspired list components for displaying structured content.',
+        component: "iOS-inspired list components for displaying structured content.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof List>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof List>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   render: () => (
@@ -30,31 +30,22 @@ export const Basic: Story = {
       <ListItem>Third item</ListItem>
     </List>
   ),
-};
+}
 
 export const WithIcons: Story = {
   render: () => (
     <List>
-      <ListItem leftContent={<Icon name="home" color="system" />}>
-        Home
-      </ListItem>
-      <ListItem leftContent={<Icon name="search" color="system" />}>
-        Search
-      </ListItem>
-      <ListItem leftContent={<Icon name="settings" color="system" />}>
-        Settings
-      </ListItem>
+      <ListItem leftContent={<Icon name="home" color="system" />}>Home</ListItem>
+      <ListItem leftContent={<Icon name="search" color="system" />}>Search</ListItem>
+      <ListItem leftContent={<Icon name="settings" color="system" />}>Settings</ListItem>
     </List>
   ),
-};
+}
 
 export const WithAvatars: Story = {
   render: () => (
     <List>
-      <ListItem
-        leftContent={<Avatar initials="JD" size="medium" />}
-        rightContent={<Badge variant="primary">3</Badge>}
-      >
+      <ListItem leftContent={<Avatar initials="JD" size="medium" />} rightContent={<Badge variant="primary">3</Badge>}>
         <div>
           <div className="font-medium">John Doe</div>
           <div className="text-sm text-label-secondary">Hey, how are you?</div>
@@ -71,20 +62,20 @@ export const WithAvatars: Story = {
       </ListItem>
     </List>
   ),
-};
+}
 
 export const Interactive: Story = {
   render: () => (
     <List>
       <ListItem
-        onClick={() => console.log('Notifications clicked')}
+        onClick={() => console.log("Notifications clicked")}
         leftContent={<Icon name="settings" color="system" />}
         rightContent={<Icon name="chevron" color="tertiary" />}
       >
         Notifications
       </ListItem>
       <ListItem
-        onClick={() => console.log('Privacy clicked')}
+        onClick={() => console.log("Privacy clicked")}
         leftContent={<Icon name="settings" color="system" />}
         rightContent={<Icon name="chevron" color="tertiary" />}
       >
@@ -99,7 +90,7 @@ export const Interactive: Story = {
       </ListItem>
     </List>
   ),
-};
+}
 
 export const Variants: Story = {
   render: () => (
@@ -129,4 +120,4 @@ export const Variants: Story = {
       </div>
     </div>
   ),
-};
+}

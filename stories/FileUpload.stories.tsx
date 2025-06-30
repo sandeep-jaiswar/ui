@@ -1,82 +1,82 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { FileUpload } from '../src/FileUpload';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { FileUpload } from "../src/FileUpload"
 
 const meta = {
-  title: 'Advanced/FileUpload',
+  title: "Advanced/FileUpload",
   component: FileUpload,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'iOS-inspired file upload component with drag & drop.',
+        component: "iOS-inspired file upload component with drag & drop.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof FileUpload>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof FileUpload>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Dropzone: Story = {};
+export const Dropzone: Story = {}
 
 export const Button: Story = {
   args: {
-    variant: 'button',
+    variant: "button",
   },
-};
+}
 
 export const WithRestrictions: Story = {
   args: {
-    accept: '.jpg,.jpeg,.png,.gif',
+    accept: ".jpg,.jpeg,.png,.gif",
     maxSize: 5 * 1024 * 1024, // 5MB
-    label: 'Upload Images',
-    helperText: 'Only image files up to 5MB are allowed',
+    label: "Upload Images",
+    helperText: "Only image files up to 5MB are allowed",
   },
-};
+}
 
 export const Multiple: Story = {
   args: {
     multiple: true,
-    label: 'Upload Documents',
-    helperText: 'You can select multiple files',
+    label: "Upload Documents",
+    helperText: "You can select multiple files",
   },
-};
+}
 
 export const WithProgress: Story = {
   args: {
     progress: 65,
-    label: 'Uploading...',
+    label: "Uploading...",
   },
-};
+}
 
 export const Interactive: Story = {
   render: () => {
-    const [files, setFiles] = React.useState<File[]>([]);
-    const [progress, setProgress] = React.useState<number | undefined>();
+    const [files, setFiles] = React.useState<File[]>([])
+    const [progress, setProgress] = React.useState<number | undefined>()
 
     const handleFileChange = (fileList: FileList | null) => {
       if (fileList) {
-        const newFiles = Array.from(fileList);
-        setFiles(prev => [...prev, ...newFiles]);
+        const newFiles = Array.from(fileList)
+        setFiles((prev) => [...prev, ...newFiles])
 
         // Simulate upload progress
-        setProgress(0);
+        setProgress(0)
         const interval = setInterval(() => {
-          setProgress(prev => {
+          setProgress((prev) => {
             if (prev === undefined || prev >= 100) {
-              clearInterval(interval);
-              return undefined;
+              clearInterval(interval)
+              return undefined
             }
-            return prev + 10;
-          });
-        }, 200);
+            return prev + 10
+          })
+        }, 200)
       }
-    };
+    }
 
     return (
-      <div className="space-y-4 w-96">
+      <div className="w-96 space-y-4">
         <FileUpload
           multiple
           accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
@@ -88,8 +88,8 @@ export const Interactive: Story = {
         />
 
         {files.length > 0 && (
-          <div className="p-4 bg-fill-quaternary dark:bg-fill-quaternary-dark rounded-ios">
-            <h4 className="font-semibold mb-2">Uploaded Files:</h4>
+          <div className="rounded-ios bg-fill-quaternary p-4 dark:bg-fill-quaternary-dark">
+            <h4 className="mb-2 font-semibold">Uploaded Files:</h4>
             <ul className="space-y-1">
               {files.map((file, index) => (
                 <li key={index} className="text-sm">
@@ -100,6 +100,6 @@ export const Interactive: Story = {
           </div>
         )}
       </div>
-    );
+    )
   },
-};
+}

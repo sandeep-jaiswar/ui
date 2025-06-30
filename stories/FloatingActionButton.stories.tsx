@@ -1,25 +1,25 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { FloatingActionButton } from '../src/FloatingActionButton';
+import type { Meta, StoryObj } from "@storybook/react"
+import React from "react"
+import { FloatingActionButton } from "../src/FloatingActionButton"
 
 const meta = {
-  title: 'Advanced/FloatingActionButton',
+  title: "Advanced/FloatingActionButton",
   component: FloatingActionButton,
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
     docs: {
       description: {
-        component: 'iOS-inspired floating action button component.',
+        component: "iOS-inspired floating action button component.",
       },
     },
   },
-  tags: ['autodocs'],
-} satisfies Meta<typeof FloatingActionButton>;
+  tags: ["autodocs"],
+} satisfies Meta<typeof FloatingActionButton>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Positions: Story = {
   render: () => (
@@ -30,7 +30,7 @@ export const Positions: Story = {
       <FloatingActionButton position="bottom-right" icon="plus" />
     </div>
   ),
-};
+}
 
 export const Sizes: Story = {
   render: () => (
@@ -40,7 +40,7 @@ export const Sizes: Story = {
       <FloatingActionButton position="bottom-right" size="large" className="right-36" />
     </div>
   ),
-};
+}
 
 export const Colors: Story = {
   render: () => (
@@ -52,35 +52,31 @@ export const Colors: Story = {
       <FloatingActionButton position="bottom-left" color="purple" className="bottom-72" />
     </div>
   ),
-};
+}
 
 export const Interactive: Story = {
   render: () => {
-    const [count, setCount] = React.useState(0);
+    const [count, setCount] = React.useState(0)
 
     return (
-      <div className="relative h-96 bg-fill-quaternary dark:bg-fill-quaternary-dark p-6">
+      <div className="relative h-96 bg-fill-quaternary p-6 dark:bg-fill-quaternary-dark">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Counter: {count}</h2>
+          <h2 className="mb-4 text-2xl font-bold">Counter: {count}</h2>
           <p className="text-label-secondary">Click the floating button to increment</p>
         </div>
 
-        <FloatingActionButton
-          icon="plus"
-          onClick={() => setCount(count + 1)}
-          color="blue"
-        />
+        <FloatingActionButton icon="plus" onClick={() => setCount(count + 1)} color="blue" />
       </div>
-    );
+    )
   },
-};
+}
 
 export const CustomContent: Story = {
   render: () => (
     <div className="relative h-96 bg-fill-quaternary dark:bg-fill-quaternary-dark">
       <FloatingActionButton>
-        <span className="text-white font-bold">!</span>
+        <span className="font-bold text-white">!</span>
       </FloatingActionButton>
     </div>
   ),
-};
+}
