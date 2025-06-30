@@ -1,172 +1,175 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from './Icon';
 
 export interface RatingProps {
-  /** Rating value (0-max) */
+  /**
+   * The current rating value
+   */
   value?: number;
-  /** Default rating value */
-  defaultValue?: number;
-  /** Maximum rating value */
+  /**
+   * Maximum number of stars
+   */
   max?: number;
-  /** Is the rating read-only? */
-  readOnly?: boolean;
-  /** Is the rating disabled? */
-  disabled?: boolean;
-  /** Rating size */
+  /**
+   * Size of the rating stars
+   */
   size?: 'small' | 'medium' | 'large';
-  /** Rating color */
+  /**
+   * Color theme for active stars
+   */
   color?: 'yellow' | 'red' | 'blue' | 'green';
-  /** Show rating value as text */
-  showValue?: boolean;
-  /** Allow half ratings */
+  /**
+   * Whether the rating is read-only
+   */
+  readonly?: boolean;
+  /**
+   * Whether to allow half-star ratings
+   */
   allowHalf?: boolean;
-  /** Change handler */
-  onChange?: (rating: number) => void;
-  /** Additional CSS classes */
+  /**
+   * Callback when rating changes
+   */
+  onChange?: (value: number) => void;
+  /**
+   * Additional CSS classes
+   */
   className?: string;
-  /** Test ID for testing */
-  testId?: string;
+  /**
+   * Test identifier
+   */
+  'data-testid'?: string;
 }
 
-/** iOS-inspired rating component with star ratings */
-export const Rating = React.forwardRef<HTMLDivElement, RatingProps>(
-  ({
-    value,
-    defaultValue = 0,
-    max = 5,
-    readOnly = false,
-    disabled = false,
-    size = 'medium',
-    color = 'yellow',
-    showValue = false,
-    allowHalf = false,
-    onChange,
-    className = '',
-    testId,
-    ...props
-  }, ref) => {
-    const [rating, setRating] = React.useState(value ?? defaultValue);
-    const [hoverRating, setHoverRating] = React.useState<number | null>(null);
+export const Rating: React.FC<RatingProps> = ({
+  value = 0,
+  max = 5,
+  size = 'medium',
+  color = 'yellow',
+  readonly = false,
+  allowHalf = false,
+  onChange,
+  className = '',
+  'data-testid': testId,
+}) => {
+  const [hoverValue, setHoverValue] = useState<number | null>(null);
+  const [internalValue, setInternalValue] = useState(value);
 
-    React.useEffect(() => {
-      if (value !== undefined) {
-        setRating(value);
-      }
-    }, [value]);
+  useEffect(() => {
+    setInternalValue(value);
+  }, [value]);
 
-    const handleRatingChange = (newRating: number) => {
-      if (readOnly || disabled) return;
+  const handleStarClick = (starIndex: number, isHalf: boolean = false) => {
+    if (readonly) return;
+    
+    const newValue = starIndex + (isHalf && allowHalf ? 0.5 : 1);
+    setInternalValue(newValue);
+    onChange?.(newValue);
+  };
 
-      if (value === undefined) {
-        setRating(newRating);
-      }
-      onChange?.(newRating);
-    };
+  const handleStarHover = (starIndex: number, isHalf: boolean = false) => {
+    if (readonly) return;
+    
+    const newValue = starIndex + (isHalf && allowHalf ? 0.5 : 1);
+    setHoverValue(newValue);
+  };
 
-    const handleMouseEnter = (starIndex: number, isHalf?: boolean) => {
-      if (readOnly || disabled) return;
-      const newRating = isHalf ? starIndex + 0.5 : starIndex + 1;
-      setHoverRating(newRating);
-    };
+  const handleMouseLeave = () => {
+    if (readonly) return;
+    setHoverValue(null);
+  };
 
-    const handleMouseLeave = () => {
-      if (readOnly || disabled) return;
-      setHoverRating(null);
-    };
+  const getStarState = (starIndex: number) => {
+    const currentValue = hoverValue !== null ? hoverValue : internalValue;
+    const starValue = starIndex + 1;
+    
+    if (currentValue >= starValue) {
+      return 'full';
+    } else if (allowHalf && currentValue >= starValue - 0.5) {
+      return 'half';
+    }
+    return 'empty';
+  };
 
-    const handleClick = (starIndex: number, isHalf?: boolean) => {
-      if (readOnly || disabled) return;
-      const newRating = isHalf ? starIndex + 0.5 : starIndex + 1;
-      handleRatingChange(newRating);
-    };
+  const sizeStyles = {
+    small: 'w-4 h-4',
+    medium: 'w-5 h-5',
+    large: 'w-6 h-6'
+  };
 
-    const currentRating = hoverRating ?? rating;
+  const colorHexMap = {
+    yellow: '#FFCC02',
+    red: '#FF3B30',
+    blue: '#007AFF',
+    green: '#34C759'
+  };
 
-    const sizeStyles = {
-      small: 'w-4 h-4',
-      medium: 'w-6 h-6',
-      large: 'w-8 h-8'
-    };
+  return (
+    <div
+      className={`flex items-center gap-1 ${className}`}
+      onMouseLeave={handleMouseLeave}
+      data-testid={testId}
+    >
+      {Array.from({ length: max }, (_, index) => {
+        const starState = getStarState(index);
+        const isActive = starState === 'full';
+        const isHalfActive = starState === 'half';
 
-    const colorHexMap = {
-      yellow: '#FFCC02',
-      red: '#FF3B30',
-      blue: '#007AFF',
-      green: '#34C759'
-    };
-
-    const textSizeStyles = {
-      small: 'text-ios-caption-1',
-      medium: 'text-ios-footnote',
-      large: 'text-ios-subhead'
-    };
-
-    const renderStar = (index: number) => {
-      const starValue = index + 1;
-      const isActive = currentRating >= starValue;
-      const isHalfActive = allowHalf && currentRating >= starValue - 0.5 && currentRating < starValue;
-
-      return (
-        <div
-          key={index}
-          className="relative cursor-pointer"
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => handleClick(index)}
-        >
-          {/* Background star */}
-          <Icon
-            name="star"
-            size={size}
-            className={`${sizeStyles[size]} text-fill-tertiary dark:text-fill-tertiary-dark`}
-          />
-
-          {/* Active star */}
-          {(isActive || isHalfActive) && (
+        return (
+          <div
+            key={index}
+            className={`relative ${readonly ? '' : 'cursor-pointer'}`}
+            onClick={() => handleStarClick(index)}
+            onMouseEnter={() => handleStarHover(index)}
+          >
+            {/* Background star */}
             <Icon
               name="star"
               size={size}
-              color="custom"
-              customColor={colorHexMap[color]}
-              className={`${sizeStyles[size]} absolute inset-0`}
-              style={isHalfActive ? { clipPath: 'inset(0 50% 0 0)' } : undefined}
+              className={`${sizeStyles[size]} text-fill-tertiary dark:text-fill-tertiary-dark`}
             />
-          )}
+            
+            {/* Active star overlay */}
+            {(isActive || isHalfActive) && (
+              <div
+                className={`absolute inset-0 ${isHalfActive ? 'overflow-hidden' : ''}`}
+                style={isHalfActive ? { clipPath: 'inset(0 50% 0 0)' } : undefined}
+              >
+                <Icon
+                  name="star"
+                  size={size}
+                  color="custom"
+                  customColor={colorHexMap[color]}
+                  className={`${sizeStyles[size]} absolute inset-0`}
+                />
+              </div>
+            )}
 
-          {/* Half star overlay for hover/interaction */}
-          {allowHalf && !readOnly && !disabled && (
-            <div
-              className="absolute inset-0 w-1/2"
-              onMouseEnter={() => handleMouseEnter(index, true)}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleClick(index, true);
-              }}
-            />
-          )}
-        </div>
-      );
-    };
+            {/* Half star hover area */}
+            {allowHalf && !readonly && (
+              <>
+                <div
+                  className="absolute inset-0 w-1/2 z-10"
+                  onMouseEnter={() => handleStarHover(index, true)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleStarClick(index, true);
+                  }}
+                />
+                <div
+                  className="absolute inset-0 left-1/2 w-1/2 z-10"
+                  onMouseEnter={() => handleStarHover(index, false)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleStarClick(index, false);
+                  }}
+                />
+              </>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-    return (
-      <div
-        ref={ref}
-        className={`flex items-center gap-1 ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}
-        data-testid={testId}
-        {...props}
-      >
-        <div className="flex items-center gap-0.5">
-          {Array.from({ length: max }, (_, index) => renderStar(index))}
-        </div>
-
-        {showValue && (
-          <span className={`ml-2 ${textSizeStyles[size]} text-label-secondary dark:text-label-secondary-dark`}>
-            {rating.toFixed(allowHalf ? 1 : 0)} / {max}
-          </span>
-        )}
-      </div>
-    );
-  }
-);
-
-Rating.displayName = 'Rating';
+export default Rating;
