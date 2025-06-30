@@ -1,5 +1,6 @@
 {
   "name": "@sandeep-jaiswar/ui",
+  "type": "module",
   "author": {
     "name": "sandeep jaiswar",
     "email": "jaiswarsandeep119@gmail.com",
