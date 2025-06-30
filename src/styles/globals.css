@@ -122,7 +122,7 @@
   /* iOS Navigation */
   .navbar {
     @apply nav-ios px-4 py-2 flex items-center justify-between;
-    @apply dark:bg-background-secondary-dark/94 dark:border-separator-opaque-dark;
+    @apply dark:bg-background-secondary-dark dark:border-separator-opaque-dark;
   }
 
   .navbar-title {

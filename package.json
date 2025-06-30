@@ -12,7 +12,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsup",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --host 0.0.0.0",
     "build-storybook": "storybook build"
   },
   "exports": {
