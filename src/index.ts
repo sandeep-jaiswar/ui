@@ -20,6 +20,9 @@ export type { CheckboxProps } from './components/Checkbox';
 export { Divider } from './components/Divider';
 export type { DividerProps } from './components/Divider';
 
+export { Icon } from './components/Icon';
+export type { IconProps } from './components/Icon';
+
 export { Input } from './components/Input';
 export type { InputProps } from './components/Input';
 
@@ -35,6 +38,12 @@ export type { RadioProps } from './components/Radio';
 export { RadioGroup } from './components/RadioGroup';
 export type { RadioGroupProps } from './components/RadioGroup';
 
+export { Select } from './components/Select';
+export type { SelectProps, SelectOption } from './components/Select';
+
+export { SearchField } from './components/SearchField';
+export type { SearchFieldProps } from './components/SearchField';
+
 export { Slider } from './components/Slider';
 export type { SliderProps } from './components/Slider';
 
@@ -44,10 +53,41 @@ export type { SpinnerProps } from './components/Spinner';
 export { Switch } from './components/Switch';
 export type { SwitchProps } from './components/Switch';
 
+export { TextArea } from './components/TextArea';
+export type { TextAreaProps } from './components/TextArea';
+
 export { TextField } from './components/TextField';
 export type { TextFieldProps } from './components/TextField';
 
+export { Toast } from './components/Toast';
+export type { ToastProps } from './components/Toast';
+
 export { Typography } from './components/Typography';
 export type { TypographyProps } from './components/Typography';
+
+// Navigation Components
+export { NavigationBar } from './components/NavigationBar';
+export type { NavigationBarProps } from './components/NavigationBar';
+
+export { TabBar } from './components/TabBar';
+export type { TabBarProps, TabBarItem } from './components/TabBar';
+
+// Layout Components
+export { List, ListItem } from './components/List';
+export type { ListProps, ListItemProps } from './components/List';
+
+// Data Display Components
+export { Accordion, AccordionItem } from './components/Accordion';
+export type { AccordionProps, AccordionItemProps } from './components/Accordion';
+
+export { Tabs } from './components/Tabs';
+export type { TabsProps, TabItem } from './components/Tabs';
+
+export { Image } from './components/Image';
+export type { ImageProps } from './components/Image';
+
+// Advanced Components
+export { Menu } from './components/Menu';
+export type { MenuProps, MenuItem } from './components/Menu';
 
 console.log("iOS-inspired UI Component Library loaded - v1.0.0");
