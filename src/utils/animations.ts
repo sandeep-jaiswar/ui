@@ -4,6 +4,8 @@
 
 /**
  * Checks if user prefers reduced motion
+ * 
+ * @returns Whether the user prefers reduced motion
  */
 export function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -11,6 +13,9 @@ export function prefersReducedMotion(): boolean {
 
 /**
  * Gets animation duration based on user preferences
+ * 
+ * @param defaultDuration - The default animation duration in milliseconds
+ * @returns The appropriate animation duration based on user preferences
  */
 export function getAnimationDuration(defaultDuration: number): number {
   return prefersReducedMotion() ? 0 : defaultDuration
