@@ -1,25 +1,52 @@
 import React from "react"
+import { announceToScreenReader } from "./utils/accessibility"
+import { transitions } from "./utils/animations"
 
+/**
+ * Props for the Badge component
+ */
 export interface BadgeProps {
-  /** Badge variant */
+  /** Visual style variant */
   variant?: "primary" | "secondary" | "success" | "warning" | "error" | "info"
-  /** Badge size */
+  /** Size variant */
   size?: "small" | "medium" | "large"
   /** Badge content */
-  children: React.ReactNode
-  /** Badge shape */
+  children?: React.ReactNode
+  /** Shape variant */
   shape?: "rounded" | "pill"
-  /** Show dot indicator instead of content */
+  /** Show as dot indicator instead of content */
   dot?: boolean
-  /** Maximum number to display (shows 99+ if exceeded) */
+  /** Maximum number to display (shows max+ if exceeded) */
   max?: number
-  /** Additional CSS classes */
+  /** Whether to animate count changes */
+  animated?: boolean
+  /** Accessible label for dot badges */
+  "aria-label"?: string
+  /** Additional CSS classes to apply */
   className?: string
-  /** Test ID for testing */
+  /** Test identifier for automated testing */
   testId?: string
 }
 
-/** iOS-inspired badge component for notifications and status indicators */
+/**
+ * iOS-inspired badge component for notifications, status indicators, and labels.
+ * 
+ * Features:
+ * - Multiple variants with semantic colors
+ * - Animated count changes with accessibility announcements
+ * - Dot variant with proper accessibility labels
+ * - Number formatting with customizable max values
+ * - Smooth animations with reduced motion support
+ * 
+ * @example
+ * ```tsx
+ * <Badge variant="primary" animated max={99}>
+ *   {notificationCount}
+ * </Badge>
+ * 
+ * <Badge dot variant="success" aria-label="Online status" />
+ * ```
+ */
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
@@ -29,12 +56,28 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       shape = "pill",
       dot = false,
       max = 99,
+      animated = true,
       className = "",
       testId,
       ...props
     },
     ref
   ) => {
+    const [previousValue, setPreviousValue] = React.useState<React.ReactNode>(children)
+
+    // Announce count changes to screen readers
+    React.useEffect(() => {
+      if (animated && typeof children === 'number' && typeof previousValue === 'number') {
+        if (children !== previousValue) {
+          const message = children > previousValue 
+            ? `Count increased to ${children}`
+            : `Count decreased to ${children}`
+          announceToScreenReader(message, 'polite')
+        }
+      }
+      setPreviousValue(children)
+    }, [children, previousValue, animated])
+
     const baseStyles = "badge-ios inline-flex items-center justify-center font-medium select-none"
 
     const variantStyles = {
@@ -58,6 +101,11 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       pill: "rounded-full",
     }
 
+    const animationStyles = animated ? transitions.default : ""
+
+    /**
+     * Formats content with max value handling
+     */
     const formatContent = (content: React.ReactNode): React.ReactNode => {
       if (typeof content === "number" && content > max) {
         return `${max}+`
@@ -65,12 +113,23 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       return content
     }
 
+    const badgeClasses = [
+      baseStyles,
+      variantStyles[variant],
+      sizeStyles[size],
+      shapeStyles[shape],
+      animationStyles,
+      className,
+    ].filter(Boolean).join(" ")
+
     if (dot) {
       return (
         <span
           ref={ref}
-          className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${shapeStyles[shape]} ${className}`.trim()}
+          className={badgeClasses}
           data-testid={testId}
+          role="status"
+          aria-label={props["aria-label"] || `${variant} indicator`}
           {...props}
         />
       )
@@ -79,11 +138,15 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     return (
       <span
         ref={ref}
-        className={`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${shapeStyles[shape]} ${className}`.trim()}
+        className={badgeClasses}
         data-testid={testId}
+        role="status"
+        aria-label={typeof children === 'number' ? `${children} notifications` : undefined}
         {...props}
       >
-        {formatContent(children)}
+        <span className={animated ? "transition-all duration-200 ease-ios" : ""}>
+          {formatContent(children)}
+        </span>
       </span>
     )
   }

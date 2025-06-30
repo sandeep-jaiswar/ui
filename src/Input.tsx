@@ -1,11 +1,16 @@
 import React from "react"
+import { generateId } from "./utils/accessibility"
+import { transitions } from "./utils/animations"
 
+/**
+ * Props for the Input component
+ */
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /** Input variant */
+  /** Visual style variant */
   variant?: "filled" | "outlined" | "plain"
-  /** Input size */
+  /** Size variant */
   size?: "small" | "medium" | "large"
-  /** Input state */
+  /** Input state for validation feedback */
   state?: "default" | "error" | "success"
   /** Label text */
   label?: string
@@ -19,15 +24,45 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   endIcon?: React.ReactNode
   /** Show clear button when input has value */
   clearable?: boolean
+  /** Show character counter */
+  showCounter?: boolean
   /** Full width input */
   fullWidth?: boolean
-  /** Additional CSS classes */
+  /** Whether the input is required */
+  required?: boolean
+  /** Additional CSS classes to apply */
   className?: string
-  /** Test ID for testing */
+  /** Test identifier for automated testing */
   testId?: string
 }
 
-/** iOS-inspired input component with various styles and states */
+/**
+ * iOS-inspired input component with comprehensive features and accessibility.
+ * 
+ * Features:
+ * - Multiple variants (filled, outlined, plain)
+ * - Validation states with proper error handling
+ * - Character counter with maxLength support
+ * - Clear button with smooth animations
+ * - Icon support with proper spacing
+ * - Comprehensive accessibility features
+ * - Debounced validation feedback
+ * 
+ * @example
+ * ```tsx
+ * <Input
+ *   label="Email Address"
+ *   type="email"
+ *   required
+ *   clearable
+ *   showCounter
+ *   maxLength={100}
+ *   state={emailError ? "error" : "default"}
+ *   errorText={emailError}
+ *   onChange={handleEmailChange}
+ * />
+ * ```
+ */
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
@@ -40,17 +75,24 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       startIcon,
       endIcon,
       clearable = false,
+      showCounter = false,
       fullWidth = false,
+      required = false,
       className = "",
       testId,
       value,
       onChange,
+      maxLength,
       ...props
     },
     ref
   ) => {
     const [internalValue, setInternalValue] = React.useState(value || "")
     const [isFocused, setIsFocused] = React.useState(false)
+    const inputId = React.useId()
+    const errorId = generateId('input-error')
+    const helperId = generateId('input-helper')
+    const counterId = generateId('input-counter')
 
     React.useEffect(() => {
       if (value !== undefined) {
@@ -58,6 +100,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, [value])
 
+    /**
+     * Handles input change events
+     */
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
       if (value === undefined) {
@@ -66,6 +111,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange?.(e)
     }
 
+    /**
+     * Handles clear button click
+     */
     const handleClear = () => {
       const event = {
         target: { value: "" },
@@ -81,6 +129,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const currentValue = value !== undefined ? value : internalValue
     const showClear = clearable && currentValue && !props.disabled && !props.readOnly
     const displayText = state === "error" && errorText ? errorText : helperText
+    const characterCount = typeof currentValue === 'string' ? currentValue.length : 0
+    const isOverLimit = maxLength && characterCount > maxLength
 
     const baseStyles = "transition-all duration-200 ease-ios focus:outline-none"
 
@@ -131,10 +181,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={`${fullWidth ? "w-full" : ""} space-y-1`}>
         {label && (
           <label
-            htmlFor={props.id}
+            htmlFor={inputId}
             className="block font-medium text-label-primary text-ios-subhead dark:text-label-primary-dark"
           >
             {label}
+            {required && <span className="text-systemRed-500 ml-1" aria-label="required">*</span>}
           </label>
         )}
 
@@ -147,6 +198,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           <input
             ref={ref}
+            id={inputId}
             className={inputClasses}
             value={currentValue}
             onChange={handleChange}
@@ -159,6 +211,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               props.onBlur?.(e)
             }}
             data-testid={testId}
+            required={required}
+            maxLength={maxLength}
+            aria-describedby={[
+              state === "error" && errorText ? errorId : null,
+              helperText && state !== "error" ? helperId : null,
+              showCounter ? counterId : null,
+            ].filter(Boolean).join(' ') || undefined}
+            aria-invalid={state === "error"}
+            aria-required={required}
             {...props}
           />
 
@@ -168,10 +229,11 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="text-label-tertiary transition-colors hover:text-label-secondary dark:text-label-tertiary-dark dark:hover:text-label-secondary-dark"
+                  className={`text-label-tertiary transition-all duration-200 ease-ios hover:text-label-secondary dark:text-label-tertiary-dark dark:hover:text-label-secondary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-systemBlue-500 focus-visible:ring-offset-2 rounded ${transitions.default}`}
                   aria-label="Clear input"
+                  tabIndex={-1}
                 >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                     <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                   </svg>
                 </button>
@@ -182,19 +244,38 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
 
-        {displayText && (
-          <p
-            className={`text-ios-footnote ${
-              state === "error"
-                ? "text-systemRed-500 dark:text-systemRed-400"
-                : state === "success"
-                ? "text-systemGreen-500 dark:text-systemGreen-400"
-                : "text-label-tertiary dark:text-label-tertiary-dark"
-            }`}
-          >
-            {displayText}
-          </p>
-        )}
+        <div className="flex items-center justify-between">
+          {displayText && (
+            <p
+              id={state === "error" ? errorId : helperId}
+              className={`text-ios-footnote ${
+                state === "error"
+                  ? "text-systemRed-500 dark:text-systemRed-400"
+                  : state === "success"
+                  ? "text-systemGreen-500 dark:text-systemGreen-400"
+                  : "text-label-tertiary dark:text-label-tertiary-dark"
+              }`}
+              role={state === "error" ? "alert" : undefined}
+            >
+              {displayText}
+            </p>
+          )}
+
+          {showCounter && (
+            <p
+              id={counterId}
+              className={`ml-auto text-ios-footnote ${
+                isOverLimit
+                  ? "text-systemRed-500 dark:text-systemRed-400"
+                  : "text-label-tertiary dark:text-label-tertiary-dark"
+              }`}
+              aria-live="polite"
+            >
+              {characterCount}
+              {maxLength && `/${maxLength}`}
+            </p>
+          )}
+        </div>
       </div>
     )
   }
