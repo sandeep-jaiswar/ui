@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from '@storybook/test';
 import { Button } from '../src/components/Button';
+import React from 'react';
+
+// Mock function for onClick handlers
+const fn = () => {};
 
 // Icons for demonstration
 const ChevronRightIcon = () => (
