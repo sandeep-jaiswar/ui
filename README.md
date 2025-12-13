@@ -14,6 +14,27 @@ A modern, iOS-inspired React component library built with TypeScript and Tailwin
 - ♿ Accessible components following WAI-ARIA guidelines
 - 🔍 TypeScript support with comprehensive type definitions
 - 🧩 Modular architecture for tree-shaking
+ - 🧩 Modular architecture for tree-shaking
+
+## ✅ Packaging & Size optimizations
+
+We made the following changes to keep the published package minimal and smaller on install:
+
+- Build with tsup: ESLint + esbuild (faster), targeting ES2021
+- Production builds are minified and tree-shaken by default
+- ESM (import) and CJS (require) outputs (`dist/index.js` + `dist/index.cjs`) are built; `build:esm` is available to output ESM-only (smaller)
+- `postcss` + `tailwindcss` purge builds `dist/index.css` only with the used utility classes (minimized CSS for components)
+- `peerDependencies` declare `react`/`react-dom` and no React bundling in published package (avoid duplicate React copies)
+- `sideEffects: false` enables better tree-shaking for bundlers
+- `files: ["dist"]` plus `exports` only expose the built distribution (prevents publishing the source & tests)
+- `prepack` ensures package is built before `npm publish` or `npm pack`
+- `size-limit` checks (npm run size) and enforces size targets for the ESM bundle
+
+Usage tips for consumers to keep runtime bundle minimal:
+
+- Prefer ESM and subpath imports: `import { Button } from '@sandeep-jaiswar/ui/Button'` or `import { Button } from '@sandeep-jaiswar/ui'` (ESM builds allow tree-shaking)
+- Avoid bundling `react` as it should be a peer dependency in your project
+
 - 🎭 Comprehensive Storybook documentation
 
 ## Installation
