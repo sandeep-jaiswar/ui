@@ -1,10 +1,10 @@
-// https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
-// import eslintPluginTailwindcss from "eslint-plugin-tailwindcss"
 import eslintPluginNext from "@next/eslint-plugin-next"
 import eslintPluginImport from "eslint-plugin-import"
 import eslintPluginStorybook from "eslint-plugin-storybook"
-import typescriptEslint from "typescript-eslint"
-import * as fs from "fs"
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin"
+import tsParser from "@typescript-eslint/parser"
+import jsxA11y from "eslint-plugin-jsx-a11y"
+import fs from "fs"
 
 const eslintIgnore = [
   ".git/",
@@ -18,30 +18,38 @@ const eslintIgnore = [
   "*.d.ts",
 ]
 
-const config = typescriptEslint.config(
+function getDirectoriesToSort() {
+  const ignoredSortingDirectories = [".git", ".next", ".vscode", "node_modules"]
+  return fs
+    .readdirSync(process.cwd())
+    .filter((file) => fs.statSync(process.cwd() + "/" + file).isDirectory())
+    .filter((f) => !ignoredSortingDirectories.includes(f))
+}
+
+export default [
   {
     ignores: eslintIgnore,
   },
-  ...eslintPluginStorybook.configs["flat/recommended"],
-  //  https://github.com/francoismassart/eslint-plugin-tailwindcss/pull/381
-  // ...eslintPluginTailwindcss.configs["flat/recommended"],
-  typescriptEslint.configs.recommended,
-  eslintPluginImport.flatConfigs.recommended,
   {
+    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.json",
+        sourceType: "module",
+      },
+    },
     plugins: {
+      "@typescript-eslint": typescriptEslintPlugin,
       "@next/next": eslintPluginNext,
+      import: eslintPluginImport,
+      storybook: eslintPluginStorybook,
+      "jsx-a11y": jsxA11y,
     },
-    rules: {
-      ...eslintPluginNext.configs.recommended.rules,
-      ...eslintPluginNext.configs["core-web-vitals"].rules,
-    },
-  },
-  {
     settings: {
       tailwindcss: {
         callees: ["classnames", "clsx", "ctl", "cn", "cva"],
       },
-
       "import/resolver": {
         typescript: true,
         node: true,
@@ -92,16 +100,8 @@ const config = typescriptEslint.config(
           },
         },
       ],
+      ...eslintPluginNext.configs?.recommended?.rules,
+      ...eslintPluginNext.configs?.["core-web-vitals"]?.rules,
     },
-  }
-)
-
-function getDirectoriesToSort() {
-  const ignoredSortingDirectories = [".git", ".next", ".vscode", "node_modules"]
-  return fs
-    .readdirSync(process.cwd())
-    .filter((file) => fs.statSync(process.cwd() + "/" + file).isDirectory())
-    .filter((f) => !ignoredSortingDirectories.includes(f))
-}
-
-export default config
+  },
+]
