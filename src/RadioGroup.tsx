@@ -35,14 +35,14 @@ export interface RadioGroupProps {
 
 /**
  * iOS-inspired radio group component for managing multiple radio buttons.
- * 
+ *
  * Features:
  * - Controlled and uncontrolled modes
  * - Horizontal or vertical layout
  * - Consistent styling across radio buttons
  * - Group-level disabled state
  * - Proper accessibility with role="radiogroup"
- * 
+ *
  * @example
  * ```tsx
  * <RadioGroup

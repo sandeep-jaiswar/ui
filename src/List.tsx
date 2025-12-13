@@ -36,14 +36,14 @@ export interface ListProps {
 
 /**
  * iOS-inspired list item component for structured content display.
- * 
+ *
  * Features:
  * - Support for left and right content (icons, badges, etc.)
  * - Interactive state with hover effects
  * - Disabled state
  * - Proper keyboard accessibility
  * - Consistent iOS-style borders
- * 
+ *
  * @example
  * ```tsx
  * <ListItem
@@ -87,12 +87,12 @@ ListItem.displayName = "ListItem"
 
 /**
  * iOS-inspired list container component for grouping list items.
- * 
+ *
  * Features:
  * - Multiple variants (grouped, inset, plain)
  * - Consistent iOS styling
  * - Proper accessibility semantics
- * 
+ *
  * @example
  * ```tsx
  * <List variant="grouped">

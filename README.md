@@ -14,7 +14,7 @@ A modern, iOS-inspired React component library built with TypeScript and Tailwin
 - ♿ Accessible components following WAI-ARIA guidelines
 - 🔍 TypeScript support with comprehensive type definitions
 - 🧩 Modular architecture for tree-shaking
- - 🧩 Modular architecture for tree-shaking
+- 🧩 Modular architecture for tree-shaking
 
 ## ✅ Packaging & Size optimizations
 
@@ -53,13 +53,13 @@ pnpm add @sandeep-jaiswar/ui
 ## Quick Start
 
 ```jsx
-import React from 'react'
-import { Button, Card, Typography } from '@sandeep-jaiswar/ui'
-import '@sandeep-jaiswar/ui/styles.css'
+import React from "react"
+import { Button, Card, Typography } from "@sandeep-jaiswar/ui"
+import "@sandeep-jaiswar/ui/styles.css"
 
 function App() {
   return (
-    <Card className="p-6 max-w-md mx-auto">
+    <Card className="mx-auto max-w-md p-6">
       <Typography variant="headline">Welcome to @sandeep-jaiswar/ui</Typography>
       <Typography variant="body" className="mt-2">
         A beautiful, iOS-inspired component library for React applications.
@@ -78,7 +78,7 @@ This library is built with Tailwind CSS. To ensure all styles work correctly, ad
 module.exports = {
   content: [
     // ...
-    './node_modules/@sandeep-jaiswar/ui/**/*.{js,ts,jsx,tsx}',
+    "./node_modules/@sandeep-jaiswar/ui/**/*.{js,ts,jsx,tsx}",
   ],
   // ...
 }
@@ -89,11 +89,13 @@ module.exports = {
 The library includes a comprehensive set of components:
 
 ### Layout Components
+
 - `Card` - Versatile container with various styles
 - `List` & `ListItem` - For creating lists with various content
 - `Divider` - Horizontal or vertical separators
 
 ### Navigation Components
+
 - `NavigationBar` - iOS-style top navigation
 - `TabBar` - Bottom navigation with badges
 - `Tabs` - Content tabs with different styles
@@ -101,6 +103,7 @@ The library includes a comprehensive set of components:
 - `Drawer` - Side panel for navigation or content
 
 ### Form Components
+
 - `Button` - Various button styles and states
 - `Input` - Text input with validation
 - `TextArea` - Multi-line text input
@@ -115,6 +118,7 @@ The library includes a comprehensive set of components:
 - `FileUpload` - File upload with drag & drop
 
 ### Feedback Components
+
 - `Alert` - Modal alerts and action sheets
 - `Modal` - Content overlay
 - `Toast` - Temporary notifications
@@ -122,6 +126,7 @@ The library includes a comprehensive set of components:
 - `Spinner` - Loading indicators
 
 ### Display Components
+
 - `Typography` - Text styles following iOS guidelines
 - `Icon` - System and custom icons
 - `Avatar` - User avatars with various states

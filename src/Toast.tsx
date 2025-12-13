@@ -29,7 +29,7 @@ export interface ToastProps {
 
 /**
  * iOS-inspired toast notification component for temporary feedback.
- * 
+ *
  * Features:
  * - Multiple types (info, success, warning, error)
  * - Auto-dismiss with configurable duration
@@ -37,7 +37,7 @@ export interface ToastProps {
  * - Optional close button
  * - Smooth animations
  * - Proper ARIA attributes for accessibility
- * 
+ *
  * @example
  * ```tsx
  * <Toast

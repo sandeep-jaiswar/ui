@@ -18,14 +18,14 @@ export interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElemen
 
 /**
  * Basic text field component with clear button functionality.
- * 
+ *
  * Features:
  * - Light and dark variants
  * - Error state
  * - Helper text
  * - Clear button
  * - Focus and blur handling
- * 
+ *
  * @example
  * ```tsx
  * <TextField

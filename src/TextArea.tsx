@@ -32,7 +32,7 @@ export interface TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
 
 /**
  * iOS-inspired textarea component with auto-resize and character count.
- * 
+ *
  * Features:
  * - Multiple variants (filled, outlined, plain)
  * - Various size options
@@ -40,7 +40,7 @@ export interface TextAreaProps extends Omit<React.TextareaHTMLAttributes<HTMLTex
  * - Character counter with maxLength support
  * - Auto-resizing capability
  * - Label and helper text
- * 
+ *
  * @example
  * ```tsx
  * <TextArea

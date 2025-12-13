@@ -4,7 +4,7 @@
 
 /**
  * Announces text to screen readers
- * 
+ *
  * @param message - The message to announce
  * @param priority - The priority level for the announcement
  */
@@ -25,7 +25,7 @@ export function announceToScreenReader(message: string, priority: "polite" | "as
 
 /**
  * Generates unique IDs for accessibility
- * 
+ *
  * @param prefix - Optional prefix for the generated ID
  * @returns A unique ID string
  */
@@ -36,7 +36,7 @@ export function generateId(prefix: string = "id"): string {
 
 /**
  * Manages body scroll lock
- * 
+ *
  * @returns A function to unlock body scroll
  */
 export function lockBodyScroll() {
@@ -57,7 +57,7 @@ export function lockBodyScroll() {
 
 /**
  * Checks if element is visible and focusable
- * 
+ *
  * @param element - The HTML element to check
  * @returns Whether the element is focusable
  */

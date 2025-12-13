@@ -20,21 +20,21 @@ export interface SpinnerProps {
 
 /**
  * iOS-inspired spinner component for loading states.
- * 
+ *
  * Features:
  * - Multiple size variants
  * - Various color options
  * - Optional loading text
  * - Smooth animation
  * - Proper accessibility attributes
- * 
+ *
  * @example
  * ```tsx
  * // Basic spinner
  * <Spinner />
- * 
+ *
  * // Spinner with label and custom color
- * <Spinner 
+ * <Spinner
  *   size="large"
  *   color="green"
  *   label="Loading data..."

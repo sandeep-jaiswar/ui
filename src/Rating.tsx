@@ -45,7 +45,7 @@ export interface RatingProps {
 
 /**
  * iOS-inspired rating component for displaying and collecting star ratings.
- * 
+ *
  * Features:
  * - Configurable maximum rating (default: 5)
  * - Half-star rating support
@@ -53,14 +53,14 @@ export interface RatingProps {
  * - Read-only mode for display only
  * - Different size options
  * - Hover effects for interactive feedback
- * 
+ *
  * @example
  * ```tsx
  * // Basic rating display
  * <Rating value={4.5} readonly />
- * 
+ *
  * // Interactive rating with half-stars
- * <Rating 
+ * <Rating
  *   value={rating}
  *   onChange={setRating}
  *   allowHalf

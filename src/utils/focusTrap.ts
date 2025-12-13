@@ -4,7 +4,7 @@
 
 /**
  * Gets all focusable elements within a container
- * 
+ *
  * @param container - The container element to search within
  * @returns An array of focusable elements
  */
@@ -24,7 +24,7 @@ export function getFocusableElements(container: HTMLElement): HTMLElement[] {
 
 /**
  * Creates a focus trap within the specified container
- * 
+ *
  * @param container - The container element to trap focus within
  * @returns An object with activate and deactivate methods
  */
@@ -34,7 +34,7 @@ export function createFocusTrap(container: HTMLElement) {
 
   /**
    * Activates the focus trap
-   * 
+   *
    * @returns A cleanup function to remove event listeners
    */
   const activate = () => {

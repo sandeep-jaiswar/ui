@@ -30,7 +30,7 @@ export interface RadioProps {
 
 /**
  * iOS-inspired radio component for single selection options.
- * 
+ *
  * Features:
  * - Multiple size variants
  * - Various color options
@@ -38,7 +38,7 @@ export interface RadioProps {
  * - Disabled state
  * - Proper accessibility attributes
  * - Smooth animations
- * 
+ *
  * @example
  * ```tsx
  * <Radio

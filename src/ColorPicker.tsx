@@ -30,14 +30,14 @@ export interface ColorPickerProps {
 
 /**
  * iOS-inspired color picker component for selecting colors from a predefined palette or custom input.
- * 
+ *
  * Features:
  * - Predefined color palette with customizable options
  * - Custom color input with hex value support
  * - Multiple size variants
  * - Controlled and uncontrolled modes
  * - Accessibility support with proper ARIA attributes
- * 
+ *
  * @example
  * ```tsx
  * <ColorPicker

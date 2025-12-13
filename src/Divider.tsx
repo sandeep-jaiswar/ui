@@ -22,25 +22,25 @@ export interface DividerProps {
 
 /**
  * iOS-inspired divider component for separating content sections.
- * 
+ *
  * Features:
  * - Horizontal or vertical orientation
  * - Multiple variants (full, inset, middle)
  * - Customizable thickness
  * - Different color options
  * - Optional content display in the middle
- * 
+ *
  * @example
  * ```tsx
  * // Simple divider
  * <Divider />
- * 
+ *
  * // Divider with text
  * <Divider>OR</Divider>
- * 
+ *
  * // Vertical divider
  * <Divider orientation="vertical" />
- * 
+ *
  * // Styled divider
  * <Divider variant="middle" thickness="medium" color="dark" />
  * ```

@@ -36,14 +36,14 @@ export interface TabsProps {
 
 /**
  * iOS-inspired tabs component for content organization.
- * 
+ *
  * Features:
  * - Default and segmented variants
  * - Controlled and uncontrolled modes
  * - Disabled tab support
  * - Proper ARIA roles for accessibility
  * - Smooth transitions between tabs
- * 
+ *
  * @example
  * ```tsx
  * <Tabs

@@ -28,7 +28,7 @@ export interface SwitchProps {
 
 /**
  * iOS-inspired switch component for toggling boolean values.
- * 
+ *
  * Features:
  * - Multiple size variants
  * - Various color options when active
@@ -36,16 +36,16 @@ export interface SwitchProps {
  * - Smooth sliding animation
  * - Proper accessibility attributes
  * - Controlled and uncontrolled modes
- * 
+ *
  * @example
  * ```tsx
  * // Basic switch
- * <Switch 
+ * <Switch
  *   label="Dark Mode"
  *   checked={isDarkMode}
  *   onChange={setIsDarkMode}
  * />
- * 
+ *
  * // Custom color and size
  * <Switch
  *   label="Notifications"

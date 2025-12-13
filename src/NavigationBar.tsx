@@ -25,14 +25,14 @@ export interface NavigationBarProps {
 
 /**
  * iOS-inspired navigation bar component for app headers.
- * 
+ *
  * Features:
  * - Multiple variants (default, large title, transparent)
  * - Back button with handler
  * - Customizable left and right content areas
  * - Proper semantic HTML structure
  * - Consistent iOS styling with blur effects
- * 
+ *
  * @example
  * ```tsx
  * <NavigationBar

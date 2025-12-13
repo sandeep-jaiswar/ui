@@ -31,7 +31,7 @@ export interface DrawerProps {
 
 /**
  * iOS-inspired drawer/sidebar component for displaying content or navigation.
- * 
+ *
  * Features:
  * - Multiple positions (left, right, top, bottom)
  * - Various size options
@@ -40,7 +40,7 @@ export interface DrawerProps {
  * - Close button and escape key support
  * - Focus management
  * - Body scroll locking
- * 
+ *
  * @example
  * ```tsx
  * <Drawer

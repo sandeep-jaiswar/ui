@@ -35,7 +35,7 @@ export interface FileUploadProps {
 
 /**
  * iOS-inspired file upload component with drag & drop functionality.
- * 
+ *
  * Features:
  * - Drag and drop file upload
  * - File type restrictions
@@ -44,7 +44,7 @@ export interface FileUploadProps {
  * - Progress indicator
  * - File list with remove option
  * - Button and dropzone variants
- * 
+ *
  * @example
  * ```tsx
  * <FileUpload

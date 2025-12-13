@@ -18,7 +18,7 @@ export default defineConfig(({ watch }) => ({
     // Define NODE_ENV at build time so that libraries using env checks (React etc.) can be optimized away.
     options.define = {
       ...(options.define || {}),
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "production"),
     }
   },
   // Do not bundle React (peer deps) — this keeps packages minimal and avoids duplicate React copies

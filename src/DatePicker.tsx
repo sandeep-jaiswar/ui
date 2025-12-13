@@ -37,7 +37,7 @@ export interface DatePickerProps {
 
 /**
  * iOS-inspired date picker component for selecting dates with a calendar interface.
- * 
+ *
  * Features:
  * - Calendar popup for date selection
  * - Min/max date constraints
@@ -45,7 +45,7 @@ export interface DatePickerProps {
  * - Formatted date display
  * - Today button for quick selection
  * - Responsive design
- * 
+ *
  * @example
  * ```tsx
  * <DatePicker

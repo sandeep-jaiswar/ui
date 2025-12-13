@@ -53,7 +53,7 @@ export interface SelectProps {
 
 /**
  * iOS-inspired select component for dropdown selection.
- * 
+ *
  * Features:
  * - Multiple variants (filled, outlined, plain)
  * - Various size options
@@ -61,7 +61,7 @@ export interface SelectProps {
  * - Custom chevron icon
  * - Placeholder support
  * - Disabled state and options
- * 
+ *
  * @example
  * ```tsx
  * <Select

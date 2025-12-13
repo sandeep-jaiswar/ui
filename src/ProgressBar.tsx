@@ -26,7 +26,7 @@ export interface ProgressBarProps {
 
 /**
  * iOS-inspired progress bar component for displaying completion status.
- * 
+ *
  * Features:
  * - Multiple size variants
  * - Various color options
@@ -34,21 +34,21 @@ export interface ProgressBarProps {
  * - Indeterminate state for unknown progress
  * - Proper ARIA attributes for accessibility
  * - Smooth animations
- * 
+ *
  * @example
  * ```tsx
  * // Basic progress bar
  * <ProgressBar value={75} />
- * 
+ *
  * // With label and custom color
- * <ProgressBar 
- *   value={downloadProgress} 
+ * <ProgressBar
+ *   value={downloadProgress}
  *   max={100}
  *   color="green"
  *   showLabel
  *   label="Downloading..."
  * />
- * 
+ *
  * // Indeterminate progress
  * <ProgressBar indeterminate label="Loading..." />
  * ```

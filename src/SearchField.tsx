@@ -33,7 +33,7 @@ export interface SearchFieldProps {
 
 /**
  * iOS-inspired search field component with search icon and cancel functionality.
- * 
+ *
  * Features:
  * - Search icon with proper positioning
  * - Clear button for quick text clearing
@@ -41,7 +41,7 @@ export interface SearchFieldProps {
  * - Multiple size variants
  * - Search event on Enter key
  * - Controlled and uncontrolled modes
- * 
+ *
  * @example
  * ```tsx
  * <SearchField

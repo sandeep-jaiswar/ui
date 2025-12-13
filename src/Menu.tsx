@@ -43,7 +43,7 @@ export interface MenuProps {
 
 /**
  * iOS-inspired context menu component for dropdown actions.
- * 
+ *
  * Features:
  * - Multiple positioning options
  * - Support for icons and separators
@@ -51,7 +51,7 @@ export interface MenuProps {
  * - Disabled state handling
  * - Keyboard navigation and accessibility
  * - Click outside and escape key handling
- * 
+ *
  * @example
  * ```tsx
  * <Menu

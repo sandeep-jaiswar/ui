@@ -39,14 +39,14 @@ export interface TimelineProps {
 
 /**
  * iOS-inspired timeline component for chronological data display.
- * 
+ *
  * Features:
  * - Vertical or horizontal orientation
  * - Default and compact variants
  * - Customizable item colors
  * - Icon support
  * - Completed/incomplete state visualization
- * 
+ *
  * @example
  * ```tsx
  * <Timeline

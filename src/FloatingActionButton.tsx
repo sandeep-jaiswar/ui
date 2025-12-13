@@ -27,7 +27,7 @@ export interface FloatingActionButtonProps {
 
 /**
  * iOS-inspired floating action button component for primary actions.
- * 
+ *
  * Features:
  * - Fixed positioning in any corner
  * - Multiple size options
@@ -35,7 +35,7 @@ export interface FloatingActionButtonProps {
  * - Icon or custom content
  * - Hover and active animations
  * - Accessibility support
- * 
+ *
  * @example
  * ```tsx
  * <FloatingActionButton

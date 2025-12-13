@@ -4,7 +4,7 @@
 
 /**
  * Checks if user prefers reduced motion
- * 
+ *
  * @returns Whether the user prefers reduced motion
  */
 export function prefersReducedMotion(): boolean {
@@ -13,7 +13,7 @@ export function prefersReducedMotion(): boolean {
 
 /**
  * Gets animation duration based on user preferences
- * 
+ *
  * @param defaultDuration - The default animation duration in milliseconds
  * @returns The appropriate animation duration based on user preferences
  */

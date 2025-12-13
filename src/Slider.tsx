@@ -34,7 +34,7 @@ export interface SliderProps {
 
 /**
  * iOS-inspired slider component for selecting numeric values.
- * 
+ *
  * Features:
  * - Min/max range with step control
  * - Multiple color options
@@ -42,7 +42,7 @@ export interface SliderProps {
  * - Smooth thumb movement
  * - Proper accessibility attributes
  * - Controlled and uncontrolled modes
- * 
+ *
  * @example
  * ```tsx
  * // Basic slider
@@ -52,7 +52,7 @@ export interface SliderProps {
  *   onChange={setVolume}
  *   showValue
  * />
- * 
+ *
  * // Custom range and formatting
  * <Slider
  *   label="Temperature"

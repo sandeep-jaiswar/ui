@@ -26,7 +26,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 /**
  * iOS-inspired image component with aspect ratio and fallback support.
- * 
+ *
  * Features:
  * - Configurable aspect ratios
  * - Object fit options
@@ -34,7 +34,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
  * - Error handling with fallback content
  * - Lazy loading support
  * - Various border radius options
- * 
+ *
  * @example
  * ```tsx
  * // Basic image
@@ -43,7 +43,7 @@ export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
  *   alt="Product image"
  *   aspectRatio="4:3"
  * />
- * 
+ *
  * // With fallback
  * <Image
  *   src="https://example.com/image.jpg"
