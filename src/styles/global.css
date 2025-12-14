@@ -1,0 +1,19 @@
+/*
+  Developer note:
+  - This file is used by Storybook and local development.
+  - We do NOT compile Tailwind into the published package; consumers should install Tailwind and configure it.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Project-level base styles (optional) */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add any minimal library styles (non-Tailwind) below */

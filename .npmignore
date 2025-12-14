@@ -9,6 +9,8 @@
 /.vscode
 /coverage
 
+/.storybook
+
 # dev & build artifacts (ignored by default via .gitignore)
 node_modules
 npm-debug.log

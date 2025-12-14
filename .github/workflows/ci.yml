@@ -36,5 +36,7 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
       - name: Run Storybook browser tests (Vitest + Playwright)
-        run: npm run test -- --run
+        run: npm run test:storybook
