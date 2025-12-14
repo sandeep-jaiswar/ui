@@ -1,18 +1,12 @@
 import fs from "node:fs"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
-
 import js from "@eslint/js"
-
-import tseslint from "@typescript-eslint/eslint-plugin"
-import tsParser from "@typescript-eslint/parser"
+import markdown from "@eslint/markdown"
 import { defineConfig } from "eslint/config"
 import importPlugin from "eslint-plugin-import"
-import markdown from "eslint-plugin-markdown"
 import react from "eslint-plugin-react"
 import globals from "globals"
-
-const dirname = path.dirname(fileURLToPath(import.meta.url))
+import tseslint from "typescript-eslint"
 
 const eslintIgnore = [
   ".git/",
@@ -51,28 +45,15 @@ export default defineConfig([
   // --------------------------------------------------
   // React (flat config)
   // --------------------------------------------------
-  react.configs.flat.recommended,
+  {
+    ...react.configs.flat.recommended,
+    files: ["**/*.{jsx,tsx}"],
+  },
 
   // --------------------------------------------------
   // TypeScript (flat config)
   // --------------------------------------------------
-  {
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        project: "./tsconfig.json",
-        tsconfigRootDir: dirname,
-        sourceType: "module",
-      },
-    },
-    plugins: {
-      "@typescript-eslint": tseslint,
-    },
-    rules: {
-      ...tseslint.configs.recommended.rules,
-    },
-  },
+  ...tseslint.configs.recommended,
 
   // --------------------------------------------------
   // Import plugin (flat)
@@ -85,10 +66,20 @@ export default defineConfig([
   markdown.configs.recommended,
 
   // --------------------------------------------------
+  // Markdown overrides
+  // --------------------------------------------------
+  {
+    files: ["**/*.md"],
+    rules: {
+      "no-irregular-whitespace": "off",
+    },
+  },
+
+  // --------------------------------------------------
   // Common JS / TS / React rules
   // --------------------------------------------------
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -139,6 +130,16 @@ export default defineConfig([
       // Library-friendly rules
       "no-console": "warn",
       "no-debugger": "error",
+    },
+  },
+
+  // --------------------------------------------------
+  // Node scripts
+  // --------------------------------------------------
+  {
+    files: ["scripts/**/*.{js,mjs,cjs,ts,mts,cts}"],
+    rules: {
+      "no-console": "off",
     },
   },
 ])

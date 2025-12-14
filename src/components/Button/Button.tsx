@@ -60,7 +60,10 @@ function getFocusRingClasses(intent: NonNullable<ButtonProps["intent"]>) {
   }
 }
 
-function getIntentVariantClasses(intent: NonNullable<ButtonProps["intent"]>, variant: NonNullable<ButtonProps["variant"]>) {
+function getIntentVariantClasses(
+  intent: NonNullable<ButtonProps["intent"]>,
+  variant: NonNullable<ButtonProps["variant"]>
+) {
   if (variant === "link") {
     switch (intent) {
       case "danger":
@@ -129,22 +132,12 @@ function getIntentVariantClasses(intent: NonNullable<ButtonProps["intent"]>, var
 }
 
 function Spinner({ size }: { size: NonNullable<ButtonProps["size"]> }) {
-  const sizeClasses =
-    size === "xs" ? "h-3 w-3" : size === "sm" ? "h-4 w-4" : size === "md" ? "h-4 w-4" : "h-5 w-5"
+  const sizeClasses = size === "xs" ? "h-3 w-3" : size === "sm" ? "h-4 w-4" : size === "md" ? "h-4 w-4" : "h-5 w-5"
 
   return (
-    <svg
-      className={cn("animate-spin", sizeClasses)}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
+    <svg className={cn("animate-spin", sizeClasses)} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-      <path
-        className="opacity-75"
-        fill="currentColor"
-        d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
-      />
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z" />
     </svg>
   )
 }
@@ -170,7 +163,7 @@ const Button = ({
   if (process.env.NODE_ENV !== "production") {
     if (intent === "danger" && autoFocus) {
       // eslint-disable-next-line no-console
-      console.warn("[Button] `intent=\"danger\"` should not be default-focused. Remove `autoFocus`.")
+      console.warn('[Button] `intent="danger"` should not be default-focused. Remove `autoFocus`.')
     }
     if (isIconOnly) {
       const ariaLabel = (props["aria-label"] ?? props["aria-labelledby"]) as string | undefined
@@ -194,7 +187,7 @@ const Button = ({
   const intentVariant = getIntentVariantClasses(intent, variant)
 
   const content = (
-    <span className={cn("inline-flex items-center gap-2", loading && "opacity-0")}> 
+    <span className={cn("inline-flex items-center gap-2", loading && "opacity-0")}>
       {leadingIcon ? <span className="inline-flex shrink-0">{leadingIcon}</span> : null}
       {children ? <span className="inline-flex">{children}</span> : null}
       {trailingIcon ? <span className="inline-flex shrink-0">{trailingIcon}</span> : null}
@@ -210,7 +203,15 @@ const Button = ({
       aria-busy={loading || undefined}
       disabled={isDisabled}
       autoFocus={autoFocus}
-      className={cn(base, shapeClasses, sizeClasses, focusRing, intentVariant, variant === "link" && "h-auto px-0", className)}
+      className={cn(
+        base,
+        shapeClasses,
+        sizeClasses,
+        focusRing,
+        intentVariant,
+        variant === "link" && "h-auto px-0",
+        className
+      )}
       {...props}
     >
       {content}

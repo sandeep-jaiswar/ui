@@ -1,5 +1,5 @@
-import type React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
+import type React from "react"
 import { Button } from "./index"
 
 const meta = {
@@ -12,8 +12,8 @@ const meta = {
         component:
           "Buttons encode user intent (priority/risk/outcome) and visual treatment (variant).\n\n" +
           "Guardrails:\n" +
-          "- Prefer a single `intent=\"primary\"` per hierarchy level.\n" +
-          "- Avoid default focus for `intent=\"danger\"` (don’t use `autoFocus`).\n" +
+          '- Prefer a single `intent="primary"` per hierarchy level.\n' +
+          '- Avoid default focus for `intent="danger"` (don’t use `autoFocus`).\n' +
           "- Icon-only buttons must include `aria-label` (or `aria-labelledby`) and should include a `title` tooltip.",
       },
     },
@@ -156,8 +156,7 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Size variants control density. UX rule: don’t mix sizes within the same action group.",
+        story: "Size variants control density. UX rule: don’t mix sizes within the same action group.",
       },
     },
   },
@@ -234,13 +233,7 @@ export const Icons: Story = {
       <Button {...args} trailingIcon={<Icon label="→" />}>
         Continue
       </Button>
-      <Button
-        {...args}
-        shape="square"
-        aria-label="Open menu"
-        title="Open menu"
-        leadingIcon={<Icon label="≡" />}
-      />
+      <Button {...args} shape="square" aria-label="Open menu" title="Open menu" leadingIcon={<Icon label="≡" />} />
     </Row>
   ),
 }
