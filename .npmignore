@@ -1,0 +1,22 @@
+# Keep only dist folder in the tarball
+*
+!/dist
+
+# Prevent accidental publishing of source files
+/src
+/stories
+/test
+/.vscode
+/coverage
+
+/.storybook
+
+# dev & build artifacts (ignored by default via .gitignore)
+node_modules
+npm-debug.log
+.DS_Store
+
+# Keep package manifest and readme
+!package.json
+!README.md
+!LICENSE
