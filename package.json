@@ -14,7 +14,7 @@
   ],
   "version": "0.0.1",
   "scripts": {
-    "copy:css": "node ./scripts/copy-css.mts",
+    "copy:css": "node ./scripts/copy-css.mjs",
     "build": "cross-env NODE_ENV=production tsup && npm run copy:css",
     "build:esm": "cross-env NODE_ENV=production tsup --format esm --clean && npm run copy:css",
     "prepare": "npm run build",
