@@ -19,3 +19,8 @@ vi.mock("@base-ui/react/button", () => ({
 vi.mock("@base-ui/react/input", () => ({
   Input: React.forwardRef((props: any, ref: any) => React.createElement("input", { ref, ...props })),
 }))
+
+vi.mock("@base-ui/react/accordion", async () => {
+  const mod = await import("../src/test-stubs/base-ui-accordion")
+  return mod
+})

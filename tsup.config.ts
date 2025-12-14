@@ -24,5 +24,6 @@ export default defineConfig(({ watch }) => ({
     "react/jsx-dev-runtime",
     "@base-ui/react/button",
     "@base-ui/react/input",
+    "@base-ui/react/accordion",
   ],
 }))

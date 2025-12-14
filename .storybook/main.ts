@@ -23,6 +23,7 @@ const config: StorybookConfig = {
       ...(viteConfig.resolve.alias as any),
       "@base-ui/react/button": path.resolve(dirname, "../src/test-stubs/base-ui-button.tsx"),
       "@base-ui/react/input": path.resolve(dirname, "../src/test-stubs/base-ui-input.tsx"),
+      "@base-ui/react/accordion": path.resolve(dirname, "../src/test-stubs/base-ui-accordion.tsx"),
     }
     return viteConfig
   },
