@@ -105,6 +105,16 @@ export default defineConfig([
       },
     },
     rules: {
+      // This library externalizes Base UI entrypoints in tsup and ships local
+      // type declarations in `src/types/base-ui.d.ts`. The actual runtime
+      // package is expected to be provided by the consumer.
+      "import/no-unresolved": [
+        "error",
+        {
+          ignore: ["^@base-ui/react/(button|input|accordion)$"],
+        },
+      ],
+
       "import/order": [
         "warn",
         {

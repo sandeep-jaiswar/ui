@@ -1,5 +1,12 @@
 import React from "react"
 
-export const Button = React.forwardRef((props: any, ref: any) => <button ref={ref} {...props} />)
+export const Button = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(function BaseUIButton(
+	props,
+	ref
+) {
+	return <button ref={ref} {...props} />
+})
+
+Button.displayName = "BaseUIButton"
 
 export default Button

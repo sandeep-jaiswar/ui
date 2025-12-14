@@ -43,6 +43,16 @@ function normalizeControlledValue(type: AccordionType, value: unknown) {
   return typeof value === "string" ? value : value === null ? null : null
 }
 
+type AccordionValue = string | null | string[]
+
+type AccordionProps = React.ComponentPropsWithoutRef<"div"> & {
+  type?: AccordionType
+  collapsible?: boolean
+  value?: AccordionValue
+  defaultValue?: AccordionValue
+  onValueChange?: (next: AccordionValue) => void
+}
+
 export const Accordion = ({
   type = "single",
   collapsible = true,
@@ -51,15 +61,17 @@ export const Accordion = ({
   onValueChange,
   children,
   ...props
-}: any) => {
+}: AccordionProps) => {
   const isControlled = value !== undefined
 
-  const [uncontrolledValue, setUncontrolledValue] = React.useState(() => normalizeDefaultValue(type, defaultValue))
+  const [uncontrolledValue, setUncontrolledValue] = React.useState<AccordionValue>(() =>
+    normalizeDefaultValue(type, defaultValue)
+  )
 
-  const currentValue = isControlled ? normalizeControlledValue(type, value) : uncontrolledValue
+  const currentValue: AccordionValue = isControlled ? normalizeControlledValue(type, value) : uncontrolledValue
 
   const setValue = React.useCallback(
-    (next: any) => {
+    (next: AccordionValue) => {
       if (!isControlled) setUncontrolledValue(next)
       onValueChange?.(next)
     },
@@ -78,10 +90,13 @@ export const Accordion = ({
   )
 }
 
-export const AccordionItem = ({ value, disabled = false, children, ...props }: any) => {
+type AccordionItemProps = React.ComponentPropsWithoutRef<"div"> & { value: string; disabled?: boolean }
+
+export const AccordionItem = ({ value, disabled = false, children, ...props }: AccordionItemProps) => {
   const { type, value: rootValue } = useAccordionContext()
 
-  const open = type === "multiple" ? (rootValue as string[]).includes(value) : rootValue === value
+  const open =
+    type === "multiple" ? (Array.isArray(rootValue) ? rootValue : []).includes(value) : rootValue === value
 
   const reactId = React.useId()
   const triggerId = `accordion-trigger-${reactId}`
@@ -101,7 +116,9 @@ export const AccordionItem = ({ value, disabled = false, children, ...props }: a
   )
 }
 
-export const AccordionTrigger = ({ onClick, children, ...props }: any) => {
+type AccordionTriggerProps = React.ComponentPropsWithoutRef<"button">
+
+export const AccordionTrigger = ({ onClick, children, ...props }: AccordionTriggerProps) => {
   const { type, value: rootValue, setValue, collapsible } = useAccordionContext()
   const { value, open, disabled, triggerId, contentId } = useAccordionItemContext()
 
@@ -142,7 +159,9 @@ export const AccordionTrigger = ({ onClick, children, ...props }: any) => {
   )
 }
 
-export const AccordionContent = ({ children, ...props }: any) => {
+type AccordionContentProps = React.ComponentPropsWithoutRef<"div">
+
+export const AccordionContent = ({ children, ...props }: AccordionContentProps) => {
   const { open, triggerId, contentId, disabled } = useAccordionItemContext()
 
   return (
