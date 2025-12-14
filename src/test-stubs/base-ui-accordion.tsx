@@ -95,8 +95,7 @@ type AccordionItemProps = React.ComponentPropsWithoutRef<"div"> & { value: strin
 export const AccordionItem = ({ value, disabled = false, children, ...props }: AccordionItemProps) => {
   const { type, value: rootValue } = useAccordionContext()
 
-  const open =
-    type === "multiple" ? (Array.isArray(rootValue) ? rootValue : []).includes(value) : rootValue === value
+  const open = type === "multiple" ? (Array.isArray(rootValue) ? rootValue : []).includes(value) : rootValue === value
 
   const reactId = React.useId()
   const triggerId = `accordion-trigger-${reactId}`

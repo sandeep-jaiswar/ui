@@ -68,6 +68,7 @@
     "@storybook/react-vite": "^9.0.6",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@types/eslint-plugin-markdown": "^2.0.2",
     "@types/node": "^22.15.34",
     "@typescript-eslint/eslint-plugin": "^8.49.0",
     "@typescript-eslint/parser": "^8.49.0",
