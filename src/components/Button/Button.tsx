@@ -142,6 +142,19 @@ function Spinner({ size }: { size: NonNullable<ButtonProps["size"]> }) {
   )
 }
 
+/**
+ * Button component for user actions.
+ * Supports various styles, sizes, and states including loading.
+ * Wraps @base-ui/react/button for accessibility.
+ *
+ * @example
+ * <Button intent="primary" onClick={handleClick}>
+ *   Click me
+ * </Button>
+ *
+ * @example
+ * <Button loading>Saving...</Button>
+ */
 const Button = ({
   className,
   intent = "primary",
