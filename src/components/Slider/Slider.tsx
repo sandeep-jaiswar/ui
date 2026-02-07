@@ -10,14 +10,13 @@ export interface SliderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 
   value?: number[]
   onValueChange?: (value: number[]) => void
   disabled?: boolean
+  name?: string
 }
 
 /**
  * Slider component for selecting a numeric value from a range.
  * Supports min, max, step, and disabled states.
- *
- * @example
- * <Slider min={0} max={100} value={[50]} onValueChange={handleChange} />
+ * Fully accessible with keyboard navigation.
  */
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(
   (
@@ -30,6 +29,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       value: controlledValue,
       onValueChange,
       disabled,
+      name,
       ...props
     },
     ref
@@ -38,13 +38,22 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue)
     const value = controlledValue !== undefined ? controlledValue : uncontrolledValue
     const trackRef = useRef<HTMLDivElement>(null)
+    const thumbRef = useRef<HTMLDivElement>(null)
 
     // Only supporting single thumb for now for simplicity, array structure allows expansion
     const currentValue = value[0]
 
+    const updateValue = (newValue: number[]) => {
+      if (controlledValue === undefined) {
+        setUncontrolledValue(newValue)
+      }
+      onValueChange?.(newValue)
+    }
+
     const handlePointerDown = (event: React.PointerEvent) => {
       if (disabled) return
       event.preventDefault()
+      thumbRef.current?.focus()
       window.addEventListener("pointermove", handlePointerMove)
       window.addEventListener("pointerup", handlePointerUp)
       updateValueFromPointer(event)
@@ -68,12 +77,44 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       const steppedValue = Math.round((rawValue - min) / step) * step + min
       const clampedValue = Math.min(Math.max(steppedValue, min), max) // Safety clamp
 
-      const newValue = [clampedValue]
-
-      if (controlledValue === undefined) {
-        setUncontrolledValue(newValue)
+      if (clampedValue !== currentValue) {
+        updateValue([clampedValue])
       }
-      onValueChange?.(newValue)
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      if (disabled) return
+      let newValue = currentValue
+
+      switch (event.key) {
+        case "ArrowRight":
+        case "ArrowUp":
+          newValue = Math.min(currentValue + step, max)
+          break
+        case "ArrowLeft":
+        case "ArrowDown":
+          newValue = Math.max(currentValue - step, min)
+          break
+        case "Home":
+          newValue = min
+          break
+        case "End":
+          newValue = max
+          break
+        case "PageUp":
+          newValue = Math.min(currentValue + step * 10, max)
+          break
+        case "PageDown":
+          newValue = Math.max(currentValue - step * 10, min)
+          break
+        default:
+          return
+      }
+
+      event.preventDefault()
+      if (newValue !== currentValue) {
+        updateValue([newValue])
+      }
     }
 
     const percentage = ((currentValue - min) / (max - min)) * 100
@@ -98,10 +139,21 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
 
         {/* Thumb */}
         <div
+          ref={thumbRef}
+          role="slider"
+          aria-valuemin={min}
+          aria-valuemax={max}
+          aria-valuenow={currentValue}
+          aria-orientation="horizontal"
+          aria-disabled={disabled}
+          tabIndex={disabled ? -1 : 0}
+          onKeyDown={handleKeyDown}
           className="border-primary ring-offset-background focus-visible:ring-ring absolute h-5 w-5 cursor-grab rounded-full border-2 bg-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50"
           style={{ left: `calc(${percentage}% - 10px)` }} // Center the thumb
           onPointerDown={handlePointerDown}
         />
+        {/* Hidden input for form submission if name is provided */}
+        {name && <input type="hidden" name={name} value={currentValue} />}
       </div>
     )
   }

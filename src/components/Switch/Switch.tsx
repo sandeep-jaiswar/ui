@@ -31,11 +31,11 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     }
 
     const intentClasses = {
-      primary: "peer-checked:bg-blue-600 focus:ring-blue-500",
-      secondary: "peer-checked:bg-gray-600 focus:ring-gray-500",
-      success: "peer-checked:bg-green-600 focus:ring-green-500",
-      danger: "peer-checked:bg-red-600 focus:ring-red-500",
-      warning: "peer-checked:bg-yellow-600 focus:ring-yellow-500",
+      primary: "peer-checked:bg-blue-600 peer-focus:ring-blue-500",
+      secondary: "peer-checked:bg-gray-600 peer-focus:ring-gray-500",
+      success: "peer-checked:bg-green-600 peer-focus:ring-green-500",
+      danger: "peer-checked:bg-red-600 peer-focus:ring-red-500",
+      warning: "peer-checked:bg-yellow-600 peer-focus:ring-yellow-500",
     }
 
     return (
@@ -44,6 +44,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           <input
             ref={ref}
             type="checkbox"
+            role="switch"
             id={inputId}
             className={cn("peer sr-only", disabled && "pointer-events-none")}
             disabled={disabled}

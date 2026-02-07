@@ -29,7 +29,7 @@ export const BarChart = ({ data, barColor, animate = true }: BarChartProps) => {
   const chartWidth = width - margin.left - margin.right
   const chartHeight = height - margin.top - margin.bottom
 
-  const maxValue = Math.max(...data.map((d) => d.value))
+  const maxValue = Math.max(1, Math.max(...data.map((d) => d.value)))
   const barWidth = chartWidth / data.length
   const padding = barWidth * 0.2 // 20% padding
   const activeBarWidth = barWidth - padding

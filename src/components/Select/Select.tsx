@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useRef, useEffect, forwardRef, ReactNode } from "react"
 import { createPortal } from "react-dom"
-// import { useCore } from "../../core"; // unused
+import { useEscapeKey } from "../../hooks/use-escape-key"
+import { mergeRefs } from "../../hooks/use-merge-refs"
 import { cn } from "../../utils/cn"
 import { MotionPrimitive } from "../../ux"
-// import { InteractiveContainer } from "../../ux"; // unused
 
 // --- Select Context ---
 interface SelectContextType {
@@ -37,15 +37,7 @@ export interface SelectProps {
 /**
  * Select component for picking a value from a list.
  * Composed of SelectTrigger, SelectContent, and SelectItem.
- *
- * @example
- * <Select value={val} onValueChange={setVal}>
- *   <SelectTrigger>{val}</SelectTrigger>
- *   <SelectContent>
- *     <SelectItem value="apple">Apple</SelectItem>
- *     <SelectItem value="banana">Banana</SelectItem>
- *   </SelectContent>
- * </Select>
+ * Fully accessible with keyboard navigation and ARIA support.
  */
 export const Select = ({
   children,
@@ -76,6 +68,10 @@ export const Select = ({
     }
     onValueChange?.(newValue)
     setOpen(false) // Close on select
+    // Return focus to trigger
+    setTimeout(() => {
+      triggerRef.current?.focus()
+    }, 0)
   }
 
   return (
@@ -89,14 +85,12 @@ export const Select = ({
 export const SelectTrigger = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, children, ...props }, ref) => {
     const { open, setOpen, triggerRef } = useSelect()
-    const mergedRef = (node: HTMLButtonElement | null) => {
-      // Handle both refs
-      if (typeof ref === "function") ref(node)
-      else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node
+    const mergedRef = mergeRefs(ref, triggerRef)
 
-      // Context ref
-      if (triggerRef && "current" in triggerRef) {
-        ;(triggerRef as React.MutableRefObject<HTMLButtonElement | null>).current = node
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter" || e.key === " ") {
+        e.preventDefault()
+        setOpen(true)
       }
     }
 
@@ -104,7 +98,12 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, React.ButtonHTMLAttri
       <button
         ref={mergedRef}
         type="button"
+        role="combobox"
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        aria-controls="select-content"
         onClick={() => setOpen(!open)}
+        onKeyDown={handleKeyDown}
         className={cn(
           "flex h-10 w-full items-center justify-between rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-50",
           className
@@ -112,7 +111,6 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, React.ButtonHTMLAttri
         {...props}
       >
         {children}
-        {/* Chevron Icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -135,9 +133,6 @@ SelectTrigger.displayName = "SelectTrigger"
 
 export const SelectValue = ({ placeholder }: { placeholder?: string }) => {
   const { value } = useSelect()
-  // In a real implementation we'd need a way to map value -> label.
-  // For now, we just display the value or placeholder.
-  // A robust version would register children items to look up labels.
   return <span>{value || placeholder}</span>
 }
 
@@ -146,10 +141,16 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
   ({ className, children, ...props }, ref) => {
     const { open, setOpen, triggerRef } = useSelect()
     const contentRef = useRef<HTMLDivElement>(null)
-
-    // Simple positioning logic (floating-ui would be better for production)
     const [style, setStyle] = useState<React.CSSProperties>({})
+    const searchRef = useRef("")
+    const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+    useEscapeKey(() => {
+      setOpen(false)
+      triggerRef.current?.focus()
+    }, open)
+
+    // Positioning
     useEffect(() => {
       if (open && triggerRef.current) {
         const rect = triggerRef.current.getBoundingClientRect()
@@ -163,7 +164,22 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
       }
     }, [open, triggerRef])
 
-    // Click outside to close
+    // Focus management on open
+    useEffect(() => {
+      if (open && contentRef.current) {
+        // Find selected item or first item
+        requestAnimationFrame(() => {
+          const content = contentRef.current
+          if (!content) return
+          const options = Array.from(content.querySelectorAll('[role="option"]')) as HTMLElement[]
+          const selectedOption = options.find((opt) => opt.getAttribute("aria-selected") === "true")
+          const target = selectedOption || options[0]
+          target?.focus()
+        })
+      }
+    }, [open])
+
+    // Click outside
     useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -181,7 +197,48 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
       return () => {
         document.removeEventListener("mousedown", handleClickOutside)
       }
-    }, [open, setOpen])
+    }, [open, setOpen, triggerRef])
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (!contentRef.current) return
+
+      const options = Array.from(contentRef.current.querySelectorAll('[role="option"]')) as HTMLElement[]
+      const currentIndex = options.indexOf(document.activeElement as HTMLElement)
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault()
+        const nextIndex = (currentIndex + 1) % options.length
+        options[nextIndex]?.focus()
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault()
+        const prevIndex = (currentIndex - 1 + options.length) % options.length
+        options[prevIndex]?.focus()
+      } else if (e.key === "Home") {
+        e.preventDefault()
+        options[0]?.focus()
+      } else if (e.key === "End") {
+        e.preventDefault()
+        options[options.length - 1]?.focus()
+      } else if (e.key === "Tab") {
+        e.preventDefault()
+        setOpen(false)
+        triggerRef.current?.focus()
+      } else if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault()
+        ;(document.activeElement as HTMLElement)?.click()
+      } else if (e.key.length === 1) {
+        // Typeahead
+        if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+        searchRef.current += e.key.toLowerCase()
+
+        const match = options.find((opt) => opt.textContent?.toLowerCase().startsWith(searchRef.current))
+        if (match) match.focus()
+
+        searchTimeoutRef.current = setTimeout(() => {
+          searchRef.current = ""
+        }, 500)
+      }
+    }
 
     if (!open) return null
     if (typeof document === "undefined") return null
@@ -189,14 +246,14 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
     return createPortal(
       <MotionPrimitive animation="scale">
         <div
-          ref={(node) => {
-            ;(contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node
-            if (typeof ref === "function") ref(node)
-            else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node
-          }}
+          ref={mergeRefs(contentRef, ref)}
           style={style}
+          id="select-content"
+          role="listbox"
+          tabIndex={-1}
+          onKeyDown={handleKeyDown}
           className={cn(
-            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white text-gray-950 shadow-md dark:bg-gray-950 dark:text-gray-50",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 relative z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white text-gray-950 shadow-md dark:bg-gray-950 dark:text-gray-50",
             className
           )}
           {...props}
@@ -223,9 +280,20 @@ export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>(
     return (
       <div
         ref={ref}
+        role="option"
+        aria-selected={isSelected}
+        tabIndex={-1}
         onClick={() => onValueChange?.(value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault()
+            e.stopPropagation()
+            onValueChange?.(value)
+          }
+        }}
+        onMouseEnter={(e) => e.currentTarget.focus()}
         className={cn(
-          "relative flex w-full cursor-default cursor-pointer items-center rounded-sm py-1.5 pr-2 pl-8 text-sm outline-none select-none hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:focus:text-gray-50",
+          "relative flex w-full cursor-pointer items-center rounded-sm py-1.5 pr-2 pl-8 text-sm outline-none select-none hover:bg-gray-100 focus:bg-gray-100 focus:text-gray-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:hover:bg-gray-800 dark:focus:bg-gray-800 dark:focus:text-gray-50",
           className
         )}
         {...props}

@@ -25,8 +25,8 @@ export const ScatterChart = ({ data, pointSize = 5, color }: ScatterChartProps) 
 
   if (data.length === 0) return null
 
-  const maxX = Math.max(...data.map((d) => d.x))
-  const maxY = Math.max(...data.map((d) => d.y))
+  const maxX = Math.max(1, Math.max(...data.map((d) => d.x)))
+  const maxY = Math.max(1, Math.max(...data.map((d) => d.y)))
   // Ideally min should also be calculated, assuming 0 for now for simple charts
 
   const defaultColor = color || theme?.primaryColor || "#3b82f6"

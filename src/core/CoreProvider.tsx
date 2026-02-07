@@ -44,7 +44,12 @@ export interface CoreProviderProps {
 }
 
 export const CoreProvider = ({ config, children }: CoreProviderProps) => {
-  const finalConfig = { ...defaultCoreConfig, ...config }
+  const finalConfig = {
+    ...defaultCoreConfig,
+    ...config,
+    theme: { ...defaultCoreConfig.theme, ...config?.theme },
+    behavior: { ...defaultCoreConfig.behavior, ...config?.behavior },
+  }
 
   // In a real implementation, we might also inject CSS variables here based on the theme
 

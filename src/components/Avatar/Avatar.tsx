@@ -18,6 +18,10 @@ interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Avatar = ({ src, alt, fallback, size = "md", className, ...props }: AvatarProps) => {
   const [imageError, setImageError] = useState(false)
 
+  React.useEffect(() => {
+    setImageError(false)
+  }, [src])
+
   const sizeClasses = {
     sm: "h-8 w-8 text-xs",
     md: "h-10 w-10 text-sm",

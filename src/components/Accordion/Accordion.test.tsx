@@ -77,4 +77,45 @@ describe("Accordion", () => {
     )
     expect(screen.getByText("Content 1")).toBeInTheDocument()
   })
+  it("supports keyboard navigation", () => {
+    render(
+      <CoreProvider>
+        <Accordion type="single">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Trigger 1</AccordionTrigger>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Trigger 2</AccordionTrigger>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Trigger 3</AccordionTrigger>
+          </AccordionItem>
+        </Accordion>
+      </CoreProvider>
+    )
+
+    const triggers = screen.getAllByRole("button")
+    triggers[0].focus()
+    expect(document.activeElement).toBe(triggers[0])
+
+    // Arrow Down -> next
+    fireEvent.keyDown(triggers[0], { key: "ArrowDown" })
+    expect(document.activeElement).toBe(triggers[1])
+
+    // Arrow Down -> next
+    fireEvent.keyDown(triggers[1], { key: "ArrowDown" })
+    expect(document.activeElement).toBe(triggers[2])
+
+    // Arrow Down -> loop to start
+    fireEvent.keyDown(triggers[2], { key: "ArrowDown" })
+    expect(document.activeElement).toBe(triggers[0])
+
+    // End -> last
+    fireEvent.keyDown(triggers[0], { key: "End" })
+    expect(document.activeElement).toBe(triggers[2])
+
+    // Home -> first
+    fireEvent.keyDown(triggers[2], { key: "Home" })
+    expect(document.activeElement).toBe(triggers[0])
+  })
 })

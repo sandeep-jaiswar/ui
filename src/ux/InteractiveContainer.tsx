@@ -47,12 +47,15 @@ export const InteractiveContainer = forwardRef<HTMLDivElement, InteractiveContai
         data-variant={variant}
         data-hover-effect={hoverEffect}
         className={cn("interactive-container cursor-pointer transition-all duration-300 ease-in-out", className)}
-        style={{
-          padding: "1rem",
-          borderRadius: theme?.borderRadius || "0.5rem",
-          ...getVariantStyles(),
-          ...style,
-        }}
+        style={
+          {
+            padding: "1rem",
+            borderRadius: theme?.borderRadius || "0.5rem",
+            ["--interactive-glow-color" as string]: theme?.primaryColor || "blue",
+            ...getVariantStyles(),
+            ...style,
+          } as React.CSSProperties
+        }
       >
         {/* We can inject a style tag for the hover effects if we want to be purely self-contained, 
             but that's messy. Let's rely on standard CSS/Tailwind being present or users adding global styles.
@@ -60,19 +63,17 @@ export const InteractiveContainer = forwardRef<HTMLDivElement, InteractiveContai
             
             Actually, to ensure "WOW" factor without external CSS, let's add a style block.
         */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
+        <style>
+          {`
             .interactive-container:hover[data-hover-effect="lift"] {
                 transform: translateY(-4px);
                 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             }
             .interactive-container:hover[data-hover-effect="glow"] {
-                box-shadow: 0 0 15px ${theme?.primaryColor || "blue"};
+                box-shadow: 0 0 15px var(--interactive-glow-color);
             }
-        `,
-          }}
-        />
+        `}
+        </style>
         {children}
       </div>
     )

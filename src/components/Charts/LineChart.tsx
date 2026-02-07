@@ -30,7 +30,7 @@ export const LineChart = ({ data, color, showDots = true, strokeWidth = 2 }: Lin
 
   if (data.length === 0) return null
 
-  const maxValue = Math.max(...data.map((d) => d.value))
+  const maxValue = Math.max(1, Math.max(...data.map((d) => d.value)))
   const stepX = data.length > 1 ? chartWidth / (data.length - 1) : 0
 
   const points = data

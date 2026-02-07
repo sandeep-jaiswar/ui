@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react"
+import React, { createContext, useContext, useState, ReactNode, useRef } from "react"
 import { cn } from "../../utils/cn"
 import { MotionPrimitive } from "../../ux"
 
@@ -8,6 +8,7 @@ interface AccordionContextType {
   toggleItem: (value: string) => void
   collapsible?: boolean
   type: "single" | "multiple"
+  rootRef: React.RefObject<HTMLDivElement | null>
 }
 
 const AccordionContext = createContext<AccordionContextType | undefined>(undefined)
@@ -24,14 +25,7 @@ interface AccordionProps {
 /**
  * Accordion component for collapsible content sections.
  * Supports single or multiple open items.
- *
- * @example
- * <Accordion type="single" collapsible>
- *   <AccordionItem value="item-1">
- *     <AccordionTrigger>Is it accessible?</AccordionTrigger>
- *     <AccordionContent>Yes.</AccordionContent>
- *   </AccordionItem>
- * </Accordion>
+ * Fully accessible with keyboard navigation.
  */
 export const Accordion = ({
   children,
@@ -43,6 +37,7 @@ export const Accordion = ({
   const [activeItems, setActiveItems] = useState<string[]>(
     Array.isArray(defaultValue) ? defaultValue : defaultValue ? [defaultValue] : []
   )
+  const rootRef = useRef<HTMLDivElement>(null)
 
   const toggleItem = (value: string) => {
     if (type === "single") {
@@ -66,11 +61,22 @@ export const Accordion = ({
         toggleItem,
         type,
         collapsible,
+        rootRef,
       }}
     >
-      <div className={cn("space-y-1", className)}>{children}</div>
+      <div ref={rootRef} className={cn("space-y-1", className)}>
+        {children}
+      </div>
     </AccordionContext.Provider>
   )
+}
+
+const useAccordion = () => {
+  const context = useContext(AccordionContext)
+  if (!context) {
+    throw new Error("useAccordion must be used within an Accordion")
+  }
+  return context
 }
 
 // --- Accordion Item ---
@@ -79,6 +85,14 @@ interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const AccordionItemContext = createContext<{ value: string } | undefined>(undefined)
+
+const useAccordionItem = () => {
+  const context = useContext(AccordionItemContext)
+  if (!context) {
+    throw new Error("useAccordionItem must be used within an AccordionItem")
+  }
+  return context
+}
 
 export const AccordionItem = ({ children, className, value, ...props }: AccordionItemProps) => {
   return (
@@ -91,16 +105,53 @@ export const AccordionItem = ({ children, className, value, ...props }: Accordio
 // --- Accordion Trigger ---
 export const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ children, className, ...props }, ref) => {
-    const { toggleItem, activeItems } = useContext(AccordionContext)!
-    const { value } = useContext(AccordionItemContext)!
+    const { toggleItem, activeItems, rootRef } = useAccordion()
+    const { value } = useAccordionItem()
     const isOpen = activeItems.includes(value)
+    const triggerId = `accordion-trigger-${value}`
+    const contentId = `accordion-content-${value}`
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      // Standard Accordion Keyboard Interaction
+      // Enter/Space is handled natively by button for onClick
+      // We handle Arrows/Home/End
+
+      if (!rootRef.current) return
+
+      if (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Home" || e.key === "End") {
+        e.preventDefault()
+        const triggers = Array.from(rootRef.current.querySelectorAll("[data-accordion-trigger]")) as HTMLElement[]
+        const index = triggers.indexOf(e.currentTarget)
+
+        let nextIndex = index
+
+        if (e.key === "ArrowDown") {
+          nextIndex = (index + 1) % triggers.length
+        } else if (e.key === "ArrowUp") {
+          nextIndex = (index - 1 + triggers.length) % triggers.length
+        } else if (e.key === "Home") {
+          nextIndex = 0
+        } else if (e.key === "End") {
+          nextIndex = triggers.length - 1
+        }
+
+        triggers[nextIndex]?.focus()
+      }
+
+      props.onKeyDown?.(e)
+    }
 
     return (
       <h3 className="flex">
         <button
           ref={ref}
           type="button"
+          id={triggerId}
+          aria-controls={contentId}
+          aria-expanded={isOpen}
+          data-accordion-trigger
           onClick={() => toggleItem(value)}
+          onKeyDown={handleKeyDown}
           className={cn(
             "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
             className
@@ -133,9 +184,11 @@ AccordionTrigger.displayName = "AccordionTrigger"
 // --- Accordion Content ---
 export const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ children, className, ...props }, ref) => {
-    const { activeItems } = useContext(AccordionContext)!
-    const { value } = useContext(AccordionItemContext)!
+    const { activeItems } = useAccordion()
+    const { value } = useAccordionItem()
     const isOpen = activeItems.includes(value)
+    const triggerId = `accordion-trigger-${value}`
+    const contentId = `accordion-content-${value}`
 
     if (!isOpen) return null
 
@@ -143,6 +196,9 @@ export const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttri
       <MotionPrimitive animation="fade">
         <div
           ref={ref}
+          id={contentId}
+          role="region"
+          aria-labelledby={triggerId}
           className={cn("overflow-hidden text-sm transition-all", className)}
           data-state={isOpen ? "open" : "closed"}
           {...props}

@@ -25,9 +25,9 @@ export const BubbleChart = ({ data, maxBubbleSize = 30, color }: BubbleChartProp
 
   if (data.length === 0) return null
 
-  const maxX = Math.max(...data.map((d) => d.x))
-  const maxY = Math.max(...data.map((d) => d.y))
-  const maxR = Math.max(...data.map((d) => d.r))
+  const maxX = Math.max(1, Math.max(...data.map((d) => d.x)))
+  const maxY = Math.max(1, Math.max(...data.map((d) => d.y)))
+  const maxR = Math.max(1, Math.max(...data.map((d) => d.r)))
 
   const defaultColor = color || theme?.primaryColor || "#3b82f6"
 

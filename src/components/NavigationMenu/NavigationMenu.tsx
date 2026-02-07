@@ -1,13 +1,24 @@
-import React, { createContext, useContext, useState, ReactNode } from "react"
+import React, { createContext, useContext, useState, ReactNode, useRef } from "react"
+import { useEscapeKey } from "../../hooks/use-escape-key"
+import { mergeRefs } from "../../hooks/use-merge-refs"
 import { cn } from "../../utils/cn"
 
 // --- NavigationMenu Context ---
 interface NavigationMenuContextType {
   value?: string
   onValueChange: (value: string) => void
+  listRef: React.RefObject<HTMLUListElement | null>
 }
 
 const NavigationMenuContext = createContext<NavigationMenuContextType | undefined>(undefined)
+
+const useNavigationMenu = () => {
+  const context = useContext(NavigationMenuContext)
+  if (!context) {
+    throw new Error("useNavigationMenu must be used within a NavigationMenu")
+  }
+  return context
+}
 
 // --- NavigationMenu Root ---
 interface NavigationMenuProps {
@@ -19,40 +30,28 @@ interface NavigationMenuProps {
 /**
  * NavigationMenu component for complex site navigation.
  * Manages hover/focus states for dropdown content.
- *
- * @example
- * <NavigationMenu>
- *   <NavigationMenuList>
- *     <NavigationMenuItem>
- *       <NavigationMenuTrigger value="item1">Item 1</NavigationMenuTrigger>
- *       <NavigationMenuContent value="item1">Content 1</NavigationMenuContent>
- *     </NavigationMenuItem>
- *   </NavigationMenuList>
- * </NavigationMenu>
+ * Fully accessible with keyboard navigation.
  */
-export const NavigationMenu = ({
-  children,
-  className,
-} // delayDuration = 200 // unused
-: NavigationMenuProps) => {
+export const NavigationMenu = ({ children, className }: NavigationMenuProps) => {
   const [value, setValue] = useState<string>("")
-  // const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined); // unused
+  const listRef = useRef<HTMLUListElement>(null)
 
   const handleValueChange = (newValue: string) => {
-    if (newValue === "") {
-      // Close
-      setValue("")
-    } else {
-      setValue(newValue)
-    }
+    setValue(newValue === "" ? "" : newValue)
   }
 
   return (
-    <NavigationMenuContext.Provider value={{ value, onValueChange: handleValueChange }}>
+    <NavigationMenuContext.Provider value={{ value, onValueChange: handleValueChange, listRef }}>
       <nav
         className={cn("relative z-10 flex max-w-max items-center justify-center", className)}
         onMouseLeave={() => {
           handleValueChange("")
+        }}
+        onBlur={(e) => {
+          // Close if focus leaves the navigation menu
+          if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+            handleValueChange("")
+          }
         }}
       >
         {children}
@@ -63,15 +62,20 @@ export const NavigationMenu = ({
 
 // --- NavigationMenu List ---
 export const NavigationMenuList = React.forwardRef<HTMLUListElement, React.HTMLAttributes<HTMLUListElement>>(
-  ({ children, className, ...props }, ref) => (
-    <ul
-      ref={ref}
-      className={cn("group flex flex-1 list-none items-center justify-center space-x-1", className)}
-      {...props}
-    >
-      {children}
-    </ul>
-  )
+  ({ children, className, ...props }, ref) => {
+    const { listRef } = useNavigationMenu()
+    const mergedRef = mergeRefs(ref, listRef)
+
+    return (
+      <ul
+        ref={mergedRef}
+        className={cn("group flex flex-1 list-none items-center justify-center space-x-1", className)}
+        {...props}
+      >
+        {children}
+      </ul>
+    )
+  }
 )
 NavigationMenuList.displayName = "NavigationMenuList"
 
@@ -86,70 +90,58 @@ export const NavigationMenuItem = React.forwardRef<HTMLLIElement, React.LiHTMLAt
 NavigationMenuItem.displayName = "NavigationMenuItem"
 
 // --- NavigationMenu Trigger ---
-// We need to know the 'value' this trigger controls.
-// Ideally, Item passes it down, or Trigger defines it.
-// Let's have Trigger define it, but Item logic is usually simpler if it wraps.
-// Actually, `NavigationMenu` typically works by `NavigationMenuItem` containing `Trigger` and `Content`.
-// But to link them, we can use a generated ID or require a `value` prop on Item/Trigger.
-// Let's require `value` on Trigger/Content connection? Or just Item index?
-// A `value` prop is explicit and robust.
-// But widely used accessible patterns usually just rely on structure.
-// Let's try explicit `value` context on Item? No, let's keep it simple.
-// Trigger will take a `value`. Content will match that `value`.
-
-// Better: Item doesn't have value. Trigger toggles a value. Content shows if value matches.
-// But simpler API: Trigger automatically toggles the content next to it?
-// Let's use `value` prop on Trigger and Content? No, that's verbose.
-// Let's use `uuid` or simple string.
-// Actually, Radix UI uses explicit structure.
-// Let's try: ItemContext.
-
-interface NavigationMenuItemContextType {
-  value: string
-}
-const NavigationMenuItemContext = createContext<NavigationMenuItemContextType | undefined>(undefined)
-
-export const NavigationMenuItemWithValue = ({
-  children,
-  value,
-  ...props
-}: React.ComponentProps<typeof NavigationMenuItem> & { value: string }) => {
-  // This helper is not standardized.
-  // Let's stick to: Trigger and Content must explicitly share a value?
-  // Or, simpler: Just use `value` on Item?
-  return (
-    <NavigationMenuItemContext.Provider value={{ value }}>
-      <NavigationMenuItem {...props}>{children}</NavigationMenuItem>
-    </NavigationMenuItemContext.Provider>
-  )
-}
-
-// Re-export standard Item, but we assume user might manage state or we need a way to link.
-// Let's simpler approach: Trigger has `onClick` / `onMouseEnter` that sets root value.
-// Content renders if root value text content of Trigger? No.
-// Let's just pass `trigger` string to `NavigationMenuTrigger`.
 interface NavigationMenuTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string // Required to link
 }
 
 export const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, NavigationMenuTriggerProps>(
   ({ children, className, value, ...props }, ref) => {
-    const { onValueChange, value: activeValue } = useContext(NavigationMenuContext)!
+    const { onValueChange, value: activeValue, listRef } = useNavigationMenu()
     const isActive = activeValue === value
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault()
+        if (!listRef.current) return
+
+        const triggers = Array.from(listRef.current.querySelectorAll("[data-nav-trigger]")) as HTMLElement[]
+        const index = triggers.indexOf(e.currentTarget)
+
+        if (index === -1) return
+
+        let nextIndex = index
+        if (e.key === "ArrowLeft") {
+          nextIndex = (index - 1 + triggers.length) % triggers.length
+        } else {
+          nextIndex = (index + 1) % triggers.length
+        }
+
+        triggers[nextIndex]?.focus()
+      }
+
+      if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+        if (!isActive) {
+          e.preventDefault()
+          onValueChange(value)
+        }
+        // If already active, ArrowDown could move focus to content?
+        // For now, simple open behavior.
+      }
+    }
 
     return (
       <button
         ref={ref}
         onMouseEnter={() => onValueChange(value)}
-        // onMouseLeave is handled by Root or specific logic?
-        // Actually root handles leave.
-        onClick={() => onValueChange(isActive ? "" : value)} // Toggle on click for support
+        onClick={() => onValueChange(isActive ? "" : value)}
+        onKeyDown={handleKeyDown}
         className={cn(
           "group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:data-[state=open]:bg-gray-800/50",
           className
         )}
         data-state={isActive ? "open" : "closed"}
         aria-expanded={isActive}
+        data-nav-trigger
         {...props}
       >
         {children}
@@ -180,14 +172,17 @@ interface NavigationMenuContentProps extends React.HTMLAttributes<HTMLDivElement
 
 export const NavigationMenuContent = React.forwardRef<HTMLDivElement, NavigationMenuContentProps>(
   ({ children, className, value, ...props }, ref) => {
-    const { value: activeValue } = useContext(NavigationMenuContext)!
+    const { value: activeValue, onValueChange } = useNavigationMenu()
     const isActive = activeValue === value
+
+    useEscapeKey(() => onValueChange(""))
 
     if (!isActive) return null
 
     return (
       <div
         ref={ref}
+        tabIndex={-1}
         className={cn(
           "absolute top-full left-0 w-full md:absolute md:w-auto",
           "mt-1.5 overflow-hidden rounded-md border bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",

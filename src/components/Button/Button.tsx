@@ -215,7 +215,7 @@ const Button = ({
       data-shape={shape}
       aria-busy={loading || undefined}
       disabled={isDisabled}
-      autoFocus={autoFocus}
+      autoFocus={autoFocus} // eslint-disable-line jsx-a11y/no-autofocus
       className={cn(
         base,
         shapeClasses,

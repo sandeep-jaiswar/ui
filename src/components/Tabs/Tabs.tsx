@@ -10,6 +10,14 @@ interface TabsContextType {
 
 const TabsContext = createContext<TabsContextType | undefined>(undefined)
 
+const useTabs = () => {
+  const context = useContext(TabsContext)
+  if (!context) {
+    throw new Error("useTabs must be used within a Tabs component")
+  }
+  return context
+}
+
 // --- Tabs Root ---
 interface TabsProps {
   children: ReactNode
@@ -73,7 +81,7 @@ export const Tabs = ({
 // --- Tabs List ---
 export const TabsList = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ children, className, ...props }, ref) => {
-    const { orientation } = useContext(TabsContext)!
+    const { orientation } = useTabs()
     return (
       <div
         ref={ref}
@@ -99,7 +107,7 @@ interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement>
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ({ children, className, value, ...props }, ref) => {
-    const { value: selectedValue, onValueChange } = useContext(TabsContext)!
+    const { value: selectedValue, onValueChange } = useTabs()
     const isSelected = selectedValue === value
 
     return (
@@ -131,7 +139,7 @@ interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ children, className, value, ...props }, ref) => {
-    const { value: selectedValue } = useContext(TabsContext)!
+    const { value: selectedValue } = useTabs()
     const isSelected = selectedValue === value
 
     if (!isSelected) return null

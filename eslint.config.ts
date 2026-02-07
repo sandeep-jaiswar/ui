@@ -4,6 +4,7 @@ import js from "@eslint/js"
 import markdown from "@eslint/markdown"
 import { defineConfig } from "eslint/config"
 import importPlugin from "eslint-plugin-import"
+import jsxA11y from "eslint-plugin-jsx-a11y"
 import react from "eslint-plugin-react"
 import globals from "globals"
 import tseslint from "typescript-eslint"
@@ -60,6 +61,11 @@ export default defineConfig([
   // Import plugin (flat)
   // --------------------------------------------------
   importPlugin.flatConfigs.recommended,
+
+  // --------------------------------------------------
+  // JSX A11y
+  // --------------------------------------------------
+  jsxA11y.flatConfigs.recommended,
 
   // --------------------------------------------------
   // Markdown

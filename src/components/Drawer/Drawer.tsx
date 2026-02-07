@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react"
 import { createPortal } from "react-dom"
 
+import { useEscapeKey } from "../../hooks/use-escape-key"
+import { useFocusTrap } from "../../hooks/use-focus-trap"
+import { mergeRefs } from "../../hooks/use-merge-refs"
 import { cn } from "../../utils/cn"
 
 // --- Drawer Context ---
@@ -10,6 +13,14 @@ interface DrawerContextType {
 }
 
 const DrawerContext = createContext<DrawerContextType | undefined>(undefined)
+
+const useDrawer = () => {
+  const context = useContext(DrawerContext)
+  if (!context) {
+    throw new Error("useDrawer must be used within a Drawer")
+  }
+  return context
+}
 
 // --- Drawer Root ---
 interface DrawerProps {
@@ -39,11 +50,17 @@ export const Drawer = ({ children, open: controlledOpen, onOpenChange }: DrawerP
 
 // --- Drawer Trigger ---
 export const DrawerTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
-  const { setOpen } = useContext(DrawerContext)!
+  const { open, setOpen } = useDrawer()
   return (
-    <div onClick={() => setOpen(true)} className={cn("inline-flex cursor-pointer", className)}>
+    <button
+      type="button"
+      onClick={() => setOpen(true)}
+      aria-expanded={open}
+      aria-haspopup="dialog"
+      className={cn("inline-flex cursor-pointer border-none bg-transparent p-0", className)}
+    >
       {children}
-    </div>
+    </button>
   )
 }
 
@@ -54,8 +71,10 @@ interface DrawerContentProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps>(
   ({ children, className, side = "right", ...props }, ref) => {
-    const { open, setOpen } = useContext(DrawerContext)!
+    const { open, setOpen } = useDrawer()
     const [isVisible, setIsVisible] = useState(false)
+    const trapRef = useFocusTrap(open)
+    useEscapeKey(() => setOpen(false), open)
 
     useEffect(() => {
       if (open) setIsVisible(true)
@@ -83,10 +102,13 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
             className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
             onClick={() => setOpen(false)}
             data-state={open ? "open" : "closed"}
+            aria-hidden="true"
           />
         )}
         <div
-          ref={ref}
+          ref={mergeRefs(ref, trapRef)}
+          role="dialog"
+          aria-modal="true"
           className={cn(
             "data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 grid gap-4 bg-white p-6 shadow-lg transition duration-300 ease-in-out sm:max-w-sm dark:bg-gray-950",
             sideClasses[side],
@@ -119,8 +141,10 @@ export const DrawerFooter = ({ className, ...props }: React.HTMLAttributes<HTMLD
 DrawerFooter.displayName = "DrawerFooter"
 
 export const DrawerTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-lg font-semibold text-gray-950 dark:text-gray-50", className)} {...props} />
+  ({ className, children, ...props }, ref) => (
+    <h2 ref={ref} className={cn("text-lg font-semibold text-gray-950 dark:text-gray-50", className)} {...props}>
+      {children}
+    </h2>
   )
 )
 DrawerTitle.displayName = "DrawerTitle"

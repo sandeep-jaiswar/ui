@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { render, fireEvent } from "@testing-library/react"
+import { render, fireEvent, screen } from "@testing-library/react"
 import { describe, it, expect, vi } from "vitest"
 import { CoreProvider } from "../../core"
 import { Slider } from "./Slider"
@@ -68,5 +68,40 @@ describe("Slider", () => {
       fireEvent.pointerDown(track, { clientX: 50 })
       expect(handleChange).not.toHaveBeenCalled()
     }
+  })
+
+  it("supports keyboard navigation", () => {
+    const handleChange = vi.fn()
+    // Need to mock getBoundingClientRect again for the component rendering logic?
+    // Slider uses getBoundingClientRect for pointer events, but keyboard events rely on state.
+    // So mocking might not be needed for keyboard if we don't trigger layout dependent logic.
+    // BUT Slider implementation uses min/max/step.
+
+    render(
+      <CoreProvider>
+        <Slider defaultValue={[50]} min={0} max={100} step={10} onValueChange={handleChange} />
+      </CoreProvider>
+    )
+
+    const thumb = screen.getByRole("slider")
+    thumb.focus()
+    expect(document.activeElement).toBe(thumb)
+
+    // Arrow Right -> +10 (50 -> 60)
+    fireEvent.keyDown(thumb, { key: "ArrowRight" })
+    expect(handleChange).toHaveBeenCalledWith([60])
+    expect(thumb).toHaveAttribute("aria-valuenow", "60")
+
+    // Arrow Left -> -10 (60 -> 50)
+    fireEvent.keyDown(thumb, { key: "ArrowLeft" })
+    expect(handleChange).toHaveBeenCalledWith([50])
+
+    // Home -> 0
+    fireEvent.keyDown(thumb, { key: "Home" })
+    expect(handleChange).toHaveBeenCalledWith([0])
+
+    // End -> 100
+    fireEvent.keyDown(thumb, { key: "End" })
+    expect(handleChange).toHaveBeenCalledWith([100])
   })
 })
