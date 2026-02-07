@@ -1,12 +1,12 @@
 // @vitest-environment jsdom
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import { Skeleton } from "./Skeleton";
+import { render } from "@testing-library/react"
+import { describe, it, expect } from "vitest"
+import { Skeleton } from "./Skeleton"
 
 describe("Skeleton", () => {
-    it("renders with correct class", () => {
-        const { container } = render(<Skeleton className="h-4 w-full" />);
-        expect(container.firstChild).toHaveClass("animate-pulse");
-        expect(container.firstChild).toHaveClass("bg-gray-100");
-    });
-});
+  it("renders with correct class", () => {
+    const { container } = render(<Skeleton className="h-4 w-full" />)
+    expect(container.firstChild).toHaveClass("animate-pulse")
+    expect(container.firstChild).toHaveClass("bg-gray-100")
+  })
+})

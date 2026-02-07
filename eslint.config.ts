@@ -19,6 +19,7 @@ const eslintIgnore = [
   "*.min.js",
   "*.config.js",
   "*.d.ts",
+  "docs/",
 ]
 
 function getDirectoriesToSort() {
@@ -130,6 +131,7 @@ export default defineConfig([
       // Library-friendly rules
       "no-console": "warn",
       "no-debugger": "error",
+      "react/prop-types": "off",
     },
   },
 

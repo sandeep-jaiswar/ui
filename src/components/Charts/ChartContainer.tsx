@@ -1,25 +1,25 @@
-import React, { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react";
-import { cn } from "../../utils/cn";
+import React, { createContext, useContext, useEffect, useRef, useState, ReactNode } from "react"
+import { cn } from "../../utils/cn"
 
 interface ChartConfig {
-    width: number;
-    height: number;
-    margin: { top: number; right: number; bottom: number; left: number };
+  width: number
+  height: number
+  margin: { top: number; right: number; bottom: number; left: number }
 }
 
-const ChartContext = createContext<ChartConfig | undefined>(undefined);
+const ChartContext = createContext<ChartConfig | undefined>(undefined)
 
 export const useChart = () => {
-    const context = useContext(ChartContext);
-    if (!context) {
-        throw new Error("useChart must be used within a ChartContainer");
-    }
-    return context;
-};
+  const context = useContext(ChartContext)
+  if (!context) {
+    throw new Error("useChart must be used within a ChartContainer")
+  }
+  return context
+}
 
 interface ChartContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
-    children: ReactNode | ((props: ChartConfig) => ReactNode);
-    margin?: Partial<ChartConfig["margin"]>;
+  children: ReactNode | ((props: ChartConfig) => ReactNode)
+  margin?: Partial<ChartConfig["margin"]>
 }
 
 /**
@@ -32,44 +32,40 @@ interface ChartContainerProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
  * </ChartContainer>
  */
 export const ChartContainer = ({
-    children,
-    className,
-    margin = { top: 20, right: 20, bottom: 30, left: 40 },
-    ...props
+  children,
+  className,
+  margin = { top: 20, right: 20, bottom: 30, left: 40 },
+  ...props
 }: ChartContainerProps) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
 
-    useEffect(() => {
-        if (!containerRef.current) return;
+  useEffect(() => {
+    if (!containerRef.current) return
 
-        const observer = new ResizeObserver((entries) => {
-            if (!entries[0]) return;
-            const { width, height } = entries[0].contentRect;
-            setDimensions({ width, height });
-        });
+    const observer = new ResizeObserver((entries) => {
+      if (!entries[0]) return
+      const { width, height } = entries[0].contentRect
+      setDimensions({ width, height })
+    })
 
-        observer.observe(containerRef.current);
-        return () => observer.disconnect();
-    }, []);
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [])
 
-    const config: ChartConfig = {
-        width: dimensions.width,
-        height: dimensions.height,
-        margin: { top: 20, right: 20, bottom: 30, left: 40, ...margin }, // Merge defaults
-    };
+  const config: ChartConfig = {
+    width: dimensions.width,
+    height: dimensions.height,
+    margin: { top: 20, right: 20, bottom: 30, left: 40, ...margin }, // Merge defaults
+  }
 
-    return (
-        <div
-            ref={containerRef}
-            className={cn("w-full h-full min-h-[300px] relative", className)}
-            {...props}
-        >
-            {dimensions.width > 0 && (
-                <ChartContext.Provider value={config}>
-                    {typeof children === 'function' ? children(config) : children}
-                </ChartContext.Provider>
-            )}
-        </div>
-    );
-};
+  return (
+    <div ref={containerRef} className={cn("relative h-full min-h-[300px] w-full", className)} {...props}>
+      {dimensions.width > 0 && (
+        <ChartContext.Provider value={config}>
+          {typeof children === "function" ? children(config) : children}
+        </ChartContext.Provider>
+      )}
+    </div>
+  )
+}

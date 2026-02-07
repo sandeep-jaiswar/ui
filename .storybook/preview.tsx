@@ -1,14 +1,14 @@
 import type { Preview } from "@storybook/react-vite"
 import "../src/styles/global.css"
 
-import React from 'react';
-import { CoreProvider } from "../src/core";
+import React from "react"
+import { CoreProvider } from "../src/core"
 
 const preview: Preview = {
   decorators: [
     (Story) => (
       <CoreProvider>
-      <Story />
+        <Story />
       </CoreProvider>
     ),
   ],

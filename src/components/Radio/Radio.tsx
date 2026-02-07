@@ -1,26 +1,26 @@
-import React, { createContext, useContext, forwardRef } from "react";
-import { cn } from "../../utils/cn";
-import { useCore } from "../../core";
+import React, { createContext, useContext, forwardRef } from "react"
+// import { useCore } from "../../core"; // unused
+import { cn } from "../../utils/cn"
 
 // --- Radio Group Context ---
 interface RadioGroupContextType {
-    name?: string;
-    value?: string;
-    onChange?: (value: string) => void;
-    disabled?: boolean;
-    intent?: "primary" | "secondary" | "success" | "danger" | "warning";
+  name?: string
+  value?: string
+  onChange?: (value: string) => void
+  disabled?: boolean
+  intent?: "primary" | "secondary" | "success" | "danger" | "warning"
 }
 
-const RadioGroupContext = createContext<RadioGroupContextType | undefined>(undefined);
+const RadioGroupContext = createContext<RadioGroupContextType | undefined>(undefined)
 
 // --- Radio Group Component ---
 export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
-    value?: string;
-    defaultValue?: string;
-    onValueChange?: (value: string) => void;
-    disabled?: boolean;
-    name?: string;
-    intent?: RadioGroupContextType["intent"];
+  value?: string
+  defaultValue?: string
+  onValueChange?: (value: string) => void
+  disabled?: boolean
+  name?: string
+  intent?: RadioGroupContextType["intent"]
 }
 
 /**
@@ -34,32 +34,45 @@ export interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
  * </RadioGroup>
  */
 export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
-    ({ className, onChange, onValueChange, defaultValue, value: controlledValue, name, disabled, intent = "primary", children, ...props }, ref) => {
-        const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue);
-        const value = controlledValue !== undefined ? controlledValue : uncontrolledValue;
+  (
+    {
+      className,
+      onValueChange,
+      defaultValue,
+      value: controlledValue,
+      name,
+      disabled,
+      intent = "primary",
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const [uncontrolledValue, setUncontrolledValue] = React.useState(defaultValue)
+    const value = controlledValue !== undefined ? controlledValue : uncontrolledValue
 
-        const handleChange = (newValue: string) => {
-            if (controlledValue === undefined) {
-                setUncontrolledValue(newValue);
-            }
-            onValueChange?.(newValue);
-        };
-
-        return (
-            <RadioGroupContext.Provider value={{ name, value, onChange: handleChange, disabled, intent }}>
-                <div ref={ref} className={cn("grid gap-2", className)} role="radiogroup" {...props}>
-                    {children}
-                </div>
-            </RadioGroupContext.Provider>
-        );
+    const handleChange = (newValue: string) => {
+      if (controlledValue === undefined) {
+        setUncontrolledValue(newValue)
+      }
+      onValueChange?.(newValue)
     }
-);
-RadioGroup.displayName = "RadioGroup";
+
+    return (
+      <RadioGroupContext.Provider value={{ name, value, onChange: handleChange, disabled, intent }}>
+        <div ref={ref} className={cn("grid gap-2", className)} role="radiogroup" {...props}>
+          {children}
+        </div>
+      </RadioGroupContext.Provider>
+    )
+  }
+)
+RadioGroup.displayName = "RadioGroup"
 
 // --- Radio Item Component ---
 export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    value: string;
-    label?: string;
+  value: string
+  label?: string
 }
 
 /**
@@ -67,61 +80,61 @@ export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> 
  * Must be used within a RadioGroup.
  */
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-    ({ className, value, label, disabled, id, ...props }, ref) => {
-        const context = useContext(RadioGroupContext);
-        const generatedId = React.useId();
-        const inputId = id || generatedId;
+  ({ className, value, label, disabled, id, ...props }, ref) => {
+    const context = useContext(RadioGroupContext)
+    const generatedId = React.useId()
+    const inputId = id || generatedId
 
-        // Merge context props
-        const isChecked = context?.value === value;
-        const isDisabled = disabled || context?.disabled;
-        const name = context?.name;
-        const intent = context?.intent || "primary";
+    // Merge context props
+    const isChecked = context?.value === value
+    const isDisabled = disabled || context?.disabled
+    const name = context?.name
+    const intent = context?.intent || "primary"
 
-        const intentClasses = {
-            primary: "text-blue-600 focus:ring-blue-500 border-gray-300",
-            secondary: "text-gray-600 focus:ring-gray-500 border-gray-300",
-            success: "text-green-600 focus:ring-green-500 border-gray-300",
-            danger: "text-red-600 focus:ring-red-500 border-gray-300",
-            warning: "text-yellow-600 focus:ring-yellow-500 border-gray-300",
-        };
-
-        return (
-            <div className="flex items-center space-x-2">
-                <div className="relative flex items-center">
-                    <input
-                        ref={ref}
-                        type="radio"
-                        id={inputId}
-                        name={name}
-                        value={value}
-                        checked={isChecked}
-                        disabled={isDisabled}
-                        onChange={() => context?.onChange?.(value)}
-                        className={cn(
-                            "peer h-4 w-4 appearance-none rounded-full border bg-white transition-all duration-200 checked:border-transparent checked:bg-current focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50",
-                            intentClasses[intent],
-                            className
-                        )}
-                        {...props}
-                    />
-                    {/* Custom dot for checked state */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100"></span>
-                </div>
-
-                {label && (
-                    <label
-                        htmlFor={inputId}
-                        className={cn(
-                            "cursor-pointer select-none text-sm font-medium text-gray-700 dark:text-gray-200",
-                            isDisabled && "cursor-not-allowed opacity-50"
-                        )}
-                    >
-                        {label}
-                    </label>
-                )}
-            </div>
-        );
+    const intentClasses = {
+      primary: "text-blue-600 focus:ring-blue-500 border-gray-300",
+      secondary: "text-gray-600 focus:ring-gray-500 border-gray-300",
+      success: "text-green-600 focus:ring-green-500 border-gray-300",
+      danger: "text-red-600 focus:ring-red-500 border-gray-300",
+      warning: "text-yellow-600 focus:ring-yellow-500 border-gray-300",
     }
-);
-Radio.displayName = "Radio";
+
+    return (
+      <div className="flex items-center space-x-2">
+        <div className="relative flex items-center">
+          <input
+            ref={ref}
+            type="radio"
+            id={inputId}
+            name={name}
+            value={value}
+            checked={isChecked}
+            disabled={isDisabled}
+            onChange={() => context?.onChange?.(value)}
+            className={cn(
+              "peer h-4 w-4 appearance-none rounded-full border bg-white transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              intentClasses[intent],
+              className
+            )}
+            {...props}
+          />
+          {/* Custom dot for checked state */}
+          <span className="pointer-events-none absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100"></span>
+        </div>
+
+        {label && (
+          <label
+            htmlFor={inputId}
+            className={cn(
+              "cursor-pointer text-sm font-medium text-gray-700 select-none dark:text-gray-200",
+              isDisabled && "cursor-not-allowed opacity-50"
+            )}
+          >
+            {label}
+          </label>
+        )}
+      </div>
+    )
+  }
+)
+Radio.displayName = "Radio"
