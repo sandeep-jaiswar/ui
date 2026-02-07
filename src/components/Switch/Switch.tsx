@@ -31,11 +31,11 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     }
 
     const intentClasses = {
-      primary: "peer-checked:bg-blue-600 peer-focus:ring-blue-500",
-      secondary: "peer-checked:bg-gray-600 peer-focus:ring-gray-500",
+      primary: "peer-checked:bg-primary peer-focus:ring-primary",
+      secondary: "peer-checked:bg-secondary peer-focus:ring-secondary",
       success: "peer-checked:bg-green-600 peer-focus:ring-green-500",
-      danger: "peer-checked:bg-red-600 peer-focus:ring-red-500",
-      warning: "peer-checked:bg-yellow-600 peer-focus:ring-yellow-500",
+      danger: "peer-checked:bg-destructive peer-focus:ring-destructive",
+      warning: "peer-checked:bg-amber-600 peer-focus:ring-amber-500",
     }
 
     return (
@@ -53,7 +53,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           />
           <div
             className={cn(
-              "rounded-full bg-gray-200 transition-colors duration-200 peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:outline-none dark:bg-gray-700",
+              "rounded-full bg-input transition-colors duration-200 peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:outline-none",
               sizeClasses[size].track,
               intentClasses[intent],
               disabled && "cursor-not-allowed opacity-50",
@@ -62,7 +62,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           >
             <div
               className={cn(
-                "absolute top-0.5 rounded-full bg-white shadow ring-0 transition-all duration-200",
+                "absolute top-0.5 rounded-full bg-background shadow ring-0 transition-all duration-200",
                 sizeClasses[size].thumb
               )}
             />
@@ -73,7 +73,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "cursor-pointer text-sm font-medium text-gray-700 select-none dark:text-gray-200",
+              "cursor-pointer text-sm font-medium text-foreground select-none",
               disabled && "pointer-events-none cursor-not-allowed opacity-50",
               size === "lg" && "text-base",
               size === "sm" && "text-xs"

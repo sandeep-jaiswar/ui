@@ -5,12 +5,31 @@ import React from "react"
 import { CoreProvider } from "../src/core"
 
 const preview: Preview = {
+  globalTypes: {
+    theme: {
+      description: "Global theme for components",
+      defaultValue: "dark",
+      toolbar: {
+        title: "Theme",
+        icon: "circlehollow",
+        items: [
+          { value: "light", icon: "circlehollow", title: "Light" },
+          { value: "dark", icon: "circle", title: "Dark" },
+          { value: "system", icon: "sync", title: "System" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   decorators: [
-    (Story) => (
-      <CoreProvider>
-        <Story />
-      </CoreProvider>
-    ),
+    (Story, context) => {
+      const themeMode = context.globals.theme || "dark"
+      return (
+        <CoreProvider config={{ theme: { mode: themeMode } }}>
+          <Story />
+        </CoreProvider>
+      )
+    },
   ],
   parameters: {
     controls: {

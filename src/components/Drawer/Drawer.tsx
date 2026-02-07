@@ -88,11 +88,11 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
 
     const sideClasses = {
       right:
-        "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
-      left: "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
-      top: "inset-x-0 top-0 h-96 w-full border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+        "inset-y-0 right-0 h-full w-3/4 border-l border-border sm:max-w-sm data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+      left: "inset-y-0 left-0 h-full w-3/4 border-r border-border sm:max-w-sm data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+      top: "inset-x-0 top-0 h-96 w-full border-b border-border data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
       bottom:
-        "inset-x-0 bottom-0 h-96 w-full border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+        "inset-x-0 bottom-0 h-96 w-full border-t border-border data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
     }
 
     return createPortal(
@@ -110,7 +110,7 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
           role="dialog"
           aria-modal="true"
           className={cn(
-            "data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 grid gap-4 bg-white p-6 shadow-lg transition duration-300 ease-in-out sm:max-w-sm dark:bg-gray-950",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 grid gap-4 bg-background p-6 shadow-lg transition duration-300 ease-in-out sm:max-w-sm",
             sideClasses[side],
             className
           )}
@@ -142,7 +142,7 @@ DrawerFooter.displayName = "DrawerFooter"
 
 export const DrawerTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, children, ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-lg font-semibold text-gray-950 dark:text-gray-50", className)} {...props}>
+    <h2 ref={ref} className={cn("text-lg font-semibold text-foreground", className)} {...props}>
       {children}
     </h2>
   )
@@ -151,7 +151,7 @@ DrawerTitle.displayName = "DrawerTitle"
 
 export const DrawerDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-gray-500 dark:text-gray-400", className)} {...props} />
+    <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
   )
 )
 DrawerDescription.displayName = "DrawerDescription"

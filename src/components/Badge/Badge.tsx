@@ -11,18 +11,18 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
 const getIntentClasses = (intent: NonNullable<BadgeProps["intent"]>) => {
   switch (intent) {
     case "primary":
-      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300"
+      return "border-transparent bg-primary text-primary-foreground hover:bg-primary/80"
     case "secondary":
-      return "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+      return "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80"
     case "success":
-      return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+      return "border-transparent bg-green-500/15 text-green-700 hover:bg-green-500/25 dark:text-green-400"
     case "warning":
-      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300"
+      return "border-transparent bg-amber-500/15 text-amber-700 hover:bg-amber-500/25 dark:text-amber-400"
     case "danger":
-      return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
+      return "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80"
     case "neutral":
     default:
-      return "bg-gray-50 text-gray-600 dark:bg-gray-800 dark:text-gray-400"
+      return "border-transparent bg-muted text-muted-foreground hover:bg-muted/80"
   }
 }
 

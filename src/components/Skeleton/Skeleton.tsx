@@ -11,6 +11,6 @@ export type SkeletonProps = React.HTMLAttributes<HTMLDivElement>
  * <Skeleton className="h-4 w-[250px]" />
  */
 export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(({ className, ...props }, ref) => {
-  return <div ref={ref} className={cn("animate-pulse rounded-md bg-gray-100 dark:bg-gray-800", className)} {...props} />
+  return <div ref={ref} className={cn("animate-pulse rounded-md bg-muted", className)} {...props} />
 })
 Skeleton.displayName = "Skeleton"

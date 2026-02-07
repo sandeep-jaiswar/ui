@@ -131,10 +131,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       >
         <div
           ref={trackRef}
-          className="relative h-2 w-full grow cursor-pointer overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800"
+          className="relative h-2 w-full grow cursor-pointer overflow-hidden rounded-full bg-secondary"
           onPointerDown={handlePointerDown}
         >
-          <div className="absolute h-full bg-blue-600 dark:bg-blue-500" style={{ width: `${percentage}%` }} />
+          <div className="absolute h-full bg-primary" style={{ width: `${percentage}%` }} />
         </div>
 
         {/* Thumb */}
@@ -148,7 +148,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
           aria-disabled={disabled}
           tabIndex={disabled ? -1 : 0}
           onKeyDown={handleKeyDown}
-          className="border-primary ring-offset-background focus-visible:ring-ring absolute h-5 w-5 cursor-grab rounded-full border-2 bg-white shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50"
+          className="border-primary ring-offset-background focus-visible:ring-ring absolute h-5 w-5 cursor-grab rounded-full border-2 bg-background shadow-md transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50"
           style={{ left: `calc(${percentage}% - 10px)` }} // Center the thumb
           onPointerDown={handlePointerDown}
         />

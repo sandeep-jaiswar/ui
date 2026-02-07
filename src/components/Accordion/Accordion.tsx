@@ -96,7 +96,7 @@ const useAccordionItem = () => {
 
 export const AccordionItem = ({ children, className, value, ...props }: AccordionItemProps) => {
   return (
-    <div className={cn("border-b", className)} {...props} data-state="closed" data-value={value}>
+    <div className={cn("border-b border-border", className)} {...props} data-state="closed" data-value={value}>
       <AccordionItemContext.Provider value={{ value }}>{children}</AccordionItemContext.Provider>
     </div>
   )

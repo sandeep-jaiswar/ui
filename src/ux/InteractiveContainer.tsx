@@ -12,33 +12,18 @@ export const InteractiveContainer = forwardRef<HTMLDivElement, InteractiveContai
   ({ children, variant = "surface", hoverEffect = "lift", className = "", style, ...props }, ref) => {
     const { theme } = useCore()
 
-    // Basic styles based on variant (inline for portability, ideally Tailwind classes)
-    const getVariantStyles = () => {
+    // Basic styles based on variant (mapped to classes where possible, or inline if specific)
+    const getVariantClasses = () => {
       switch (variant) {
         case "glass":
-          return {
-            background: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(10px)",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.05)",
-          }
+          return "bg-background/60 backdrop-blur-md border border-border/50 shadow-sm"
         case "ghost":
-          return {
-            background: "transparent",
-          }
+          return "hover:bg-accent hover:text-accent-foreground"
         case "surface":
         default:
-          return {
-            background: "#ffffff", // Should use theme.primaryColor contextually
-            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-            border: "1px solid #e5e7eb",
-          }
+          return "bg-card text-card-foreground border border-border shadow-sm"
       }
     }
-
-    // const getHoverStyles = () => {
-    //     return {};
-    // }
 
     return (
       <div
@@ -46,13 +31,16 @@ export const InteractiveContainer = forwardRef<HTMLDivElement, InteractiveContai
         {...props}
         data-variant={variant}
         data-hover-effect={hoverEffect}
-        className={cn("interactive-container cursor-pointer transition-all duration-300 ease-in-out", className)}
+        className={cn(
+          "interactive-container cursor-pointer transition-all duration-300 ease-in-out",
+          getVariantClasses(),
+          className
+        )}
         style={
           {
             padding: "1rem",
-            borderRadius: theme?.borderRadius || "0.5rem",
-            ["--interactive-glow-color" as string]: theme?.primaryColor || "blue",
-            ...getVariantStyles(),
+            borderRadius: "var(--radius)",
+            ["--interactive-glow-color" as string]: "hsl(var(--primary))",
             ...style,
           } as React.CSSProperties
         }

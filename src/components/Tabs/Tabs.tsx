@@ -88,7 +88,7 @@ export const TabsList = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
         role="tablist"
         aria-orientation={orientation}
         className={cn(
-          "inline-flex h-9 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500 dark:bg-gray-800 dark:text-gray-400",
+          "inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
           className
         )}
         {...props}
@@ -120,7 +120,7 @@ export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>
         data-state={isSelected ? "active" : "inactive"}
         onClick={() => onValueChange(value)}
         className={cn(
-          "inline-flex items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap ring-offset-white transition-all focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-gray-950 data-[state=active]:shadow-sm dark:ring-offset-gray-950 dark:data-[state=active]:bg-gray-950 dark:data-[state=active]:text-gray-50",
+          "inline-flex items-center justify-center rounded-md px-3 py-1 text-sm font-medium whitespace-nowrap ring-offset-background transition-all focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
           className
         )}
         {...props}
@@ -151,7 +151,7 @@ export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
         id={`tabpanel-${value}`}
         tabIndex={0}
         className={cn(
-          "mt-2 ring-offset-white focus-visible:ring-2 focus-visible:ring-gray-950 focus-visible:ring-offset-2 focus-visible:outline-none dark:ring-offset-gray-950",
+          "mt-2 ring-offset-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
           className
         )}
         {...props}

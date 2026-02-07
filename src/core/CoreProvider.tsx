@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode } from "react"
+import React, { createContext, useContext, useEffect, ReactNode } from "react"
 
 export interface CoreConfig {
   theme?: {
@@ -6,6 +6,7 @@ export interface CoreConfig {
     secondaryColor?: string
     borderRadius?: string
     fontFamily?: string
+    mode?: "light" | "dark" | "system"
   }
   behavior?: {
     reducedMotion?: boolean
@@ -16,10 +17,11 @@ export interface CoreConfig {
 
 const defaultCoreConfig: CoreConfig = {
   theme: {
-    primaryColor: "blue", // Placeholder, ideally use CSS vars or Tailwind
+    primaryColor: "blue",
     secondaryColor: "gray",
     borderRadius: "0.5rem",
     fontFamily: "sans-serif",
+    mode: "dark",
   },
   behavior: {
     reducedMotion: false,
@@ -51,7 +53,20 @@ export const CoreProvider = ({ config, children }: CoreProviderProps) => {
     behavior: { ...defaultCoreConfig.behavior, ...config?.behavior },
   }
 
-  // In a real implementation, we might also inject CSS variables here based on the theme
+  useEffect(() => {
+    const root = window.document.documentElement
+    const mode = finalConfig.theme?.mode || "dark"
+
+    root.classList.remove("light", "dark")
+
+    if (mode === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      root.classList.add(systemTheme)
+      return
+    }
+
+    root.classList.add(mode)
+  }, [finalConfig.theme?.mode])
 
   return <CoreContext.Provider value={finalConfig}>{children}</CoreContext.Provider>
 }

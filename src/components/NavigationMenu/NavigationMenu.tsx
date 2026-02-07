@@ -136,7 +136,7 @@ export const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, Navigat
         onClick={() => onValueChange(isActive ? "" : value)}
         onKeyDown={handleKeyDown}
         className={cn(
-          "group inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=open]:bg-gray-100/50 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:data-[state=open]:bg-gray-800/50",
+          "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
           className
         )}
         data-state={isActive ? "open" : "closed"}
@@ -185,7 +185,7 @@ export const NavigationMenuContent = React.forwardRef<HTMLDivElement, Navigation
         tabIndex={-1}
         className={cn(
           "absolute top-full left-0 w-full md:absolute md:w-auto",
-          "mt-1.5 overflow-hidden rounded-md border bg-white shadow-lg dark:border-gray-800 dark:bg-gray-950",
+          "mt-1.5 overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-lg",
           "animate-in fade-in zoom-in-95",
           className
         )}
@@ -204,7 +204,7 @@ export const NavigationMenuLink = React.forwardRef<HTMLAnchorElement, React.Anch
     <a
       ref={ref}
       className={cn(
-        "block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus:bg-gray-800 dark:focus:text-gray-50",
+        "block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
         className
       )}
       {...props}

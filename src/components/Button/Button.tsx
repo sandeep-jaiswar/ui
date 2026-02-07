@@ -43,21 +43,12 @@ function getShapeClasses(shape: NonNullable<ButtonProps["shape"]>) {
   }
 }
 
+// Helper to get focus classes (standardized)
 function getFocusRingClasses(intent: NonNullable<ButtonProps["intent"]>) {
-  switch (intent) {
-    case "primary":
-      return "focus-visible:ring-blue-500"
-    case "secondary":
-      return "focus-visible:ring-gray-500"
-    case "tertiary":
-      return "focus-visible:ring-gray-500"
-    case "danger":
-      return "focus-visible:ring-red-500"
-    case "success":
-      return "focus-visible:ring-green-500"
-    case "warning":
-      return "focus-visible:ring-amber-500"
-  }
+  if (intent === "danger") return "focus-visible:ring-destructive"
+  if (intent === "success") return "focus-visible:ring-green-500"
+  if (intent === "warning") return "focus-visible:ring-amber-500"
+  return "focus-visible:ring-ring"
 }
 
 function getIntentVariantClasses(
@@ -67,67 +58,62 @@ function getIntentVariantClasses(
   if (variant === "link") {
     switch (intent) {
       case "danger":
-        return "text-red-700 hover:text-red-800 underline underline-offset-4"
+        return "text-destructive underline-offset-4 hover:underline"
       case "success":
-        return "text-green-700 hover:text-green-800 underline underline-offset-4"
+        return "text-green-600 underline-offset-4 hover:underline dark:text-green-500"
       case "warning":
-        return "text-amber-700 hover:text-amber-800 underline underline-offset-4"
-      case "secondary":
-      case "tertiary":
-        return "text-gray-700 hover:text-gray-900 underline underline-offset-4"
+        return "text-amber-600 underline-offset-4 hover:underline dark:text-amber-500"
       case "primary":
-        return "text-blue-700 hover:text-blue-800 underline underline-offset-4"
+      default:
+        return "text-primary underline-offset-4 hover:underline"
     }
   }
 
   if (variant === "ghost") {
     switch (intent) {
       case "danger":
-        return "text-red-700 hover:bg-red-50 active:bg-red-100"
+        return "text-destructive hover:bg-destructive hover:text-destructive-foreground"
       case "success":
-        return "text-green-700 hover:bg-green-50 active:bg-green-100"
+        return "text-green-600 hover:bg-green-100 dark:text-green-500 dark:hover:bg-green-900/20"
       case "warning":
-        return "text-amber-800 hover:bg-amber-50 active:bg-amber-100"
-      case "secondary":
-        return "text-gray-900 hover:bg-gray-100 active:bg-gray-200"
-      case "tertiary":
-        return "text-gray-700 hover:bg-gray-100 active:bg-gray-200"
+        return "text-amber-600 hover:bg-amber-100 dark:text-amber-500 dark:hover:bg-amber-900/20"
       case "primary":
-        return "text-blue-700 hover:bg-blue-50 active:bg-blue-100"
+      default:
+        return "hover:bg-accent hover:text-accent-foreground"
     }
   }
 
   if (variant === "outline") {
     switch (intent) {
       case "danger":
-        return "border border-red-600 text-red-700 hover:bg-red-50 active:bg-red-100"
+        return "border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
       case "success":
-        return "border border-green-600 text-green-700 hover:bg-green-50 active:bg-green-100"
+        return "border-green-600 text-green-600 hover:bg-green-100 dark:border-green-500 dark:text-green-500 dark:hover:bg-green-900/20"
       case "warning":
-        return "border border-amber-600 text-amber-800 hover:bg-amber-50 active:bg-amber-100"
-      case "secondary":
-        return "border border-gray-300 text-gray-900 hover:bg-gray-50 active:bg-gray-100"
-      case "tertiary":
-        return "border border-gray-200 text-gray-700 hover:bg-gray-50 active:bg-gray-100"
+        return "border-amber-600 text-amber-600 hover:bg-amber-100 dark:border-amber-500 dark:text-amber-500 dark:hover:bg-amber-900/20"
       case "primary":
-        return "border border-blue-600 text-blue-700 hover:bg-blue-50 active:bg-blue-100"
+      default:
+        return "border-input bg-background hover:bg-accent hover:text-accent-foreground"
     }
   }
 
   // solid
   switch (intent) {
     case "danger":
-      return "bg-red-600 text-white hover:bg-red-700 active:bg-red-800"
+      return "bg-destructive text-destructive-foreground hover:bg-destructive/90"
     case "success":
-      return "bg-green-600 text-white hover:bg-green-700 active:bg-green-800"
+      return "bg-green-600 text-white hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700"
     case "warning":
-      return "bg-amber-500 text-black hover:bg-amber-600 active:bg-amber-700"
+      return "bg-amber-500 text-white hover:bg-amber-600 dark:bg-amber-600 dark:hover:bg-amber-700"
     case "secondary":
-      return "bg-gray-900 text-white hover:bg-gray-800 active:bg-gray-950"
+      // Keeping distinct "dark" look for legacy support, or map to 'secondary' if preferred.
+      // Let's map to foreground/background inverse to keep it "dark"
+      return "bg-foreground text-background hover:bg-foreground/90"
     case "tertiary":
-      return "bg-gray-100 text-gray-900 hover:bg-gray-200 active:bg-gray-300"
+      return "bg-secondary text-secondary-foreground hover:bg-secondary/80"
     case "primary":
-      return "bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800"
+    default:
+      return "bg-primary text-primary-foreground hover:bg-primary/90"
   }
 }
 
@@ -192,7 +178,7 @@ const Button = ({
   }
 
   const base =
-    "relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+    "relative inline-flex select-none items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ring-offset-background"
 
   const shapeClasses = getShapeClasses(shape)
   const sizeClasses = shape === "square" ? getSquareSizeClasses(size) : getSizeClasses(size)

@@ -92,11 +92,11 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
     const intent = context?.intent || "primary"
 
     const intentClasses = {
-      primary: "text-blue-600 focus:ring-blue-500 border-gray-300",
-      secondary: "text-gray-600 focus:ring-gray-500 border-gray-300",
-      success: "text-green-600 focus:ring-green-500 border-gray-300",
-      danger: "text-red-600 focus:ring-red-500 border-gray-300",
-      warning: "text-yellow-600 focus:ring-yellow-500 border-gray-300",
+      primary: "text-primary focus:ring-primary border-input",
+      secondary: "text-secondary-foreground focus:ring-secondary border-input",
+      success: "text-green-600 focus:ring-green-500 border-input",
+      danger: "text-destructive focus:ring-destructive border-input",
+      warning: "text-amber-600 focus:ring-amber-500 border-input",
     }
 
     return (
@@ -112,21 +112,21 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             disabled={isDisabled}
             onChange={() => context?.onChange?.(value)}
             className={cn(
-              "peer h-4 w-4 appearance-none rounded-full border bg-white transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "peer h-4 w-4 appearance-none rounded-full border bg-background transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               intentClasses[intent],
               className
             )}
             {...props}
           />
           {/* Custom dot for checked state */}
-          <span className="pointer-events-none absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100"></span>
+          <span className="pointer-events-none absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-background opacity-0 transition-opacity peer-checked:opacity-100"></span>
         </div>
 
         {label && (
           <label
             htmlFor={inputId}
             className={cn(
-              "cursor-pointer text-sm font-medium text-gray-700 select-none dark:text-gray-200",
+              "cursor-pointer text-sm font-medium text-foreground select-none",
               isDisabled && "cursor-not-allowed opacity-50"
             )}
           >
