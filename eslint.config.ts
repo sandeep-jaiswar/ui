@@ -4,6 +4,7 @@ import js from "@eslint/js"
 import markdown from "@eslint/markdown"
 import { defineConfig } from "eslint/config"
 import importPlugin from "eslint-plugin-import"
+import jsxA11y from "eslint-plugin-jsx-a11y"
 import react from "eslint-plugin-react"
 import globals from "globals"
 import tseslint from "typescript-eslint"
@@ -19,6 +20,7 @@ const eslintIgnore = [
   "*.min.js",
   "*.config.js",
   "*.d.ts",
+  "docs/",
 ]
 
 function getDirectoriesToSort() {
@@ -59,6 +61,11 @@ export default defineConfig([
   // Import plugin (flat)
   // --------------------------------------------------
   importPlugin.flatConfigs.recommended,
+
+  // --------------------------------------------------
+  // JSX A11y
+  // --------------------------------------------------
+  jsxA11y.flatConfigs.recommended,
 
   // --------------------------------------------------
   // Markdown
@@ -130,6 +137,7 @@ export default defineConfig([
       // Library-friendly rules
       "no-console": "warn",
       "no-debugger": "error",
+      "react/prop-types": "off",
     },
   },
 
