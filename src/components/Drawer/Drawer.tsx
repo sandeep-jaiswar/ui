@@ -62,7 +62,9 @@ export const DrawerTrigger = ({ children, className, asChild = false }: DrawerTr
     return React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
       onClick: (e: React.MouseEvent) => {
         // preserve existing click handler if any
-        ; (children as React.ReactElement<React.HTMLAttributes<HTMLElement>>).props.onClick?.(e)
+        ;(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>).props.onClick?.(
+          e as unknown as React.MouseEvent<HTMLElement>
+        )
         setOpen(true)
       },
       "aria-expanded": open,
