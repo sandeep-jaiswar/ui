@@ -53,7 +53,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           />
           <div
             className={cn(
-              "rounded-full bg-input transition-colors duration-200 peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:outline-none",
+              "bg-input rounded-full transition-colors duration-200 peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:outline-none",
               sizeClasses[size].track,
               intentClasses[intent],
               disabled && "cursor-not-allowed opacity-50",
@@ -62,7 +62,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           >
             <div
               className={cn(
-                "absolute top-0.5 rounded-full bg-background shadow ring-0 transition-all duration-200",
+                "bg-background absolute top-0.5 rounded-full shadow ring-0 transition-all duration-200",
                 sizeClasses[size].thumb
               )}
             />
@@ -73,7 +73,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "cursor-pointer text-sm font-medium text-foreground select-none",
+              "text-foreground cursor-pointer text-sm font-medium select-none",
               disabled && "pointer-events-none cursor-not-allowed opacity-50",
               size === "lg" && "text-base",
               size === "sm" && "text-xs"

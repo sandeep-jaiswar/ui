@@ -59,15 +59,15 @@ export const DrawerTrigger = ({ children, className, asChild = false }: DrawerTr
   const { open, setOpen } = useDrawer()
 
   if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children as React.ReactElement<any>, {
+    return React.cloneElement(children as React.ReactElement<React.HTMLAttributes<HTMLElement>>, {
       onClick: (e: React.MouseEvent) => {
         // preserve existing click handler if any
-        (children as any).props.onClick?.(e)
+        ; (children as React.ReactElement<React.HTMLAttributes<HTMLElement>>).props.onClick?.(e)
         setOpen(true)
       },
       "aria-expanded": open,
       "aria-haspopup": "dialog",
-      // Merge classNames if needed, or just let child control it. 
+      // Merge classNames if needed, or just let child control it.
       // Usually triggers don't start with classes unless passed.
     })
   }
@@ -120,7 +120,7 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
       <>
         {/* Overlay */}
         <div
-          className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm cursor-pointer"
+          className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 cursor-pointer bg-black/80 backdrop-blur-sm"
           onClick={() => setOpen(false)}
           data-state={open ? "open" : "closed"}
           aria-hidden="true"
@@ -131,7 +131,7 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
           role="dialog"
           aria-modal="true"
           className={cn(
-            "data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 grid gap-4 bg-background p-6 shadow-lg transition duration-300 ease-in-out sm:max-w-sm",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out bg-background fixed z-50 grid gap-4 p-6 shadow-lg transition duration-300 ease-in-out sm:max-w-sm",
             sideClasses[side],
             className
           )}
@@ -163,7 +163,7 @@ DrawerFooter.displayName = "DrawerFooter"
 
 export const DrawerTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, children, ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-lg font-semibold text-foreground", className)} {...props}>
+    <h2 ref={ref} className={cn("text-foreground text-lg font-semibold", className)} {...props}>
       {children}
     </h2>
   )
@@ -172,7 +172,7 @@ DrawerTitle.displayName = "DrawerTitle"
 
 export const DrawerDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+    <p ref={ref} className={cn("text-muted-foreground text-sm", className)} {...props} />
   )
 )
 DrawerDescription.displayName = "DrawerDescription"

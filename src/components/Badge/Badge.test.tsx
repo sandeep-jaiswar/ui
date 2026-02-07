@@ -8,13 +8,13 @@ describe("Badge", () => {
     render(<Badge>Default</Badge>)
     const badge = screen.getByText("Default")
     expect(badge).toBeInTheDocument()
-    expect(badge).toHaveClass("bg-gray-50") // Neutral default
+    expect(badge).toHaveClass("bg-muted") // Neutral default
   })
 
   it("applies intent classes", () => {
     render(<Badge intent="success">Success</Badge>)
     const badge = screen.getByText("Success")
-    expect(badge).toHaveClass("bg-green-100")
+    expect(badge).toHaveClass("bg-green-500/15")
   })
 
   it("applies shape classes", () => {

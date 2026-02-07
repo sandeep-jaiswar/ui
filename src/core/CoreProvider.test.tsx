@@ -37,7 +37,7 @@ describe("CoreProvider", () => {
   it("throws if useCore is used outside provider", () => {
     // Suppress console.error for this test as React logs the error
     const spy = vi.spyOn(console, "error")
-    spy.mockImplementation(() => { })
+    spy.mockImplementation(() => {})
 
     expect(() => render(<TestComponent />)).toThrow("useCore must be used within a CoreProvider")
 

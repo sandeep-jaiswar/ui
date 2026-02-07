@@ -47,7 +47,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             disabled={disabled}
             onClick={(e) => disabled && e.preventDefault()}
             className={cn(
-              "peer appearance-none rounded border bg-background transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "peer bg-background appearance-none rounded border transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               disabled && "pointer-events-none",
               sizeClasses[size],
               intentClasses[intent],
@@ -58,7 +58,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {/* Custom Checkmark SVG driven by peer-checked */}
           <svg
             className={cn(
-              "pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-primary-foreground opacity-0 transition-opacity duration-200 peer-checked:opacity-100",
+              "text-primary-foreground pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 peer-checked:opacity-100",
               size === "sm" ? "h-3 w-3" : size === "md" ? "h-3.5 w-3.5" : "h-4 w-4"
             )}
             viewBox="0 0 24 24"
@@ -76,7 +76,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "cursor-pointer text-sm font-medium text-foreground select-none",
+              "text-foreground cursor-pointer text-sm font-medium select-none",
               disabled && "pointer-events-none cursor-not-allowed opacity-50",
               size === "lg" && "text-base",
               size === "sm" && "text-xs"

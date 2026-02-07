@@ -57,6 +57,6 @@ describe("Radio", () => {
     )
     const radio = container.querySelector("input")
     // intentClasses.danger logic
-    expect(radio).toHaveClass("text-red-600")
+    expect(radio).toHaveClass("text-destructive")
   })
 })

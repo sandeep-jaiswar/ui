@@ -1,5 +1,5 @@
 import React, { ReactNode, forwardRef } from "react"
-import { useCore } from "../core"
+// import { useCore } from "../core"
 import { cn } from "../utils/cn"
 
 interface InteractiveContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -10,7 +10,7 @@ interface InteractiveContainerProps extends React.HTMLAttributes<HTMLDivElement>
 
 export const InteractiveContainer = forwardRef<HTMLDivElement, InteractiveContainerProps>(
   ({ children, variant = "surface", hoverEffect = "lift", className = "", style, ...props }, ref) => {
-    const { theme } = useCore()
+    // const { theme } = useCore()
 
     // Basic styles based on variant (mapped to classes where possible, or inline if specific)
     const getVariantClasses = () => {

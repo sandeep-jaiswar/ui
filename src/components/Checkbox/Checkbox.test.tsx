@@ -62,6 +62,6 @@ describe("Checkbox", () => {
       </CoreProvider>
     )
     const input = container.querySelector("input")
-    expect(input).toHaveClass("text-red-600")
+    expect(input).toHaveClass("text-destructive")
   })
 })

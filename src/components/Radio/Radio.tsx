@@ -112,21 +112,21 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             disabled={isDisabled}
             onChange={() => context?.onChange?.(value)}
             className={cn(
-              "peer h-4 w-4 appearance-none rounded-full border bg-background transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              "peer bg-background h-4 w-4 appearance-none rounded-full border transition-all duration-200 checked:border-transparent checked:bg-current focus:ring-2 focus:ring-offset-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               intentClasses[intent],
               className
             )}
             {...props}
           />
           {/* Custom dot for checked state */}
-          <span className="pointer-events-none absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-background opacity-0 transition-opacity peer-checked:opacity-100"></span>
+          <span className="bg-background pointer-events-none absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0 transition-opacity peer-checked:opacity-100"></span>
         </div>
 
         {label && (
           <label
             htmlFor={inputId}
             className={cn(
-              "cursor-pointer text-sm font-medium text-foreground select-none",
+              "text-foreground cursor-pointer text-sm font-medium select-none",
               isDisabled && "cursor-not-allowed opacity-50"
             )}
           >
