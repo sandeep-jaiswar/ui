@@ -23,7 +23,7 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <DrawerTrigger>
+        <DrawerTrigger asChild>
           <Button variant="outline">Open Drawer</Button>
         </DrawerTrigger>
         <DrawerContent>
@@ -49,7 +49,7 @@ export const TopSide: Story = {
   args: {
     children: (
       <>
-        <DrawerTrigger>
+        <DrawerTrigger asChild>
           <Button variant="outline">Open Top Drawer</Button>
         </DrawerTrigger>
         <DrawerContent side="top">

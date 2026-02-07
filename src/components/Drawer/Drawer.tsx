@@ -49,8 +49,29 @@ export const Drawer = ({ children, open: controlledOpen, onOpenChange }: DrawerP
 }
 
 // --- Drawer Trigger ---
-export const DrawerTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
+interface DrawerTriggerProps {
+  children: ReactNode
+  className?: string
+  asChild?: boolean
+}
+
+export const DrawerTrigger = ({ children, className, asChild = false }: DrawerTriggerProps) => {
   const { open, setOpen } = useDrawer()
+
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children as React.ReactElement<any>, {
+      onClick: (e: React.MouseEvent) => {
+        // preserve existing click handler if any
+        (children as any).props.onClick?.(e)
+        setOpen(true)
+      },
+      "aria-expanded": open,
+      "aria-haspopup": "dialog",
+      // Merge classNames if needed, or just let child control it. 
+      // Usually triggers don't start with classes unless passed.
+    })
+  }
+
   return (
     <button
       type="button"
@@ -97,14 +118,14 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
 
     return createPortal(
       <>
-        {open && (
-          <div
-            className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
-            onClick={() => setOpen(false)}
-            data-state={open ? "open" : "closed"}
-            aria-hidden="true"
-          />
-        )}
+        {/* Overlay */}
+        <div
+          className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 backdrop-blur-sm cursor-pointer"
+          onClick={() => setOpen(false)}
+          data-state={open ? "open" : "closed"}
+          aria-hidden="true"
+        />
+        {/* Drawer Content */}
         <div
           ref={mergeRefs(ref, trapRef)}
           role="dialog"
@@ -120,7 +141,7 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
             if (!open) setIsVisible(false)
           }}
         >
-          {open && children}
+          {children}
         </div>
       </>,
       document.body
