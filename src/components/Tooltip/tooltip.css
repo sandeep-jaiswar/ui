@@ -1,0 +1,49 @@
+/* Tooltip styles */
+
+.tooltip-root {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger {
+  display: inline-flex;
+}
+
+.tooltip-content {
+  position: absolute;
+  z-index: var(--ui-z-tooltip);
+  padding: var(--ui-tooltip-padding-y) var(--ui-tooltip-padding-x);
+  border-radius: var(--ui-tooltip-radius);
+  background: var(--ui-tooltip-bg);
+  color: var(--ui-tooltip-fg);
+  font-size: var(--ui-text-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--ui-shadow-md);
+  animation: ui-fade-in var(--ui-duration-fast) var(--ui-ease);
+}
+
+/* Positions */
+.tooltip-content[data-side="top"] {
+  bottom: calc(100% + var(--ui-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip-content[data-side="bottom"] {
+  top: calc(100% + var(--ui-space-2));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip-content[data-side="left"] {
+  right: calc(100% + var(--ui-space-2));
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tooltip-content[data-side="right"] {
+  left: calc(100% + var(--ui-space-2));
+  top: 50%;
+  transform: translateY(-50%);
+}

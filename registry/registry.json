@@ -1,0 +1,314 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sandeep-jaiswar/ui/main/registry/schema.json",
+  "version": "1.0.0",
+  "homepage": "https://github.com/sandeep-jaiswar/ui",
+  "tokens": {
+    "file": "src/tokens/tokens.css",
+    "description": "Full design token system — CSS Custom Properties for colors, spacing, typography, radius, shadows, motion, z-index, and per-component tokens."
+  },
+  "utilities": [
+    {
+      "name": "cn",
+      "description": "Zero-dep class name merger utility",
+      "files": ["src/utils/cn.ts"]
+    }
+  ],
+  "primitives": [
+    {
+      "name": "portal",
+      "description": "Renders children outside DOM hierarchy via React portal",
+      "files": ["src/primitives/Portal.tsx"]
+    },
+    {
+      "name": "presence",
+      "description": "Mount/unmount lifecycle with CSS animation awareness",
+      "files": ["src/primitives/Presence.tsx"]
+    },
+    {
+      "name": "focus-trap",
+      "description": "Hook that traps keyboard focus within a container",
+      "files": ["src/primitives/FocusTrap.tsx"]
+    },
+    {
+      "name": "visually-hidden",
+      "description": "Hides content visually while keeping it accessible",
+      "files": ["src/primitives/VisuallyHidden.tsx"]
+    }
+  ],
+  "hooks": [
+    {
+      "name": "use-escape-key",
+      "description": "Fires a callback when the Escape key is pressed",
+      "files": ["src/hooks/use-escape-key.ts"]
+    },
+    {
+      "name": "use-focus-trap",
+      "description": "Traps keyboard focus within a container element",
+      "files": ["src/hooks/use-focus-trap.ts"]
+    },
+    {
+      "name": "use-merge-refs",
+      "description": "Merges multiple React refs into a single callback ref",
+      "files": ["src/hooks/use-merge-refs.ts"]
+    }
+  ],
+  "components": [
+    {
+      "name": "button",
+      "description": "Interactive button with intents, variants, sizes, shapes and loading state",
+      "category": "input",
+      "files": [
+        "src/components/Button/Button.tsx",
+        "src/components/Button/button.css",
+        "src/components/Button/types.ts",
+        "src/components/Button/index.ts"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": [
+        "--ui-btn-radius",
+        "--ui-btn-font-weight",
+        "--ui-btn-transition"
+      ]
+    },
+    {
+      "name": "input",
+      "description": "Text entry field with all native HTML input attributes",
+      "category": "input",
+      "files": [
+        "src/components/Input/Input.tsx",
+        "src/components/Input/input.css",
+        "src/components/Input/types.ts",
+        "src/components/Input/index.ts"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": [
+        "--ui-input-radius",
+        "--ui-input-height",
+        "--ui-input-padding-x",
+        "--ui-input-focus-ring"
+      ]
+    },
+    {
+      "name": "badge",
+      "description": "Status indicator or label with intent colors and shapes",
+      "category": "display",
+      "files": [
+        "src/components/Badge/Badge.tsx",
+        "src/components/Badge/badge.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-badge-radius", "--ui-badge-padding-x", "--ui-badge-padding-y"]
+    },
+    {
+      "name": "alert",
+      "description": "Important message with severity variants",
+      "category": "feedback",
+      "files": [
+        "src/components/Alert/Alert.tsx",
+        "src/components/Alert/alert.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": []
+    },
+    {
+      "name": "avatar",
+      "description": "User image with graceful fallback to initials",
+      "category": "display",
+      "files": [
+        "src/components/Avatar/Avatar.tsx",
+        "src/components/Avatar/avatar.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-avatar-size", "--ui-avatar-radius"]
+    },
+    {
+      "name": "card",
+      "description": "Content container with surface/ghost/glass variants and hover effects",
+      "category": "layout",
+      "files": [
+        "src/components/Card/Card.tsx",
+        "src/components/Card/card.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-card-radius", "--ui-card-padding"]
+    },
+    {
+      "name": "skeleton",
+      "description": "Loading placeholder with shimmer animation",
+      "category": "feedback",
+      "files": [
+        "src/components/Skeleton/Skeleton.tsx",
+        "src/components/Skeleton/skeleton.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-skeleton-bg", "--ui-skeleton-shimmer"]
+    },
+    {
+      "name": "progress",
+      "description": "Progress bar with indeterminate state support",
+      "category": "feedback",
+      "files": [
+        "src/components/Progress/Progress.tsx",
+        "src/components/Progress/progress.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-progress-height", "--ui-progress-radius", "--ui-progress-fill"]
+    },
+    {
+      "name": "breadcrumb",
+      "description": "Navigation hierarchy with automatic separators",
+      "category": "navigation",
+      "files": [
+        "src/components/Breadcrumb/Breadcrumb.tsx",
+        "src/components/Breadcrumb/breadcrumb.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": []
+    },
+    {
+      "name": "tabs",
+      "description": "Tabbed content panels with keyboard navigation",
+      "category": "navigation",
+      "files": [
+        "src/components/Tabs/Tabs.tsx",
+        "src/components/Tabs/tabs.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-tabs-trigger-radius"]
+    },
+    {
+      "name": "accordion",
+      "description": "Collapsible sections, single or multiple. CSS Grid height animation.",
+      "category": "disclosure",
+      "files": [
+        "src/components/Accordion/Accordion.tsx",
+        "src/components/Accordion/accordion.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-accordion-border-color"]
+    },
+    {
+      "name": "checkbox",
+      "description": "Boolean selection with custom checkmark and intent colors",
+      "category": "input",
+      "files": [
+        "src/components/Checkbox/Checkbox.tsx",
+        "src/components/Checkbox/checkbox.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": []
+    },
+    {
+      "name": "radio",
+      "description": "Exclusive selection within a RadioGroup",
+      "category": "input",
+      "files": [
+        "src/components/Radio/Radio.tsx",
+        "src/components/Radio/radio.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": []
+    },
+    {
+      "name": "switch",
+      "description": "Toggle component with track/thumb animation",
+      "category": "input",
+      "files": [
+        "src/components/Switch/Switch.tsx",
+        "src/components/Switch/switch.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": [
+        "--ui-switch-width",
+        "--ui-switch-height",
+        "--ui-switch-thumb-size"
+      ]
+    },
+    {
+      "name": "slider",
+      "description": "Range slider with keyboard and pointer support",
+      "category": "input",
+      "files": [
+        "src/components/Slider/Slider.tsx",
+        "src/components/Slider/slider.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": ["--ui-slider-track-height", "--ui-slider-thumb-size"]
+    },
+    {
+      "name": "tooltip",
+      "description": "Floating info label on hover/focus, 4 sides",
+      "category": "overlay",
+      "files": [
+        "src/components/Tooltip/Tooltip.tsx",
+        "src/components/Tooltip/tooltip.css"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": [
+        "--ui-tooltip-radius",
+        "--ui-tooltip-padding-x",
+        "--ui-tooltip-padding-y",
+        "--ui-tooltip-bg",
+        "--ui-tooltip-fg"
+      ]
+    },
+    {
+      "name": "select",
+      "description": "Accessible dropdown picker with keyboard navigation and typeahead",
+      "category": "input",
+      "files": [
+        "src/components/Select/Select.tsx",
+        "src/components/Select/select.css"
+      ],
+      "registryDependencies": ["cn", "portal", "use-escape-key", "use-merge-refs"],
+      "cssVariables": ["--ui-select-radius", "--ui-select-height"]
+    },
+    {
+      "name": "dialog",
+      "description": "Modal dialog with focus trap, overlay, and animations",
+      "category": "overlay",
+      "files": [
+        "src/components/Dialog/Dialog.tsx",
+        "src/components/Dialog/dialog.css"
+      ],
+      "registryDependencies": ["cn", "portal", "focus-trap", "use-escape-key"],
+      "cssVariables": [
+        "--ui-dialog-radius",
+        "--ui-dialog-padding",
+        "--ui-overlay-bg"
+      ]
+    },
+    {
+      "name": "drawer",
+      "description": "Sliding panel overlay supporting left/right/top/bottom",
+      "category": "overlay",
+      "files": [
+        "src/components/Drawer/Drawer.tsx",
+        "src/components/Drawer/drawer.css"
+      ],
+      "registryDependencies": ["cn", "portal", "focus-trap", "use-escape-key", "use-merge-refs"],
+      "cssVariables": ["--ui-overlay-bg"]
+    },
+    {
+      "name": "navigation-menu",
+      "description": "Complex site navigation with dropdowns and keyboard control",
+      "category": "navigation",
+      "files": [
+        "src/components/NavigationMenu/NavigationMenu.tsx",
+        "src/components/NavigationMenu/navigation-menu.css"
+      ],
+      "registryDependencies": ["cn", "use-escape-key", "use-merge-refs"],
+      "cssVariables": []
+    },
+    {
+      "name": "charts",
+      "description": "Data visualization components",
+      "category": "display",
+      "files": [
+        "src/components/Charts/Charts.tsx"
+      ],
+      "registryDependencies": ["cn"],
+      "cssVariables": []
+    }
+  ]
+}

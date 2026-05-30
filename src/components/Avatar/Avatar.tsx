@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { cn } from "../../utils/cn"
+import "./avatar.css"
 
 interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string
@@ -10,7 +11,7 @@ interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Avatar component for displaying user images or fallbacks.
- * Handles image loading errors gracefully.
+ * Handles image loading errors gracefully. Zero external dependencies.
  *
  * @example
  * <Avatar src="url.jpg" alt="User Name" fallback="UN" />
@@ -22,30 +23,21 @@ export const Avatar = ({ src, alt, fallback, size = "md", className, ...props }:
     setImageError(false)
   }, [src])
 
-  const sizeClasses = {
-    sm: "h-8 w-8 text-xs",
-    md: "h-10 w-10 text-sm",
-    lg: "h-14 w-14 text-base",
-  }
-
   return (
     <div
-      className={cn(
-        "relative flex shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800",
-        sizeClasses[size],
-        className
-      )}
+      data-size={size}
+      className={cn("avatar", className)}
       {...props}
     >
       {src && !imageError ? (
         <img
           src={src}
           alt={alt}
-          className="aspect-square h-full w-full object-cover"
+          className="avatar__image"
           onError={() => setImageError(true)}
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center font-medium text-gray-500 dark:text-gray-400">
+        <div className="avatar__fallback">
           {fallback || alt?.slice(0, 2).toUpperCase() || "??"}
         </div>
       )}

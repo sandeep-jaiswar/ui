@@ -1,7 +1,7 @@
 import React from "react"
 import { cn } from "../../utils/cn"
+import "./progress.css"
 
-// --- Progress Root ---
 interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
   value?: number
   max?: number
@@ -9,13 +9,20 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * Progress component for visualizing completion of a task.
+ * Supports indeterminate state (omit value). Zero external dependencies.
  *
  * @example
  * <Progress value={60} max={100} />
+ *
+ * @example
+ * <Progress /> {/* indeterminate *\/}
  */
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ({ className, value, max = 100, ...props }, ref) => {
-    const percent = Math.min(100, Math.max(0, ((value || 0) / max) * 100))
+    const isIndeterminate = value === undefined || value === null
+    const percent = isIndeterminate
+      ? 0
+      : Math.min(100, Math.max(0, (value / max) * 100))
 
     return (
       <div
@@ -23,13 +30,14 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         role="progressbar"
         aria-valuemin={0}
         aria-valuemax={max}
-        aria-valuenow={value}
-        className={cn("relative h-4 w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800", className)}
+        aria-valuenow={isIndeterminate ? undefined : value}
+        data-indeterminate={isIndeterminate ? "true" : undefined}
+        className={cn("progress", className)}
         {...props}
       >
         <div
-          className="h-full w-full flex-1 bg-gray-900 transition-all dark:bg-gray-50"
-          style={{ transform: `translateX(-${100 - percent}%)` }}
+          className="progress__fill"
+          style={isIndeterminate ? undefined : { transform: `translateX(-${100 - percent}%)` }}
         />
       </div>
     )

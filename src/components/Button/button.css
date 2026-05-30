@@ -1,0 +1,213 @@
+/**
+ * Button component styles
+ * Customize via CSS Custom Properties — override in your own stylesheet:
+ *   .my-button { --ui-btn-radius: 9999px; }
+ */
+
+/* ── Base ─────────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  white-space: nowrap;
+  font-weight: var(--ui-btn-font-weight);
+  font-size: var(--ui-text-sm);
+  border-radius: var(--ui-btn-radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: var(--ui-btn-transition);
+  outline: none;
+  box-sizing: border-box;
+
+  /* Size defaults (md) */
+  height: var(--_btn-h, var(--ui-space-10));
+  padding-inline: var(--_btn-px, var(--ui-space-4));
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--ui-background)), 0 0 0 4px hsl(var(--ui-ring));
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.btn[aria-busy="true"] {
+  cursor: wait;
+}
+
+/* ── Content wrapper ──────────────────────────────────────── */
+.btn__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  transition: opacity var(--ui-duration-fast) var(--ui-ease);
+}
+
+.btn__content--hidden {
+  opacity: 0;
+}
+
+.btn__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ── Spinner ──────────────────────────────────────────────── */
+.btn__spinner {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn__spinner-icon {
+  animation: ui-spin 0.75s linear infinite;
+}
+
+/* ── Sizes ────────────────────────────────────────────────── */
+.btn[data-size="xs"] { --_btn-h: var(--ui-space-6); --_btn-px: var(--ui-space-2); font-size: var(--ui-text-xs); }
+.btn[data-size="sm"] { --_btn-h: var(--ui-space-8); --_btn-px: var(--ui-space-3); font-size: var(--ui-text-sm); }
+.btn[data-size="md"] { --_btn-h: var(--ui-space-10); --_btn-px: var(--ui-space-4); }
+.btn[data-size="lg"] { --_btn-h: var(--ui-space-12); --_btn-px: var(--ui-space-5); font-size: var(--ui-text-base); }
+.btn[data-size="xl"] { --_btn-h: var(--ui-space-14); --_btn-px: var(--ui-space-6); font-size: var(--ui-text-base); }
+
+/* ── Shape modifiers ──────────────────────────────────────── */
+.btn[data-shape="pill"]   { border-radius: var(--ui-radius-full); }
+.btn[data-shape="square"] { padding-inline: 0; width: var(--_btn-h); }
+
+/* ── Variant × Intent — Solid (default) ──────────────────── */
+.btn[data-variant="solid"][data-intent="primary"] {
+  background: hsl(var(--ui-primary));
+  color: hsl(var(--ui-primary-fg));
+}
+.btn[data-variant="solid"][data-intent="primary"]:hover:not(:disabled) {
+  background: hsl(var(--ui-primary) / 0.9);
+}
+
+.btn[data-variant="solid"][data-intent="secondary"] {
+  background: hsl(var(--ui-foreground));
+  color: hsl(var(--ui-background));
+}
+.btn[data-variant="solid"][data-intent="secondary"]:hover:not(:disabled) {
+  background: hsl(var(--ui-foreground) / 0.9);
+}
+
+.btn[data-variant="solid"][data-intent="tertiary"] {
+  background: hsl(var(--ui-secondary));
+  color: hsl(var(--ui-secondary-fg));
+}
+.btn[data-variant="solid"][data-intent="tertiary"]:hover:not(:disabled) {
+  background: hsl(var(--ui-secondary) / 0.8);
+}
+
+.btn[data-variant="solid"][data-intent="danger"] {
+  background: hsl(var(--ui-destructive));
+  color: hsl(var(--ui-destructive-fg));
+}
+.btn[data-variant="solid"][data-intent="danger"]:hover:not(:disabled) {
+  background: hsl(var(--ui-destructive) / 0.9);
+}
+.btn[data-variant="solid"][data-intent="danger"]:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--ui-background)), 0 0 0 4px hsl(var(--ui-destructive));
+}
+
+.btn[data-variant="solid"][data-intent="success"] {
+  background: hsl(var(--ui-success));
+  color: hsl(var(--ui-success-fg));
+}
+.btn[data-variant="solid"][data-intent="success"]:hover:not(:disabled) {
+  background: hsl(var(--ui-success) / 0.9);
+}
+
+.btn[data-variant="solid"][data-intent="warning"] {
+  background: hsl(var(--ui-warning));
+  color: hsl(var(--ui-warning-fg));
+}
+.btn[data-variant="solid"][data-intent="warning"]:hover:not(:disabled) {
+  background: hsl(var(--ui-warning) / 0.9);
+}
+
+/* ── Variant × Intent — Outline ──────────────────────────── */
+.btn[data-variant="outline"] {
+  background: transparent;
+  border-color: hsl(var(--ui-border));
+  color: hsl(var(--ui-foreground));
+}
+.btn[data-variant="outline"]:hover:not(:disabled) {
+  background: hsl(var(--ui-accent));
+  color: hsl(var(--ui-accent-fg));
+}
+
+.btn[data-variant="outline"][data-intent="danger"] {
+  border-color: hsl(var(--ui-destructive));
+  color: hsl(var(--ui-destructive));
+}
+.btn[data-variant="outline"][data-intent="danger"]:hover:not(:disabled) {
+  background: hsl(var(--ui-destructive));
+  color: hsl(var(--ui-destructive-fg));
+}
+
+.btn[data-variant="outline"][data-intent="success"] {
+  border-color: hsl(var(--ui-success));
+  color: hsl(var(--ui-success));
+}
+.btn[data-variant="outline"][data-intent="success"]:hover:not(:disabled) {
+  background: hsl(var(--ui-success) / 0.1);
+}
+
+.btn[data-variant="outline"][data-intent="warning"] {
+  border-color: hsl(var(--ui-warning));
+  color: hsl(var(--ui-warning));
+}
+.btn[data-variant="outline"][data-intent="warning"]:hover:not(:disabled) {
+  background: hsl(var(--ui-warning) / 0.1);
+}
+
+/* ── Variant × Intent — Ghost ────────────────────────────── */
+.btn[data-variant="ghost"] {
+  background: transparent;
+  color: hsl(var(--ui-foreground));
+}
+.btn[data-variant="ghost"]:hover:not(:disabled) {
+  background: hsl(var(--ui-accent));
+  color: hsl(var(--ui-accent-fg));
+}
+
+.btn[data-variant="ghost"][data-intent="danger"] { color: hsl(var(--ui-destructive)); }
+.btn[data-variant="ghost"][data-intent="danger"]:hover:not(:disabled) {
+  background: hsl(var(--ui-destructive) / 0.1);
+}
+
+.btn[data-variant="ghost"][data-intent="success"] { color: hsl(var(--ui-success)); }
+.btn[data-variant="ghost"][data-intent="success"]:hover:not(:disabled) {
+  background: hsl(var(--ui-success) / 0.1);
+}
+
+.btn[data-variant="ghost"][data-intent="warning"] { color: hsl(var(--ui-warning)); }
+.btn[data-variant="ghost"][data-intent="warning"]:hover:not(:disabled) {
+  background: hsl(var(--ui-warning) / 0.1);
+}
+
+/* ── Variant — Link ───────────────────────────────────────── */
+.btn[data-variant="link"] {
+  height: auto;
+  padding-inline: 0;
+  background: transparent;
+  color: hsl(var(--ui-primary));
+  text-underline-offset: 4px;
+}
+.btn[data-variant="link"]:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.btn[data-variant="link"][data-intent="danger"] { color: hsl(var(--ui-destructive)); }
+.btn[data-variant="link"][data-intent="success"] { color: hsl(var(--ui-success)); }
+.btn[data-variant="link"][data-intent="warning"] { color: hsl(var(--ui-warning)); }

@@ -1,0 +1,377 @@
+/**
+ * Design tokens for @sandeep-jaiswar/ui
+ *
+ * This is the single source of truth for all visual tokens.
+ * Import this file once in your project root (e.g. in main.css or layout.tsx):
+ *   @import "@sandeep-jaiswar/ui/tokens";
+ *   (or copy this file into your project via the CLI: npx @sandeep-jaiswar/ui init)
+ *
+ * Customize by overriding any variable in your own CSS:
+ *   :root { --ui-primary: 270 80% 60%; }
+ *
+ * Naming convention: --ui-<category>-<scale|name>
+ */
+
+/* ============================================================
+   COLOR PRIMITIVES — HSL channels only (no hsl() wrapper)
+   Use as: color: hsl(var(--ui-primary))
+   ============================================================ */
+:root {
+  /* Primary */
+  --ui-primary: 221.2 83.2% 53.3%;
+  --ui-primary-fg: 210 40% 98%;
+
+  /* Secondary */
+  --ui-secondary: 210 40% 96.1%;
+  --ui-secondary-fg: 222.2 47.4% 11.2%;
+
+  /* Accent */
+  --ui-accent: 210 40% 96.1%;
+  --ui-accent-fg: 222.2 47.4% 11.2%;
+
+  /* Neutral surfaces */
+  --ui-background: 0 0% 100%;
+  --ui-foreground: 222.2 84% 4.9%;
+
+  --ui-card: 0 0% 100%;
+  --ui-card-fg: 222.2 84% 4.9%;
+
+  --ui-popover: 0 0% 100%;
+  --ui-popover-fg: 222.2 84% 4.9%;
+
+  /* Muted */
+  --ui-muted: 210 40% 96.1%;
+  --ui-muted-fg: 215.4 16.3% 46.9%;
+
+  /* Semantic */
+  --ui-destructive: 0 84.2% 60.2%;
+  --ui-destructive-fg: 210 40% 98%;
+
+  --ui-success: 142.1 76.2% 36.3%;
+  --ui-success-fg: 355.7 100% 97.3%;
+
+  --ui-warning: 32.1 94.6% 43.7%;
+  --ui-warning-fg: 0 0% 100%;
+
+  --ui-info: 199 89% 48%;
+  --ui-info-fg: 0 0% 100%;
+
+  /* Border, Input, Ring */
+  --ui-border: 214.3 31.8% 91.4%;
+  --ui-input: 214.3 31.8% 91.4%;
+  --ui-ring: 221.2 83.2% 53.3%;
+
+  /* ============================================================
+     SPACING SCALE
+     ============================================================ */
+  --ui-space-px: 1px;
+  --ui-space-0: 0;
+  --ui-space-0-5: 0.125rem;  /* 2px */
+  --ui-space-1: 0.25rem;     /* 4px */
+  --ui-space-1-5: 0.375rem;  /* 6px */
+  --ui-space-2: 0.5rem;      /* 8px */
+  --ui-space-2-5: 0.625rem;  /* 10px */
+  --ui-space-3: 0.75rem;     /* 12px */
+  --ui-space-3-5: 0.875rem;  /* 14px */
+  --ui-space-4: 1rem;        /* 16px */
+  --ui-space-5: 1.25rem;     /* 20px */
+  --ui-space-6: 1.5rem;      /* 24px */
+  --ui-space-7: 1.75rem;     /* 28px */
+  --ui-space-8: 2rem;        /* 32px */
+  --ui-space-9: 2.25rem;     /* 36px */
+  --ui-space-10: 2.5rem;     /* 40px */
+  --ui-space-11: 2.75rem;    /* 44px */
+  --ui-space-12: 3rem;       /* 48px */
+  --ui-space-14: 3.5rem;     /* 56px */
+  --ui-space-16: 4rem;       /* 64px */
+
+  /* ============================================================
+     TYPOGRAPHY SCALE
+     ============================================================ */
+  --ui-text-xs: 0.75rem;     /* 12px */
+  --ui-text-sm: 0.875rem;    /* 14px */
+  --ui-text-base: 1rem;      /* 16px */
+  --ui-text-lg: 1.125rem;    /* 18px */
+  --ui-text-xl: 1.25rem;     /* 20px */
+  --ui-text-2xl: 1.5rem;     /* 24px */
+  --ui-text-3xl: 1.875rem;   /* 30px */
+
+  --ui-leading-none: 1;
+  --ui-leading-tight: 1.25;
+  --ui-leading-snug: 1.375;
+  --ui-leading-normal: 1.5;
+  --ui-leading-relaxed: 1.625;
+
+  --ui-font-normal: 400;
+  --ui-font-medium: 500;
+  --ui-font-semibold: 600;
+  --ui-font-bold: 700;
+
+  /* ============================================================
+     BORDER RADIUS
+     ============================================================ */
+  --ui-radius-none: 0;
+  --ui-radius-sm: 0.125rem;  /* 2px */
+  --ui-radius-md: 0.375rem;  /* 6px */
+  --ui-radius: 0.5rem;       /* 8px — default */
+  --ui-radius-lg: 0.75rem;   /* 12px */
+  --ui-radius-xl: 1rem;      /* 16px */
+  --ui-radius-2xl: 1.5rem;   /* 24px */
+  --ui-radius-full: 9999px;
+
+  /* ============================================================
+     SHADOWS
+     ============================================================ */
+  --ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ui-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ui-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ============================================================
+     MOTION / ANIMATION
+     ============================================================ */
+  --ui-duration-instant: 0ms;
+  --ui-duration-fast: 100ms;
+  --ui-duration-normal: 200ms;
+  --ui-duration-slow: 350ms;
+  --ui-duration-slower: 500ms;
+
+  --ui-ease-linear: linear;
+  --ui-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ui-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ui-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ui-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     Z-INDEX SCALE
+     ============================================================ */
+  --ui-z-0: 0;
+  --ui-z-10: 10;
+  --ui-z-20: 20;
+  --ui-z-30: 30;
+  --ui-z-40: 40;
+  --ui-z-50: 50;
+  --ui-z-overlay: 100;
+  --ui-z-modal: 200;
+  --ui-z-popover: 300;
+  --ui-z-tooltip: 400;
+
+  /* ============================================================
+     COMPONENT TOKENS — per-component overridable defaults
+     ============================================================ */
+
+  /* Button */
+  --ui-btn-radius: var(--ui-radius);
+  --ui-btn-font-weight: var(--ui-font-medium);
+  --ui-btn-transition: background-color var(--ui-duration-fast) var(--ui-ease),
+                       opacity var(--ui-duration-fast) var(--ui-ease),
+                       box-shadow var(--ui-duration-fast) var(--ui-ease);
+
+  /* Input */
+  --ui-input-radius: var(--ui-radius);
+  --ui-input-height: var(--ui-space-10);
+  --ui-input-padding-x: var(--ui-space-3);
+  --ui-input-border-color: hsl(var(--ui-input));
+  --ui-input-focus-ring: 0 0 0 2px hsl(var(--ui-ring) / 0.5);
+
+  /* Card */
+  --ui-card-radius: var(--ui-radius-lg);
+  --ui-card-padding: var(--ui-space-6);
+
+  /* Badge */
+  --ui-badge-radius: var(--ui-radius-full);
+  --ui-badge-padding-x: var(--ui-space-2-5);
+  --ui-badge-padding-y: var(--ui-space-0-5);
+
+  /* Dialog / Drawer */
+  --ui-dialog-radius: var(--ui-radius-lg);
+  --ui-dialog-padding: var(--ui-space-6);
+  --ui-overlay-bg: hsl(0 0% 0% / 0.8);
+
+  /* Tooltip */
+  --ui-tooltip-radius: var(--ui-radius-md);
+  --ui-tooltip-padding-x: var(--ui-space-2);
+  --ui-tooltip-padding-y: var(--ui-space-1);
+  --ui-tooltip-bg: hsl(var(--ui-foreground));
+  --ui-tooltip-fg: hsl(var(--ui-background));
+
+  /* Progress */
+  --ui-progress-height: var(--ui-space-2);
+  --ui-progress-radius: var(--ui-radius-full);
+  --ui-progress-bg: hsl(var(--ui-secondary));
+  --ui-progress-fill: hsl(var(--ui-primary));
+
+  /* Switch */
+  --ui-switch-width: 2.75rem;
+  --ui-switch-height: 1.5rem;
+  --ui-switch-thumb-size: 1.25rem;
+
+  /* Slider */
+  --ui-slider-track-height: 0.375rem;
+  --ui-slider-thumb-size: 1.25rem;
+
+  /* Accordion */
+  --ui-accordion-border-color: hsl(var(--ui-border));
+
+  /* Avatar */
+  --ui-avatar-size: var(--ui-space-10);
+  --ui-avatar-radius: var(--ui-radius-full);
+
+  /* Skeleton */
+  --ui-skeleton-bg: hsl(var(--ui-muted));
+  --ui-skeleton-shimmer: hsl(var(--ui-muted-fg) / 0.1);
+
+  /* Tabs */
+  --ui-tabs-trigger-radius: var(--ui-radius-sm);
+
+  /* Navigation Menu */
+  --ui-nav-bg: hsl(var(--ui-background));
+
+  /* Select */
+  --ui-select-radius: var(--ui-radius);
+  --ui-select-height: var(--ui-space-10);
+}
+
+/* ============================================================
+   DARK MODE
+   Set data-theme="dark" on <html> to activate
+   ============================================================ */
+[data-theme="dark"] {
+  --ui-background: 222.2 84% 4.9%;
+  --ui-foreground: 210 40% 98%;
+
+  --ui-card: 222.2 84% 4.9%;
+  --ui-card-fg: 210 40% 98%;
+
+  --ui-popover: 222.2 84% 4.9%;
+  --ui-popover-fg: 210 40% 98%;
+
+  --ui-primary: 217.2 91.2% 59.8%;
+  --ui-primary-fg: 222.2 47.4% 11.2%;
+
+  --ui-secondary: 217.2 32.6% 17.5%;
+  --ui-secondary-fg: 210 40% 98%;
+
+  --ui-muted: 217.2 32.6% 17.5%;
+  --ui-muted-fg: 215 20.2% 65.1%;
+
+  --ui-accent: 217.2 32.6% 17.5%;
+  --ui-accent-fg: 210 40% 98%;
+
+  --ui-destructive: 0 62.8% 30.6%;
+  --ui-destructive-fg: 210 40% 98%;
+
+  --ui-border: 217.2 32.6% 17.5%;
+  --ui-input: 217.2 32.6% 17.5%;
+  --ui-ring: 212.7 26.8% 83.9%;
+
+  --ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --ui-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+}
+
+/* ============================================================
+   SYSTEM DARK MODE (when data-theme="system")
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  [data-theme="system"] {
+    --ui-background: 222.2 84% 4.9%;
+    --ui-foreground: 210 40% 98%;
+    --ui-card: 222.2 84% 4.9%;
+    --ui-card-fg: 210 40% 98%;
+    --ui-popover: 222.2 84% 4.9%;
+    --ui-popover-fg: 210 40% 98%;
+    --ui-primary: 217.2 91.2% 59.8%;
+    --ui-primary-fg: 222.2 47.4% 11.2%;
+    --ui-secondary: 217.2 32.6% 17.5%;
+    --ui-secondary-fg: 210 40% 98%;
+    --ui-muted: 217.2 32.6% 17.5%;
+    --ui-muted-fg: 215 20.2% 65.1%;
+    --ui-accent: 217.2 32.6% 17.5%;
+    --ui-accent-fg: 210 40% 98%;
+    --ui-destructive: 0 62.8% 30.6%;
+    --ui-destructive-fg: 210 40% 98%;
+    --ui-border: 217.2 32.6% 17.5%;
+    --ui-input: 217.2 32.6% 17.5%;
+    --ui-ring: 212.7 26.8% 83.9%;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    --ui-duration-fast: 0ms !important;
+    --ui-duration-normal: 0ms !important;
+    --ui-duration-slow: 0ms !important;
+    --ui-duration-slower: 0ms !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+@keyframes ui-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ui-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes ui-slide-in-from-top {
+  from { transform: translateY(-0.5rem); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes ui-slide-in-from-bottom {
+  from { transform: translateY(0.5rem); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes ui-slide-in-from-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes ui-slide-in-from-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes ui-zoom-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes ui-zoom-out {
+  from { transform: scale(1); opacity: 1; }
+  to   { transform: scale(0.95); opacity: 0; }
+}
+
+@keyframes ui-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ui-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes ui-accordion-open {
+  from { grid-template-rows: 0fr; opacity: 0; }
+  to   { grid-template-rows: 1fr; opacity: 1; }
+}
+
+@keyframes ui-accordion-close {
+  from { grid-template-rows: 1fr; opacity: 1; }
+  to   { grid-template-rows: 0fr; opacity: 0; }
+}

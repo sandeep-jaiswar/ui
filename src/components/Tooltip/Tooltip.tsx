@@ -1,38 +1,39 @@
-import React, { createContext, useContext, useState, useRef, useEffect, ReactNode } from "react"
-import { createPortal } from "react-dom"
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  type ReactNode,
+} from "react"
 import { cn } from "../../utils/cn"
-// import { MotionPrimitive } from "../../ux"; // unused
+import "./tooltip.css"
 
-// --- Tooltip Context ---
 interface TooltipContextType {
   open: boolean
-  setOpen: (open: boolean) => void
-  triggerRef: React.RefObject<HTMLDivElement | null>
+  openTooltip: () => void
+  closeTooltip: () => void
 }
 
 const TooltipContext = createContext<TooltipContextType | undefined>(undefined)
 
 const useTooltip = () => {
-  const context = useContext(TooltipContext)
-  if (!context) {
-    throw new Error("useTooltip must be used within a Tooltip")
-  }
-  return context
+  const ctx = useContext(TooltipContext)
+  if (!ctx) throw new Error("useTooltip must be used within a Tooltip")
+  return ctx
 }
 
-// --- Tooltip Interface ---
+/** Pass-through provider for grouping tooltips. Optional. */
+export const TooltipProvider = ({ children }: { children: ReactNode }) => <>{children}</>
+
 interface TooltipProps {
   children: ReactNode
   delayDuration?: number
 }
 
-export const TooltipProvider = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>
-}
-
 /**
- * Tooltip component for displaying floating content on hover/focus.
- * Uses context to share state between Trigger and Content.
+ * Tooltip component for floating informational content.
+ * Uses relative positioning — no portal or external library needed.
+ * Zero external dependencies.
  *
  * @example
  * <Tooltip>
@@ -42,32 +43,25 @@ export const TooltipProvider = ({ children }: { children: ReactNode }) => {
  */
 export const Tooltip = ({ children, delayDuration = 300 }: TooltipProps) => {
   const [open, setOpen] = useState(false)
-  const triggerRef = useRef<HTMLDivElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const handleOpen = () => {
+  const openTooltip = () => {
     timeoutRef.current = setTimeout(() => setOpen(true), delayDuration)
   }
 
-  const handleClose = () => {
+  const closeTooltip = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setOpen(false)
   }
 
   return (
-    <TooltipContext.Provider
-      value={{
-        open,
-        setOpen: (val) => (val ? handleOpen() : handleClose()),
-        triggerRef: triggerRef as React.RefObject<HTMLDivElement | null>,
-      }}
-    >
+    <TooltipContext.Provider value={{ open, openTooltip, closeTooltip }}>
       <div
-        className="relative inline-block"
-        onMouseEnter={handleOpen}
-        onMouseLeave={handleClose}
-        onFocus={handleOpen}
-        onBlur={handleClose}
+        className="tooltip-root"
+        onMouseEnter={openTooltip}
+        onMouseLeave={closeTooltip}
+        onFocus={openTooltip}
+        onBlur={closeTooltip}
       >
         {children}
       </div>
@@ -75,50 +69,27 @@ export const Tooltip = ({ children, delayDuration = 300 }: TooltipProps) => {
   )
 }
 
-export const TooltipTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
-  const { triggerRef } = useTooltip()
-  return (
-    <div ref={triggerRef} className={cn("inline-flex", className)}>
-      {children}
-    </div>
-  )
+export const TooltipTrigger = ({ children, className }: { children: ReactNode; className?: string }) => (
+  <div className={cn("tooltip-trigger", className)}>{children}</div>
+)
+
+interface TooltipContentProps {
+  children: ReactNode
+  className?: string
+  side?: "top" | "bottom" | "left" | "right"
 }
 
-export const TooltipContent = ({ children, className }: { children: ReactNode; className?: string }) => {
-  const { open, triggerRef } = useTooltip()
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [style, setStyle] = useState<React.CSSProperties>({})
-
-  useEffect(() => {
-    if (open && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect()
-      // Simple top positioning logic
-      setStyle({
-        position: "absolute",
-        top: rect.top + window.scrollY - 10 + "px", // 10px offset up
-        left: rect.left + window.scrollX + rect.width / 2 + "px",
-        transform: "translate(-50%, -100%)",
-        zIndex: 60,
-      })
-    }
-  }, [open, triggerRef])
-
+export const TooltipContent = ({ children, className, side = "top" }: TooltipContentProps) => {
+  const { open } = useTooltip()
   if (!open) return null
-  if (typeof document === "undefined") return null
 
-  return createPortal(
+  return (
     <div
-      ref={contentRef}
-      style={style}
       role="tooltip"
-      className={cn(
-        "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 bg-foreground text-background z-50 overflow-hidden rounded-md border px-3 py-1.5 text-xs shadow-md",
-        className
-      )}
+      data-side={side}
+      className={cn("tooltip-content", className)}
     >
       {children}
-      {/* Simple arrow could be added here */}
-    </div>,
-    document.body
+    </div>
   )
 }

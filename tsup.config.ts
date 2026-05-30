@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup"
 
 export default defineConfig(({ watch }) => ({
-  entry: ["src/index.ts", "src/*.tsx"],
+  entry: ["src/index.ts", "src/cli/index.ts"],
   outDir: "dist",
   format: ["esm", "cjs"],
   dts: true,
@@ -22,8 +22,9 @@ export default defineConfig(({ watch }) => ({
     "react-dom",
     "react/jsx-runtime",
     "react/jsx-dev-runtime",
-    "@base-ui/react/button",
-    "@base-ui/react/input",
-    "@base-ui/react/accordion",
+    // Node.js built-ins (used by CLI)
+    "fs",
+    "path",
+    "readline",
   ],
 }))

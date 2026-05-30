@@ -1,16 +1,25 @@
 import React from "react"
 import { cn } from "../../utils/cn"
+import "./skeleton.css"
 
 export type SkeletonProps = React.HTMLAttributes<HTMLDivElement>
 
 /**
- * Skeleton component for loading states.
- * Uses a pulse animation to indicate loading.
+ * Skeleton component for loading placeholder states.
+ * Uses a shimmer animation. Zero external dependencies.
  *
  * @example
- * <Skeleton className="h-4 w-[250px]" />
+ * <Skeleton style={{ height: "1rem", width: "250px" }} />
  */
-export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(({ className, ...props }, ref) => {
-  return <div ref={ref} className={cn("bg-muted animate-pulse rounded-md", className)} {...props} />
-})
+export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
+  ({ className, style, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("skeleton", className)}
+      style={style}
+      aria-hidden="true"
+      {...props}
+    />
+  )
+)
 Skeleton.displayName = "Skeleton"

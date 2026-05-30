@@ -1,0 +1,64 @@
+/* Alert styles */
+
+.alert {
+  position: relative;
+  width: 100%;
+  border-radius: var(--ui-radius-lg);
+  border: 1px solid hsl(var(--ui-border));
+  padding: var(--ui-space-3) var(--ui-space-4) var(--ui-space-3) var(--ui-space-11);
+  font-size: var(--ui-text-sm);
+  box-sizing: border-box;
+}
+
+/* Icon slot — any SVG/icon placed as direct child */
+.alert > svg {
+  position: absolute;
+  top: var(--ui-space-4);
+  left: var(--ui-space-4);
+  width: 1rem;
+  height: 1rem;
+}
+
+.alert-title {
+  margin: 0 0 var(--ui-space-1);
+  font-weight: var(--ui-font-medium);
+  line-height: var(--ui-leading-none);
+  letter-spacing: -0.025em;
+  color: inherit;
+}
+
+.alert-description {
+  font-size: var(--ui-text-sm);
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Variants */
+.alert[data-variant="default"] {
+  background: hsl(var(--ui-muted));
+  color: hsl(var(--ui-foreground));
+}
+
+.alert[data-variant="destructive"] {
+  background: hsl(var(--ui-destructive) / 0.08);
+  border-color: hsl(var(--ui-destructive) / 0.4);
+  color: hsl(var(--ui-destructive));
+}
+
+.alert[data-variant="success"] {
+  background: hsl(var(--ui-success) / 0.08);
+  border-color: hsl(var(--ui-success) / 0.4);
+  color: hsl(var(--ui-success));
+}
+
+.alert[data-variant="warning"] {
+  background: hsl(var(--ui-warning) / 0.08);
+  border-color: hsl(var(--ui-warning) / 0.4);
+  color: hsl(var(--ui-warning));
+}
+
+.alert[data-variant="info"] {
+  background: hsl(var(--ui-info) / 0.08);
+  border-color: hsl(var(--ui-info) / 0.4);
+  color: hsl(var(--ui-info));
+}

@@ -10,9 +10,11 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "registry"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "copy:css": "node ./scripts/copy-css.mjs",
     "build": "cross-env NODE_ENV=production tsup && npm run copy:css",
@@ -31,6 +33,9 @@
     "prepack": "npm run build",
     "size": "size-limit"
   },
+  "bin": {
+    "ui": "./dist/cli/index.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -41,6 +46,9 @@
       "types": "./dist/*.d.ts",
       "import": "./dist/*.js",
       "require": "./dist/*.cjs"
+    },
+    "./tokens": {
+      "import": "./dist/tokens/tokens.css"
     }
   },
   "repository": {
@@ -52,7 +60,7 @@
     "url": "https://github.com/sandeep-jaiswar/ui/issues"
   },
   "homepage": "https://github.com/sandeep-jaiswar/ui#readme",
-  "description": "",
+  "description": "Zero-dependency, copy-paste web components. Drop components into your project like shadcn.",
   "devDependencies": {
     "@changesets/cli": "^2.29.3",
     "@chromatic-com/storybook": "^4.0.0",
@@ -90,12 +98,10 @@
     "postcss": "^8.5.6",
     "postcss-cli": "^10.1.0",
     "prettier": "3.0.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "size-limit": "^6.0.1",
     "storybook": "^9.0.6",
-    "tailwindcss": "^4.1.18",
     "tsup": "^8.5.0",
     "typescript": "^5.3.3",
     "typescript-eslint": "^8.49.0",
@@ -110,17 +116,13 @@
     }
   ],
   "peerDependencies": {
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tailwindcss": "^4.0.0"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.4.0"
   }
 }

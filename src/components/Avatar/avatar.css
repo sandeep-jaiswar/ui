@@ -1,0 +1,34 @@
+/* Avatar styles */
+
+.avatar {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--ui-avatar-radius);
+  background: hsl(var(--ui-muted));
+  width: var(--_avatar-size, var(--ui-avatar-size));
+  height: var(--_avatar-size, var(--ui-avatar-size));
+  font-size: var(--_avatar-font, var(--ui-text-sm));
+}
+
+.avatar[data-size="sm"] { --_avatar-size: var(--ui-space-8);  --_avatar-font: var(--ui-text-xs); }
+.avatar[data-size="md"] { --_avatar-size: var(--ui-space-10); --_avatar-font: var(--ui-text-sm); }
+.avatar[data-size="lg"] { --_avatar-size: var(--ui-space-14); --_avatar-font: var(--ui-text-base); }
+
+.avatar__image {
+  aspect-ratio: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar__fallback {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--ui-font-medium);
+  color: hsl(var(--ui-muted-fg));
+}

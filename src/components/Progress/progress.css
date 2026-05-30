@@ -1,0 +1,30 @@
+/* Progress styles */
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: var(--ui-progress-height);
+  overflow: hidden;
+  border-radius: var(--ui-progress-radius);
+  background: hsl(var(--ui-secondary));
+}
+
+.progress__fill {
+  height: 100%;
+  width: 100%;
+  background: hsl(var(--ui-primary));
+  transform-origin: left;
+  transition: transform var(--ui-duration-slow) var(--ui-ease);
+  border-radius: inherit;
+}
+
+/* Indeterminate state */
+.progress[data-indeterminate="true"] .progress__fill {
+  animation: progress-indeterminate 1.5s ease-in-out infinite;
+  width: 40%;
+}
+
+@keyframes progress-indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
