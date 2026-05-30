@@ -28,21 +28,33 @@
   background: hsl(var(--ui-background));
   cursor: pointer;
   outline: none;
-  transition: border-color var(--ui-duration-fast) var(--ui-ease),
-              background-color var(--ui-duration-fast) var(--ui-ease);
+  transition:
+    border-color var(--ui-duration-fast) var(--ui-ease),
+    background-color var(--ui-duration-fast) var(--ui-ease);
 }
 
 .radio:focus-visible {
-  box-shadow: 0 0 0 2px hsl(var(--ui-background)), 0 0 0 4px hsl(var(--ui-ring));
+  box-shadow:
+    0 0 0 2px hsl(var(--ui-background)),
+    0 0 0 4px hsl(var(--ui-ring));
 }
 
 .radio:checked {
   border-color: hsl(var(--ui-primary));
   background: hsl(var(--ui-primary));
 }
-.radio[data-intent="success"]:checked  { border-color: hsl(var(--ui-success)); background: hsl(var(--ui-success)); }
-.radio[data-intent="danger"]:checked   { border-color: hsl(var(--ui-destructive)); background: hsl(var(--ui-destructive)); }
-.radio[data-intent="warning"]:checked  { border-color: hsl(var(--ui-warning)); background: hsl(var(--ui-warning)); }
+.radio[data-intent="success"]:checked {
+  border-color: hsl(var(--ui-success));
+  background: hsl(var(--ui-success));
+}
+.radio[data-intent="danger"]:checked {
+  border-color: hsl(var(--ui-destructive));
+  background: hsl(var(--ui-destructive));
+}
+.radio[data-intent="warning"]:checked {
+  border-color: hsl(var(--ui-warning));
+  background: hsl(var(--ui-warning));
+}
 
 .radio:disabled {
   cursor: not-allowed;

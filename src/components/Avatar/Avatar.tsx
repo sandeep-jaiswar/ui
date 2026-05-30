@@ -24,22 +24,11 @@ export const Avatar = ({ src, alt, fallback, size = "md", className, ...props }:
   }, [src])
 
   return (
-    <div
-      data-size={size}
-      className={cn("avatar", className)}
-      {...props}
-    >
+    <div data-size={size} className={cn("avatar", className)} {...props}>
       {src && !imageError ? (
-        <img
-          src={src}
-          alt={alt}
-          className="avatar__image"
-          onError={() => setImageError(true)}
-        />
+        <img src={src} alt={alt} className="avatar__image" onError={() => setImageError(true)} />
       ) : (
-        <div className="avatar__fallback">
-          {fallback || alt?.slice(0, 2).toUpperCase() || "??"}
-        </div>
+        <div className="avatar__fallback">{fallback || alt?.slice(0, 2).toUpperCase() || "??"}</div>
       )}
     </div>
   )

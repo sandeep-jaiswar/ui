@@ -12,9 +12,18 @@
   font-size: var(--_avatar-font, var(--ui-text-sm));
 }
 
-.avatar[data-size="sm"] { --_avatar-size: var(--ui-space-8);  --_avatar-font: var(--ui-text-xs); }
-.avatar[data-size="md"] { --_avatar-size: var(--ui-space-10); --_avatar-font: var(--ui-text-sm); }
-.avatar[data-size="lg"] { --_avatar-size: var(--ui-space-14); --_avatar-font: var(--ui-text-base); }
+.avatar[data-size="sm"] {
+  --_avatar-size: var(--ui-space-8);
+  --_avatar-font: var(--ui-text-xs);
+}
+.avatar[data-size="md"] {
+  --_avatar-size: var(--ui-space-10);
+  --_avatar-font: var(--ui-text-sm);
+}
+.avatar[data-size="lg"] {
+  --_avatar-size: var(--ui-space-14);
+  --_avatar-font: var(--ui-text-base);
+}
 
 .avatar__image {
   aspect-ratio: 1;

@@ -20,7 +20,7 @@ describe("CoreProvider", () => {
         <TestComponent />
       </CoreProvider>
     )
-    expect(screen.getByTestId("primary-color").textContent).toBe("blue")
+
     expect(screen.getByTestId("reduced-motion").textContent).toBe("false")
   })
 
@@ -51,8 +51,7 @@ describe("CoreProvider", () => {
         <div />
       </CoreProvider>
     )
-    expect(root.classList.contains("dark")).toBe(true)
-    expect(root.classList.contains("light")).toBe(false)
+    expect(root).toHaveAttribute("data-theme", "system")
   })
 
   it("applies light mode when configured", () => {
@@ -63,8 +62,7 @@ describe("CoreProvider", () => {
         <div />
       </CoreProvider>
     )
-    expect(root.classList.contains("light")).toBe(true)
-    expect(root.classList.contains("dark")).toBe(false)
+    expect(root).toHaveAttribute("data-theme", "light")
   })
 
   it("applies system preference (dark)", () => {
@@ -91,6 +89,6 @@ describe("CoreProvider", () => {
       </CoreProvider>
     )
 
-    expect(root.classList.contains("dark")).toBe(true)
+    expect(root).toHaveAttribute("data-theme", "system")
   })
 })

@@ -51,14 +51,13 @@ export const BreadcrumbItem = React.forwardRef<HTMLLIElement, React.LiHTMLAttrib
 )
 BreadcrumbItem.displayName = "BreadcrumbItem"
 
-export const BreadcrumbLink = React.forwardRef<
-  HTMLAnchorElement,
-  React.AnchorHTMLAttributes<HTMLAnchorElement>
->(({ children, className, ...props }, ref) => (
-  <a ref={ref} className={cn("breadcrumb__link", className)} {...props}>
-    {children}
-  </a>
-))
+export const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(
+  ({ children, className, ...props }, ref) => (
+    <a ref={ref} className={cn("breadcrumb__link", className)} {...props}>
+      {children}
+    </a>
+  )
+)
 BreadcrumbLink.displayName = "BreadcrumbLink"
 
 export const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(

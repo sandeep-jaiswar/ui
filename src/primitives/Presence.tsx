@@ -31,7 +31,6 @@ export function Presence({ present, children }: PresenceProps) {
   const prevPresentRef = useRef(present)
 
   useEffect(() => {
-    const prevPresent = prevPresentRef.current
     prevPresentRef.current = present
 
     const el = elementRef.current
@@ -50,12 +49,8 @@ export function Presence({ present, children }: PresenceProps) {
     // Check for active CSS animations or transitions
     const styles = window.getComputedStyle(el)
     const hasAnimation =
-      styles.animationName !== "none" &&
-      styles.animationDuration !== "0s" &&
-      styles.animationDuration !== "0ms"
-    const hasTransition =
-      styles.transitionDuration !== "0s" &&
-      styles.transitionDuration !== "0ms"
+      styles.animationName !== "none" && styles.animationDuration !== "0s" && styles.animationDuration !== "0ms"
+    const hasTransition = styles.transitionDuration !== "0s" && styles.transitionDuration !== "0ms"
 
     if (!hasAnimation && !hasTransition) {
       setMounted(false)

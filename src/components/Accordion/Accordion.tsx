@@ -70,9 +70,7 @@ export const Accordion = ({
         setActiveItems([value])
       }
     } else {
-      setActiveItems((prev) =>
-        prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]
-      )
+      setActiveItems((prev) => (prev.includes(value) ? prev.filter((item) => item !== value) : [...prev, value]))
     }
   }
 
@@ -92,107 +90,98 @@ interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const AccordionItem = ({ children, className, value, ...props }: AccordionItemProps) => (
   <div className={cn("accordion-item", className)} data-value={value} {...props}>
-    <AccordionItemContext.Provider value={{ value }}>
-      {children}
-    </AccordionItemContext.Provider>
+    <AccordionItemContext.Provider value={{ value }}>{children}</AccordionItemContext.Provider>
   </div>
 )
 
 // --- Trigger ---
-export const AccordionTrigger = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ children, className, ...props }, ref) => {
-  const { toggleItem, activeItems, rootRef } = useAccordion()
-  const { value } = useAccordionItem()
-  const isOpen = activeItems.includes(value)
-  const triggerId = `accordion-trigger-${value}`
-  const contentId = `accordion-content-${value}`
+export const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  ({ children, className, ...props }, ref) => {
+    const { toggleItem, activeItems, rootRef } = useAccordion()
+    const { value } = useAccordionItem()
+    const isOpen = activeItems.includes(value)
+    const triggerId = `accordion-trigger-${value}`
+    const contentId = `accordion-content-${value}`
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
-    if (!rootRef.current) return
-    if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (!rootRef.current) return
+      if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return
 
-    e.preventDefault()
-    const triggers = Array.from(
-      rootRef.current.querySelectorAll<HTMLElement>("[data-accordion-trigger]")
-    )
-    const index = triggers.indexOf(e.currentTarget)
-    let nextIndex = index
+      e.preventDefault()
+      const triggers = Array.from(rootRef.current.querySelectorAll<HTMLElement>("[data-accordion-trigger]"))
+      const index = triggers.indexOf(e.currentTarget)
+      let nextIndex = index
 
-    if (e.key === "ArrowDown") nextIndex = (index + 1) % triggers.length
-    else if (e.key === "ArrowUp") nextIndex = (index - 1 + triggers.length) % triggers.length
-    else if (e.key === "Home") nextIndex = 0
-    else if (e.key === "End") nextIndex = triggers.length - 1
+      if (e.key === "ArrowDown") nextIndex = (index + 1) % triggers.length
+      else if (e.key === "ArrowUp") nextIndex = (index - 1 + triggers.length) % triggers.length
+      else if (e.key === "Home") nextIndex = 0
+      else if (e.key === "End") nextIndex = triggers.length - 1
 
-    triggers[nextIndex]?.focus()
-    props.onKeyDown?.(e)
-  }
+      triggers[nextIndex]?.focus()
+      props.onKeyDown?.(e)
+    }
 
-  return (
-    <h3 className="accordion-trigger-wrapper">
-      <button
-        ref={ref}
-        type="button"
-        id={triggerId}
-        aria-controls={contentId}
-        aria-expanded={isOpen}
-        data-accordion-trigger
-        onClick={() => toggleItem(value)}
-        onKeyDown={handleKeyDown}
-        className={cn("accordion-trigger", className)}
-        {...props}
-      >
-        {children}
-        <svg
-          className="accordion-chevron"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden="true"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
-      </button>
-    </h3>
-  )
-})
-AccordionTrigger.displayName = "AccordionTrigger"
-
-// --- Content ---
-export const AccordionContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ children, className, ...props }, ref) => {
-  const { activeItems } = useAccordion()
-  const { value } = useAccordionItem()
-  const isOpen = activeItems.includes(value)
-  const triggerId = `accordion-trigger-${value}`
-  const contentId = `accordion-content-${value}`
-
-  return (
-    <div
-      className="accordion-content-wrapper"
-      data-state={isOpen ? "open" : "closed"}
-    >
-      <div className="accordion-content-inner">
-        <div
+    return (
+      <h3 className="accordion-trigger-wrapper">
+        <button
           ref={ref}
-          id={contentId}
-          role="region"
-          aria-labelledby={triggerId}
-          hidden={!isOpen ? true : undefined}
-          className={cn("accordion-content", className)}
+          type="button"
+          id={triggerId}
+          aria-controls={contentId}
+          aria-expanded={isOpen}
+          data-accordion-trigger
+          onClick={() => toggleItem(value)}
+          onKeyDown={handleKeyDown}
+          className={cn("accordion-trigger", className)}
           {...props}
         >
           {children}
+          <svg
+            className="accordion-chevron"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+      </h3>
+    )
+  }
+)
+AccordionTrigger.displayName = "AccordionTrigger"
+
+// --- Content ---
+export const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ children, className, ...props }, ref) => {
+    const { activeItems } = useAccordion()
+    const { value } = useAccordionItem()
+    const isOpen = activeItems.includes(value)
+    const triggerId = `accordion-trigger-${value}`
+    const contentId = `accordion-content-${value}`
+
+    return (
+      <div className="accordion-content-wrapper" data-state={isOpen ? "open" : "closed"}>
+        <div className="accordion-content-inner">
+          <div
+            ref={ref}
+            id={contentId}
+            role="region"
+            aria-labelledby={triggerId}
+            hidden={!isOpen ? true : undefined}
+            className={cn("accordion-content", className)}
+            {...props}
+          >
+            {children}
+          </div>
         </div>
       </div>
-    </div>
-  )
-})
+    )
+  }
+)
 AccordionContent.displayName = "AccordionContent"

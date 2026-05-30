@@ -23,10 +23,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const iconSize = size === "sm" ? 12 : size === "md" ? 14 : 16
 
     return (
-      <div
-        className="checkbox-wrapper"
-        data-disabled={disabled ? "true" : undefined}
-      >
+      <div className="checkbox-wrapper" data-disabled={disabled ? "true" : undefined}>
         <div className="checkbox-control">
           <input
             ref={ref}
@@ -55,11 +52,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         </div>
 
         {label && (
-          <label
-            htmlFor={inputId}
-            className="checkbox-label"
-            data-size={size}
-          >
+          <label htmlFor={inputId} className="checkbox-label" data-size={size}>
             {label}
           </label>
         )}

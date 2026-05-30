@@ -1,13 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  type ReactNode,
-} from "react"
-import { Portal } from "../../primitives/Portal"
-import { useFocusTrap } from "../../primitives/FocusTrap"
+import React, { createContext, useContext, useState, type ReactNode } from "react"
 import { useEscapeKey } from "../../hooks/use-escape-key"
 import { mergeRefs } from "../../hooks/use-merge-refs"
+import { useFocusTrap } from "../../primitives/FocusTrap"
+import { Portal } from "../../primitives/Portal"
 import { cn } from "../../utils/cn"
 import "./drawer.css"
 
@@ -47,11 +42,7 @@ export const Drawer = ({ children, open: controlledOpen, onOpenChange }: DrawerP
   const open = isControlled ? controlledOpen! : uncontrolledOpen
   const setOpen = isControlled ? onOpenChange! : setUncontrolledOpen
 
-  return (
-    <DrawerContext.Provider value={{ open, setOpen }}>
-      {children}
-    </DrawerContext.Provider>
-  )
+  return <DrawerContext.Provider value={{ open, setOpen }}>{children}</DrawerContext.Provider>
 }
 
 interface DrawerTriggerProps {
@@ -88,11 +79,7 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
 
     return (
       <Portal>
-        <div
-          className="drawer-overlay"
-          onClick={() => setOpen(false)}
-          aria-hidden="true"
-        />
+        <div className="drawer-overlay" onClick={() => setOpen(false)} aria-hidden="true" />
         <div
           ref={mergeRefs(ref, trapRef as React.Ref<HTMLDivElement>)}
           role="dialog"
@@ -130,8 +117,6 @@ export const DrawerTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttrib
 DrawerTitle.displayName = "DrawerTitle"
 
 export const DrawerDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("drawer-description", className)} {...props} />
-  )
+  ({ className, ...props }, ref) => <p ref={ref} className={cn("drawer-description", className)} {...props} />
 )
 DrawerDescription.displayName = "DrawerDescription"

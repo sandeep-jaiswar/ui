@@ -13,8 +13,9 @@
   line-height: var(--ui-leading-normal);
   outline: none;
   box-sizing: border-box;
-  transition: box-shadow var(--ui-duration-fast) var(--ui-ease),
-              border-color var(--ui-duration-fast) var(--ui-ease);
+  transition:
+    box-shadow var(--ui-duration-fast) var(--ui-ease),
+    border-color var(--ui-duration-fast) var(--ui-ease);
 }
 
 .input::placeholder {

@@ -68,13 +68,7 @@ export const TabsList = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
   ({ children, className, ...props }, ref) => {
     const { orientation } = useTabs()
     return (
-      <div
-        ref={ref}
-        role="tablist"
-        aria-orientation={orientation}
-        className={cn("tabs-list", className)}
-        {...props}
-      >
+      <div ref={ref} role="tablist" aria-orientation={orientation} className={cn("tabs-list", className)} {...props}>
         {children}
       </div>
     )

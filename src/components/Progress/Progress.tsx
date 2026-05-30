@@ -20,9 +20,7 @@ interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ({ className, value, max = 100, ...props }, ref) => {
     const isIndeterminate = value === undefined || value === null
-    const percent = isIndeterminate
-      ? 0
-      : Math.min(100, Math.max(0, (value / max) * 100))
+    const percent = isIndeterminate ? 0 : Math.min(100, Math.max(0, (value / max) * 100))
 
     return (
       <div

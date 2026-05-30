@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useRef,
-  type ReactNode,
-} from "react"
+import React, { createContext, useContext, useState, useRef, type ReactNode } from "react"
 import { cn } from "../../utils/cn"
 import "./tooltip.css"
 
@@ -84,11 +78,7 @@ export const TooltipContent = ({ children, className, side = "top" }: TooltipCon
   if (!open) return null
 
   return (
-    <div
-      role="tooltip"
-      data-side={side}
-      className={cn("tooltip-content", className)}
-    >
+    <div role="tooltip" data-side={side} className={cn("tooltip-content", className)}>
       {children}
     </div>
   )

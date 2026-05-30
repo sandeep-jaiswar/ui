@@ -2,31 +2,12 @@ import type { ButtonProps } from "./types"
 import "./button.css"
 
 function Spinner({ size }: { size: NonNullable<ButtonProps["size"]> }) {
-  const dim =
-    size === "xs" ? 12 : size === "sm" || size === "md" ? 16 : 20
+  const dim = size === "xs" ? 12 : size === "sm" || size === "md" ? 16 : 20
 
   return (
-    <svg
-      className="btn__spinner-icon"
-      width={dim}
-      height={dim}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-        stroke="currentColor"
-        strokeWidth="4"
-        style={{ opacity: 0.25 }}
-      />
-      <path
-        fill="currentColor"
-        d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"
-        style={{ opacity: 0.75 }}
-      />
+    <svg className="btn__spinner-icon" width={dim} height={dim} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" style={{ opacity: 0.25 }} />
+      <path fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z" style={{ opacity: 0.75 }} />
     </svg>
   )
 }

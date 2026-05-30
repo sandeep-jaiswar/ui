@@ -1,8 +1,8 @@
 import fs from "fs"
 import path from "path"
-import { type UIConfig } from "./init"
-import { loadRegistry, resolveComponentDeps, type RegistryComponent } from "../utils/registry"
 import { copyFiles } from "../utils/files"
+import { loadRegistry, resolveComponentDeps } from "../utils/registry"
+import { type UIConfig } from "./init"
 
 const CONFIG_FILE = "ui.config.json"
 
@@ -26,7 +26,9 @@ export async function add(componentNames: string[]) {
   for (const name of componentNames) {
     const resolved = resolveComponentDeps(name, registry)
     if (!resolved) {
-      console.error(`  ❌  Component "${name}" not found. Run \`npx @sandeep-jaiswar/ui list\` to see available components.`)
+      console.error(
+        `  ❌  Component "${name}" not found. Run \`npx @sandeep-jaiswar/ui list\` to see available components.`
+      )
       process.exit(1)
     }
     for (const [key, val] of resolved.entries()) {
@@ -58,15 +60,22 @@ export async function add(componentNames: string[]) {
   }
 
   console.log(`\n  🎉  Added ${allItems.size} item(s), ${copied} file(s) copied.\n`)
-  console.log("  Remember to import the component's CSS in your stylesheet, or use a CSS bundler that handles CSS imports.\n")
+  console.log(
+    "  Remember to import the component's CSS in your stylesheet, or use a CSS bundler that handles CSS imports.\n"
+  )
 }
 
 function getDestDir(type: string, config: UIConfig): string {
   switch (type) {
-    case "component":  return config.componentsDir
-    case "hook":       return config.hooksDir
-    case "utility":    return config.utilsDir
-    case "primitive":  return config.primitivesDir
-    default:           return config.componentsDir
+    case "component":
+      return config.componentsDir
+    case "hook":
+      return config.hooksDir
+    case "utility":
+      return config.utilsDir
+    case "primitive":
+      return config.primitivesDir
+    default:
+      return config.componentsDir
   }
 }

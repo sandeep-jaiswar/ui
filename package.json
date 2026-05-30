@@ -93,6 +93,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-storybook": "^0.11.6",
     "globals": "^16.2.0",
+    "jiti": "^2.7.0",
     "jsdom": "^27.3.0",
     "playwright": "^1.52.0",
     "postcss": "^8.5.6",

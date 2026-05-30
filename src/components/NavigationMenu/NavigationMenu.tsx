@@ -60,11 +60,7 @@ export const NavigationMenuList = React.forwardRef<HTMLUListElement, React.HTMLA
   ({ children, className, ...props }, ref) => {
     const { listRef } = useNavigationMenu()
     return (
-      <ul
-        ref={mergeRefs(ref, listRef)}
-        className={cn("nav-menu__list", className)}
-        {...props}
-      >
+      <ul ref={mergeRefs(ref, listRef)} className={cn("nav-menu__list", className)} {...props}>
         {children}
       </ul>
     )
@@ -94,13 +90,9 @@ export const NavigationMenuTrigger = React.forwardRef<HTMLButtonElement, Navigat
       if (!listRef.current) return
       if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
         e.preventDefault()
-        const triggers = Array.from(
-          listRef.current.querySelectorAll<HTMLElement>("[data-nav-trigger]")
-        )
+        const triggers = Array.from(listRef.current.querySelectorAll<HTMLElement>("[data-nav-trigger]"))
         const idx = triggers.indexOf(e.currentTarget)
-        const next = e.key === "ArrowLeft"
-          ? (idx - 1 + triggers.length) % triggers.length
-          : (idx + 1) % triggers.length
+        const next = e.key === "ArrowLeft" ? (idx - 1 + triggers.length) % triggers.length : (idx + 1) % triggers.length
         triggers[next]?.focus()
       }
       if (["ArrowDown", "Enter", " "].includes(e.key) && !isActive) {
@@ -154,12 +146,7 @@ export const NavigationMenuContent = React.forwardRef<HTMLDivElement, Navigation
     if (!isActive) return null
 
     return (
-      <div
-        ref={ref}
-        tabIndex={-1}
-        className={cn("nav-menu__content", className)}
-        {...props}
-      >
+      <div ref={ref} tabIndex={-1} className={cn("nav-menu__content", className)} {...props}>
         {children}
       </div>
     )
@@ -167,12 +154,11 @@ export const NavigationMenuContent = React.forwardRef<HTMLDivElement, Navigation
 )
 NavigationMenuContent.displayName = "NavigationMenuContent"
 
-export const NavigationMenuLink = React.forwardRef<
-  HTMLAnchorElement,
-  React.AnchorHTMLAttributes<HTMLAnchorElement>
->(({ children, className, ...props }, ref) => (
-  <a ref={ref} className={cn("nav-menu__link", className)} {...props}>
-    {children}
-  </a>
-))
+export const NavigationMenuLink = React.forwardRef<HTMLAnchorElement, React.AnchorHTMLAttributes<HTMLAnchorElement>>(
+  ({ children, className, ...props }, ref) => (
+    <a ref={ref} className={cn("nav-menu__link", className)} {...props}>
+      {children}
+    </a>
+  )
+)
 NavigationMenuLink.displayName = "NavigationMenuLink"

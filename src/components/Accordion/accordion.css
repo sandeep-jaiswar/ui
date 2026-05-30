@@ -55,8 +55,9 @@
 .accordion-content-wrapper {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows var(--ui-duration-normal) var(--ui-ease),
-              opacity var(--ui-duration-normal) var(--ui-ease);
+  transition:
+    grid-template-rows var(--ui-duration-normal) var(--ui-ease),
+    opacity var(--ui-duration-normal) var(--ui-ease);
   opacity: 0;
   overflow: hidden;
 }

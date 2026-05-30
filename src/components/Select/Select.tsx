@@ -1,15 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  forwardRef,
-  type ReactNode,
-} from "react"
-import { Portal } from "../../primitives/Portal"
+import React, { createContext, useContext, useState, useRef, useEffect, forwardRef, type ReactNode } from "react"
 import { useEscapeKey } from "../../hooks/use-escape-key"
 import { mergeRefs } from "../../hooks/use-merge-refs"
+import { Portal } from "../../primitives/Portal"
 import { cn } from "../../utils/cn"
 import "./select.css"
 
@@ -70,7 +62,11 @@ export const Select = ({
   const open = controlledOpen !== undefined ? controlledOpen : uncontrolledOpen
 
   const setOpen = (newOpen: boolean) => {
-    onOpenChange ? onOpenChange(newOpen) : setUncontrolledOpen(newOpen)
+    if (onOpenChange) {
+      onOpenChange(newOpen)
+    } else {
+      setUncontrolledOpen(newOpen)
+    }
   }
 
   const handleValueChange = (newValue: string) => {
@@ -81,9 +77,7 @@ export const Select = ({
   }
 
   return (
-    <SelectContext.Provider
-      value={{ value, onValueChange: handleValueChange, open, setOpen, triggerRef, contentId }}
-    >
+    <SelectContext.Provider value={{ value, onValueChange: handleValueChange, open, setOpen, triggerRef, contentId }}>
       <div className="select-wrapper">{children}</div>
     </SelectContext.Provider>
   )
@@ -136,11 +130,7 @@ SelectTrigger.displayName = "SelectTrigger"
 
 export const SelectValue = ({ placeholder }: { placeholder?: string }) => {
   const { value } = useSelect()
-  return (
-    <span className={value ? undefined : "select-trigger__placeholder"}>
-      {value ?? placeholder}
-    </span>
-  )
+  return <span className={value ? undefined : "select-trigger__placeholder"}>{value ?? placeholder}</span>
 }
 
 export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
@@ -160,7 +150,12 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
       if (!open || !contentRef.current) return
       requestAnimationFrame(() => {
         const options = Array.from(
-          contentRef.current!.querySelectorAll<HTMLElement>('[role="option"]')
+          (
+            contentRef.current?.querySelectorAll.bind(contentRef.current) ||
+            function () {
+              return []
+            }
+          )<HTMLElement>('[role="option"]')
         )
         const selected = options.find((o) => o.getAttribute("aria-selected") === "true")
         ;(selected ?? options[0])?.focus()
@@ -171,10 +166,7 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
     useEffect(() => {
       if (!open) return
       const handleClick = (e: MouseEvent) => {
-        if (
-          !contentRef.current?.contains(e.target as Node) &&
-          !triggerRef.current?.contains(e.target as Node)
-        ) {
+        if (!contentRef.current?.contains(e.target as Node) && !triggerRef.current?.contains(e.target as Node)) {
           setOpen(false)
         }
       }
@@ -184,26 +176,45 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (!contentRef.current) return
-      const options = Array.from(
-        contentRef.current.querySelectorAll<HTMLElement>('[role="option"]')
-      )
+      const options = Array.from(contentRef.current.querySelectorAll<HTMLElement>('[role="option"]'))
       const idx = options.indexOf(document.activeElement as HTMLElement)
 
       switch (e.key) {
-        case "ArrowDown": e.preventDefault(); options[(idx + 1) % options.length]?.focus(); break
-        case "ArrowUp":   e.preventDefault(); options[(idx - 1 + options.length) % options.length]?.focus(); break
-        case "Home":      e.preventDefault(); options[0]?.focus(); break
-        case "End":       e.preventDefault(); options[options.length - 1]?.focus(); break
-        case "Tab":       e.preventDefault(); setOpen(false); triggerRef.current?.focus(); break
+        case "ArrowDown":
+          e.preventDefault()
+          options[(idx + 1) % options.length]?.focus()
+          break
+        case "ArrowUp":
+          e.preventDefault()
+          options[(idx - 1 + options.length) % options.length]?.focus()
+          break
+        case "Home":
+          e.preventDefault()
+          options[0]?.focus()
+          break
+        case "End":
+          e.preventDefault()
+          options[options.length - 1]?.focus()
+          break
+        case "Tab":
+          e.preventDefault()
+          setOpen(false)
+          triggerRef.current?.focus()
+          break
         case "Enter":
-        case " ":         e.preventDefault(); ;(document.activeElement as HTMLElement)?.click(); break
+        case " ":
+          e.preventDefault()
+          ;(document.activeElement as HTMLElement)?.click()
+          break
         default:
           if (e.key.length === 1) {
             if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
             searchRef.current += e.key.toLowerCase()
             const match = options.find((o) => o.textContent?.toLowerCase().startsWith(searchRef.current))
             match?.focus()
-            searchTimeoutRef.current = setTimeout(() => { searchRef.current = "" }, 500)
+            searchTimeoutRef.current = setTimeout(() => {
+              searchRef.current = ""
+            }, 500)
           }
       }
     }

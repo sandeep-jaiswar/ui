@@ -48,7 +48,9 @@
 }
 
 .slider__thumb:focus-visible {
-  box-shadow: 0 0 0 2px hsl(var(--ui-background)), 0 0 0 4px hsl(var(--ui-ring));
+  box-shadow:
+    0 0 0 2px hsl(var(--ui-background)),
+    0 0 0 4px hsl(var(--ui-ring));
 }
 
 .slider__thumb:active {

@@ -29,34 +29,46 @@
   background: hsl(var(--ui-primary));
   color: hsl(var(--ui-primary-fg));
 }
-.badge[data-intent="primary"]:hover { background: hsl(var(--ui-primary) / 0.8); }
+.badge[data-intent="primary"]:hover {
+  background: hsl(var(--ui-primary) / 0.8);
+}
 
 .badge[data-intent="secondary"] {
   background: hsl(var(--ui-secondary));
   color: hsl(var(--ui-secondary-fg));
 }
-.badge[data-intent="secondary"]:hover { background: hsl(var(--ui-secondary) / 0.8); }
+.badge[data-intent="secondary"]:hover {
+  background: hsl(var(--ui-secondary) / 0.8);
+}
 
 .badge[data-intent="success"] {
   background: hsl(var(--ui-success) / 0.15);
   color: hsl(var(--ui-success));
 }
-.badge[data-intent="success"]:hover { background: hsl(var(--ui-success) / 0.25); }
+.badge[data-intent="success"]:hover {
+  background: hsl(var(--ui-success) / 0.25);
+}
 
 .badge[data-intent="warning"] {
   background: hsl(var(--ui-warning) / 0.15);
   color: hsl(var(--ui-warning));
 }
-.badge[data-intent="warning"]:hover { background: hsl(var(--ui-warning) / 0.25); }
+.badge[data-intent="warning"]:hover {
+  background: hsl(var(--ui-warning) / 0.25);
+}
 
 .badge[data-intent="danger"] {
   background: hsl(var(--ui-destructive));
   color: hsl(var(--ui-destructive-fg));
 }
-.badge[data-intent="danger"]:hover { background: hsl(var(--ui-destructive) / 0.8); }
+.badge[data-intent="danger"]:hover {
+  background: hsl(var(--ui-destructive) / 0.8);
+}
 
 .badge[data-intent="neutral"] {
   background: hsl(var(--ui-muted));
   color: hsl(var(--ui-muted-fg));
 }
-.badge[data-intent="neutral"]:hover { background: hsl(var(--ui-muted) / 0.8); }
+.badge[data-intent="neutral"]:hover {
+  background: hsl(var(--ui-muted) / 0.8);
+}

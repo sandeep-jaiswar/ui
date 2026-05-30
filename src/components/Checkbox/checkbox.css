@@ -27,26 +27,44 @@
   width: var(--_cb-size, 1.25rem);
   height: var(--_cb-size, 1.25rem);
   cursor: pointer;
-  transition: background-color var(--ui-duration-fast) var(--ui-ease),
-              border-color var(--ui-duration-fast) var(--ui-ease);
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    border-color var(--ui-duration-fast) var(--ui-ease);
   outline: none;
 }
 
-.checkbox[data-size="sm"] { --_cb-size: 1rem; }
-.checkbox[data-size="md"] { --_cb-size: 1.25rem; }
-.checkbox[data-size="lg"] { --_cb-size: 1.5rem; }
+.checkbox[data-size="sm"] {
+  --_cb-size: 1rem;
+}
+.checkbox[data-size="md"] {
+  --_cb-size: 1.25rem;
+}
+.checkbox[data-size="lg"] {
+  --_cb-size: 1.5rem;
+}
 
 .checkbox:focus-visible {
-  box-shadow: 0 0 0 2px hsl(var(--ui-background)), 0 0 0 4px hsl(var(--ui-ring));
+  box-shadow:
+    0 0 0 2px hsl(var(--ui-background)),
+    0 0 0 4px hsl(var(--ui-ring));
 }
 
 .checkbox:checked {
   background: hsl(var(--ui-primary));
   border-color: hsl(var(--ui-primary));
 }
-.checkbox[data-intent="success"]:checked  { background: hsl(var(--ui-success)); border-color: hsl(var(--ui-success)); }
-.checkbox[data-intent="danger"]:checked   { background: hsl(var(--ui-destructive)); border-color: hsl(var(--ui-destructive)); }
-.checkbox[data-intent="warning"]:checked  { background: hsl(var(--ui-warning)); border-color: hsl(var(--ui-warning)); }
+.checkbox[data-intent="success"]:checked {
+  background: hsl(var(--ui-success));
+  border-color: hsl(var(--ui-success));
+}
+.checkbox[data-intent="danger"]:checked {
+  background: hsl(var(--ui-destructive));
+  border-color: hsl(var(--ui-destructive));
+}
+.checkbox[data-intent="warning"]:checked {
+  background: hsl(var(--ui-warning));
+  border-color: hsl(var(--ui-warning));
+}
 
 .checkbox-check {
   position: absolute;
@@ -70,5 +88,9 @@
   cursor: pointer;
   user-select: none;
 }
-.checkbox-label[data-size="sm"] { font-size: var(--ui-text-xs); }
-.checkbox-label[data-size="lg"] { font-size: var(--ui-text-base); }
+.checkbox-label[data-size="sm"] {
+  font-size: var(--ui-text-xs);
+}
+.checkbox-label[data-size="lg"] {
+  font-size: var(--ui-text-base);
+}

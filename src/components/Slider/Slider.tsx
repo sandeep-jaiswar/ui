@@ -78,14 +78,27 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
       let newVal = currentValue
       switch (event.key) {
         case "ArrowRight":
-        case "ArrowUp":   newVal = Math.min(currentValue + step, max); break
+        case "ArrowUp":
+          newVal = Math.min(currentValue + step, max)
+          break
         case "ArrowLeft":
-        case "ArrowDown": newVal = Math.max(currentValue - step, min); break
-        case "Home":      newVal = min; break
-        case "End":       newVal = max; break
-        case "PageUp":    newVal = Math.min(currentValue + step * 10, max); break
-        case "PageDown":  newVal = Math.max(currentValue - step * 10, min); break
-        default:          return
+        case "ArrowDown":
+          newVal = Math.max(currentValue - step, min)
+          break
+        case "Home":
+          newVal = min
+          break
+        case "End":
+          newVal = max
+          break
+        case "PageUp":
+          newVal = Math.min(currentValue + step * 10, max)
+          break
+        case "PageDown":
+          newVal = Math.max(currentValue - step * 10, min)
+          break
+        default:
+          return
       }
       event.preventDefault()
       if (newVal !== currentValue) updateValue([newVal])
@@ -94,12 +107,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
     const percentage = ((currentValue - min) / (max - min)) * 100
 
     return (
-      <div
-        ref={ref}
-        data-disabled={disabled ? "true" : undefined}
-        className={cn("slider", className)}
-        {...props}
-      >
+      <div ref={ref} data-disabled={disabled ? "true" : undefined} className={cn("slider", className)} {...props}>
         <div ref={trackRef} className="slider__track" onPointerDown={handlePointerDown}>
           <div className="slider__range" style={{ width: `${percentage}%` }} />
         </div>

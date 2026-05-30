@@ -64,11 +64,7 @@
         "src/components/Button/index.ts"
       ],
       "registryDependencies": ["cn"],
-      "cssVariables": [
-        "--ui-btn-radius",
-        "--ui-btn-font-weight",
-        "--ui-btn-transition"
-      ]
+      "cssVariables": ["--ui-btn-radius", "--ui-btn-font-weight", "--ui-btn-transition"]
     },
     {
       "name": "input",
@@ -81,21 +77,13 @@
         "src/components/Input/index.ts"
       ],
       "registryDependencies": ["cn"],
-      "cssVariables": [
-        "--ui-input-radius",
-        "--ui-input-height",
-        "--ui-input-padding-x",
-        "--ui-input-focus-ring"
-      ]
+      "cssVariables": ["--ui-input-radius", "--ui-input-height", "--ui-input-padding-x", "--ui-input-focus-ring"]
     },
     {
       "name": "badge",
       "description": "Status indicator or label with intent colors and shapes",
       "category": "display",
-      "files": [
-        "src/components/Badge/Badge.tsx",
-        "src/components/Badge/badge.css"
-      ],
+      "files": ["src/components/Badge/Badge.tsx", "src/components/Badge/badge.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-badge-radius", "--ui-badge-padding-x", "--ui-badge-padding-y"]
     },
@@ -103,10 +91,7 @@
       "name": "alert",
       "description": "Important message with severity variants",
       "category": "feedback",
-      "files": [
-        "src/components/Alert/Alert.tsx",
-        "src/components/Alert/alert.css"
-      ],
+      "files": ["src/components/Alert/Alert.tsx", "src/components/Alert/alert.css"],
       "registryDependencies": ["cn"],
       "cssVariables": []
     },
@@ -114,10 +99,7 @@
       "name": "avatar",
       "description": "User image with graceful fallback to initials",
       "category": "display",
-      "files": [
-        "src/components/Avatar/Avatar.tsx",
-        "src/components/Avatar/avatar.css"
-      ],
+      "files": ["src/components/Avatar/Avatar.tsx", "src/components/Avatar/avatar.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-avatar-size", "--ui-avatar-radius"]
     },
@@ -125,10 +107,7 @@
       "name": "card",
       "description": "Content container with surface/ghost/glass variants and hover effects",
       "category": "layout",
-      "files": [
-        "src/components/Card/Card.tsx",
-        "src/components/Card/card.css"
-      ],
+      "files": ["src/components/Card/Card.tsx", "src/components/Card/card.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-card-radius", "--ui-card-padding"]
     },
@@ -136,10 +115,7 @@
       "name": "skeleton",
       "description": "Loading placeholder with shimmer animation",
       "category": "feedback",
-      "files": [
-        "src/components/Skeleton/Skeleton.tsx",
-        "src/components/Skeleton/skeleton.css"
-      ],
+      "files": ["src/components/Skeleton/Skeleton.tsx", "src/components/Skeleton/skeleton.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-skeleton-bg", "--ui-skeleton-shimmer"]
     },
@@ -147,10 +123,7 @@
       "name": "progress",
       "description": "Progress bar with indeterminate state support",
       "category": "feedback",
-      "files": [
-        "src/components/Progress/Progress.tsx",
-        "src/components/Progress/progress.css"
-      ],
+      "files": ["src/components/Progress/Progress.tsx", "src/components/Progress/progress.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-progress-height", "--ui-progress-radius", "--ui-progress-fill"]
     },
@@ -158,10 +131,7 @@
       "name": "breadcrumb",
       "description": "Navigation hierarchy with automatic separators",
       "category": "navigation",
-      "files": [
-        "src/components/Breadcrumb/Breadcrumb.tsx",
-        "src/components/Breadcrumb/breadcrumb.css"
-      ],
+      "files": ["src/components/Breadcrumb/Breadcrumb.tsx", "src/components/Breadcrumb/breadcrumb.css"],
       "registryDependencies": ["cn"],
       "cssVariables": []
     },
@@ -169,10 +139,7 @@
       "name": "tabs",
       "description": "Tabbed content panels with keyboard navigation",
       "category": "navigation",
-      "files": [
-        "src/components/Tabs/Tabs.tsx",
-        "src/components/Tabs/tabs.css"
-      ],
+      "files": ["src/components/Tabs/Tabs.tsx", "src/components/Tabs/tabs.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-tabs-trigger-radius"]
     },
@@ -180,10 +147,7 @@
       "name": "accordion",
       "description": "Collapsible sections, single or multiple. CSS Grid height animation.",
       "category": "disclosure",
-      "files": [
-        "src/components/Accordion/Accordion.tsx",
-        "src/components/Accordion/accordion.css"
-      ],
+      "files": ["src/components/Accordion/Accordion.tsx", "src/components/Accordion/accordion.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-accordion-border-color"]
     },
@@ -191,10 +155,7 @@
       "name": "checkbox",
       "description": "Boolean selection with custom checkmark and intent colors",
       "category": "input",
-      "files": [
-        "src/components/Checkbox/Checkbox.tsx",
-        "src/components/Checkbox/checkbox.css"
-      ],
+      "files": ["src/components/Checkbox/Checkbox.tsx", "src/components/Checkbox/checkbox.css"],
       "registryDependencies": ["cn"],
       "cssVariables": []
     },
@@ -202,10 +163,7 @@
       "name": "radio",
       "description": "Exclusive selection within a RadioGroup",
       "category": "input",
-      "files": [
-        "src/components/Radio/Radio.tsx",
-        "src/components/Radio/radio.css"
-      ],
+      "files": ["src/components/Radio/Radio.tsx", "src/components/Radio/radio.css"],
       "registryDependencies": ["cn"],
       "cssVariables": []
     },
@@ -213,25 +171,15 @@
       "name": "switch",
       "description": "Toggle component with track/thumb animation",
       "category": "input",
-      "files": [
-        "src/components/Switch/Switch.tsx",
-        "src/components/Switch/switch.css"
-      ],
+      "files": ["src/components/Switch/Switch.tsx", "src/components/Switch/switch.css"],
       "registryDependencies": ["cn"],
-      "cssVariables": [
-        "--ui-switch-width",
-        "--ui-switch-height",
-        "--ui-switch-thumb-size"
-      ]
+      "cssVariables": ["--ui-switch-width", "--ui-switch-height", "--ui-switch-thumb-size"]
     },
     {
       "name": "slider",
       "description": "Range slider with keyboard and pointer support",
       "category": "input",
-      "files": [
-        "src/components/Slider/Slider.tsx",
-        "src/components/Slider/slider.css"
-      ],
+      "files": ["src/components/Slider/Slider.tsx", "src/components/Slider/slider.css"],
       "registryDependencies": ["cn"],
       "cssVariables": ["--ui-slider-track-height", "--ui-slider-thumb-size"]
     },
@@ -239,10 +187,7 @@
       "name": "tooltip",
       "description": "Floating info label on hover/focus, 4 sides",
       "category": "overlay",
-      "files": [
-        "src/components/Tooltip/Tooltip.tsx",
-        "src/components/Tooltip/tooltip.css"
-      ],
+      "files": ["src/components/Tooltip/Tooltip.tsx", "src/components/Tooltip/tooltip.css"],
       "registryDependencies": ["cn"],
       "cssVariables": [
         "--ui-tooltip-radius",
@@ -256,10 +201,7 @@
       "name": "select",
       "description": "Accessible dropdown picker with keyboard navigation and typeahead",
       "category": "input",
-      "files": [
-        "src/components/Select/Select.tsx",
-        "src/components/Select/select.css"
-      ],
+      "files": ["src/components/Select/Select.tsx", "src/components/Select/select.css"],
       "registryDependencies": ["cn", "portal", "use-escape-key", "use-merge-refs"],
       "cssVariables": ["--ui-select-radius", "--ui-select-height"]
     },
@@ -267,25 +209,15 @@
       "name": "dialog",
       "description": "Modal dialog with focus trap, overlay, and animations",
       "category": "overlay",
-      "files": [
-        "src/components/Dialog/Dialog.tsx",
-        "src/components/Dialog/dialog.css"
-      ],
+      "files": ["src/components/Dialog/Dialog.tsx", "src/components/Dialog/dialog.css"],
       "registryDependencies": ["cn", "portal", "focus-trap", "use-escape-key"],
-      "cssVariables": [
-        "--ui-dialog-radius",
-        "--ui-dialog-padding",
-        "--ui-overlay-bg"
-      ]
+      "cssVariables": ["--ui-dialog-radius", "--ui-dialog-padding", "--ui-overlay-bg"]
     },
     {
       "name": "drawer",
       "description": "Sliding panel overlay supporting left/right/top/bottom",
       "category": "overlay",
-      "files": [
-        "src/components/Drawer/Drawer.tsx",
-        "src/components/Drawer/drawer.css"
-      ],
+      "files": ["src/components/Drawer/Drawer.tsx", "src/components/Drawer/drawer.css"],
       "registryDependencies": ["cn", "portal", "focus-trap", "use-escape-key", "use-merge-refs"],
       "cssVariables": ["--ui-overlay-bg"]
     },
@@ -304,9 +236,7 @@
       "name": "charts",
       "description": "Data visualization components",
       "category": "display",
-      "files": [
-        "src/components/Charts/Charts.tsx"
-      ],
+      "files": ["src/components/Charts/Charts.tsx"],
       "registryDependencies": ["cn"],
       "cssVariables": []
     }

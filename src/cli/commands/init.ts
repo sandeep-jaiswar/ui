@@ -43,10 +43,10 @@ export async function init() {
   console.log("  Configure your project (press Enter to accept defaults):\n")
 
   const componentsDir = await prompt("  Components directory", defaults.componentsDir)
-  const hooksDir      = await prompt("  Hooks directory",      defaults.hooksDir)
-  const utilsDir      = await prompt("  Utils directory",      defaults.utilsDir)
+  const hooksDir = await prompt("  Hooks directory", defaults.hooksDir)
+  const utilsDir = await prompt("  Utils directory", defaults.utilsDir)
   const primitivesDir = await prompt("  Primitives directory", defaults.primitivesDir)
-  const tokensPath    = await prompt("  Tokens CSS path",      defaults.tokensPath)
+  const tokensPath = await prompt("  Tokens CSS path", defaults.tokensPath)
 
   const config: UIConfig = {
     componentsDir,

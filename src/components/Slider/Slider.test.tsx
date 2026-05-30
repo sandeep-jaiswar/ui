@@ -14,7 +14,7 @@ describe("Slider", () => {
       </CoreProvider>
     )
     // The blue fill bar should have width 50%
-    const fillBar = container.querySelector(".bg-primary")
+    const fillBar = container.querySelector(".slider__range")
     expect(fillBar).toHaveStyle({ width: "50%" })
   })
 
@@ -26,7 +26,7 @@ describe("Slider", () => {
       </CoreProvider>
     )
 
-    const track = container.querySelector(".bg-secondary") // track
+    const track = container.querySelector(".slider__track") // track
     expect(track).toBeInTheDocument()
 
     // Simulate pointer down. Since getBoundingClientRect is 0 in jsdom, we might need to mock it
@@ -61,7 +61,7 @@ describe("Slider", () => {
       </CoreProvider>
     )
     const root = container.firstChild
-    expect(root).toHaveClass("pointer-events-none")
+    expect(root).toHaveAttribute("data-disabled", "true")
 
     const track = container.querySelector(".bg-secondary")
     if (track) {

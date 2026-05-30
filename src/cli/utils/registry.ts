@@ -1,5 +1,5 @@
-import path from "path"
 import fs from "fs"
+import path from "path"
 
 export interface RegistryItem {
   name: string
@@ -33,9 +33,7 @@ export async function loadRegistry(): Promise<Registry> {
     return _registry
   }
 
-  throw new Error(
-    "Registry not found. Make sure you are running this CLI from the @sandeep-jaiswar/ui package."
-  )
+  throw new Error("Registry not found. Make sure you are running this CLI from the @sandeep-jaiswar/ui package.")
 }
 
 type ResolvedItem = { files: string[]; type: string }

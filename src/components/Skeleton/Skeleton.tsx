@@ -11,15 +11,7 @@ export type SkeletonProps = React.HTMLAttributes<HTMLDivElement>
  * @example
  * <Skeleton style={{ height: "1rem", width: "250px" }} />
  */
-export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
-  ({ className, style, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("skeleton", className)}
-      style={style}
-      aria-hidden="true"
-      {...props}
-    />
-  )
-)
+export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(({ className, style, ...props }, ref) => (
+  <div ref={ref} className={cn("skeleton", className)} style={style} aria-hidden="true" {...props} />
+))
 Skeleton.displayName = "Skeleton"

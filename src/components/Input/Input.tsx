@@ -11,17 +11,9 @@ import "./input.css"
  * @example
  * <Input placeholder="Enter your name" onChange={handleChange} />
  */
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => {
-    return (
-      <input
-        ref={ref}
-        className={cn("input", className)}
-        {...props}
-      />
-    )
-  }
-)
+const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, ...props }, ref) => {
+  return <input ref={ref} className={cn("input", className)} {...props} />
+})
 
 Input.displayName = "Input"
 

@@ -22,10 +22,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     const inputId = id ?? generatedId
 
     return (
-      <div
-        className={cn("switch-wrapper", className)}
-        data-disabled={disabled ? "true" : undefined}
-      >
+      <div className={cn("switch-wrapper", className)} data-disabled={disabled ? "true" : undefined}>
         <label className="switch-label-el" htmlFor={inputId}>
           <input
             ref={ref}

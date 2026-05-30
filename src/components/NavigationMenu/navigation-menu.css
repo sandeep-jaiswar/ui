@@ -37,8 +37,9 @@
   font-size: var(--ui-text-sm);
   font-weight: var(--ui-font-medium);
   cursor: pointer;
-  transition: background-color var(--ui-duration-fast) var(--ui-ease),
-              color var(--ui-duration-fast) var(--ui-ease);
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease);
   outline: none;
   white-space: nowrap;
   gap: var(--ui-space-1);
@@ -94,8 +95,9 @@
   line-height: var(--ui-leading-none);
   user-select: none;
   outline: none;
-  transition: background-color var(--ui-duration-fast) var(--ui-ease),
-              color var(--ui-duration-fast) var(--ui-ease);
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease);
 }
 
 .nav-menu__link:hover,

@@ -18,31 +18,21 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ className, variant = "default", ...props }, ref) => (
-    <div
-      ref={ref}
-      role="alert"
-      data-variant={variant}
-      className={cn("alert", className)}
-      {...props}
-    />
+    <div ref={ref} role="alert" data-variant={variant} className={cn("alert", className)} {...props} />
   )
 )
 Alert.displayName = "Alert"
 
-export const AlertTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, children, ...props }, ref) => (
-  <h5 ref={ref} className={cn("alert-title", className)} {...props}>
-    {children}
-  </h5>
-))
+export const AlertTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, children, ...props }, ref) => (
+    <h5 ref={ref} className={cn("alert-title", className)} {...props}>
+      {children}
+    </h5>
+  )
+)
 AlertTitle.displayName = "AlertTitle"
 
-export const AlertDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("alert-description", className)} {...props} />
-))
+export const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => <div ref={ref} className={cn("alert-description", className)} {...props} />
+)
 AlertDescription.displayName = "AlertDescription"

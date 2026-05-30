@@ -16,9 +16,7 @@ export async function list() {
   for (const [category, components] of byCategory.entries()) {
     console.log(`  ${capitalize(category)}`)
     for (const comp of components) {
-      const deps = comp.registryDependencies?.length
-        ? ` (deps: ${comp.registryDependencies.join(", ")})`
-        : ""
+      const deps = comp.registryDependencies?.length ? ` (deps: ${comp.registryDependencies.join(", ")})` : ""
       console.log(`    • ${comp.name.padEnd(22)} ${comp.description}${deps}`)
     }
     console.log()

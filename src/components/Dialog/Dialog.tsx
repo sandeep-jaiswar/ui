@@ -1,15 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  forwardRef,
-  useId,
-  type ReactNode,
-} from "react"
-import { Portal } from "../../primitives/Portal"
-import { useFocusTrap } from "../../primitives/FocusTrap"
+import React, { createContext, useContext, useState, forwardRef, useId, type ReactNode } from "react"
 import { useEscapeKey } from "../../hooks/use-escape-key"
-import { mergeRefs } from "../../hooks/use-merge-refs"
+import { useFocusTrap } from "../../primitives/FocusTrap"
+import { Portal } from "../../primitives/Portal"
 import { cn } from "../../utils/cn"
 import "./dialog.css"
 
@@ -71,28 +63,27 @@ const Dialog = ({ children, open: controlledOpen, onOpenChange }: DialogProps) =
   )
 }
 
-const DialogTrigger = forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, onClick, children, ...props }, ref) => {
-  const { open, setOpen } = useDialog()
-  return (
-    <button
-      ref={ref}
-      type="button"
-      aria-haspopup="dialog"
-      aria-expanded={open}
-      className={className}
-      onClick={(e) => {
-        setOpen(true)
-        onClick?.(e)
-      }}
-      {...props}
-    >
-      {children}
-    </button>
-  )
-})
+const DialogTrigger = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  ({ className, onClick, children, ...props }, ref) => {
+    const { open, setOpen } = useDialog()
+    return (
+      <button
+        ref={ref}
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        className={className}
+        onClick={(e) => {
+          setOpen(true)
+          onClick?.(e)
+        }}
+        {...props}
+      >
+        {children}
+      </button>
+    )
+  }
+)
 DialogTrigger.displayName = "DialogTrigger"
 
 const DialogPortal = ({ children }: { children: ReactNode }) => {
@@ -159,12 +150,7 @@ const DialogTitle = forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHead
   ({ className, children, ...props }, ref) => {
     const { titleId } = useDialog()
     return (
-      <h2
-        ref={ref}
-        id={titleId}
-        className={cn("dialog-title", className)}
-        {...props}
-      >
+      <h2 ref={ref} id={titleId} className={cn("dialog-title", className)} {...props}>
         {children}
       </h2>
     )
@@ -172,20 +158,12 @@ const DialogTitle = forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHead
 )
 DialogTitle.displayName = "DialogTitle"
 
-const DialogDescription = forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
-  const { descriptionId } = useDialog()
-  return (
-    <p
-      ref={ref}
-      id={descriptionId}
-      className={cn("dialog-description", className)}
-      {...props}
-    />
-  )
-})
+const DialogDescription = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => {
+    const { descriptionId } = useDialog()
+    return <p ref={ref} id={descriptionId} className={cn("dialog-description", className)} {...props} />
+  }
+)
 DialogDescription.displayName = "DialogDescription"
 
 export {

@@ -11,8 +11,8 @@
  *   npx @sandeep-jaiswar/ui list
  */
 
-import { init } from "./commands/init"
 import { add } from "./commands/add"
+import { init } from "./commands/init"
 import { list } from "./commands/list"
 
 const [, , command, ...args] = process.argv
