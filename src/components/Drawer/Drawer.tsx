@@ -3,6 +3,7 @@ import { useEscapeKey } from "../../hooks/use-escape-key"
 import { mergeRefs } from "../../hooks/use-merge-refs"
 import { useFocusTrap } from "../../primitives/FocusTrap"
 import { Portal } from "../../primitives/Portal"
+import { Presence } from "../../primitives/Presence"
 import { cn } from "../../utils/cn"
 import "./drawer.css"
 
@@ -40,7 +41,7 @@ export const Drawer = ({ children, open: controlledOpen, onOpenChange }: DrawerP
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false)
   const isControlled = controlledOpen !== undefined
   const open = isControlled ? controlledOpen! : uncontrolledOpen
-  const setOpen = isControlled ? onOpenChange! : setUncontrolledOpen
+  const setOpen = onOpenChange ?? setUncontrolledOpen
 
   return <DrawerContext.Provider value={{ open, setOpen }}>{children}</DrawerContext.Provider>
 }
@@ -75,23 +76,23 @@ export const DrawerContent = React.forwardRef<HTMLDivElement, DrawerContentProps
     const trapRef = useFocusTrap(open)
     useEscapeKey(() => setOpen(false), open)
 
-    if (!open) return null
-
     return (
-      <Portal>
-        <div className="drawer-overlay" onClick={() => setOpen(false)} aria-hidden="true" />
-        <div
-          ref={mergeRefs(ref, trapRef as React.Ref<HTMLDivElement>)}
-          role="dialog"
-          aria-modal="true"
-          tabIndex={-1}
-          data-side={side}
-          className={cn("drawer-content", className)}
-          {...props}
-        >
-          {children}
-        </div>
-      </Portal>
+      <Presence present={open}>
+        <Portal>
+          <div className="drawer-overlay" onClick={() => setOpen(false)} aria-hidden="true" />
+          <div
+            ref={mergeRefs(ref, trapRef as React.Ref<HTMLDivElement>)}
+            role="dialog"
+            aria-modal="true"
+            tabIndex={-1}
+            data-side={side}
+            className={cn("drawer-content", className)}
+            {...props}
+          >
+            {children}
+          </div>
+        </Portal>
+      </Presence>
     )
   }
 )

@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import { fileURLToPath } from "url"
 
 export interface RegistryItem {
   name: string
@@ -27,13 +28,15 @@ export async function loadRegistry(): Promise<Registry> {
   if (_registry) return _registry
 
   // Try local registry.json first (dev mode or after publish)
-  const localPath = path.join(__dirname, "../../../../registry/registry.json")
+  const __file = fileURLToPath(import.meta.url)
+  const base = path.dirname(__file)
+  const localPath = path.join(base, "../../../registry/registry.json")
   if (fs.existsSync(localPath)) {
     _registry = JSON.parse(fs.readFileSync(localPath, "utf-8")) as Registry
     return _registry
   }
 
-  throw new Error("Registry not found. Make sure you are running this CLI from the @sandeep-jaiswar/ui package.")
+  throw new Error(`Registry not found. Searched at: ${localPath}. Make sure you are running this CLI from the @sandeep-jaiswar/ui package.`)
 }
 
 type ResolvedItem = { files: string[]; type: string }
@@ -69,10 +72,11 @@ export function resolveComponentDeps(
   // Recursively resolve dependencies
   for (const dep of found.item.registryDependencies ?? []) {
     const depResolved = resolveComponentDeps(dep, registry, visited)
-    if (depResolved) {
-      for (const [k, v] of depResolved.entries()) {
-        if (!result.has(k)) result.set(k, v)
-      }
+    if (!depResolved) {
+      throw new Error(`Failed to resolve dependency "${dep}" for component "${name}". The dependency may not exist in the registry.`)
+    }
+    for (const [k, v] of depResolved.entries()) {
+      if (!result.has(k)) result.set(k, v)
     }
   }
 

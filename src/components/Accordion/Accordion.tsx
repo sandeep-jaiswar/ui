@@ -130,10 +130,13 @@ export const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.Button
           aria-controls={contentId}
           aria-expanded={isOpen}
           data-accordion-trigger
-          onClick={() => toggleItem(value)}
-          onKeyDown={handleKeyDown}
           className={cn("accordion-trigger", className)}
           {...props}
+          onClick={(e) => {
+            toggleItem(value)
+            props.onClick?.(e)
+          }}
+          onKeyDown={handleKeyDown}
         >
           {children}
           <svg

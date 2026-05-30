@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useRef, useEffect, forwardRef, type ReactNode } from "react"
 import { useEscapeKey } from "../../hooks/use-escape-key"
 import { mergeRefs } from "../../hooks/use-merge-refs"
-import { Portal } from "../../primitives/Portal"
 import { cn } from "../../utils/cn"
 import "./select.css"
 
@@ -222,19 +221,17 @@ export const SelectContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTM
     if (!open) return null
 
     return (
-      <Portal>
-        <div
-          ref={mergeRefs(contentRef, ref)}
-          id={contentId}
-          role="listbox"
-          tabIndex={-1}
-          onKeyDown={handleKeyDown}
-          className={cn("select-content", className)}
-          {...props}
-        >
-          {children}
-        </div>
-      </Portal>
+      <div
+        ref={mergeRefs(contentRef, ref)}
+        id={contentId}
+        role="listbox"
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        className={cn("select-content", className)}
+        {...props}
+      >
+        {children}
+      </div>
     )
   }
 )

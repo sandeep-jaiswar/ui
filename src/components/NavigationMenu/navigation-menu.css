@@ -73,7 +73,7 @@
 
 .nav-menu__content {
   position: absolute;
-  top: calc(100% + var(--ui-space-1-5));
+  top: 100%;
   left: 0;
   min-width: 10rem;
   background: hsl(var(--ui-popover));

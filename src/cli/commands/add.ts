@@ -48,8 +48,8 @@ export async function add(componentNames: string[]) {
       const destPath = path.join(destDir, path.basename(file))
 
       if (!fs.existsSync(srcPath)) {
-        console.warn(`  ⚠️   Source file not found: ${srcPath}`)
-        continue
+        console.error(`  ❌  Source file not found: ${srcPath}`)
+        process.exit(1)
       }
 
       copyFiles(srcPath, destPath)

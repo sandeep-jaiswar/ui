@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, forwardRef, useId, type Rea
 import { useEscapeKey } from "../../hooks/use-escape-key"
 import { useFocusTrap } from "../../primitives/FocusTrap"
 import { Portal } from "../../primitives/Portal"
+import { Presence } from "../../primitives/Presence"
 import { cn } from "../../utils/cn"
 import "./dialog.css"
 
@@ -88,8 +89,11 @@ DialogTrigger.displayName = "DialogTrigger"
 
 const DialogPortal = ({ children }: { children: ReactNode }) => {
   const { open } = useDialog()
-  if (!open) return null
-  return <Portal>{children}</Portal>
+  return (
+    <Presence present={open}>
+      <Portal>{children}</Portal>
+    </Presence>
+  )
 }
 
 const DialogOverlay = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

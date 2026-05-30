@@ -79,28 +79,5 @@ export const CoreProvider = ({ config, children }: CoreProviderProps) => {
     }
   }, [mode])
 
-  // Apply animation speed via CSS custom property
-  useEffect(() => {
-    const root = window.document.documentElement
-    const speed = finalConfig.behavior?.animationSpeed ?? "normal"
-    const multiplier = speed === "slow" ? 2 : speed === "fast" ? 0.5 : 1
-
-    root.style.setProperty("--ui-animation-speed", String(multiplier))
-
-    return () => {
-      root.style.removeProperty("--ui-animation-speed")
-    }
-  }, [finalConfig.behavior?.animationSpeed])
-
-  // Apply reduced motion preference programmatically
-  useEffect(() => {
-    const root = window.document.documentElement
-    if (finalConfig.behavior?.reducedMotion) {
-      root.setAttribute("data-reduced-motion", "true")
-    } else {
-      root.removeAttribute("data-reduced-motion")
-    }
-  }, [finalConfig.behavior?.reducedMotion])
-
   return <CoreContext.Provider value={finalConfig}>{children}</CoreContext.Provider>
 }

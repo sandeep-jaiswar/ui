@@ -1,6 +1,7 @@
 import fs from "fs"
 import path from "path"
 import readline from "readline"
+import { fileURLToPath } from "url"
 
 const CONFIG_FILE = "ui.config.json"
 
@@ -62,7 +63,9 @@ export async function init() {
   console.log(`\n  ✅  Created ${CONFIG_FILE}`)
 
   // Copy tokens.css
-  const tokensSrc = path.join(__dirname, "../../tokens/tokens.css")
+  const __file = fileURLToPath(import.meta.url)
+  const base = path.dirname(__file)
+  const tokensSrc = path.join(base, "../../tokens/tokens.css")
   if (fs.existsSync(tokensSrc)) {
     fs.mkdirSync(path.dirname(tokensPath), { recursive: true })
     fs.copyFileSync(tokensSrc, tokensPath)
@@ -72,7 +75,7 @@ export async function init() {
   }
 
   // Copy cn.ts utility
-  const cnSrc = path.join(__dirname, "../../utils/cn.ts")
+  const cnSrc = path.join(base, "../../utils/cn.ts")
   if (fs.existsSync(cnSrc)) {
     fs.mkdirSync(utilsDir, { recursive: true })
     fs.copyFileSync(cnSrc, path.join(utilsDir, "cn.ts"))

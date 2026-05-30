@@ -6,6 +6,7 @@ interface TooltipContextType {
   open: boolean
   openTooltip: () => void
   closeTooltip: () => void
+  tooltipId: string
 }
 
 const TooltipContext = createContext<TooltipContextType | undefined>(undefined)
@@ -38,6 +39,7 @@ interface TooltipProps {
 export const Tooltip = ({ children, delayDuration = 300 }: TooltipProps) => {
   const [open, setOpen] = useState(false)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const tooltipId = React.useId()
 
   const openTooltip = () => {
     timeoutRef.current = setTimeout(() => setOpen(true), delayDuration)
@@ -49,7 +51,7 @@ export const Tooltip = ({ children, delayDuration = 300 }: TooltipProps) => {
   }
 
   return (
-    <TooltipContext.Provider value={{ open, openTooltip, closeTooltip }}>
+    <TooltipContext.Provider value={{ open, openTooltip, closeTooltip, tooltipId }}>
       <div
         className="tooltip-root"
         onMouseEnter={openTooltip}
@@ -63,9 +65,14 @@ export const Tooltip = ({ children, delayDuration = 300 }: TooltipProps) => {
   )
 }
 
-export const TooltipTrigger = ({ children, className }: { children: ReactNode; className?: string }) => (
-  <div className={cn("tooltip-trigger", className)}>{children}</div>
-)
+export const TooltipTrigger = ({ children, className }: { children: ReactNode; className?: string }) => {
+  const { open, tooltipId } = useTooltip()
+  return (
+    <div className={cn("tooltip-trigger", className)} aria-describedby={open ? tooltipId : undefined}>
+      {children}
+    </div>
+  )
+}
 
 interface TooltipContentProps {
   children: ReactNode
@@ -74,11 +81,11 @@ interface TooltipContentProps {
 }
 
 export const TooltipContent = ({ children, className, side = "top" }: TooltipContentProps) => {
-  const { open } = useTooltip()
+  const { open, tooltipId } = useTooltip()
   if (!open) return null
 
   return (
-    <div role="tooltip" data-side={side} className={cn("tooltip-content", className)}>
+    <div id={tooltipId} role="tooltip" data-side={side} className={cn("tooltip-content", className)}>
       {children}
     </div>
   )
