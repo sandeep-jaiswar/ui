@@ -1,0 +1,47 @@
+/* Input component styles */
+
+.input {
+  display: flex;
+  width: 100%;
+  height: var(--ui-input-height);
+  padding-inline: var(--ui-input-padding-x);
+  border-radius: var(--ui-input-radius);
+  border: 1px solid hsl(var(--ui-input));
+  background: hsl(var(--ui-background));
+  color: hsl(var(--ui-foreground));
+  font-size: var(--ui-text-sm);
+  line-height: var(--ui-leading-normal);
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    box-shadow var(--ui-duration-fast) var(--ui-ease),
+    border-color var(--ui-duration-fast) var(--ui-ease);
+}
+
+.input::placeholder {
+  color: hsl(var(--ui-muted-fg));
+}
+
+.input:focus-visible {
+  border-color: hsl(var(--ui-ring));
+  box-shadow: var(--ui-input-focus-ring);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.input[type="file"] {
+  cursor: pointer;
+  padding-block: var(--ui-space-1-5);
+}
+
+.input[type="file"]::file-selector-button {
+  border: none;
+  background: transparent;
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-font-medium);
+  cursor: pointer;
+  margin-inline-end: var(--ui-space-3);
+}

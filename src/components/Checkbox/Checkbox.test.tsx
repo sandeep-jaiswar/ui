@@ -52,7 +52,7 @@ describe("Checkbox", () => {
     // Check for size class in label (text-base) or input (h-6 w-6)
     // Implementation: sizeClasses[size] applied to input
     const input = container.querySelector("input")
-    expect(input).toHaveClass("h-6 w-6")
+    expect(input).toHaveAttribute("data-size", "lg")
   })
 
   it("renders different intents", () => {
@@ -62,6 +62,6 @@ describe("Checkbox", () => {
       </CoreProvider>
     )
     const input = container.querySelector("input")
-    expect(input).toHaveClass("text-destructive")
+    expect(input).toHaveAttribute("data-intent", "danger")
   })
 })

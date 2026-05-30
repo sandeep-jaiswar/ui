@@ -66,6 +66,6 @@ describe("Avatar", () => {
     )
     // implementation: sizeClasses.lg -> h-14 w-14
     const root = container.firstChild
-    expect(root).toHaveClass("h-14 w-14")
+    expect(root).toHaveAttribute("data-size", "lg")
   })
 })

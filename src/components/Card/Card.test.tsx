@@ -34,6 +34,6 @@ describe("Card", () => {
     )
     const card = screen.getByTestId("card")
     expect(card).toHaveAttribute("data-variant", "glass")
-    expect(card).toHaveAttribute("data-hover-effect", "glow")
+    expect(card).toHaveAttribute("data-hover", "glow")
   })
 })

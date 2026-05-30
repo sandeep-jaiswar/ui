@@ -1,0 +1,74 @@
+/* Badge styles */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-weight: var(--ui-font-medium);
+  border: 1px solid transparent;
+  border-radius: var(--ui-badge-radius);
+  padding-inline: var(--ui-badge-padding-x);
+  padding-block: var(--ui-badge-padding-y);
+  font-size: var(--ui-text-xs);
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color var(--ui-duration-fast) var(--ui-ease);
+}
+
+/* Size */
+.badge[data-size="md"] {
+  font-size: var(--ui-text-sm);
+}
+
+/* Shape */
+.badge[data-shape="rounded"] {
+  border-radius: var(--ui-radius-md);
+}
+
+/* Intent */
+.badge[data-intent="primary"] {
+  background: hsl(var(--ui-primary));
+  color: hsl(var(--ui-primary-fg));
+}
+.badge[data-intent="primary"]:hover {
+  background: hsl(var(--ui-primary) / 0.8);
+}
+
+.badge[data-intent="secondary"] {
+  background: hsl(var(--ui-secondary));
+  color: hsl(var(--ui-secondary-fg));
+}
+.badge[data-intent="secondary"]:hover {
+  background: hsl(var(--ui-secondary) / 0.8);
+}
+
+.badge[data-intent="success"] {
+  background: hsl(var(--ui-success) / 0.15);
+  color: hsl(var(--ui-success));
+}
+.badge[data-intent="success"]:hover {
+  background: hsl(var(--ui-success) / 0.25);
+}
+
+.badge[data-intent="warning"] {
+  background: hsl(var(--ui-warning) / 0.15);
+  color: hsl(var(--ui-warning));
+}
+.badge[data-intent="warning"]:hover {
+  background: hsl(var(--ui-warning) / 0.25);
+}
+
+.badge[data-intent="danger"] {
+  background: hsl(var(--ui-destructive));
+  color: hsl(var(--ui-destructive-fg));
+}
+.badge[data-intent="danger"]:hover {
+  background: hsl(var(--ui-destructive) / 0.8);
+}
+
+.badge[data-intent="neutral"] {
+  background: hsl(var(--ui-muted));
+  color: hsl(var(--ui-muted-fg));
+}
+.badge[data-intent="neutral"]:hover {
+  background: hsl(var(--ui-muted) / 0.8);
+}

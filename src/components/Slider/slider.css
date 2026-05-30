@@ -1,0 +1,58 @@
+/* Slider styles */
+
+.slider {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  touch-action: none;
+  user-select: none;
+}
+
+.slider[data-disabled="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.slider__track {
+  position: relative;
+  width: 100%;
+  height: var(--ui-slider-track-height);
+  background: hsl(var(--ui-secondary));
+  border-radius: var(--ui-radius-full);
+  overflow: visible;
+  cursor: pointer;
+}
+
+.slider__range {
+  position: absolute;
+  height: 100%;
+  background: hsl(var(--ui-primary));
+  border-radius: inherit;
+}
+
+.slider__thumb {
+  position: absolute;
+  width: var(--ui-slider-thumb-size);
+  height: var(--ui-slider-thumb-size);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: var(--ui-radius-full);
+  border: 2px solid hsl(var(--ui-primary));
+  background: hsl(var(--ui-background));
+  box-shadow: var(--ui-shadow);
+  cursor: grab;
+  outline: none;
+  transition: box-shadow var(--ui-duration-fast) var(--ui-ease);
+}
+
+.slider__thumb:focus-visible {
+  box-shadow:
+    0 0 0 2px hsl(var(--ui-background)),
+    0 0 0 4px hsl(var(--ui-ring));
+}
+
+.slider__thumb:active {
+  cursor: grabbing;
+}
