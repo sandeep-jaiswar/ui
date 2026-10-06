@@ -1,0 +1,63 @@
+/* Tabs styles */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tabs-list {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: hsl(var(--ui-muted));
+  color: hsl(var(--ui-muted-fg));
+  border-radius: var(--ui-radius-lg);
+  padding: var(--ui-space-1);
+  gap: var(--ui-space-1);
+}
+
+.tabs-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ui-space-1) var(--ui-space-3);
+  border: none;
+  border-radius: var(--ui-tabs-trigger-radius);
+  background: transparent;
+  color: inherit;
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-font-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease),
+    box-shadow var(--ui-duration-fast) var(--ui-ease);
+  outline: none;
+}
+
+.tabs-trigger:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--ui-ring));
+}
+
+.tabs-trigger:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.tabs-trigger[data-state="active"] {
+  background: hsl(var(--ui-background));
+  color: hsl(var(--ui-foreground));
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.tabs-content {
+  margin-top: var(--ui-space-2);
+  outline: none;
+}
+
+.tabs-content:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--ui-ring));
+  border-radius: var(--ui-radius);
+}

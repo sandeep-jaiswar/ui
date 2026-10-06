@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useEffect, ReactNode } from "react"
+import { createContext, useContext, useEffect, type ReactNode } from "react"
 
 export interface CoreConfig {
   theme?: {
     primaryColor?: string
-    secondaryColor?: string
     borderRadius?: string
     fontFamily?: string
+    /** Controls the color scheme. "system" respects OS preference. */
     mode?: "light" | "dark" | "system"
   }
   behavior?: {
@@ -17,11 +17,9 @@ export interface CoreConfig {
 
 const defaultCoreConfig: CoreConfig = {
   theme: {
-    primaryColor: "blue",
-    secondaryColor: "gray",
     borderRadius: "0.5rem",
     fontFamily: "sans-serif",
-    mode: "dark",
+    mode: "system",
   },
   behavior: {
     reducedMotion: false,
@@ -45,28 +43,41 @@ export interface CoreProviderProps {
   children: ReactNode
 }
 
+/**
+ * CoreProvider initializes the design system.
+ *
+ * It sets `data-theme` on <html> (rather than toggling CSS class names),
+ * which is compatible with the token system in tokens.css.
+ *
+ * @example
+ * <CoreProvider config={{ theme: { mode: "dark" } }}>
+ *   <App />
+ * </CoreProvider>
+ */
 export const CoreProvider = ({ config, children }: CoreProviderProps) => {
-  const finalConfig = {
+  const finalConfig: CoreConfig = {
     ...defaultCoreConfig,
     ...config,
     theme: { ...defaultCoreConfig.theme, ...config?.theme },
     behavior: { ...defaultCoreConfig.behavior, ...config?.behavior },
   }
 
+  const mode = finalConfig.theme?.mode ?? "system"
+
   useEffect(() => {
     const root = window.document.documentElement
-    const mode = finalConfig.theme?.mode || "dark"
-
-    root.classList.remove("light", "dark")
 
     if (mode === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-      root.classList.add(systemTheme)
+      root.setAttribute("data-theme", "system")
       return
     }
 
-    root.classList.add(mode)
-  }, [finalConfig.theme?.mode])
+    root.setAttribute("data-theme", mode)
+
+    return () => {
+      root.removeAttribute("data-theme")
+    }
+  }, [mode])
 
   return <CoreContext.Provider value={finalConfig}>{children}</CoreContext.Provider>
 }

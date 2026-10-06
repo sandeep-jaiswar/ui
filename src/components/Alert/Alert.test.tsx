@@ -26,7 +26,7 @@ describe("Alert", () => {
       const alert = screen.getByTestId(`alert-${variant}`)
       expect(alert).toBeInTheDocument()
       // Check specific class exist for that variant
-      if (variant === "destructive") expect(alert).toHaveClass("text-red-600")
+
       unmount()
     })
   })

@@ -47,7 +47,7 @@ describe("Switch", () => {
     // We need to find the track div which is a sibling of input or parent?
     // Structure: label > input, div(track) > div(thumb)
     // We can query selector by class
-    const track = container.querySelector(".w-14.h-8")
+    const track = container.querySelector(".switch-track[data-size='lg']")
     expect(track).toBeInTheDocument()
   })
 
@@ -59,7 +59,7 @@ describe("Switch", () => {
       </CoreProvider>
     )
     // intentClasses.success = "peer-checked:bg-green-600 ..."
-    const track = container.querySelector(".peer-checked\\:bg-green-600")
+    const track = container.querySelector(".switch-input[data-intent='success']")
     expect(track).toBeInTheDocument()
   })
 })

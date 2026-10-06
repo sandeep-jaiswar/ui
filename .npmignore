@@ -1,9 +1,11 @@
 # Keep only dist folder in the tarball
 *
 !/dist
+!/src
+!/registry
 
 # Prevent accidental publishing of source files
-/src
+
 /stories
 /test
 /.vscode

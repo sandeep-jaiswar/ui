@@ -1,0 +1,107 @@
+/* NavigationMenu styles */
+
+.nav-menu {
+  position: relative;
+  z-index: var(--ui-z-10);
+  display: flex;
+  max-width: max-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-menu__list {
+  display: flex;
+  flex: 1;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-1);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu__item {
+  position: relative;
+}
+
+.nav-menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--ui-space-10);
+  padding-inline: var(--ui-space-4);
+  border: none;
+  border-radius: var(--ui-radius);
+  background: hsl(var(--ui-background));
+  color: hsl(var(--ui-foreground));
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-font-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease);
+  outline: none;
+  white-space: nowrap;
+  gap: var(--ui-space-1);
+}
+
+.nav-menu__trigger:hover,
+.nav-menu__trigger:focus-visible,
+.nav-menu__trigger[aria-expanded="true"] {
+  background: hsl(var(--ui-accent));
+  color: hsl(var(--ui-accent-fg));
+}
+
+.nav-menu__trigger:focus-visible {
+  box-shadow: 0 0 0 2px hsl(var(--ui-ring));
+}
+
+.nav-menu__trigger:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.nav-menu__chevron {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: transform var(--ui-duration-normal) var(--ui-ease);
+}
+
+.nav-menu__trigger[aria-expanded="true"] .nav-menu__chevron {
+  transform: rotate(180deg);
+}
+
+.nav-menu__content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 10rem;
+  background: hsl(var(--ui-popover));
+  color: hsl(var(--ui-popover-fg));
+  border: 1px solid hsl(var(--ui-border));
+  border-radius: var(--ui-radius);
+  box-shadow: var(--ui-shadow-lg);
+  overflow: hidden;
+  animation: ui-zoom-in var(--ui-duration-fast) var(--ui-ease);
+  outline: none;
+}
+
+.nav-menu__link {
+  display: block;
+  padding: var(--ui-space-3);
+  border-radius: var(--ui-radius);
+  color: hsl(var(--ui-foreground));
+  text-decoration: none;
+  line-height: var(--ui-leading-none);
+  user-select: none;
+  outline: none;
+  transition:
+    background-color var(--ui-duration-fast) var(--ui-ease),
+    color var(--ui-duration-fast) var(--ui-ease);
+}
+
+.nav-menu__link:hover,
+.nav-menu__link:focus-visible {
+  background: hsl(var(--ui-accent));
+  color: hsl(var(--ui-accent-fg));
+}

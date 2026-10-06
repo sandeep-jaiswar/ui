@@ -1,0 +1,108 @@
+/* Switch styles */
+
+.switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+}
+
+.switch-wrapper[data-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.switch-label-el {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Hidden native checkbox */
+.switch-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Track */
+.switch-track {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--ui-radius-full);
+  background: hsl(var(--ui-input));
+  transition: background-color var(--ui-duration-normal) var(--ui-ease);
+  width: var(--_sw-w, var(--ui-switch-width));
+  height: var(--_sw-h, var(--ui-switch-height));
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+/* Thumb */
+.switch-thumb {
+  display: block;
+  border-radius: var(--ui-radius-full);
+  background: hsl(var(--ui-background));
+  box-shadow: var(--ui-shadow-sm);
+  width: var(--_sw-thumb, var(--ui-switch-thumb-size));
+  height: var(--_sw-thumb, var(--ui-switch-thumb-size));
+  transition: transform var(--ui-duration-normal) var(--ui-ease);
+  transform: translateX(0);
+}
+
+/* Sizes */
+.switch-track[data-size="sm"] {
+  --_sw-w: 2rem;
+  --_sw-h: 1rem;
+  --_sw-thumb: 0.75rem;
+}
+.switch-track[data-size="md"] {
+  --_sw-w: var(--ui-switch-width);
+  --_sw-h: var(--ui-switch-height);
+  --_sw-thumb: var(--ui-switch-thumb-size);
+}
+.switch-track[data-size="lg"] {
+  --_sw-w: 3.5rem;
+  --_sw-h: 2rem;
+  --_sw-thumb: 1.625rem;
+}
+
+/* Checked state */
+.switch-input:checked + .switch-track {
+  background: hsl(var(--ui-primary));
+}
+.switch-input:checked + .switch-track .switch-thumb {
+  transform: translateX(
+    calc(var(--_sw-w, var(--ui-switch-width)) - var(--_sw-thumb, var(--ui-switch-thumb-size)) - 4px)
+  );
+}
+
+/* Intent variants */
+.switch-input[data-intent="success"]:checked + .switch-track {
+  background: hsl(var(--ui-success));
+}
+.switch-input[data-intent="danger"]:checked + .switch-track {
+  background: hsl(var(--ui-destructive));
+}
+.switch-input[data-intent="warning"]:checked + .switch-track {
+  background: hsl(var(--ui-warning));
+}
+
+/* Focus ring */
+.switch-input:focus-visible + .switch-track {
+  box-shadow:
+    0 0 0 2px hsl(var(--ui-background)),
+    0 0 0 4px hsl(var(--ui-ring));
+}
+
+.switch-text-label {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-font-medium);
+  color: hsl(var(--ui-foreground));
+  cursor: pointer;
+  user-select: none;
+}

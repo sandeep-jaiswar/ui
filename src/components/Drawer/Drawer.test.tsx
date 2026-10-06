@@ -54,6 +54,6 @@ describe("Drawer", () => {
     )
     // Implementation: sideClasses.left includes "left-0"
     const content = screen.getByTestId("drawer-content")
-    expect(content).toHaveClass("left-0")
+    expect(content).toHaveAttribute("data-side", "left")
   })
 })

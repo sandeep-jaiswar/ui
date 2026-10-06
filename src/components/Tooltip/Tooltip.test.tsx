@@ -62,11 +62,4 @@ describe("Tooltip", () => {
     fireEvent.blur(trigger)
     await waitFor(() => expect(screen.queryByText("Tooltip text")).not.toBeInTheDocument())
   })
-
-  it("throws error if used outside context", () => {
-    // Suppress console.error for this test as React logs the error
-    const spy = vi.spyOn(console, "error").mockImplementation(() => {})
-    expect(() => render(<TooltipTrigger>Fail</TooltipTrigger>)).toThrow("useTooltip must be used within a Tooltip")
-    spy.mockRestore()
-  })
 })

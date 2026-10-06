@@ -1,0 +1,14 @@
+/* Skeleton styles */
+
+.skeleton {
+  display: block;
+  border-radius: var(--ui-radius);
+  background: linear-gradient(
+    90deg,
+    hsl(var(--ui-muted)) 25%,
+    hsl(var(--ui-muted-fg) / 0.1) 50%,
+    hsl(var(--ui-muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: ui-shimmer 1.5s ease-in-out infinite;
+}

@@ -66,7 +66,7 @@ describe("Button", () => {
     // Spinner presence (class animate-spin)
     // Note: we can't easily query by text "Loading" because it might be hidden or wrapped differently
     // But we can check if children are hidden? Our implementation wraps children in opacity-0 if loading.
-    const childrenWrapper = btn.querySelector("span.opacity-0")
+    const childrenWrapper = btn.querySelector(".btn__content--hidden")
     expect(childrenWrapper).toBeInTheDocument()
 
     fireEvent.click(btn)
