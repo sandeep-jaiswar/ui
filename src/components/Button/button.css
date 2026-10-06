@@ -78,11 +78,13 @@
 .btn[data-size="xs"] {
   --_btn-h: var(--ui-space-6);
   --_btn-px: var(--ui-space-2);
+
   font-size: var(--ui-text-xs);
 }
 .btn[data-size="sm"] {
   --_btn-h: var(--ui-space-8);
   --_btn-px: var(--ui-space-3);
+
   font-size: var(--ui-text-sm);
 }
 .btn[data-size="md"] {
@@ -92,11 +94,13 @@
 .btn[data-size="lg"] {
   --_btn-h: var(--ui-space-12);
   --_btn-px: var(--ui-space-5);
+
   font-size: var(--ui-text-base);
 }
 .btn[data-size="xl"] {
   --_btn-h: var(--ui-space-14);
   --_btn-px: var(--ui-space-6);
+
   font-size: var(--ui-text-base);
 }
 
